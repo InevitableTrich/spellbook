@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta name="keywords" content="HTML, CSS">
+  <meta name="description" content="this is the description that shows up
+  when you google the site">
+  <title>uaq's Spellbook</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+
+  <script>
+    function test(cID){
+      const current = document.querySelectorAll("#" + cID);
+      current.forEach(function(item){
+        item.className = 'blank'
+      });
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <div class="head">
+    <h1 class="title">
+      uaq's Spellbook [WIP]
+    </h1>
+    <div class="darkOption">
+      <h2 class="darkTxt">Dark Mode: On</h2>
+    </div>
+  </div>
+
+  <h2 class="menuOption">
+    - Suggestions / Feedback
+  </h2>
+  <h2 class="menuOption">
+    - Request New Spells
+  </h2>
+
+  <h2 class="srchTxt">search:</h2>
+  <div class="rowContainer">
+    <input type="search" class="searchBar">
+    <div id="myID" class="charBook">
+      <p class="spellName" style="margin-top: 5px; margin-left: 0;">
+        Create new Character Spellbook</p>
+    </div>
+  </div>
+
+
+
+  <div class="rowContainer">
+    <div class="name">
+      <p class="levelHeadTxt">Spell Name: ▼</p>
+    </div>
+    <div class="level">
+      <p class="levelHeadTxt">Spell Level: -</p>
+    </div>
+    <div class="classes">
+      <p class="levelHeadTxt">Classes: -</p>
+    </div>
+    <div class="school">
+      <p class="levelHeadTxt">School: -</p>
+    </div>
+    <div class="closeBtn"></div>
+  </div>
+
+
+  <div class="spellContainer">
+    <div id="Acid_Arrow" class="name">
+      <p class="spellName"> Acid Arrow - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">2</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div id="Acid_Arrow" onclick=test(id) class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+
+
+  <div>
+    <div class="spellContainer">
+      <div class="name">
+        <p class="spellName"> Acid Arrow - </p>
+      </div><div class="level">
+        <p class="spellDispDesc">2</p>
+      </div><div class="classes">
+        <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+          Trickster), Wizard</p>
+      </div><div class="school">
+        <p class="spellDispDesc">Evocation</p>
+      </div>
+      <div class="closeBtn">
+        <p class="expandArrow">▶</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    <div class="spellContainer">
+      <div class="name">
+        <p class="spellName"> Acid Arrow - </p>
+      </div>
+      <div class="level">
+        <p class="spellDispDesc">2</p>
+      </div><div class="classes">
+        <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+          Trickster), Wizard</p>
+      </div><div class="school">
+        <p class="spellDispDesc">Evocation</p>
+      </div>
+      <div class="closeBtn">
+        <p class="expandArrow">▶</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    <div class="spellContainer">
+      <div class="expLeft">
+        <p class="spellName">Acid Arrow - </p>
+      </div>
+      <div class="expTop"></div>
+      <div class="expRight">
+        <p class="expandArrow">▼</p>
+      </div>
+    </div>
+    <div class="expBody">
+      <p class="spellDispDescExp">Level: 2</p>
+      <p class="spellDispDescExp">School: Evocation</p>
+      <p class="spellDispDescExp">Casting Time: Action</p>
+      <p class="spellDispDescExp">Range: 90 feet</p>
+      <p class="spellDispDescExp">Components: V, S, M (powdered rhubarb leaf
+        and an adder's stomach)</p>
+      <p class="spellDispDescExp">Duration: Instantaneous</p>
+      <p class="spellDispDescExp">Classes: Fighter (Eldritch Night),
+        Rogue (Arcane Tricster), Wizard</p>
+      <p class="spellDispDescExp">Subclasses: Artificer (Alchemist), Druid
+      (Swamp)</p>
+      <p class="spellDispDescExp">A shimmering green arrow streaks toward
+        a target within range and bursts in a spray of acid. Make a ranged
+        spell attack against the target. On a hit, the target takes 4d4 acid
+        damage immediately and 2d4 acid damage at the end of its next turn.
+        On a miss, the arrow splashes the target with acid for half as much
+        of the initial damage and no damage at the end of its next turn.</p>
+
+      <p class="spellDispDescExp">Higher Level: When you cast this spell
+        using a spell slot of 3rd level or higher, the damage (both
+        initial and later) increases by 1d4 for each slot level
+        above 2nd.</p>
+    </div>
+    <div class="rowContainer" style="margin-top: -28px;">
+      <div class="expLeft">
+        <p class="spellName">Acid Arrow - </p>
+      </div>
+      <div class="expBot"></div>
+      <div class="expRight">
+        <p class="expandArrow">▲</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spellContainer">
+    <div class="name">
+      <p class="spellName"> Acid Arrow - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">2</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+  <div class="spellContainer">
+    <div class="name">
+      <p class="spellName"> Acid Arrow - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">2</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+  <div class="spellContainer">
+    <div class="name">
+      <p class="spellName"> Booming Blade - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">0</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Sorcerer, Warlock, Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+  <div class="spellContainer">
+    <div class="name">
+      <p class="spellName"> Booming Blade - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">0</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Sorcerer, Warlock, Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+  <div class="spellContainer">
+    <div class="name">
+      <p class="spellName"> Booming Blade - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">0</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Sorcerer, Warlock, Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+  <div class="spellContainer">
+    <div class="name">
+      <p class="spellName"> Booming Blade - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">0</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Sorcerer, Warlock, Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+  <div class="spellContainer">
+    <div class="name">
+      <p class="spellName"> Booming Blade - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">0</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Sorcerer, Warlock, Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+  <div class="spellContainer">
+    <div class="name">
+      <p class="spellName"> Booming Blade - </p>
+    </div><div class="level">
+      <p class="spellDispDesc">0</p>
+    </div><div class="classes">
+      <p class="spellDispDesc">Fighter (Eldritch Knight), Rogue (Arcane
+        Trickster), Sorcerer, Warlock, Wizard</p>
+    </div><div class="school">
+      <p class="spellDispDesc">Evocation</p>
+    </div>
+    <div class="closeBtn">
+      <p class="expandArrow">▶</p>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

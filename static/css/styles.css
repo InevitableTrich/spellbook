@@ -1,0 +1,275 @@
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+body {
+  background-color: rgb(33,33,33);
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: auto;
+}
+
+.title {
+  margin: 3%;
+  color: rgb(222, 222, 222);
+}
+
+.darkOption {
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: 3%;
+  width: fit-content;
+  height: 40px;
+}
+
+.darkTxt {
+  white-space: nowrap;
+  margin-left: auto;
+  margin-right: 3%;
+  margin-top: 5px;
+  color: rgba(0, 192, 0, 0.719)
+}
+
+.menuOption {
+  color: rgb(89, 129, 204);
+  margin-left: 2%;
+  margin-bottom: 40px;
+  margin-top: -20px;
+}
+
+.spellContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.spellBox {
+  display: flex;
+  width: 95%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-right: 0px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  line-height: 20px;
+  flex-direction: row;
+}
+
+.spellName {
+  margin-left: 20px;
+  font-size: 150%;
+  z-index: 1;
+  width: auto;
+  white-space: nowrap;
+  color: rgb(222, 222, 222);
+}
+
+.spellDispDesc {
+  font-size: 150%;
+  margin-left: 20px;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgb(200,200,200)
+}
+
+.spellDispDescExp {
+  font-size: 150%;
+  margin-top: 18.5px;
+  margin-left: 50px;
+  margin-right: 50px;
+  width: auto;
+  line-height: 30px;
+  color: rgb(200,200,200)
+}
+
+.closeBtn {
+  display: flex;
+  width: 5%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-left: 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+.expandArrow {
+  width: 5%;
+  margin: auto;
+  margin-left: 15%;
+  font-size: 150%;
+  font-stretch: expanded;
+  color: rgb(222, 222, 222);
+}
+
+.expLeft {
+  display: flex;
+  width: 5%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-right: 0px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+.expTop {
+  display: flex;
+  width: 90%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border-top: rgb(80,80,80) solid 3px;
+  line-height: 20px;
+  flex-direction: row;
+}
+
+.expRight {
+  display: flex;
+  width: 5%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-left: 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+.expBody {
+  width: 89.5%;
+  height: fit-content;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-top: 0px;
+  border-bottom: 0px;
+  margin-top: -27px;
+  margin-left: 5%;
+  line-height: 20px;
+}
+
+.expBot {
+  display: flex;
+  width: 90%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border-bottom: rgb(80,80,80) solid 3px;
+  line-height: 20px;
+  margin-top: 3px;
+  flex-direction: row;
+}
+
+.levelHeadTxt {
+  margin-left: 20px;
+  font-size: 150%;
+  z-index: 1;
+  width: auto;
+  white-space: nowrap;
+  color: rgb(222, 222, 222);
+}
+
+.name {
+  display: flex;
+  width: 15%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-right: 0px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  line-height: 20px;
+  flex-direction: row;
+}
+
+.level {
+  display: flex;
+  width: 12.5%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-right: 0px;
+  border-left: 0px;
+  line-height: 20px;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.classes {
+  display: flex;
+  width: 52.5%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-right: 0px;
+  border-left: 0px;
+  line-height: 20px;
+  flex-direction: row;
+}
+
+.school {
+  display: flex;
+  width: 15%;
+  height: 72px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-right: 0px;
+  border-left: 0px;
+  line-height: 20px;
+  flex-direction: row;
+}
+
+.searchBar {
+  margin: 20px;
+  margin-top: -10px;
+  margin-bottom: 30px;
+  width: 27.5%;
+  height: 36px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-radius: 10px;
+  color: rgb(200,200,200);
+  font-size: 20px;
+  text-indent: 5px;
+  outline: none;
+}
+
+.srchTxt {
+  margin-left: 20px;
+  font-size: 135%;
+  width: auto;
+  white-space: nowrap;
+  color: rgb(178, 178, 178);
+}
+
+.charBook {
+  display: flex;
+  width: 27.5%;
+  height: 36px;
+  margin: 20px;
+  margin-top: -10px;
+  margin-left: 40%;
+  margin-bottom: 30px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+.blank {
+  width: 0;
+  height: 0;
+}
