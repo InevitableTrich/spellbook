@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import SimpleTemplateResponse
 from django.views import View
+import json
 
 
 class BaseView(View):
@@ -10,7 +11,7 @@ class BaseView(View):
 
 class SampleDataView(View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse('{foo: {bar:0}}', content_type='application/json')
+        return HttpResponse(json.dumps({'foo': {'bar': 0}}), content_type='application/json')
 
 
 class ReDir(View):
