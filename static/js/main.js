@@ -120,27 +120,27 @@ function populateSpells(jsonResponse) {
     spells.innerHTML = ''
     data.spells.forEach(spell => {
         spells.innerHTML +=`<div>
-    <div class="spellContainer" id="${spell.id}">
-      <div onclick="expandSpellView('${spell.id}')" class="name">
+    <div class="spellContainer" id="${spell.spellid}">
+      <div onclick="expandSpellView('${spell.spellid}')" class="name">
         <p class="spellName"> ${spell.name} - </p>
-      </div><div onclick="expandSpellView('${spell.id}')" class="level">
+      </div><div onclick="expandSpellView('${spell.spellid}')" class="level">
         <p class="spellDispDesc">${spell.level}</p>
-      </div><div onclick="expandSpellView('${spell.id}')" class="classes">
+      </div><div onclick="expandSpellView('${spell.spellid}')" class="classes">
         <p class="spellDispDesc">${spell.classes}</p>
-      </div><div onclick="expandSpellView('${spell.id}')" class="school">
+      </div><div onclick="expandSpellView('${spell.spellid}')" class="school">
         <p class="spellDispDesc">${spell.school}</p>
       </div>
-      <div onclick="expandSpellView('${spell.id}')" class="closeBtn">
+      <div onclick="expandSpellView('${spell.spellid}')" class="closeBtn">
         <p class="expandArrow">▶</p>
       </div>
     </div>
-    <div class="blank" id="${spell.id}_Exp">
+    <div class="blank" id="${spell.spellid}_Exp">
       <div class="spellContainer">
         <div class="expLeft">
           <p class="spellName">${spell.name} - </p>
         </div>
-        <div onclick="shrinkSpellView('${spell.id}')" class="expTop"></div>
-        <div onclick="shrinkSpellView('${spell.id}')" class="expRight">
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expTop"></div>
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight">
           <p class="expandArrow">▼</p>
         </div>
       </div>
@@ -159,8 +159,8 @@ function populateSpells(jsonResponse) {
         <div class="expLeft">
           <p class="spellName">${spell.name} - </p>
         </div>
-        <div onclick="shrinkSpellView('${spell.id}')" class="expBot"></div>
-        <div onclick="shrinkSpellView('${spell.id}')" class="expRight">
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expBot"></div>
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight">
           <p class="expandArrow">▲</p>
         </div>
       </div>
