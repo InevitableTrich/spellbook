@@ -149,11 +149,10 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">School: ${spell.school}</p>
         <p class="spellDispDescExp">Casting Time: ${spell.cast_time}</p>
         <p class="spellDispDescExp">Range: ${spell.range}</p>
-        <p class="spellDispDescExp">Components: ${spell.components} (${spell.material})</p>
+        <p class="spellDispDescExp">Components: ${spell.components} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
         <p class="spellDispDescExp">Duration: ${spell.duration}</p>
         <p class="spellDispDescExp">Classes: ${spell.classes}</p>
         <p class="spellDispDescExp">${spell.desc}</p>
-
         <p class="spellDispDescExp">At Higher Levels: ${spell.higher_level}</p>
       </div>
       <div class="rowContainer" style="margin-top: -28px;">
@@ -177,7 +176,7 @@ function makeHTTPRequest(url, callback) {
     objXMLHttp.send()
 }
 
-function handleResponse(data) {
+function handleSpellsResponse(data) {
     if (this.readyState == 4 && this.status == 200){
         populateSpells(data)
     }
