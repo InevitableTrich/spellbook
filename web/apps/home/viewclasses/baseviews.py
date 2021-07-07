@@ -1,3 +1,4 @@
+import pymongo
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import SimpleTemplateResponse
 from django.views import View
@@ -11,10 +12,26 @@ class BaseView(View):
         return SimpleTemplateResponse('index.html')
 
 
-class SampleDataView(View):
+class SortSpellsView(View):
     def get(self, request, *args, **kwargs):
+
+        field = request.GET.get('field')
+        direction = request.GET.get('direction')
+        sortField = None
+        sortdir= None
+
+        if field:
+            sortField = field[0:-4]
+            if sortField == 'class':
+                sortField = 'classes'
+
+        if direction == '1':
+            sortdir = pymongo.ASCENDING
+        elif direction == '2':
+            sortdir = pymongo.DESCENDING
+
         return HttpResponse(json.dumps({
-            "spells": spellmgr.getspells()
+            "spells": spellmgr.getspells(sort=sortField, sortby=sortdir)
         }), content_type='application/json')
 
 

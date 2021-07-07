@@ -34,6 +34,12 @@ function cycleSort(id){
   document.getElementById(id).innerHTML = sortState[id] +
   sortState[varCycle[id]]
 
+  if (varCycle[id] == 0) {
+    makeSortRequest('nameSort', 0)
+  } else {
+    makeSortRequest(id, varCycle[id])
+  }
+
   for([key] of Object.entries(varCycle)){
     if (key != id){
       varCycle[key] = 0
@@ -42,6 +48,10 @@ function cycleSort(id){
     }
   }
 
+}
+
+function makeSortRequest(fieldid, direction){
+    makeHTTPRequest('http://127.0.0.1:8000/sort?field='+fieldid+'&direction='+direction, handleSpellsResponse);
 }
 
 function darkModeToggle(){
