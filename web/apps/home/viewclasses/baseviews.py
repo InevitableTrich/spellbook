@@ -17,21 +17,23 @@ class SortSpellsView(View):
 
         field = request.GET.get('field')
         direction = request.GET.get('direction')
-        sortField = None
-        sortdir= None
+        spellskwargs = {}
 
         if field:
             sortField = field[0:-4]
             if sortField == 'class':
                 sortField = 'classes'
+            spellskwargs['sort'] = sortField
 
         if direction == '1':
             sortdir = pymongo.ASCENDING
+            spellskwargs['sortby'] = sortdir
         elif direction == '2':
             sortdir = pymongo.DESCENDING
+            spellskwargs['sortby'] = sortdir
 
         return HttpResponse(json.dumps({
-            "spells": spellmgr.getspells(sort=sortField, sortby=sortdir)
+            "spells": spellmgr.getspells(**spellskwargs)
         }), content_type='application/json')
 
 

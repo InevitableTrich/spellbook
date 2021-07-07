@@ -9,9 +9,6 @@ def getspellscollection():
 
 def getspells(sort='name', sortby=pymongo.ASCENDING):
     col = getspellscollection()
-    if not sort:
-        sort = 'name'
-    if not sortby:
-        sortby = 1
+
     spells = [x for x in col.find(projection={'_id': False}).sort(sort, sortby)]
     return spells
