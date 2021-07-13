@@ -154,6 +154,7 @@ function shrinkExclSrch(){
   current.className = 'smallBtn'
   const currentExp = document.querySelector('#eeso_exp');
   currentExp.className = 'blank'
+  if (darkMode != true) applyLightMode()
 }
 function CycleList(dID){
   id = dID + "_txt"

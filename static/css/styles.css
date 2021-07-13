@@ -1,11 +1,14 @@
+body {
+  width: auto;
+  min-width: 1216px;
+  background-color: rgb(33,33,33);
+  margin: 8px;
+}
+
 .rowContainer {
   display: flex;
   flex-direction: row;
-  width: 100%;
-}
-
-body {
-  background-color: rgb(33,33,33);
+  z-index: -1;
 }
 
 .head {
@@ -266,7 +269,8 @@ body {
   margin: 20px;
   margin-top: -10px;
   margin-bottom: 30px;
-  width: 27.5%;
+  width: 27.3%;
+  size: inherit;
   height: 36px;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
@@ -285,36 +289,6 @@ body {
   color: rgb(178, 178, 178);
 }
 
-.charBook {
-  display: flex;
-  width: 27.5%;
-  height: 36px;
-  margin: 20px;
-  margin-top: -10px;
-  margin-left: 40%;
-  margin-bottom: 30px;
-  background-color: rgb(50, 50, 50);
-  border: rgb(80,80,80) solid 3px;
-  border-radius: 10px;
-  justify-content: center;
-}
-
-.blank {
-  display: none;
-}
-
-.lightScheme {
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(211,211,211);
-}
-
-.lightText {
-  color: black
-}
-
-.bluerText {
-  color: rgb(5, 18, 197)
-}
 .smallBtn {
   display: flex;
   width: 27.5%;
@@ -363,6 +337,10 @@ body {
   margin-right: 5px;
   background-color: rgb(50, 50, 50);
   height: 44px;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 .ciTxt {
@@ -400,6 +378,18 @@ body {
   white-space: nowrap;
   color: rgb(222, 222, 222);
 }
+
+.blank {
+  display: none;
+}
+
+.clickObj {
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
 .searchColumnL {
   margin-left: 20px;
   width: 27.5%;
@@ -418,4 +408,15 @@ body {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   margin-bottom: 20px;
+}
+
+.lightScheme {
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(211,211,211);
+}
+.lightText {
+  color: black
+}
+.bluerText {
+  color: rgb(5, 18, 197)
 }
