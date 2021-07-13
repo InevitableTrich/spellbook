@@ -68,6 +68,23 @@ function cycleSort(id){
 
 }
 
+function sortToggle(id){
+  toggle = document.getElementById(id)
+  toggle.classList.toggle("sortSelected")
+  toggle = document.getElementById("_" + id)
+  toggle.classList.toggle("sortSelectedTxt")
+}
+function clrESO(){
+  divs = document.querySelectorAll("div.sortSelected")
+  divs.forEach(element => {
+    element.classList.remove('sortSelected')
+  });
+  ps = document.querySelectorAll("p.sortSelectedTxt")
+  ps.forEach(element => {
+    element.classList.remove('sortSelectedTxt')
+  });
+}
+
 function makeSortRequest(fieldid, direction){
     makeHTTPRequest('http://127.0.0.1:8000/sort?field='+fieldid+'&direction='+direction, handleSpellsResponse);
 }

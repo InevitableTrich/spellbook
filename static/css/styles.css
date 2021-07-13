@@ -410,6 +410,23 @@ body {
   margin-bottom: 20px;
 }
 
+.clrESO {
+  display: flex;
+  width: 17.5%;
+  height: 36px;
+  margin: 20px;
+  margin-top: -10px;
+  margin-bottom: 30px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-radius: 10px;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
 .lightScheme {
   background-color: rgb(255, 255, 255);
   border-color: rgb(211,211,211);
@@ -419,4 +436,14 @@ body {
 }
 .bluerText {
   color: rgb(5, 18, 197)
+}
+
+.sortSelected {
+  border-left: rgb(50, 0, 0) 5px solid;
+  border-right: rgb(50, 0, 0) 5px solid;
+  border-radius: 20px;
+}
+
+.sortSelectedTxt {
+  font-weight: 700;
 }
