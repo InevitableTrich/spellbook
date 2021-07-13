@@ -33,13 +33,222 @@
   </h2>
 
   <h3 class="srchTxt">search:</h3>
-  <div class="rowContainer">
-    <input type="search" class="searchBar">
-    <div class="charBook">
-      <p class="spellName" style="margin-top: 5px; margin-left: 0;">
-        Create new Character Spellbook</p>
-    </div>
+  <input id="search" class="searchBar" type="text" placeholder="Search Here:">
+
+  <div class="smallBtn" id="eeso" onclick="expandExclSrch()">
+    <p class="smallTxt">
+      Expand Exclusive Search Options
+    </p>
   </div>
+  <div class="blank" id="eeso_exp">
+    <div class="smallBtnExp" onclick="shrinkExclSrch()">
+      <p class="smallTxt">
+        Shrink Exclusive Search Options
+      </p>
+    </div>
+
+    <div class="rowContainer">
+
+        <div class="searchColumnL">
+          <div id="class" onclick="CycleList(id)">
+            <p class="searchOpTxt" id="class_txt">Class: ▶</p>
+          </div>
+
+          <div id="class_ops" class="blank">
+            <div class="rowContainer">
+              <div class="cibl"></div>
+              <div class="searchRowCon">
+                <div class="classItem">
+                  <p class="ciTxt">Artificer,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Bard,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Cleric,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Druid,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Fighter,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Monk,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Paladin,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Ranger,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Rogue,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Sorcerer,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Warlock,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Wizard</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="level" onclick="CycleList(id)">
+            <p class="searchOpTxt" id="level_txt">Level: ▶</p>
+          </div>
+
+          <div id="level_ops" class="blank">
+            <div class="rowContainer">
+              <div class="cibl"></div>
+              <div class="searchRowCon">
+                <div class="classItem">
+                  <p class="ciTxt">Level 0,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 1,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 2,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 3,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 4,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 5,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 6,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 7,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 8,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Level 9</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 10px;" id="school" onclick="CycleList(id)">
+            <p class="searchOpTxt" id="school_txt">School: ▶</p>
+          </div>
+
+          <div id="school_ops" class="blank">
+            <div class="rowContainer">
+              <div class="cibl"></div>
+              <div class="searchRowCon">
+                <div class="classItem">
+                  <p class="ciTxt">Abjuration,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Cnjuration,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Divination,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Enchantment,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Evocation,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Illusion,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Necromancy,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Transmutation</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="searchColumnTR">
+          <div id="action" onclick="CycleList(id)">
+            <p class="searchOpTxt" id="action_txt">Action: ▶</p>
+          </div>
+
+          <div id="action_ops" class="blank">
+            <div class="rowContainer">
+              <div class="cibl"></div>
+              <div class="searchRowCon">
+                <div class="classItem">
+                  <p class="ciTxt">Action,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Bonus Action,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Reaction,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">1 Minute,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">10 Minutes,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">1 Hour</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="concentration" onclick="CycleList(id)">
+            <p class="searchOpTxt" id="concentration_txt">Concentration: ▶</p>
+          </div>
+
+          <div id="concentration_ops" class="blank">
+            <div class="rowContainer">
+              <div class="cibl"></div>
+              <div class="searchRowCon">
+                <div class="classItem">
+                  <p class="ciTxt">Concentration,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Not Concentration</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="ritual" onclick="CycleList(id)">
+            <p class="searchOpTxt" id="ritual_txt">Ritual: ▶</p>
+          </div>
+
+          <div id="ritual_ops" class="blank">
+            <div class="rowContainer">
+              <div class="cibl"></div>
+              <div class="searchRowCon">
+                <div class="classItem">
+                  <p class="ciTxt">Ritual,</p>
+                </div>
+                <div class="classItem">
+                  <p class="ciTxt">Not Ritual</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+ </div>
 
 
 

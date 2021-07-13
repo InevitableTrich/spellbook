@@ -14,6 +14,24 @@ var varCycle = {
   "classSort": 0,
   "schoolSort": 0,
 }
+var searchCycle = {
+  0: "▶",
+  1: "▼",
+  "class" : 0,
+  "level" : 0,
+  "components" : 0,
+  "school" : 0,
+  "action" : 0,
+  "concentration" : 0,
+  "ritual" : 0,
+  "_class": "Class: ",
+  "_level": "Level: ",
+  "_components": "Components: ",
+  "_school": "School: ",
+  "_action": "Action: ",
+  "_concentration": "Concentration: ",
+  "_ritual": "Ritual: ",
+}
 
 function expandSpellView(cName){
   const current = document.querySelector('#' + cName);
@@ -124,6 +142,37 @@ function applyLightMode() {
 
 
 }
+
+function expandExclSrch(){
+  const current = document.querySelector('#eeso');
+  current.className = 'blank'
+  const currentExp = document.querySelector('#eeso_exp');
+  currentExp.className = ''
+}
+function shrinkExclSrch(){
+  const current = document.querySelector('#eeso');
+  current.className = 'smallBtn'
+  const currentExp = document.querySelector('#eeso_exp');
+  currentExp.className = 'blank'
+}
+function CycleList(dID){
+  id = dID + "_txt"
+  opsID = dID + "_ops"
+
+  searchCycle[dID] += 1
+  if (searchCycle[dID] > 1) searchCycle[dID] = 0
+
+  document.getElementById(id).innerHTML = searchCycle["_" + dID] + searchCycle[searchCycle[dID]]
+
+  if (searchCycle[dID] == 0){
+    const current = document.querySelector("#" + opsID)
+    current.className = "blank"
+  }else if (searchCycle[dID] == 1){
+    const current = document.querySelector("#" + opsID)
+    current.className = ""
+  }
+}
+
 function populateSpells(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")

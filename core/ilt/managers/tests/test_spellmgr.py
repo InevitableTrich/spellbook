@@ -9,5 +9,5 @@ class TestSpellmgr(unittest.TestCase):
 
     def test_getspells(self):
         # self.assertEqual('not writing that', spellmgr.getspells())
-        # essentiallyprints whole heckin thing
+        # essentially prints whole heckin thing
         pass

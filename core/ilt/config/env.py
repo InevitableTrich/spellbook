@@ -24,5 +24,10 @@ def parseconfig(rawconfig):
     return cookedconfig
 
 
-config = getconfig()
+filelocation = None
+envid = os.environ.get('SPELLBOOKENV')
+if envid:
+    root_config_path = ilt.config.__path__[0]
+    filelocation = os.path.join(root_config_path, "environments", envid+'.json')
+config = getconfig(filelocation)
 GLOBALCONFIG = parseconfig(config)
