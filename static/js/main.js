@@ -147,6 +147,13 @@ function clrESO(){
   ps.forEach(element => {
     element.classList.remove('sortSelectedTxt')
   });
+  for([key] of Object.entries(varCycle)){
+      varCycle[key] = 0
+      document.getElementById(key).innerHTML = sortState[key] +
+      sortState[varCycle[key]]
+  }
+  search = document.getElementById('search')
+  search.value = ""
   makeHTTPRequest('http://127.0.0.1:8000/sort', handleSpellsResponse)
 }
 
@@ -156,6 +163,10 @@ function makeSortRequest(fieldid, direction){
 
 function makeFilterRequest(fieldid, direction, filter){
     makeHTTPPostRequest('http://127.0.0.1:8000/filter?field='+fieldid+'&direction='+direction, handleSpellsResponse, filter);
+}
+
+function makeSearchRequest(value) {
+    makeHTTPRequest('http://127.0.0.1:8000/search?query='+value, handleSpellsResponse)
 }
 
 function darkModeToggle(){

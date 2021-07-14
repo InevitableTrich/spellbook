@@ -1,5 +1,4 @@
 import pymongo
-import json
 from ilt.dal import mongodb
 
 
@@ -17,9 +16,16 @@ def getspells(sort='name', sortby=pymongo.ASCENDING):
 def filter_spells(filters, sort='name', sortby=pymongo.ASCENDING):
     col = getspellscollection()
 
-    output = {}
+    formatted_filter = {}
     for field, values in filters.items():
-        output[field] = {"$in": values}
+        formatted_filter[field] = {"$in": values}
 
-    spells = [x for x in col.find(filter=output, projection={'_id': False}).sort(sort, sortby)]
+    spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}).sort(sort, sortby)]
+    return spells
+
+
+def searchspells(query):
+    col = getspellscollection()
+
+    spells = [x for x in col.find({"$text": {"$search": query}}, projection={'_id': False})]
     return spells

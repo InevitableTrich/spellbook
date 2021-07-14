@@ -63,6 +63,20 @@ class FilterSpellsView(View):
         }), content_type='application/json')
 
 
+class SearchSpellsView(View):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('query')
+
+        if not query:
+            return HttpResponse(json.dumps({
+                "spells": spellmgr.getspells()
+            }), content_type='application/json')
+
+        return HttpResponse(json.dumps({
+            "spells": spellmgr.searchspells(query)
+        }), content_type='application/json')
+
+
 class ReDir(View):
     def get(self, request, *args, **kwargs):
         return HttpResponseRedirect(redirect_to='/samples/samplejson')
