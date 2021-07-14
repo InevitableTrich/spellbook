@@ -20,10 +20,10 @@ class SortSpellsView(View):
         spellskwargs = {}
 
         if field:
-            sortField = field[0:-4]
-            if sortField == 'class':
-                sortField = 'classes'
-            spellskwargs['sort'] = sortField
+            sortfield = field[0:-4]
+            if sortfield == 'class':
+                sortfield = 'classes'
+            spellskwargs['sort'] = sortfield
 
         if direction == '1':
             sortdir = pymongo.ASCENDING
@@ -34,6 +34,15 @@ class SortSpellsView(View):
 
         return HttpResponse(json.dumps({
             "spells": spellmgr.getspells(**spellskwargs)
+        }), content_type='application/json')
+
+
+class FilterSpellsView(View):
+    def post(self, request, *args, **kwargs):
+        filterdata = json.loads(request.body).get("filter")
+
+        return HttpResponse(json.dumps({
+            "spells": spellmgr.filter_spells(filterdata)
         }), content_type='application/json')
 
 

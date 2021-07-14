@@ -1,4 +1,5 @@
 var darkMode = true
+var filterState = {}
 var sortState = {
   0: '-',
   1: '▼',
@@ -54,7 +55,9 @@ function cycleSort(id){
 
   if (varCycle[id] == 0) {
     makeSortRequest('nameSort', 0)
-  } else {
+  } else if (0==1) {
+    makeFilterRequest(id, varCycle[id], 'None')
+  }else {
     makeSortRequest(id, varCycle[id])
   }
 
@@ -68,11 +71,24 @@ function cycleSort(id){
 
 }
 
-function sortToggle(id){
+function sortToggle(id, field){
+  if (filterState[field]) {
+
+    if (filterState[field][id]) {
+        // if it exists, remove it
+    } else {
+        filterState[field].push(id)
+    }
+
+  } else {
+    //init an array, add id, add to dict with key field
+  }
+
   toggle = document.getElementById(id)
   toggle.classList.toggle("sortSelected")
   toggle = document.getElementById("_" + id)
   toggle.classList.toggle("sortSelectedTxt")
+  makeFilterRequest(1, 0, 0)
 }
 function clrESO(){
   divs = document.querySelectorAll("div.sortSelected")
@@ -87,6 +103,11 @@ function clrESO(){
 
 function makeSortRequest(fieldid, direction){
     makeHTTPRequest('http://127.0.0.1:8000/sort?field='+fieldid+'&direction='+direction, handleSpellsResponse);
+}
+
+function makeFilterRequest(fieldid, direction, filter){
+    var data = JSON.stringify({"filter":{"level": ["3"]}})
+    makeHTTPPostRequest('http://127.0.0.1:8000/filter', handleSpellsResponse, data);
 }
 
 function darkModeToggle(){
@@ -251,6 +272,14 @@ function makeHTTPRequest(url, callback) {
     objXMLHttp.onreadystatechange  = callback
     objXMLHttp.open("GET", url)
     objXMLHttp.send()
+}
+
+function makeHTTPPostRequest(url, callback, data) {
+    objXMLHttp=new XMLHttpRequest()
+    objXMLHttp.onreadystatechange  = callback
+    objXMLHttp.open("POST", url)
+    objXMLHttp.setRequestHeader("Content-Type", "application/json");
+    objXMLHttp.send(data)
 }
 
 function handleSpellsResponse(data) {
