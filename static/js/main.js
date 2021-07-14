@@ -1,15 +1,16 @@
 var darkMode = true
 var filterState = {}
+var currentFilter = JSON.stringify({"filter": {}})
 var filterIDs = {
     "artificer": "Artificer",
     "bard": "Bard",
     "cleric": "Cleric",
     "druid": "Druid",
-    "fighter": "Fighter",
+    "fighter": "Fighter (Eldritch Knight)",
     "monk": "Monk",
     "paladin": "Paladin",
     "ranger": "Ranger",
-    "rogue": "Rogue",
+    "rogue": "Rogue (Arcane Trickster)",
     "sorcerer": "Sorcerer",
     "warlock": "Warlock",
     "wizard": "Wizard",
@@ -32,7 +33,7 @@ var filterIDs = {
     "necromancy": "Necromancy",
     "transmutation": "Transmutation",
     "_action": "1 action",
-    "bonus_action": "1 bonus_action",
+    "bonus_action": "1 bonus action",
     "reaction": "1 reaction",
     "minute": "1 minute",
     "ten_minute": "10 minutes",
@@ -96,11 +97,9 @@ function cycleSort(id){
   sortState[varCycle[id]]
 
   if (varCycle[id] == 0) {
-    makeSortRequest('nameSort', 0)
-  } else if (0==1) {
-    makeFilterRequest(id, varCycle[id], 'None')
-  }else {
-    makeSortRequest(id, varCycle[id])
+    makeFilterRequest('nameSort', 0, currentFilter)
+  } else {
+    makeFilterRequest(id, varCycle[id], currentFilter)
   }
 
   for([key] of Object.entries(varCycle)){
@@ -131,13 +130,13 @@ function sortToggle(id, field){
   } else {
     filterState[field] = [filterKey]
   }
-  filterOutput = "{\"filter\": " + JSON.stringify(filterState) + "}"
+  currentFilter = "{\"filter\": " + JSON.stringify(filterState) + "}"
 
   toggle = document.getElementById(id)
   toggle.classList.toggle("sortSelected")
   toggle = document.getElementById("_" + id)
   toggle.classList.toggle("sortSelectedTxt")
-  makeFilterRequest(0, 0, filterOutput)
+  makeFilterRequest('nameSort', 0, currentFilter)
 }
 function clrESO(){
   divs = document.querySelectorAll("div.sortSelected")
@@ -156,7 +155,7 @@ function makeSortRequest(fieldid, direction){
 }
 
 function makeFilterRequest(fieldid, direction, filter){
-    makeHTTPPostRequest('http://127.0.0.1:8000/filter', handleSpellsResponse, filter);
+    makeHTTPPostRequest('http://127.0.0.1:8000/filter?field='+fieldid+'&direction='+direction, handleSpellsResponse, filter);
 }
 
 function darkModeToggle(){
@@ -273,7 +272,7 @@ function populateSpells(jsonResponse) {
       </div><div onclick="expandSpellView('${spell.spellid}')" class="level">
         <p class="spellDispDesc">${spell.level}</p>
       </div><div onclick="expandSpellView('${spell.spellid}')" class="classes">
-        <p class="spellDispDesc">${spell.classes}</p>
+        <p class="spellDispDesc">${spell.classes.join(", ")}</p>
       </div><div onclick="expandSpellView('${spell.spellid}')" class="school">
         <p class="spellDispDesc">${spell.school}</p>
       </div>
@@ -298,7 +297,7 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">Range: ${spell.range}</p>
         <p class="spellDispDescExp">Components: ${spell.components} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
         <p class="spellDispDescExp">Duration: ${spell.duration}</p>
-        <p class="spellDispDescExp">Classes: ${spell.classes}</p>
+        <p class="spellDispDescExp">Classes: ${spell.classes.join(", ")}</p>
         <p class="spellDispDescExp">${spell.desc}</p>
         <p class="spellDispDescExp">At Higher Levels: ${spell.higher_level}</p>
       </div>
