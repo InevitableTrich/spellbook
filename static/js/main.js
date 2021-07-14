@@ -1,5 +1,47 @@
 var darkMode = true
 var filterState = {}
+var filterIDs = {
+    "artificer": "Artificer",
+    "bard": "Bard",
+    "cleric": "Cleric",
+    "druid": "Druid",
+    "fighter": "Fighter",
+    "monk": "Monk",
+    "paladin": "Paladin",
+    "ranger": "Ranger",
+    "rogue": "Rogue",
+    "sorcerer": "Sorcerer",
+    "warlock": "Warlock",
+    "wizard": "Wizard",
+    "l0": "0",
+    "l1": "1",
+    "l2": "2",
+    "l3": "3",
+    "l4": "4",
+    "l5": "5",
+    "l6": "6",
+    "l7": "7",
+    "l8": "8",
+    "l9": "9",
+    "abjuration": "Abjuration",
+    "conjuration": "Conjuration",
+    "divination": "Divination",
+    "enchantment": "Enchantment",
+    "evocation": "Evocation",
+    "illusion": "Illusion",
+    "necromancy": "Necromancy",
+    "transmutation": "Transmutation",
+    "_action": "1 action",
+    "bonus_action": "1 bonus_action",
+    "reaction": "1 reaction",
+    "minute": "1 minute",
+    "ten_minute": "10 minutes",
+    "hour": "1 hour",
+    "_concentration": true,
+    "not_concentration": false,
+    "_ritual": true,
+    "not_ritual": false,
+}
 var sortState = {
   0: '-',
   1: '▼',
@@ -72,23 +114,30 @@ function cycleSort(id){
 }
 
 function sortToggle(id, field){
+  filterKey = filterIDs[id]
+
   if (filterState[field]) {
-
-    if (filterState[field][id]) {
-        // if it exists, remove it
+    if (filterState[field].includes(filterKey)) {
+        var index = filterState[field].indexOf(filterKey)
+        if (index !== -1) {
+          filterState[field].splice(index, 1);
+        }
+        if (filterState[field].length == 0) {
+          delete filterState[field]
+        }
     } else {
-        filterState[field].push(id)
+        filterState[field].push(filterKey)
     }
-
   } else {
-    //init an array, add id, add to dict with key field
+    filterState[field] = [filterKey]
   }
+  filterOutput = "{\"filter\": " + JSON.stringify(filterState) + "}"
 
   toggle = document.getElementById(id)
   toggle.classList.toggle("sortSelected")
   toggle = document.getElementById("_" + id)
   toggle.classList.toggle("sortSelectedTxt")
-  makeFilterRequest(1, 0, 0)
+  makeFilterRequest(0, 0, filterOutput)
 }
 function clrESO(){
   divs = document.querySelectorAll("div.sortSelected")
@@ -99,6 +148,7 @@ function clrESO(){
   ps.forEach(element => {
     element.classList.remove('sortSelectedTxt')
   });
+  makeHTTPRequest('http://127.0.0.1:8000/sort', handleSpellsResponse)
 }
 
 function makeSortRequest(fieldid, direction){
@@ -106,8 +156,7 @@ function makeSortRequest(fieldid, direction){
 }
 
 function makeFilterRequest(fieldid, direction, filter){
-    var data = JSON.stringify({"filter":{"level": ["3"]}})
-    makeHTTPPostRequest('http://127.0.0.1:8000/filter', handleSpellsResponse, data);
+    makeHTTPPostRequest('http://127.0.0.1:8000/filter', handleSpellsResponse, filter);
 }
 
 function darkModeToggle(){

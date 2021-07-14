@@ -16,8 +16,8 @@ def getspells(sort='name', sortby=pymongo.ASCENDING):
 
 def filter_spells(filters, sort='name', sortby=pymongo.ASCENDING):
     col = getspellscollection()
-    output = {}
 
+    output = {}
     for field, values in filters.items():
         output[field] = {"$in": values}
 
