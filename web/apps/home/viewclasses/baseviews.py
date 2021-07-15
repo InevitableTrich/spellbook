@@ -12,37 +12,13 @@ class BaseView(View):
         return SimpleTemplateResponse('index.html')
 
 
-class SortSpellsView(View):
-    def get(self, request, *args, **kwargs):
-
-        field = request.GET.get('field')
-        direction = request.GET.get('direction')
-        spellskwargs = {}
-
-        if field:
-            sortfield = field[0:-4]
-            if sortfield == 'class':
-                sortfield = 'classes'
-            spellskwargs['sort'] = sortfield
-
-        if direction == '1':
-            sortdir = pymongo.ASCENDING
-            spellskwargs['sortby'] = sortdir
-        elif direction == '2':
-            sortdir = pymongo.DESCENDING
-            spellskwargs['sortby'] = sortdir
-
-        return HttpResponse(json.dumps({
-            "spells": spellmgr.getspells(**spellskwargs)
-        }), content_type='application/json')
-
-
 class FilterSpellsView(View):
     def post(self, request, *args, **kwargs):
         filterdata = json.loads(request.body).get("filter")
 
         field = request.GET.get('field')
         direction = request.GET.get('direction')
+        searchquery = request.GET.get('searchquery')
         spellskwargs = {}
 
         if field:
@@ -57,23 +33,13 @@ class FilterSpellsView(View):
         elif direction == '2':
             sortdir = pymongo.DESCENDING
             spellskwargs['sortby'] = sortdir
-
-        return HttpResponse(json.dumps({
-            "spells": spellmgr.filter_spells(filterdata, **spellskwargs)
-        }), content_type='application/json')
-
-
-class SearchSpellsView(View):
-    def get(self, request, *args, **kwargs):
-        query = request.GET.get('query')
-
-        if not query:
+        if searchquery == '':
             return HttpResponse(json.dumps({
-                "spells": spellmgr.getspells()
+                "spells": spellmgr.filter_spells(filterdata, **spellskwargs)
             }), content_type='application/json')
 
         return HttpResponse(json.dumps({
-            "spells": spellmgr.searchspells(query)
+            "spells": spellmgr.search_filter_spells(filterdata, searchquery, **spellskwargs)
         }), content_type='application/json')
 
 

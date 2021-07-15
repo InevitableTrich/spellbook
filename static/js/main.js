@@ -1,6 +1,7 @@
 var darkMode = true
 var filterState = {}
 var currentFilter = JSON.stringify({"filter": {}})
+var searchQuery = ''
 var filterIDs = {
     "artificer": "Artificer",
     "bard": "Bard",
@@ -138,6 +139,20 @@ function sortToggle(id, field){
   toggle.classList.toggle("sortSelectedTxt")
   makeFilterRequest('nameSort', 0, currentFilter)
 }
+
+function search(query){
+    searchQuery = query
+    sort = findSort()
+    makeFilterRequest(sort, varCycle[sort], currentFilter, query)
+}
+
+function findSort(){
+    for([key] of Object.entries(varCycle)){
+        if (varCycle[key] != 0) return key
+        return 'nameSort'
+    }
+}
+
 function clrESO(){
   divs = document.querySelectorAll("div.sortSelected")
   divs.forEach(element => {
@@ -147,26 +162,23 @@ function clrESO(){
   ps.forEach(element => {
     element.classList.remove('sortSelectedTxt')
   });
+  currentFilter = JSON.stringify({"filter": {}})
+  filterState = {}
+
   for([key] of Object.entries(varCycle)){
       varCycle[key] = 0
       document.getElementById(key).innerHTML = sortState[key] +
       sortState[varCycle[key]]
   }
+
   search = document.getElementById('search')
   search.value = ""
-  makeHTTPRequest('http://127.0.0.1:8000/sort', handleSpellsResponse)
-}
-
-function makeSortRequest(fieldid, direction){
-    makeHTTPRequest('http://127.0.0.1:8000/sort?field='+fieldid+'&direction='+direction, handleSpellsResponse);
+  searchQuery = ''
+  makeFilterRequest('nameSort', 0, currentFilter)
 }
 
 function makeFilterRequest(fieldid, direction, filter){
-    makeHTTPPostRequest('http://127.0.0.1:8000/filter?field='+fieldid+'&direction='+direction, handleSpellsResponse, filter);
-}
-
-function makeSearchRequest(value) {
-    makeHTTPRequest('http://127.0.0.1:8000/search?query='+value, handleSpellsResponse)
+    makeHTTPPostRequest('http://127.0.0.1:8000/filter?field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery, handleSpellsResponse, filter);
 }
 
 function darkModeToggle(){
@@ -309,8 +321,8 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">Components: ${spell.components} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
         <p class="spellDispDescExp">Duration: ${spell.duration}</p>
         <p class="spellDispDescExp">Classes: ${spell.classes.join(", ")}</p>
-        <p class="spellDispDescExp">${spell.desc}</p>
-        <p class="spellDispDescExp">At Higher Levels: ${spell.higher_level}</p>
+        <p class="spellDispDescExp">${typeof(spell.desc) == "string" ? "&emsp;&emsp;" + spell.desc : "&emsp;&emsp;" + spell.desc.join("<BR/> &emsp;&emsp;")}</p>
+        <p class="spellDispDescExp">At Higher Levels: ${typeof(spell.higher_level) == "string" ? spell.higher_level : spell.higher_level.join("<BR/> &emsp;&emsp;")}</p>
       </div>
       <div class="rowContainer" style="margin-top: -28px;">
         <div class="expLeft">
@@ -324,13 +336,6 @@ function populateSpells(jsonResponse) {
     </div>
   </div>`
     })
-}
-
-function makeHTTPRequest(url, callback) {
-    objXMLHttp=new XMLHttpRequest()
-    objXMLHttp.onreadystatechange  = callback
-    objXMLHttp.open("GET", url)
-    objXMLHttp.send()
 }
 
 function makeHTTPPostRequest(url, callback, data) {

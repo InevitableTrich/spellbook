@@ -24,8 +24,13 @@ def filter_spells(filters, sort='name', sortby=pymongo.ASCENDING):
     return spells
 
 
-def searchspells(query):
+def search_filter_spells(filters, searchquery, sort='name', sortby=pymongo.ASCENDING):
     col = getspellscollection()
 
-    spells = [x for x in col.find({"$text": {"$search": query}}, projection={'_id': False})]
+    formatted_filter = {}
+    for field, values in filters.items():
+        formatted_filter[field] = {"$in": values}
+    formatted_filter["$text"] = {"$search": searchquery}
+
+    spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}).sort(sort, sortby)]
     return spells

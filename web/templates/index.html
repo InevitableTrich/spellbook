@@ -14,7 +14,7 @@
 
 </head>
 
-<body onload="makeHTTPRequest('http://127.0.0.1:8000/sort', handleSpellsResponse)">
+<body onload="makeFilterRequest('http://127.0.0.1:8000/filter?field=nameSort&direction=0&searchquery=', handleSpellsResponse, JSON.stringify({'filter': {}}))">
 
   <div class="head">
     <h1 class="title">
@@ -33,7 +33,7 @@
   </h2>
 
   <h3 class="srchTxt">search:</h3>
-  <input id="search" class="searchBar" type="text" placeholder="Search Here:" value="" onchange="makeSearchRequest(value)">
+  <input id="search" class="searchBar" type="text" placeholder="Search Here:" value="" onchange="search(value)">
 
   <div class="smallBtn" id="eeso" onclick="expandExclSrch()">
     <p class="smallTxt">
