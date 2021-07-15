@@ -113,6 +113,12 @@ function cycleSort(id){
 
 }
 
+function search(query){
+    searchQuery = query
+    sort = findSort()
+    makeFilterRequest(sort, varCycle[sort], currentFilter, query)
+}
+
 function sortToggle(id, field){
   filterKey = filterIDs[id]
 
@@ -140,12 +146,6 @@ function sortToggle(id, field){
   makeFilterRequest('nameSort', 0, currentFilter)
 }
 
-function search(query){
-    searchQuery = query
-    sort = findSort()
-    makeFilterRequest(sort, varCycle[sort], currentFilter, query)
-}
-
 function findSort(){
     for([key] of Object.entries(varCycle)){
         if (varCycle[key] != 0) return key
@@ -171,8 +171,8 @@ function clrESO(){
       sortState[varCycle[key]]
   }
 
-  search = document.getElementById('search')
-  search.value = ""
+  searchBar = document.getElementById('search')
+  searchBar.value = ""
   searchQuery = ''
   makeFilterRequest('nameSort', 0, currentFilter)
 }
