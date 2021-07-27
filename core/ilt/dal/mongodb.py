@@ -8,6 +8,14 @@ DB_NAME = None
 
 def connect():
     config = env.GLOBALCONFIG
+    mongodbconfig = config['mongodb']
+    if mongodbconfig.get('username'):
+        # auth
+        username = mongodbconfig['username']
+        password = mongodbconfig['password']
+        mongodburl = mongodbconfig['connectionstring']
+        return MongoClient('mongodb+srv://' + username + ':' + password + '@' + mongodburl)
+
     return MongoClient(config['mongodb']['connectionstring'])
 
 
