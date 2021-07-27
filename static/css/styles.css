@@ -46,8 +46,8 @@ body {
 .menuOption {
   color: rgb(89, 129, 204);
   margin-left: 2%;
-  margin-bottom: 40px;
-  margin-top: -20px;
+  font-size: 22px;
+  text-decoration: none;
 }
 
 .spellContainer {
@@ -425,6 +425,81 @@ body {
   -moz-user-select: none;
   -webkit-user-select: none;
 }
+
+.pagem1{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 42.15%;
+  width: 7.5%;
+  height: 56px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-right: rgb(80,80,80) solid 1.5px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.pagep1{
+  margin-top: 20px;
+  width: 7.5%;
+  height: 56px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-left: rgb(80,80,80) solid 1.5px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.pageTxt {
+  width: auto;
+  margin-top: 16px;
+  font-size: 150%;
+  white-space: nowrap;
+  color: rgb(222, 222, 222);
+}
+.middle {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.stt {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    width: 56px;
+    height: 56px;
+    background-color: rgba(50, 50, 50, .5);
+    border: rgba(80,80,80,.5) solid 3px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.stt:hover {
+    background-color: rgb(50, 50, 50);
+    border: rgb(80,80,80) solid 3px;
+    transition: background-color .5s;
+    transition: border .5s;
+}
+.stttxt {
+    width: auto;
+    margin-top: 16px;
+    font-size: 150%;
+    white-space: nowrap;
+    color: rgba(255,255,255,.5);
+}
+
 
 .lightScheme {
   background-color: rgb(255, 255, 255);

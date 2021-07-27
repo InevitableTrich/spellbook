@@ -14,7 +14,7 @@
 
 </head>
 
-<body onload="makeFilterRequest('http://127.0.0.1:8000/filter?field=nameSort&direction=0&searchquery=', handleSpellsResponse, JSON.stringify({'filter': {}}))">
+<body onload="makeFilterRequest('nameSort', handleSpellsResponse, JSON.stringify({'filter': {}}))">
 
   <div class="head">
     <h1 class="title">
@@ -25,12 +25,14 @@
     </div>
   </div>
 
-  <h2 class="menuOption">
+  <a class="menuOption" href="https://forms.gle/xXn7vXJ6szEZ2Rsg8" target="_blank" rel="noopener noreferrer">
     - Suggestions / Feedback
-  </h2>
-  <h2 class="menuOption">
-    - Request New Spells
-  </h2>
+  </a>
+  <div class="blank">
+    <h2 class="menuOption">
+      - Request New Spells
+    </h2>
+  </div>
 
   <h3 class="srchTxt">search:</h3>
   <input id="search" class="searchBar" type="text" placeholder="Search Here:" value="" onchange="search(value)">
@@ -58,9 +60,6 @@
             <div class="rowContainer">
               <div class="cibl"></div>
               <div class="searchRowCon">
-                <div class="classItem" id="artificer" onclick="sortToggle(id, 'classes')">
-                  <p class="ciTxt" id="_artificer">Artificer,</p>
-                </div>
                 <div class="classItem" id="bard" onclick="sortToggle(id, 'classes')">
                   <p class="ciTxt" id="_bard">Bard,</p>
                 </div>
@@ -275,6 +274,23 @@
 
   <div id="spellList"></div>
 
+
+  <div class="rowContainer">
+    <div class="pagem1" onclick="pageChange(-1)">
+      <p class="pageTxt">◀</p>
+    </div>
+    <div class="pagep1" onclick="pageChange(1)">
+      <p class="pageTxt">▶</p>
+    </div>
+  </div>
+
+  <div class="middle">
+    <p class="pageTxt" id="pageTxt">1</p>
+  </div>
+
+<div class="stt" onclick="scrollToTop()">
+  <p class="stttxt">▲</p>
+</div>
 
 </body>
 

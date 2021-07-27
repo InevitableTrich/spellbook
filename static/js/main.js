@@ -1,5 +1,9 @@
 var darkMode = true
+var curPage = 1
+var maxPages = 0
+var spellCount = 0
 var filterState = {}
+var oldFilter = {}
 var currentFilter = JSON.stringify({"filter": {}})
 var searchQuery = ''
 var filterIDs = {
@@ -7,11 +11,11 @@ var filterIDs = {
     "bard": "Bard",
     "cleric": "Cleric",
     "druid": "Druid",
-    "fighter": "Fighter (Eldritch Knight)",
+    "fighter": "Wizard",
     "monk": "Monk",
     "paladin": "Paladin",
     "ranger": "Ranger",
-    "rogue": "Rogue (Arcane Trickster)",
+    "rogue": "Wizard",
     "sorcerer": "Sorcerer",
     "warlock": "Warlock",
     "wizard": "Wizard",
@@ -113,10 +117,33 @@ function cycleSort(id){
 
 }
 
-function search(query){
-    searchQuery = query
+function pageChange(inc) {
+    curPage += inc
+    if (curPage < 1) curPage = maxPages
+    if (curPage > maxPages) curPage = 1
+    document.getElementById("pageTxt").innerHTML = curPage
     sort = findSort()
-    makeFilterRequest(sort, varCycle[sort], currentFilter, query)
+    makeFilterRequest(sort, varCycle[sort], currentFilter)
+    window.scrollTo(0, 0)
+}
+
+function resetPage() {
+    curPage = 1
+    document.getElementById("pageTxt").innerHTML = curPage
+    sort = findSort()
+    makeFilterRequest(sort, varCycle[sort], currentFilter)
+    window.scrollTo(0, 0)
+}
+
+function scrollToTop() {
+    window.scrollTo(0, 0)
+}
+
+function search(query){
+    if (query != "") searchQuery = "\"" + query + "\""
+    else searchQuery = ""
+    sort = findSort()
+    makeFilterRequest(sort, varCycle[sort], currentFilter)
 }
 
 function sortToggle(id, field){
@@ -149,8 +176,8 @@ function sortToggle(id, field){
 function findSort(){
     for([key] of Object.entries(varCycle)){
         if (varCycle[key] != 0) return key
-        return 'nameSort'
     }
+    return 'nameSort'
 }
 
 function clrESO(){
@@ -174,23 +201,27 @@ function clrESO(){
   searchBar = document.getElementById('search')
   searchBar.value = ""
   searchQuery = ''
+  resetPage()
   makeFilterRequest('nameSort', 0, currentFilter)
 }
 
 function makeFilterRequest(fieldid, direction, filter){
-    makeHTTPPostRequest('http://127.0.0.1:8000/filter?field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery, handleSpellsResponse, filter);
+    makeHTTPPostRequest('http://127.0.0.1:8000/filter?pagenum='+curPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery, handleSpellsResponse, filter);
 }
 
 function darkModeToggle(){
   darkMode = darkMode ? false : true;
   document.getElementById("darkToggle").innerHTML =
   darkMode ? "Dark Mode: On" : "Dark Mode: Off"
-  if (darkMode) {
+  checkDarkMode()
+}
+function checkDarkMode(){
+    if (darkMode) {
     applyDarkMode()
-  }
-  else {
-    applyLightMode()
-  }
+    }
+    else {
+      applyLightMode()
+    }
 }
 function applyDarkMode() {
   divs = document.querySelectorAll("div")
@@ -287,6 +318,8 @@ function populateSpells(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")
     spells.innerHTML = ''
+    spellCount = data.spellscount
+    maxPages = Math.ceil(spellCount/50)
     data.spells.forEach(spell => {
         spells.innerHTML +=`<div>
     <div class="spellContainer" id="${spell.spellid}">
@@ -318,11 +351,12 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">School: ${spell.school}</p>
         <p class="spellDispDescExp">Casting Time: ${spell.cast_time}</p>
         <p class="spellDispDescExp">Range: ${spell.range}</p>
-        <p class="spellDispDescExp">Components: ${spell.components} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
-        <p class="spellDispDescExp">Duration: ${spell.duration}</p>
+        <p class="spellDispDescExp">Components: ${typeof(spell.components) == "string" ? spell.components : spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
+        <p class="spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
+        <p class="spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
         <p class="spellDispDescExp">Classes: ${spell.classes.join(", ")}</p>
         <p class="spellDispDescExp">${typeof(spell.desc) == "string" ? "&emsp;&emsp;" + spell.desc : "&emsp;&emsp;" + spell.desc.join("<BR/> &emsp;&emsp;")}</p>
-        <p class="spellDispDescExp">At Higher Levels: ${typeof(spell.higher_level) == "string" ? spell.higher_level : spell.higher_level.join("<BR/> &emsp;&emsp;")}</p>
+        <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
       </div>
       <div class="rowContainer" style="margin-top: -28px;">
         <div class="expLeft">
@@ -336,6 +370,7 @@ function populateSpells(jsonResponse) {
     </div>
   </div>`
     })
+    checkDarkMode()
 }
 
 function makeHTTPPostRequest(url, callback, data) {

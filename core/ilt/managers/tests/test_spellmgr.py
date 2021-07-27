@@ -158,3 +158,42 @@ class TestSpellmgr(unittest.TestCase):
             returnedspellids.add(spelldict['spellid'])
 
         self.assertEqual(expectedspellids, returnedspellids)
+
+        # q: '2d8'
+        filter_v = {}
+        searchquery = '2d8'
+        spells = spellmgr.search_filter_spells(filter_v, searchquery)
+        self.assertEqual(2, len(spells))
+        expectedspellids = {'chaos_bolt', 'booming_blade'}
+        returnedspellids = set()
+
+        for spelldict in spells:
+            returnedspellids.add(spelldict['spellid'])
+
+        self.assertEqual(expectedspellids, returnedspellids)
+
+        # q: '2d8' rogue
+        filter_v = {'classes': ['Rogue (Arcane Trickster)']}
+        searchquery = '2d8'
+        spells = spellmgr.search_filter_spells(filter_v, searchquery)
+        self.assertEqual(1, len(spells))
+        expectedspellids = {'booming_blade'}
+        returnedspellids = set()
+
+        for spelldict in spells:
+            returnedspellids.add(spelldict['spellid'])
+
+        self.assertEqual(expectedspellids, returnedspellids)
+
+        # q: 'ranged'
+        filter_v = {}
+        searchquery = 'ranged'
+        spells = spellmgr.search_filter_spells(filter_v, searchquery)
+        self.assertEqual(3, len(spells))
+        expectedspellids = {'chaos_bolt', 'acid_arrow', 'fireball'}
+        returnedspellids = set()
+
+        for spelldict in spells:
+            returnedspellids.add(spelldict['spellid'])
+
+        self.assertEqual(expectedspellids, returnedspellids)
