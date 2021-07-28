@@ -116,12 +116,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'https://d3h1ovcg3aqqmz.cloudfront.net/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR.parent / "static",
-
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR.parent / "static",
+#
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

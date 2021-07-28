@@ -7,23 +7,18 @@ import json
 from ilt.managers import spellmgr
 
 
-class BaseView(View):
-    def get(self, request, *args, **kwargs):
-        return SimpleTemplateResponse('index.html')
+class FilterSpellsViewImpl(object):
+    def do_post(self, data, *args, **kwargs):
+        filterdata = data.get("filter", {})
 
-
-class FilterSpellsView(View):
-    def post(self, request, *args, **kwargs):
-        filterdata = json.loads(request.body).get("filter")
-
-        page = int(request.GET.get('pagenum'))
-        field = request.GET.get('field')
-        direction = request.GET.get('direction')
-        searchquery = request.GET.get('searchquery')
+        page = int(data.get('pagenum'))
+        field = data.get('field')
+        direction = data.get('direction')
+        searchquery = data.get('searchquery')
         spellskwargs = {}
 
-        spellnumsstart = (page-1)*50
-        spellnumsend = (page*50)
+        spellnumsstart = (page - 1) * 50
+        spellnumsend = (page * 50)
 
         if field:
             sortfield = field[0:-4]
@@ -39,15 +34,38 @@ class FilterSpellsView(View):
             spellskwargs['sortby'] = sortdir
         if searchquery == '':
             spells, spellscount = spellmgr.filter_spells(filterdata, spellnumsstart, spellnumsend, **spellskwargs)
-            return HttpResponse(json.dumps({
-                "spells": spells, "spellscount": spellscount
-            }), content_type='application/json')
+            return {"spells": spells, "spellscount": spellscount}
 
-        spells, spellscount = spellmgr.search_filter_spells(filterdata, searchquery, spellnumsstart, spellnumsend, **spellskwargs)
+        spells, spellscount = spellmgr.search_filter_spells(filterdata, searchquery, spellnumsstart, spellnumsend,
+                                                            **spellskwargs)
+        return {"spells": spells, "spellscount": spellscount}
+    
 
-        return HttpResponse(json.dumps({
-                "spells": spells, "spellscount": spellscount
-        }), content_type='application/json')
+class _BaseView(View):
+    def do_get(self, data, *args, **kwargs):
+        raise NotImplementedError
+    
+    def do_post(self, data, *args, **kwargs):
+        raise NotImplementedError
+    
+    def get(self, request, *args, **kwargs):
+        if self.TEMPLATE:
+            return SimpleTemplateResponse(self.TEMPLATE)
+        data = {key: val for key, val in request.GET.items()}
+        return HttpResponse(json.dumps(self.do_get(data, *args, **kwargs)), content_type='application/json')
+    
+    def post(self, request, *args, **kwargs):
+        data = {key: val for key, val in request.GET.items()}
+        data['body'] = request.body
+        return HttpResponse(json.dumps(self.do_post(data, *args, **kwargs)), content_type='application/json')
+    
+    
+class HomeView(_BaseView):
+    TEMPLATE = 'index.html'
+
+
+class FilterSpellsView(FilterSpellsViewImpl, _BaseView):
+    pass
 
 
 class ReDir(View):
