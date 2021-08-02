@@ -1,3 +1,6 @@
+var staticurl = window.location.href
+var localhost = 'http://127.0.0.1:8000/filter'
+var currenturl = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells'
 var darkMode = true
 var curPage = 1
 var maxPages = 0
@@ -206,7 +209,8 @@ function clrESO(){
 }
 
 function makeFilterRequest(fieldid, direction, filter){
-    makeHTTPPostRequest('http://127.0.0.1:8000/filter?pagenum='+curPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery, handleSpellsResponse, filter);
+    makeHTTPPostRequest(currenturl+'?pagenum='+curPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery, handleSpellsResponse, filter);
+    staticurl = window.location.href
 }
 
 function darkModeToggle(){
@@ -338,7 +342,7 @@ function populateSpells(jsonResponse) {
     </div>
     <div class="blank" id="${spell.spellid}_Exp">
       <div class="spellContainer">
-        <div class="expLeft">
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft">
           <p class="spellName">${spell.name} - </p>
         </div>
         <div onclick="shrinkSpellView('${spell.spellid}')" class="expTop"></div>
@@ -359,7 +363,7 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
       </div>
       <div class="rowContainer" style="margin-top: -28px;">
-        <div class="expLeft">
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft">
           <p class="spellName">${spell.name} - </p>
         </div>
         <div onclick="shrinkSpellView('${spell.spellid}')" class="expBot"></div>

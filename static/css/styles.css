@@ -136,6 +136,10 @@ body {
   border-bottom-left-radius: 10px;
   text-align: center;
   align-items: center;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 .expTop {

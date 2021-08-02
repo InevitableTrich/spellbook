@@ -1,12 +1,12 @@
 import unittest
-from apps.home.lamdas.lambdamgr import filter_spells_handler
+from apps.home.lambdas.lambdamgr import filter_spells_handler
 
 
 class TestLambdaMgr(unittest.TestCase):
     def test_filter_spells_handler(self):
         event = {}
         event["queryStringParameters"] = {"pagenum": "1", "field": "nameSort", "direction": "0", "searchquery": ""}
-        event["body"] = b'{"filter": {"level": ["1"]}}'
+        event["body"] = {"filter": {"level": ["1"]}}
 
         context = ""
 
