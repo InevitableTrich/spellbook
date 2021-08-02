@@ -18,12 +18,12 @@ class _BaseView(View):
         if self.TEMPLATE:
             return SimpleTemplateResponse(self.TEMPLATE)
         data = {key: val for key, val in request.GET.items()}
-        return HttpResponse(json.dumps(self.do_get(data, *args, **kwargs)), content_type='application/json')
+        return HttpResponse(json.dumps(self.do_get(data, *args, **kwargs)), content_type='application/content')
 
     def post(self, request, *args, **kwargs):
         data = {key: val for key, val in request.GET.items()}
         data['body'] = request.body
-        return HttpResponse(json.dumps(self.do_post(data, *args, **kwargs)), content_type='application/json')
+        return HttpResponse(json.dumps(self.do_post(data, *args, **kwargs)), content_type='application/content')
 
 
 class HomeView(_BaseView):

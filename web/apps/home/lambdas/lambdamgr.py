@@ -25,7 +25,7 @@ def initalize_response():
         'isBase64Encoded': False,
         'headers': {}
     }
-    response['headers']['Content-Type'] = 'application/json'
+    response['headers']['Content-Type'] = 'application/content'
     response['headers']['Access-Control-Allow-Headers'] = 'Content-Type'
     response['headers']['Access-Control-Allow-Origin'] = '*'
     response['headers']['Access-Control-Allow-Methods'] = 'OPTIONS,POST,GET'

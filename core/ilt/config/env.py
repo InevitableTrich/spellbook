@@ -7,7 +7,7 @@ GLOBALCONFIG = {}
 
 def getconfig(filelocation=None):
     """
-    read config file from provided or default location. parse json into python dict
+    read config file from provided or default location. parse content into python dict
     :param filelocation: Optional absolute path to file
     :return dict:
     """

@@ -43,4 +43,5 @@ for spell in spells:
     spell['spellid'] = spell.pop('index')
     spell['cast_time'] = spell.pop('casting_time')
     spell['level'] = str(spell['level'])
+    spell['source'] = "Players Handbook"
     mongodb.getcollection('spells').replace_one({'spellid': spell['spellid']}, spell, upsert=True)

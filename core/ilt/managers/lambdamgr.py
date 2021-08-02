@@ -24,7 +24,7 @@ def lambda_handler(event, context):
     responseobject = {}
     responseobject['statusCode'] = 200
     responseobject['headers'] = {}
-    responseobject['headers']['Content-Type'] = 'application/json'
+    responseobject['headers']['Content-Type'] = 'application/content'
     responseobject['body'] = json.dumps(spellresponse)
 
     return responseobject

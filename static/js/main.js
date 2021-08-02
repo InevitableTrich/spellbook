@@ -50,6 +50,8 @@ var filterIDs = {
     "not_concentration": false,
     "_ritual": true,
     "not_ritual": false,
+    "phb": "Players Handbook",
+    "xgte": "Xanathar's Guide to Everything",
 }
 var sortState = {
   0: '-',
@@ -67,7 +69,6 @@ var varCycle = {
   "schoolSort": 0,
 }
 var searchCycle = {
-  0: "▶",
   1: "▼",
   "class" : 0,
   "level" : 0,
@@ -76,6 +77,7 @@ var searchCycle = {
   "action" : 0,
   "concentration" : 0,
   "ritual" : 0,
+  "source": 0,
   "_class": "Class: ",
   "_level": "Level: ",
   "_components": "Components: ",
@@ -83,6 +85,7 @@ var searchCycle = {
   "_action": "Action: ",
   "_concentration": "Concentration: ",
   "_ritual": "Ritual: ",
+  "_source": "Source: "
 }
 
 function expandSpellView(cName){
@@ -307,7 +310,11 @@ function CycleList(dID){
   searchCycle[dID] += 1
   if (searchCycle[dID] > 1) searchCycle[dID] = 0
 
-  document.getElementById(id).innerHTML = searchCycle["_" + dID] + searchCycle[searchCycle[dID]]
+  if (searchCycle[dID] == 1) document.getElementById(id).innerHTML = searchCycle["_" + dID] + searchCycle[searchCycle[dID]]
+  else document.getElementById(id).innerHTML = searchCycle["_" + dID] +
+        `<svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
+          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
+        </svg>`
 
   if (searchCycle[dID] == 0){
     const current = document.querySelector("#" + opsID)
@@ -337,7 +344,9 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDesc">${spell.school}</p>
       </div>
       <div onclick="expandSpellView('${spell.spellid}')" class="closeBtn">
-        <p class="expandArrow">▶</p>
+        <svg width="28px", height="20px">
+          <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+        </svg>
       </div>
     </div>
     <div class="blank" id="${spell.spellid}_Exp">
