@@ -1,3 +1,7 @@
+.spellHeight {
+  height: 52px;
+}
+
 body {
   width: auto;
   min-width: 1216px;
@@ -72,9 +76,12 @@ body {
 
 .spellName {
   margin-left: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
   font-size: 150%;
   z-index: 1;
   width: auto;
+  line-height: 25px;
   white-space: nowrap;
   color: rgb(222, 222, 222);
 }
@@ -82,6 +89,8 @@ body {
 .spellDispDesc {
   font-size: 150%;
   margin-left: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
   width: auto;
   white-space: nowrap;
   overflow: hidden;
@@ -102,7 +111,6 @@ body {
 .closeBtn {
   display: flex;
   width: 5%;
-  height: 72px;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-left: 0px;
@@ -128,7 +136,6 @@ body {
 .expLeft {
   display: flex;
   width: 5%;
-  height: 72px;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-right: 0px;
@@ -145,7 +152,6 @@ body {
 .expTop {
   display: flex;
   width: 90%;
-  height: 72px;
   background-color: rgb(50, 50, 50);
   border-top: rgb(80,80,80) solid 3px;
   line-height: 20px;
@@ -156,7 +162,6 @@ body {
 .expRight {
   display: flex;
   width: 5%;
-  height: 72px;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-left: 0px;
@@ -185,7 +190,6 @@ body {
 .expBot {
   display: flex;
   width: 90%;
-  height: 72px;
   background-color: rgb(50, 50, 50);
   border-bottom: rgb(80,80,80) solid 3px;
   line-height: 20px;
@@ -205,8 +209,7 @@ body {
 
 .name {
   display: flex;
-  width: 15%;
-  height: 72px;
+  width: 20%;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-right: 0px;
@@ -223,7 +226,6 @@ body {
 .level {
   display: flex;
   width: 12.5%;
-  height: 72px;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-right: 0px;
@@ -239,8 +241,7 @@ body {
 
 .classes {
   display: flex;
-  width: 52.5%;
-  height: 72px;
+  width: 47.5%;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-right: 0px;
@@ -256,7 +257,6 @@ body {
 .school {
   display: flex;
   width: 15%;
-  height: 72px;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-right: 0px;
@@ -287,6 +287,7 @@ body {
 
 .srchTxt {
   margin-left: 20px;
+  margin-top: 40px;
   font-size: 135%;
   width: auto;
   white-space: nowrap;
@@ -476,6 +477,7 @@ body {
 
 .stt {
     text-align: center;
+    z-index: 2;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -504,6 +506,145 @@ body {
     color: rgba(255,255,255,.5);
 }
 
+.settings {
+    text-align: center;
+    z-index: 2;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 20px;
+    width: 56px;
+    height: 56px;
+    background-color: rgba(50, 50, 50, .5);
+    border: rgba(80,80,80,.5) solid 3px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.settings:hover {
+    background-color: rgb(50, 50, 50);
+    border: rgb(80,80,80) solid 3px;
+    transition: background-color .5s;
+    transition: border .5s;
+}
+.gear {
+    margin: 8px;
+}
+.settingsBack {
+    min-width: 1216px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.4);
+}
+.settingsPage {
+    background-color: rgb(50, 50, 50);
+    min-width: 800px;
+    min-height: 600px;
+    width: 70%;
+    height: 70%;
+    position: fixed;
+    right: 15%;
+    bottom: 15%;
+    border: rgb(80,80,80) solid 3px;
+    border-radius: 20px;
+}
+.sTitle {
+    font-size: 40px;
+    color: white;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+.sText {
+    font-size: 25px;
+    color: rgb(230,230,230);
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+.sliderContainer {
+    width: 100%;
+}
+.sSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 18px;
+  background-color: white;
+  outline: none;
+}
+.sSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 40px;
+  background-color: rgb(80,80,80);
+  cursor: pointer;
+}
+
+.sSlider::-moz-range-thumb {
+  width: 20px;
+  height: 40px;
+  background-color: rgb(80,80,80);
+  cursor: pointer;
+}
+.saveSettings {
+  text-align: center;
+  width: 10%;
+  height: 32px;
+  background-color: rgb(50,50,50);
+  border: rgb(80,80,80) solid 3px;
+  border-radius: 10px;
+  position: absolute;
+  right: 25px;
+  bottom: 15px;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  webkit-user-select: none;
+}
+.saveTxt {
+  font-size: 25px;
+  width: auto;
+  color: rgb(230,230,230);
+  margin: 0px;
+  margin-top: 2px;
+}
+.previewSpell {
+  display: flex;
+  width: 70%;
+  height: 52px;
+  background-color: rgb(50, 50, 50);
+  border: rgb(80,80,80) solid 3px;
+  border-radius: 10px;
+  line-height: 20px;
+  position: absolute;
+  left: 25px;
+  bottom: 15px;
+}
+.settingsLocCont {
+  width: 17.5%;
+  height: 22%;
+  margin: 20px;
+  margin-left: 5%;
+}
+.spaceItem {
+  width: 33.3%;
+  height: 87.5%;
+  background-color: rgb(50,50,50);
+  border: rgb(80,80,80) solid 3px;
+}
+.spaceItem:hover {
+  background-color: rgb(40,40,40);
+  border: rgb(70,70,70) solid 3px;
+}
+
 
 .lightScheme {
   background-color: rgb(255, 255, 255);
@@ -525,4 +666,32 @@ body {
 
 .sortSelectedTxt {
   font-weight: 700;
+}
+
+.overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hCentered {
+  margin-left: auto;
+  margin-right: auto;
+}
+.vCentered {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.tCentered {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clickable {
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  webkit-user-select: none;
 }

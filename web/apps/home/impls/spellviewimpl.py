@@ -1,19 +1,21 @@
 import pymongo
+import json
 from ilt.managers import spellmgr
 
 
 class FilterSpellsViewImpl(object):
     def do_post(self, data, *args, **kwargs):
-        filterdata = data.get("filter", {})
+        filterdata = json.loads(data['body'])['filter']
 
         page = int(data.get('pagenum'))
+        spellsperpage = int(data.get('spellsperpage'))
         field = data.get('field')
         direction = data.get('direction')
         searchquery = data.get('searchquery')
         spellskwargs = {}
 
-        spellnumsstart = (page - 1) * 50
-        spellnumsend = (page * 50)
+        spellnumsstart = (page - 1) * spellsperpage
+        spellnumsend = (page * spellsperpage)
 
         if field:
             sortfield = field[0:-4]

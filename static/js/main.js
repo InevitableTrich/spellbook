@@ -1,9 +1,11 @@
 var staticurl = window.location.href
 var localhost = 'http://127.0.0.1:8000/filter'
 var currenturl = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells'
-var darkMode = true
+var settings = false
 var curPage = 1
 var maxPages = 0
+var spellsPerPage = 30
+var spellHeight = 52
 var spellCount = 0
 var filterState = {}
 var oldFilter = {}
@@ -52,6 +54,7 @@ var filterIDs = {
     "not_ritual": false,
     "phb": "Players Handbook",
     "xgte": "Xanathar's Guide to Everything",
+    "eepc": "Elemental Evil Player's Companion"
 }
 var sortState = {
   0: '-',
@@ -145,6 +148,119 @@ function scrollToTop() {
     window.scrollTo(0, 0)
 }
 
+function settingsToggle(close=false){
+    if (close) {
+        document.getElementById("setCon").classList.add('blank')
+        settings = false
+        loadSettings()
+        return
+    }
+    if (settings) {
+        document.getElementById("setCon").classList.add('blank')
+        settings = false
+    }
+    else if (settings == false){
+        document.getElementById("setCon").classList.remove('blank')
+        settings = true
+    }
+    loadSettings()
+}
+function loadSettings(){
+    document.getElementById("perPageNum").innerHTML = "Spells Per Page: " + spellsPerPage
+    document.getElementById("perPage").value = spellsPerPage
+    document.getElementById("spellHeightNum").innerHTML = "Spell Height: " + spellHeight + "px"
+    document.getElementById("spellHeight").value = spellHeight
+}
+function updateSettings(id){
+    idNum = id + "Num"
+    slider = document.getElementById(id)
+    num = document.getElementById(idNum)
+    preText = ""
+    postText = ""
+
+    if (id == "perPage") {
+        preText = "Spells Per Page: "
+        postText = ""
+    } else if (id == "spellHeight") {
+        preText = "Spell Height: "
+        postText = "px"
+    }
+    num.innerHTML = preText + slider.value + postText
+}
+function updatePreview() {
+    document.getElementById('previewSpell').style.height = parseInt(document.getElementById("spellHeight").value) + "px"
+}
+function saveSettings(){
+    if (spellsPerPage == parseInt(document.getElementById("perPage").value)) {
+        changed = false
+    } else {
+        changed = true
+    }
+    spellsPerPage = parseInt(document.getElementById("perPage").value)
+    spellHeight = parseInt(document.getElementById("spellHeight").value)
+    sheet = document.styleSheets[0]
+    sheet.deleteRule(0)
+    sheet.insertRule(".spellHeight {height: " + spellHeight + "px;}")
+    if (changed) resetPage()
+    settingsToggle()
+}
+function setSetPos(pos) {
+    switch(pos){
+        case 1:
+            document.getElementById('settingsGear').style.top = 0
+            document.getElementById('settingsGear').style.left = "47.5%"
+            document.getElementById('settingsGear').style.right ="auto"
+            document.getElementById('settingsGear').style.bottom = "auto"
+            break
+        case 2:
+            document.getElementById('settingsGear').style.top = 0
+            document.getElementById('settingsGear').style.left = "auto"
+            document.getElementById('settingsGear').style.right = 0
+            document.getElementById('settingsGear').style.bottom = "auto"
+            break
+        case 3:
+            document.getElementById('settingsGear').style.top = "auto"
+            document.getElementById('settingsGear').style.left = "auto"
+            document.getElementById('settingsGear').style.right = 0
+            document.getElementById('settingsGear').style.bottom = "47.5%"
+            break
+        case 5:
+            document.getElementById('settingsGear').style.top = "auto"
+            document.getElementById('settingsGear').style.left = "47.5%"
+            document.getElementById('settingsGear').style.right = "auto"
+            document.getElementById('settingsGear').style.bottom = 0
+            break
+        case 6:
+            document.getElementById('settingsGear').style.top = "auto"
+            document.getElementById('settingsGear').style.left = 0
+            document.getElementById('settingsGear').style.right = "auto"
+            document.getElementById('settingsGear').style.bottom = 0
+            break
+        case 7:
+            document.getElementById('settingsGear').style.top = "47.5%"
+            document.getElementById('settingsGear').style.left = 0
+            document.getElementById('settingsGear').style.right = "auto"
+            document.getElementById('settingsGear').style.bottom = "auto"
+            break
+        case 8:
+            document.getElementById('settingsGear').style.top = 0
+            document.getElementById('settingsGear').style.left = 0
+            document.getElementById('settingsGear').style.right = "auto"
+            document.getElementById('settingsGear').style.bottom = "auto"
+            break
+    }
+    document.querySelectorAll("div.spaceItem").forEach(element => {
+        element.style.border = "rgb(80,80,80) solid 3px"
+    });
+
+    document.getElementById('setPos' + pos).style.border = "white solid 3px"
+}
+document.addEventListener('keydown', function(event) {
+    if(event.key == 'Escape') {
+        settingsToggle(close=true)
+    }
+});
+
 function search(query){
     if (query != "") searchQuery = "\"" + query + "\""
     else searchQuery = ""
@@ -176,7 +292,8 @@ function sortToggle(id, field){
   toggle.classList.toggle("sortSelected")
   toggle = document.getElementById("_" + id)
   toggle.classList.toggle("sortSelectedTxt")
-  makeFilterRequest('nameSort', 0, currentFilter)
+  sort = findSort()
+  makeFilterRequest(sort, varCycle[sort], currentFilter)
 }
 
 function findSort(){
@@ -212,82 +329,12 @@ function clrESO(){
 }
 
 function makeFilterRequest(fieldid, direction, filter){
-    makeHTTPPostRequest(currenturl+'?pagenum='+curPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery, handleSpellsResponse, filter);
-    staticurl = window.location.href
-}
-
-function darkModeToggle(){
-  darkMode = darkMode ? false : true;
-  document.getElementById("darkToggle").innerHTML =
-  darkMode ? "Dark Mode: On" : "Dark Mode: Off"
-  checkDarkMode()
-}
-function checkDarkMode(){
-    if (darkMode) {
-    applyDarkMode()
+    if (window.location.href == 'http://127.0.0.1:8000/') {
+        url = localhost
+    } else {
+        url = currenturl
     }
-    else {
-      applyLightMode()
-    }
-}
-function applyDarkMode() {
-  divs = document.querySelectorAll("div")
-  divs.forEach(element => {
-    element.classList.remove('lightScheme')
-  });
-  inputs = document.querySelectorAll("input")
-  inputs.forEach(element => {
-    element.classList.remove('lightScheme')
-    element.classList.remove('lightText')
-  });
-  document.querySelector("body").classList.remove("lightScheme")
-  ps = document.querySelectorAll("p")
-  ps.forEach(element => {
-    element.classList.remove('lightText')
-  });
-  h1s = document.querySelectorAll("h1")
-  h1s.forEach(element => {
-    element.classList.remove('lightText')
-  });
-  h2s = document.querySelectorAll("h2")
-  h2s.forEach(element => {
-    element.classList.remove('bluerText')
-  });
-  h3s = document.querySelectorAll("h3")
-  h3s.forEach(element => {
-    element.classList.remove('lightText')
-  });
-}
-
-function applyLightMode() {
-  divs = document.querySelectorAll("div")
-  divs.forEach(element => {
-    element.classList.add('lightScheme')
-  });
-  inputs = document.querySelectorAll("input")
-  inputs.forEach(element => {
-    element.classList.add('lightScheme')
-    element.classList.add('lightText')
-  });
-  document.querySelector("body").classList.add("lightScheme")
-  ps = document.querySelectorAll("p")
-  ps.forEach(element => {
-    element.classList.add('lightText')
-  });
-  h1s = document.querySelectorAll("h1")
-  h1s.forEach(element => {
-    element.classList.add('lightText')
-  });
-  h2s = document.querySelectorAll("h2")
-  h2s.forEach(element => {
-    element.classList.add('bluerText')
-  });
-  h3s = document.querySelectorAll("h3")
-  h3s.forEach(element => {
-    element.classList.add('lightText')
-  });
-
-
+    makeHTTPPostRequest(url+'?pagenum='+curPage+'&spellsperpage='+spellsPerPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery, handleSpellsResponse, filter);
 }
 
 function expandExclSrch(){
@@ -301,7 +348,6 @@ function shrinkExclSrch(){
   current.className = 'smallBtn'
   const currentExp = document.querySelector('#eeso_exp');
   currentExp.className = 'blank'
-  if (darkMode != true) applyLightMode()
 }
 function CycleList(dID){
   id = dID + "_txt"
@@ -330,20 +376,20 @@ function populateSpells(jsonResponse) {
     spells = document.getElementById("spellList")
     spells.innerHTML = ''
     spellCount = data.spellscount
-    maxPages = Math.ceil(spellCount/50)
+    maxPages = Math.ceil(spellCount/spellsPerPage)
     data.spells.forEach(spell => {
         spells.innerHTML +=`<div>
     <div class="spellContainer" id="${spell.spellid}">
-      <div onclick="expandSpellView('${spell.spellid}')" class="name">
-        <p class="spellName"> ${spell.name} - </p>
-      </div><div onclick="expandSpellView('${spell.spellid}')" class="level">
-        <p class="spellDispDesc">${spell.level}</p>
-      </div><div onclick="expandSpellView('${spell.spellid}')" class="classes">
+      <div onclick="expandSpellView('${spell.spellid}')" class="name spellHeight">
+        <p class="spellName overflow"> ${spell.name} - </p>
+      </div><div onclick="expandSpellView('${spell.spellid}')" class="level spellHeight">
+        <p class="spellDispDesc hCentered">${spell.level}</p>
+      </div><div onclick="expandSpellView('${spell.spellid}')" class="classes spellHeight">
         <p class="spellDispDesc">${spell.classes.join(", ")}</p>
-      </div><div onclick="expandSpellView('${spell.spellid}')" class="school">
+      </div><div onclick="expandSpellView('${spell.spellid}')" class="school spellHeight">
         <p class="spellDispDesc">${spell.school}</p>
       </div>
-      <div onclick="expandSpellView('${spell.spellid}')" class="closeBtn">
+      <div onclick="expandSpellView('${spell.spellid}')" class="closeBtn spellHeight">
         <svg width="28px", height="20px">
           <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
         </svg>
@@ -351,16 +397,17 @@ function populateSpells(jsonResponse) {
     </div>
     <div class="blank" id="${spell.spellid}_Exp">
       <div class="spellContainer">
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft">
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft spellHeight">
           <p class="spellName">${spell.name} - </p>
         </div>
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expTop"></div>
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight">
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expTop spellHeight"></div>
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight spellHeight">
           <p class="expandArrow">▼</p>
         </div>
       </div>
       <div class="expBody">
-        <p class="spellDispDescExp">Level: ${spell.level}</p>
+        <br>
+        <p class="spellDispDescExp" style="margin-top: 20px;">Level: ${spell.level}</p>
         <p class="spellDispDescExp">School: ${spell.school}</p>
         <p class="spellDispDescExp">Casting Time: ${spell.cast_time}</p>
         <p class="spellDispDescExp">Range: ${spell.range}</p>
@@ -370,20 +417,20 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">Classes: ${spell.classes.join(", ")}</p>
         <p class="spellDispDescExp">${typeof(spell.desc) == "string" ? "&emsp;&emsp;" + spell.desc : "&emsp;&emsp;" + spell.desc.join("<BR/> &emsp;&emsp;")}</p>
         <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
+        <br>
       </div>
       <div class="rowContainer" style="margin-top: -28px;">
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft">
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft spellHeight">
           <p class="spellName">${spell.name} - </p>
         </div>
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expBot"></div>
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight">
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expBot spellHeight"></div>
+        <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight spellHeight">
           <p class="expandArrow">▲</p>
         </div>
       </div>
     </div>
   </div>`
     })
-    checkDarkMode()
 }
 
 function makeHTTPPostRequest(url, callback, data) {

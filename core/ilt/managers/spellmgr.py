@@ -20,8 +20,6 @@ def filter_spells(filters, pagestart, pageend, sort='name', sortby=pymongo.ASCEN
     for field, values in filters.items():
         formatted_filter[field] = {"$in": values}
 
-    # formatted_filter['level'] = {"$in":["0","1","2"]}
-
     spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}).sort(sort, sortby)[pagestart:pageend]]
     spellscount = col.count_documents(filter=formatted_filter)
     return spells, spellscount

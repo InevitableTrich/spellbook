@@ -5,24 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0">
   <meta name="keywords" content="HTML, CSS">
-  <meta name="description" content="this is the description that shows up
-  when you google the site">
+  <meta name="description" content="A spellbook by 'uaq'. Includes spells from Players Handbook, Xanathar's Guide to Everything, and more.">
   <title>uaq's Spellbook</title>
   <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" type="image/png" href="/static/images/icon.png">
 
   <script src="/static/js/main.js"></script>
 
 </head>
 
-<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}}))">
+<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}})); setSetPos(6)">
 
   <div class="head">
     <h1 class="title">
-      uaq's Spellbook [WIP]
+      uaq's Spellbook
     </h1>
-    <div onclick="darkModeToggle()" class="darkOption">
-      <h2 id="darkToggle" class="darkTxt">Dark Mode: On</h2>
-    </div>
   </div>
 
   <a class="menuOption" href="https://forms.gle/xXn7vXJ6szEZ2Rsg8" target="_blank" rel="noopener noreferrer">
@@ -53,7 +50,7 @@
 
         <div class="searchColumnL">
           <div class="clickObj" id="class" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="class_txt">Class: <svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
+            <p class="searchOpTxt" id="class_txt">Class: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
           <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
         </svg></p>
           </div>
@@ -100,7 +97,7 @@
           </div>
 
           <div class="clickObj" id="level" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="level_txt">Level: <svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
+            <p class="searchOpTxt" id="level_txt">Level: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
           <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
         </svg></p>
           </div>
@@ -144,7 +141,7 @@
           </div>
 
           <div class="clickObj" id="school" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="school_txt">School: <svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
+            <p class="searchOpTxt" id="school_txt">School: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
           <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
         </svg></p>
           </div>
@@ -182,7 +179,7 @@
           </div>
 
           <div class="clickObj" style="margin-bottom: 10px;" id="source" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="source_txt">Source: <svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
+            <p class="searchOpTxt" id="source_txt">Source: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
           <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
         </svg></p>
           </div>
@@ -195,7 +192,10 @@
                   <p class="ciTxt" id="_phb">PHB,</p>
                 </div>
                 <div class="classItem" id="xgte" onclick="sortToggle(id, 'source')">
-                  <p class="ciTxt" id="_xgte">XGTE</p>
+                  <p class="ciTxt" id="_xgte">XGTE,</p>
+                </div>
+                <div class="classItem" id="eepc" onclick="sortToggle(id, 'source')">
+                  <p class="ciTxt" id="_eepc">EEPC</p>
                 </div>
               </div>
             </div>
@@ -206,7 +206,7 @@
 
         <div class="searchColumnTR">
           <div class="clickObj" id="action" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="action_txt">Action: <svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
+            <p class="searchOpTxt" id="action_txt">Action: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
           <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
         </svg></p>
           </div>
@@ -238,7 +238,7 @@
           </div>
 
           <div class="clickObj" id="concentration" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="concentration_txt">Concentration: <svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
+            <p class="searchOpTxt" id="concentration_txt">Concentration: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
           <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
         </svg></p>
           </div>
@@ -258,7 +258,7 @@
           </div>
 
           <div class="clickObj" id="ritual" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="ritual_txt">Ritual: <svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
+            <p class="searchOpTxt" id="ritual_txt">Ritual: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
           <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
         </svg></p>
           </div>
@@ -288,19 +288,19 @@
 
 
   <div class="rowContainer">
-    <div class="name" onclick="cycleSort('nameSort')">
-      <p class="levelHeadTxt"  id="nameSort">Spell Name: -</p>
+    <div class="name spellHeight" onclick="cycleSort('nameSort')">
+      <p class="levelHeadTxt vCentered"  id="nameSort">Spell Name: -</p>
     </div>
-    <div class="level" style="justify-content: left;" onclick="cycleSort('levelSort')">
-      <p class="levelHeadTxt" id="levelSort">Spell Level: -</p>
+    <div class="level spellHeight hCentered" onclick="cycleSort('levelSort')">
+      <p class="levelHeadTxt vCentered" id="levelSort">Spell Level: -</p>
     </div>
-    <div class="classes" onclick="cycleSort('classSort')">
-      <p class="levelHeadTxt" id="classSort">Classes: -</p>
+    <div class="classes spellHeight" onclick="cycleSort('classSort')">
+      <p class="levelHeadTxt vCentered" id="classSort">Classes: -</p>
     </div>
-    <div class="school" onclick="cycleSort('schoolSort')">
-      <p class="levelHeadTxt" id="schoolSort">School: -</p>
+    <div class="school spellHeight" onclick="cycleSort('schoolSort')">
+      <p class="levelHeadTxt vCentered" id="schoolSort">School: -</p>
     </div>
-    <div class="closeBtn" onclick="cycleSort('schoolSort')"></div>
+    <div class="closeBtn spellHeight" onclick="cycleSort('schoolSort')"></div>
   </div>
 
 
@@ -309,12 +309,12 @@
 
   <div class="rowContainer">
     <div class="pagem1" onclick="pageChange(-1)">
-      <p class="pageTxt"><svg width="28px", height="24px" style="position: relative; top: -2px;">
+      <p class="pageTxt"><svg width="28px" height="24px" style="position: relative; top: -2px;">
           <polygon points="23.324,6 23.324,24 6,15" style="fill:white;stroke-width:3" />
         </svg></p>
     </div>
     <div class="pagep1" onclick="pageChange(1)">
-      <p class="pageTxt"><svg width="28px", height="24px" style="position: relative; top: -2px;">
+      <p class="pageTxt"><svg width="28px" height="24px" style="position: relative; top: -2px;">
           <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
         </svg></p>
     </div>
@@ -326,6 +326,40 @@
 
 <div class="stt" onclick="scrollToTop()">
   <p class="stttxt">▲</p>
+</div>
+
+<div class="settings" id="settingsGear" onclick="settingsToggle()">
+  <svg class="gear" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="rgba(255,255,255,.5)" d="M24 13.616v-3.232c-1.651-.587-2.693-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.749-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.743-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 3.384c-2.762 0-5-2.239-5-5s2.238-5 5-5 5 2.239 5 5-2.238 5-5 5zm3-5c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3z"/></svg>
+</div>
+
+<div class="settingsBack blank" id="setCon" onclick="settingsToggle()">
+  <div class="settingsPage" onclick="event.stopPropagation()">
+    <p class="sTitle">Settings</p>
+    <p class="sText" id="perPageNum">Spells Per Page: 30</p>
+    <div class="sliderContainer"><input type="range" min="5" max="100" value="30" class="sSlider" id="perPage" oninput="updateSettings(id)"></div>
+    <p class="sText" id="spellHeightNum">Spell Height: 72px</p>
+    <div class="sliderContainer"><input type="range" min="36" max="108" value="52" class="sSlider" id="spellHeight" oninput="updateSettings(id);updatePreview()"></div>
+    <p class="sText">Settings Gear Location:</p>
+    <div class="settingsLocCont">
+      <div class="rowContainer" style="height: 33%; width: 100%;">
+        <div class="spaceItem clickable" style="border-top-left-radius: 10px;" id="setPos8" onclick="setSetPos(8)"></div>
+        <div class="spaceItem clickable" id="setPos1" onclick="setSetPos(1)"></div>
+        <div class="spaceItem clickable" style="border-top-right-radius: 10px;" id="setPos2" onclick="setSetPos(2)"></div>
+      </div>
+      <div class="rowContainer" style="height: 33.3%; width: 100%;">
+        <div class="spaceItem clickable" id="setPos7" onclick="setSetPos(7)"></div>
+        <div style="width: 33.3%; height: 87.5%; background-color: rgb(30,30,30); border: rgb(60,60,60) solid 3px;"></div>
+        <div class="spaceItem clickable" id="setPos3" onclick="setSetPos(3)"></div>
+      </div>
+      <div class="rowContainer" style="height: 33.3%; width: 100%;">
+        <div class="spaceItem clickable" style="border-bottom-left-radius: 10px;" id="setPos6" onclick="setSetPos(6)"></div>
+        <div class="spaceItem clickable" id="setPos5" onclick="setSetPos(5)"></div>
+        <div style="width: 33.3%; height: 87.5%; background-color: rgb(30,30,30); border: rgb(60,60,60) solid 3px; border-bottom-right-radius: 10px;"></div>
+      </div>
+    </div>
+    <div class="previewSpell" id="previewSpell"><p class="spellName" style="margin-left: auto; margin-right: auto;">Size Preview</p></div>
+    <div class="saveSettings" onclick="saveSettings()"><p class="saveTxt">Save</p></div>
+  </div>
 </div>
 
 </body>
