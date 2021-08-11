@@ -54,7 +54,10 @@ var filterIDs = {
     "not_ritual": false,
     "phb": "Players Handbook",
     "xgte": "Xanathar's Guide to Everything",
-    "eepc": "Elemental Evil Player's Companion"
+    "eepc": "Elemental Evil Player's Companion",
+    "acqinc": "Acquisitions Incorporated",
+    "tcoe": "Tasha's Cauldron of Everything",
+    "scag": "Sword Coast Adventurer's Guide"
 }
 var sortState = {
   0: '-',
@@ -265,6 +268,7 @@ function search(query){
     if (query != "") searchQuery = "\"" + query + "\""
     else searchQuery = ""
     sort = findSort()
+    resetPage()
     makeFilterRequest(sort, varCycle[sort], currentFilter)
 }
 
@@ -334,7 +338,7 @@ function makeFilterRequest(fieldid, direction, filter){
     } else {
         url = currenturl
     }
-    makeHTTPPostRequest(url+'?pagenum='+curPage+'&spellsperpage='+spellsPerPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery, handleSpellsResponse, filter);
+    makeHTTPPostRequest(url+'?pagenum='+curPage+'&spellsperpage='+spellsPerPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery+'&url='+url, handleSpellsResponse, filter);
 }
 
 function expandExclSrch(){
@@ -383,11 +387,11 @@ function populateSpells(jsonResponse) {
       <div onclick="expandSpellView('${spell.spellid}')" class="name spellHeight">
         <p class="spellName overflow"> ${spell.name} - </p>
       </div><div onclick="expandSpellView('${spell.spellid}')" class="level spellHeight">
-        <p class="spellDispDesc hCentered">${spell.level}</p>
+        <p class="spellDispDesc overflow hCentered">${spell.level}</p>
       </div><div onclick="expandSpellView('${spell.spellid}')" class="classes spellHeight">
-        <p class="spellDispDesc">${spell.classes.join(", ")}</p>
+        <p class="spellDispDesc overflow">${spell.classes.join(", ")}</p>
       </div><div onclick="expandSpellView('${spell.spellid}')" class="school spellHeight">
-        <p class="spellDispDesc">${spell.school}</p>
+        <p class="spellDispDesc overflow">${spell.school}</p>
       </div>
       <div onclick="expandSpellView('${spell.spellid}')" class="closeBtn spellHeight">
         <svg width="28px", height="20px">
@@ -398,7 +402,7 @@ function populateSpells(jsonResponse) {
     <div class="blank" id="${spell.spellid}_Exp">
       <div class="spellContainer">
         <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft spellHeight">
-          <p class="spellName">${spell.name} - </p>
+          <p class="spellName" style="white-space: nowrap;">${spell.name} - </p>
         </div>
         <div onclick="shrinkSpellView('${spell.spellid}')" class="expTop spellHeight"></div>
         <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight spellHeight">
@@ -411,17 +415,18 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">School: ${spell.school}</p>
         <p class="spellDispDescExp">Casting Time: ${spell.cast_time}</p>
         <p class="spellDispDescExp">Range: ${spell.range}</p>
-        <p class="spellDispDescExp">Components: ${typeof(spell.components) == "string" ? spell.components : spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
+        <p class="spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
         <p class="spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
         <p class="spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
         <p class="spellDispDescExp">Classes: ${spell.classes.join(", ")}</p>
-        <p class="spellDispDescExp">${typeof(spell.desc) == "string" ? "&emsp;&emsp;" + spell.desc : "&emsp;&emsp;" + spell.desc.join("<BR/> &emsp;&emsp;")}</p>
+        <p class="spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
         <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
+        <p class="spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
         <br>
       </div>
       <div class="rowContainer" style="margin-top: -28px;">
         <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft spellHeight">
-          <p class="spellName">${spell.name} - </p>
+          <p class="spellName" style="white-space: nowrap;">${spell.name} - </p>
         </div>
         <div onclick="shrinkSpellView('${spell.spellid}')" class="expBot spellHeight"></div>
         <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight spellHeight">

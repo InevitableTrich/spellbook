@@ -5,7 +5,11 @@ from ilt.managers import spellmgr
 
 class FilterSpellsViewImpl(object):
     def do_post(self, data, *args, **kwargs):
-        filterdata = json.loads(data['body'])['filter']
+        filterdata = {}
+        if data['url'] == 'http://127.0.0.1:8000/filter':
+            filterdata = json.loads(data['body'])['filter']
+        elif data['url'] == 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells':
+            filterdata = data.get("filter", {})
 
         page = int(data.get('pagenum'))
         spellsperpage = int(data.get('spellsperpage'))
