@@ -352,6 +352,7 @@ body {
 }
 
 .searchRowCon {
+  width: fit-content;
   display: flex;
   background-color: rgb(50, 50, 50);
   flex-direction: row;
@@ -633,7 +634,9 @@ body {
 }
 .spaceItem {
   width: 33.3%;
-  height: 87.5%;
+  min-width: 52px;
+  max-width: 63px;
+  height: 48px;
   background-color: rgb(50,50,50);
   border: rgb(80,80,80) solid 3px;
 }

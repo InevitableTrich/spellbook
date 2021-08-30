@@ -42,6 +42,67 @@ var filterIDs = {
     "illusion": "Illusion",
     "necromancy": "Necromancy",
     "transmutation": "Transmutation",
+    "Artificer_-Alchemist-": "Artificer (Alchemist)",
+    "Artificer_-Armorer-": "Artificer (Armorer)",
+    "Artificer_-Artillerist-": "Artificer (Artillerist)",
+    "Artificer_-Battle_Smith-": "Artificer (Battle Smith)",
+    "Bard_-Glamour-": "Bard (Glamour)",
+    "Cleric_-Arcana-": "Cleric (Arcana)",
+    "Cleric_-Death-": "Cleric (Death)",
+    "Cleric_-Forge-": "Cleric (Forge)",
+    "Cleric_-Grave-": "Cleric (Grave)",
+    "Cleric_-Knowledge-": "Cleric (Knowledge)",
+    "Cleric_-Life-": "Cleric (Life)",
+    "Cleric_-Light-": "Cleric (Light)",
+    "Cleric_-Nature-": "Cleric (Nature)",
+    "Cleric_-Order-": "Cleric (Order)",
+    "Cleric_-Peace-": "Cleric (Peace)",
+    "Cleric_-Trickery-": "Cleric (Trickery)",
+    "Cleric_-Twilight-": "Cleric (Twilight)",
+    "Cleric_-War-": "Cleric (War)",
+    "Druid_-Arctic-": "Druid (Arctic)",
+    "Druid_-Coast-": "Druid (Coast)",
+    "Druid_-Desert-": "Druid (Desert)",
+    "Druid_-Forest-": "Druid (Forest)",
+    "Druid_-Mountain-": "Druid (Mountain)",
+    "Druid_-Spores-": "Druid (Spores)",
+    "Druid_-Stars-": "Druid (Stars)",
+    "Druid_-Swamp-": "Druid (Swamp)",
+    "Druid_-Underdark-": "Druid (Underdark)",
+    "Druid_-Wildfire-": "Druid (Wildfire)",
+    "Monk_-Four_Elements-": "Monk (Four Elements)",
+    "Monk_-Shadow-": "Monk (Shadow)",
+    "Monk_-Sun_Soul-": "Monk (Sun Soul)",
+    "Paladin_-Ancients-": "Paladin (Ancients)",
+    "Paladin_-Conquest-": "Paladin (Conquest)",
+    "Paladin_-Crown-": "Paladin (Crown)",
+    "Paladin_-Devotion-": "Paladin (Devotion)",
+    "Paladin_-Glory-": "Paladin (Glory)",
+    "Paladin_-Oathbreaker-": "Paladin (Oathbreaker)",
+    "Paladin_-Redemption-": "Paladin (Redemption)",
+    "Paladin_-Vengeance-": "Paladin (Vengeance)",
+    "Paladin_-Watchers-": "Paladin (Watchers)",
+    "Ranger_-Fey_Wanderer-": "Ranger (Fey Wanderer)",
+    "Ranger_-Gloom_Stalker-": "Ranger (Gloom Stalker)",
+    "Ranger_-Horizon_Walker-": "Ranger (Horizon Walker)",
+    "Ranger_-Monster_Slayer-": "Ranger (Monster Slayer)",
+    "Ranger_-Swarmkeeper-": "Ranger (Swarmkeeper)",
+    "Sorcerer_-Aberrant_Mind-": "Sorcerer (Aberrant Mind)",
+    "Sorcerer_-Clockwork_Soul-": "Sorcerer (Clockwork Soul)",
+    "Sorcerer_-Divine_Soul-": "Sorcerer (Divine Soul)",
+    "Warlock_-Archfey-": "Warlock (Archfey)",
+    "Warlock_-Celestial-": "Warlock (Celestial)",
+    "Warlock_-Fathomless-": "Warlock (Fathomless)",
+    "Warlock_-Fiend-": "Warlock (Fiend)",
+    "Warlock_-Genie_-_Djinni-": "Warlock (Genie - Djinni)",
+    "Warlock_-Genie_-_Efreeti-": "Warlock (Genie - Efreeti)",
+    "Warlock_-Genie_-_Marid-": "Warlock (Genie - Marid)",
+    "Warlock_-Genie_Djinni-": "Warlock (Genie Djinni)",
+    "Warlock_-Great_Old_One-": "Warlock (Great Old One)",
+    "Warlock_-Hexblade-": "Warlock (Hexblade)",
+    "Warlock_-Undying-": "Warlock (Undying)",
+    "Wizard_-Chronurgy-": "Wizard (Chronurgy)",
+    "Wizard_-Graviturgy-": "Wizard (Graviturgy)",
     "_action": "1 action",
     "bonus_action": "1 bonus action",
     "reaction": "1 reaction",
@@ -57,7 +118,8 @@ var filterIDs = {
     "eepc": "Elemental Evil Player's Companion",
     "acqinc": "Acquisitions Incorporated",
     "tcoe": "Tasha's Cauldron of Everything",
-    "scag": "Sword Coast Adventurer's Guide"
+    "scag": "Sword Coast Adventurer's Guide",
+    "egtw": "Explorer's Guide to Wildemount"
 }
 var sortState = {
   0: '-',
@@ -77,6 +139,7 @@ var varCycle = {
 var searchCycle = {
   1: "▼",
   "class" : 0,
+  "subclass": 0,
   "level" : 0,
   "components" : 0,
   "school" : 0,
@@ -85,6 +148,7 @@ var searchCycle = {
   "ritual" : 0,
   "source": 0,
   "_class": "Class: ",
+  "_subclass": "Subclass: ",
   "_level": "Level: ",
   "_components": "Components: ",
   "_school": "School: ",
@@ -132,16 +196,17 @@ function cycleSort(id){
 function pageChange(inc) {
     curPage += inc
     if (curPage < 1) curPage = maxPages
+    if (maxPages == 0) curPage = 1
     if (curPage > maxPages) curPage = 1
-    document.getElementById("pageTxt").innerHTML = curPage
+    document.getElementById("pageTxt").innerHTML = "Page " + curPage
+    document.getElementById("spellList").innerHTML = '<img src="/static/images/loading.gif" alt="Loading" width="3%" height="3%" style="display: block; margin: 0 auto;" rel="import">'
     sort = findSort()
     makeFilterRequest(sort, varCycle[sort], currentFilter)
-    window.scrollTo(0, 0)
 }
 
 function resetPage() {
     curPage = 1
-    document.getElementById("pageTxt").innerHTML = curPage
+    document.getElementById("pageTxt").innerHTML = "Page " + curPage
     sort = findSort()
     makeFilterRequest(sort, varCycle[sort], currentFilter)
     window.scrollTo(0, 0)
@@ -389,7 +454,7 @@ function populateSpells(jsonResponse) {
       </div><div onclick="expandSpellView('${spell.spellid}')" class="level spellHeight">
         <p class="spellDispDesc overflow hCentered">${spell.level}</p>
       </div><div onclick="expandSpellView('${spell.spellid}')" class="classes spellHeight">
-        <p class="spellDispDesc overflow">${spell.classes.join(", ")}</p>
+        <p class="spellDispDesc overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
       </div><div onclick="expandSpellView('${spell.spellid}')" class="school spellHeight">
         <p class="spellDispDesc overflow">${spell.school}</p>
       </div>
@@ -418,7 +483,8 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
         <p class="spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
         <p class="spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
-        <p class="spellDispDescExp">Classes: ${spell.classes.join(", ")}</p>
+        <p class="spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
+        <p class="spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
         <p class="spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
         <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
         <p class="spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>

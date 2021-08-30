@@ -6,8 +6,90 @@ import os
 import json
 
 
+def addartificer(spell):
+    artificerspells = [
+        'Acid Splash',
+        'Dancing Lights',
+        'Fire Bolt',
+        'Guidance',
+        'Light',
+        'Mage Hand',
+        'Mending',
+        'Message',
+        'Poison Spray',
+        'Prestidigitation',
+        'Ray of Frost',
+        'Resistance',
+        'Shocking Grasp',
+        'Spare the Dying',
+        'Thorn Whip',
+        'Alarm',
+        'Cure Wounds',
+        'Detect Magic',
+        'Disguise Self',
+        'Expeditius Retreat',
+        'Faerie Fire',
+        'False Life',
+        'Grease',
+        'Identify',
+        'Jump',
+        'Longstrider',
+        'Purify Food and Drink',
+        'Sanctuary',
+        'Aid',
+        'Alter Self',
+        'Arcane Lock',
+        'Blur',
+        'Continual Flame',
+        'Darkvision',
+        'Enhance Ability',
+        'Enlarge/Reduce',
+        'Heat Metal',
+        'Invisibility',
+        'Lesser Restoration',
+        'Levitate',
+        'Magic Mouth',
+        'Magic Weapon',
+        'Protection from Poison',
+        'Rope Trick',
+        'See Invisibility',
+        'Spider Climb',
+        'Web',
+        'Blink',
+        'Create Food and Water',
+        'Dispel Magic',
+        'Elemental Weapon',
+        'Fly',
+        'Glyph of Warding',
+        'Haste',
+        'Protection from Energy',
+        'Revivify',
+        'Water Breathing',
+        'Water Walk',
+        'Arcane Eye',
+        'Fabricate',
+        'Freedom of Movement',
+        'Leomund\'s Secret Chest',
+        'Mordenkainen\'s Faithful Hound',
+        'Mordenkainen\'s Private Sanctum',
+        'Otiluke\'s Resilient Sphere',
+        'Stone Shape',
+        'Stoneskin',
+        'Animate Objects',
+        'Bigby\'s Hand',
+        'Creation',
+        'Greater Restoration',
+        'Wall of Stone',
+    ]
+    if not any(x in spell['name'] for x in artificerspells):
+        return spell
+    spell['classes'].append('Artificer')
+    return spell
+
+
 def checknames(spell):
     badnames = ['Instant Summons',
+                'Black Tentacles',
                 'Secret Chest',
                 'Tiny Hut',
                 'Acid Arrow',
@@ -28,6 +110,8 @@ def checknames(spell):
 
     if spell['name'] == 'Instant Summons':
         spell['name'] = 'Drawmij\'s Instant Summons'
+    elif spell['name'] == 'Black Tentacles':
+        spell['name'] = 'Evard\'s Black Tentacles'
     elif spell['name'] == 'Secret Chest':
         spell['name'] = 'Leomunds Secret Chest'
     elif spell['name'] == 'Tiny Hut':
@@ -103,6 +187,7 @@ for spell in spells:
     spell['level'] = str(spell['level'])
     spell['source'] = "Players Handbook"
     spell = checknames(spell)
+    spell = addartificer(spell)
 
     mongodb.getcollection('spells').replace_one({'spellid': spell['spellid']}, spell, upsert=True)
 
