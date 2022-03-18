@@ -2,6 +2,7 @@ var staticurl = window.location.href
 var localhost = 'http://127.0.0.1:8000/filter'
 var currenturl = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells'
 var settings = false
+var accountView = false
 var curPage = 1
 var maxPages = 0
 var spellsPerPage = 30
@@ -42,67 +43,69 @@ var filterIDs = {
     "illusion": "Illusion",
     "necromancy": "Necromancy",
     "transmutation": "Transmutation",
-    "Artificer_-Alchemist-": "Artificer (Alchemist)",
-    "Artificer_-Armorer-": "Artificer (Armorer)",
-    "Artificer_-Artillerist-": "Artificer (Artillerist)",
-    "Artificer_-Battle_Smith-": "Artificer (Battle Smith)",
-    "Bard_-Glamour-": "Bard (Glamour)",
-    "Cleric_-Arcana-": "Cleric (Arcana)",
-    "Cleric_-Death-": "Cleric (Death)",
-    "Cleric_-Forge-": "Cleric (Forge)",
-    "Cleric_-Grave-": "Cleric (Grave)",
-    "Cleric_-Knowledge-": "Cleric (Knowledge)",
-    "Cleric_-Life-": "Cleric (Life)",
-    "Cleric_-Light-": "Cleric (Light)",
-    "Cleric_-Nature-": "Cleric (Nature)",
-    "Cleric_-Order-": "Cleric (Order)",
-    "Cleric_-Peace-": "Cleric (Peace)",
-    "Cleric_-Trickery-": "Cleric (Trickery)",
-    "Cleric_-Twilight-": "Cleric (Twilight)",
-    "Cleric_-War-": "Cleric (War)",
-    "Druid_-Arctic-": "Druid (Arctic)",
-    "Druid_-Coast-": "Druid (Coast)",
-    "Druid_-Desert-": "Druid (Desert)",
-    "Druid_-Forest-": "Druid (Forest)",
-    "Druid_-Mountain-": "Druid (Mountain)",
-    "Druid_-Spores-": "Druid (Spores)",
-    "Druid_-Stars-": "Druid (Stars)",
-    "Druid_-Swamp-": "Druid (Swamp)",
-    "Druid_-Underdark-": "Druid (Underdark)",
-    "Druid_-Wildfire-": "Druid (Wildfire)",
-    "Monk_-Four_Elements-": "Monk (Four Elements)",
-    "Monk_-Shadow-": "Monk (Shadow)",
-    "Monk_-Sun_Soul-": "Monk (Sun Soul)",
-    "Paladin_-Ancients-": "Paladin (Ancients)",
-    "Paladin_-Conquest-": "Paladin (Conquest)",
-    "Paladin_-Crown-": "Paladin (Crown)",
-    "Paladin_-Devotion-": "Paladin (Devotion)",
-    "Paladin_-Glory-": "Paladin (Glory)",
-    "Paladin_-Oathbreaker-": "Paladin (Oathbreaker)",
-    "Paladin_-Redemption-": "Paladin (Redemption)",
-    "Paladin_-Vengeance-": "Paladin (Vengeance)",
-    "Paladin_-Watchers-": "Paladin (Watchers)",
-    "Ranger_-Fey_Wanderer-": "Ranger (Fey Wanderer)",
-    "Ranger_-Gloom_Stalker-": "Ranger (Gloom Stalker)",
-    "Ranger_-Horizon_Walker-": "Ranger (Horizon Walker)",
-    "Ranger_-Monster_Slayer-": "Ranger (Monster Slayer)",
-    "Ranger_-Swarmkeeper-": "Ranger (Swarmkeeper)",
-    "Sorcerer_-Aberrant_Mind-": "Sorcerer (Aberrant Mind)",
-    "Sorcerer_-Clockwork_Soul-": "Sorcerer (Clockwork Soul)",
-    "Sorcerer_-Divine_Soul-": "Sorcerer (Divine Soul)",
-    "Warlock_-Archfey-": "Warlock (Archfey)",
-    "Warlock_-Celestial-": "Warlock (Celestial)",
-    "Warlock_-Fathomless-": "Warlock (Fathomless)",
-    "Warlock_-Fiend-": "Warlock (Fiend)",
-    "Warlock_-Genie_-_Djinni-": "Warlock (Genie - Djinni)",
-    "Warlock_-Genie_-_Efreeti-": "Warlock (Genie - Efreeti)",
-    "Warlock_-Genie_-_Marid-": "Warlock (Genie - Marid)",
-    "Warlock_-Genie_Djinni-": "Warlock (Genie Djinni)",
-    "Warlock_-Great_Old_One-": "Warlock (Great Old One)",
-    "Warlock_-Hexblade-": "Warlock (Hexblade)",
-    "Warlock_-Undying-": "Warlock (Undying)",
-    "Wizard_-Chronurgy-": "Wizard (Chronurgy)",
-    "Wizard_-Graviturgy-": "Wizard (Graviturgy)",
+
+"artificer_alchemist": "Artificer (Alchemist)",
+"artificer_armorer": "Artificer (Armorer)",
+"artificer_artillerist": "Artificer (Artillerist)",
+"artificer_battle_smith": "Artificer (Battle Smith)",
+"bard_glamour": "Bard (Glamour)",
+"cleric_arcana": "Cleric (Arcana)",
+"cleric_death": "Cleric (Death)",
+"cleric_forge": "Cleric (Forge)",
+"cleric_grave": "Cleric (Grave)",
+"cleric_knowledge": "Cleric (Knowledge)",
+"cleric_life": "Cleric (Life)",
+"cleric_light": "Cleric (Light)",
+"cleric_nature": "Cleric (Nature)",
+"cleric_order": "Cleric (Order)",
+"cleric_peace": "Cleric (Peace)",
+"cleric_trickery": "Cleric (Trickery)",
+"cleric_twilight": "Cleric (Twilight)",
+"cleric_war": "Cleric (War)",
+"druid_arctic": "Druid (Arctic)",
+"druid_coast": "Druid (Coast)",
+"druid_desert": "Druid (Desert)",
+"druid_forest": "Druid (Forest)",
+"druid_mountain": "Druid (Mountain)",
+"druid_spores": "Druid (Spores)",
+"druid_stars": "Druid (Stars)",
+"druid_swamp": "Druid (Swamp)",
+"druid_underdark": "Druid (Underdark)",
+"druid_wildfire": "Druid (Wildfire)",
+"monk_four_elements": "Monk (Four Elements)",
+"monk_shadow": "Monk (Shadow)",
+"monk_sun_soul": "Monk (Sun Soul)",
+"paladin_ancients": "Paladin (Ancients)",
+"paladin_conquest": "Paladin (Conquest)",
+"paladin_crown": "Paladin (Crown)",
+"paladin_devotion": "Paladin (Devotion)",
+"paladin_glory": "Paladin (Glory)",
+"paladin_oathbreaker": "Paladin (Oathbreaker)",
+"paladin_redemption": "Paladin (Redemption)",
+"paladin_vengeance": "Paladin (Vengeance)",
+"paladin_watchers": "Paladin (Watchers)",
+"ranger_fey_wanderer": "Ranger (Fey Wanderer)",
+"ranger_gloom_stalker": "Ranger (Gloom Stalker)",
+"ranger_horizon_walker": "Ranger (Horizon Walker)",
+"ranger_monster_slayer": "Ranger (Monster Slayer)",
+"ranger_swarmkeeper": "Ranger (Swarmkeeper)",
+"sorcerer_aberrant_mind": "Sorcerer (Aberrant Mind)",
+"sorcerer_clockwork_soul": "Sorcerer (Clockwork Soul)",
+"sorcerer_divine_soul": "Sorcerer (Divine Soul)",
+"warlock_archfey": "Warlock (Archfey)",
+"warlock_celestial": "Warlock (Celestial)",
+"warlock_fathomless": "Warlock (Fathomless)",
+"warlock_fiend": "Warlock (Fiend)",
+"warlock_genie_-_djinni": "Warlock (Genie - Djinni)",
+"warlock_genie_-_efreeti": "Warlock (Genie - Efreeti)",
+"warlock_genie_-_marid": "Warlock (Genie - Marid)",
+"warlock_genie_djinni": "Warlock (Genie Djinni)",
+"warlock_great_old_one": "Warlock (Great Old One)",
+"warlock_hexblade": "Warlock (Hexblade)",
+"warlock_undying": "Warlock (Undying)",
+"wizard_chronurgy": "Wizard (Chronurgy)",
+"wizard_graviturgy": "Wizard (Graviturgy)",
+
     "_action": "1 action",
     "bonus_action": "1 bonus action",
     "reaction": "1 reaction",
@@ -158,17 +161,55 @@ var searchCycle = {
   "_source": "Source: "
 }
 
-function expandSpellView(cName){
-  const current = document.querySelector('#' + cName);
-  current.className = 'blank'
-  const currentExp = document.querySelector('#' + cName + '_Exp');
-  currentExp.className = ''
+function toggleSpellView(cName){
+    var current = document.querySelector("#" + cName + "_body")
+    collapse(current)
+    suffix = ["head0", "head1", "head2", "head3", "bottom", "tarrow", "barrow"]
+    rclass = ["widen", "invis", "invis", "invis", "bottom_exp", "rot-right", "rot-left"]
+    for (var i = 0; i < suffix.length; i++) {
+        current = document.querySelector('#' + cName + "_" + suffix[i]);
+        if (current.className.indexOf(rclass[i]) == -1) {
+            current.className += " " + rclass[i]
+        } else {
+            current.className = current.className.replace(" " + rclass[i], "")
+        }
+    }
 }
-function shrinkSpellView(cName){
-  const current = document.querySelector('#' + cName);
-  current.className = 'spellContainer'
-  const currentExp = document.querySelector('#' + cName + '_Exp');
-  currentExp.className = 'blank'
+
+function collapse(element) {
+    var isCollapsed = element.getAttribute('collapsed') === 'true';
+    if(isCollapsed) {
+        expandSection(element)
+        element.setAttribute('collapsed', 'false')
+    } else {
+        collapseSection(element)
+    }
+}
+
+function collapseSection(element) {
+    var sectionHeight = element.scrollHeight;
+    var elementTransition = element.style.transition;
+    element.style.transition = '';
+    requestAnimationFrame(function() {
+        element.style.height = sectionHeight + 'px';
+        element.style.transition = elementTransition;
+        requestAnimationFrame(function() {
+            element.style.height = 0 + 'px';
+        });
+    });
+    element.setAttribute('collapsed', 'true');
+}
+
+function expandSection(element) {
+    var sectionHeight = element.scrollHeight;
+    element.style.height = sectionHeight + 'px';
+
+    element.addEventListener('transitionend', function(e) {
+        element.removeEventListener('transitionend', arguments.callee);
+        element.style.height = null;
+    });
+
+    element.setAttribute('collapsed', 'false');
 }
 
 function cycleSort(id){
@@ -209,11 +250,11 @@ function resetPage() {
     document.getElementById("pageTxt").innerHTML = "Page " + curPage
     sort = findSort()
     makeFilterRequest(sort, varCycle[sort], currentFilter)
-    window.scrollTo(0, 0)
+    scrollToTop()
 }
 
 function scrollToTop() {
-    window.scrollTo(0, 0)
+    window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'})
 }
 
 function settingsToggle(close=false){
@@ -268,7 +309,9 @@ function saveSettings(){
     spellHeight = parseInt(document.getElementById("spellHeight").value)
     sheet = document.styleSheets[0]
     sheet.deleteRule(0)
-    sheet.insertRule(".spellHeight {height: " + spellHeight + "px;}")
+    sheet.insertRule(".spellHeight {height: " + spellHeight + "px;}", 0)
+    sheet.deleteRule(1)
+    sheet.insertRule(".bottom_margin {margin-top: -" + (spellHeight+3) + "px;}", 1)
     if (changed) resetPage()
     settingsToggle()
 }
@@ -326,8 +369,24 @@ function setSetPos(pos) {
 document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
         settingsToggle(close=true)
+        toggleAcc(close=true)
     }
 });
+
+function toggleAcc(close=false) {
+    if (close) {
+        document.getElementById("accCon").classList.add('blank')
+        accountView = false
+        return
+    }
+    if (accountView) {
+        document.getElementById("accCon").classList.add('blank')
+        accountView = false
+    } else {
+        document.getElementById("accCon").classList.remove('blank')
+        accountView = true
+    }
+}
 
 function search(query){
     if (query != "") searchQuery = "\"" + query + "\""
@@ -361,6 +420,11 @@ function sortToggle(id, field){
   toggle.classList.toggle("sortSelected")
   toggle = document.getElementById("_" + id)
   toggle.classList.toggle("sortSelectedTxt")
+
+  if (field == "classes") {
+      getSubs(id)
+  }
+
   sort = findSort()
   makeFilterRequest(sort, varCycle[sort], currentFilter)
 }
@@ -372,6 +436,74 @@ function findSort(){
     return 'nameSort'
 }
 
+var subs = {
+    "artificer": [false, ["alchemist", "armorer", "artillerist", "battle smith"]],
+
+    "bard": [false, ["glamour"]],
+
+    "cleric": [false, ["arcana", "death", "forge", "grave", "knowledge", "life", "light", "nature", "order", "peace",
+        "trickery", "twilight", "war"]],
+
+    "druid": [false, ["arctic", "coast", "desert", "forest", "mountain", "spores", "stars", "swamp", "underdark",
+        "wildfire"]],
+
+    "monk": [false, ["four elements", "shadow", "sun soul"]],
+
+    "paladin": [false, ["ancients", "conquest", "crown", "devotion", "glory", "oathbreaker", "redemption", "vengeance",
+        "watchers"]],
+
+    "ranger": [false, ["fey wanderer", "gloom stalker", "horizon walker", "monster slayer", "swarmkeeper"]],
+
+    "sorcerer": [false, ["aberrant mind", "clockwork soul", "divine soul"]],
+
+    "warlock": [false, ["archfey", "celestial", "fathomless", "fiend", "genie - djinni", "genie - efreeti", "genie - marid",
+        "great old one", "hexblade", "undying"]],
+
+    "wizard": [false, ["chronurgy", "graviturgy"]]
+}
+var subs_list = []
+
+function getSubs(class_name) {
+    clearSubs(class_name)
+    var up_class = class_name.charAt(0).toUpperCase() + class_name.slice(1)
+    if (subs[class_name][0] === false) {
+        subs[class_name][1].forEach(sub => {
+            var ssub = sub.replaceAll(" ", "_")
+            var id = `${class_name}_${ssub}`
+            var up_sub = sub.split(" ").map(function(word){return word[0].toUpperCase() + word.substr(1)}).join(" ")
+            subs_list.push(
+                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sortToggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${up_class} (${up_sub})</p></div>`
+            )
+        });
+        subs[class_name][0] = true
+    } else {
+        subs[class_name][1].forEach(sub => {
+            var ssub = sub.replaceAll(" ", "_")
+            var id = `${class_name}_${ssub}`
+            var up_sub = sub.split(" ").map(function(word){return word[0].toUpperCase() + word.substr(1)}).join(" ")
+            ndx = subs_list.indexOf(
+                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sortToggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${up_class} (${up_sub})</p></div>`
+            )
+            subs_list = subs_list.slice(0,ndx).concat(subs_list.slice(ndx+1))
+        });
+        subs[class_name][0] = false
+    }
+
+    subs_list.sort()
+    var subs_string = ""
+    subs_string = subs_list.join('<p class="ciComma">,</p></div>') + "</div>"
+    if (subs_list.length > 0) {
+        document.querySelector("#subs_con").innerHTML = subs_string
+    } else {
+        document.querySelector("#subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
+    }
+}
+
+function clearSubs(class_name){
+    delete filterState["subs"]
+    currentFilter = "{\"filter\": " + JSON.stringify(filterState) + "}"
+}
+
 function clrESO(){
   divs = document.querySelectorAll("div.sortSelected")
   divs.forEach(element => {
@@ -381,6 +513,19 @@ function clrESO(){
   ps.forEach(element => {
     element.classList.remove('sortSelectedTxt')
   });
+  document.querySelector("#subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
+  for([key] of Object.entries(subs)){
+      subs[key][0] = false
+  }
+  subs_list = []
+
+  filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
+  filters.forEach(id => {
+      if (document.querySelector("#" + id + "_ops").getAttribute('collapsed') === 'false') {
+          CycleList(id)
+      }
+  });
+
   currentFilter = JSON.stringify({"filter": {}})
   filterState = {}
 
@@ -400,44 +545,53 @@ function clrESO(){
 function makeFilterRequest(fieldid, direction, filter){
     if (window.location.href == 'http://127.0.0.1:8000/') {
         url = localhost
+        loc = 'l'
     } else {
         url = currenturl
+        loc = 's'
     }
-    makeHTTPPostRequest(url+'?pagenum='+curPage+'&spellsperpage='+spellsPerPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery+'&url='+url, handleSpellsResponse, filter);
+
+    makeHTTPPostRequest(url+'?pagenum='+curPage+'&spellsperpage='+spellsPerPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery+'&loc='+loc, handleSpellsResponse, filter);
+
 }
 
-function expandExclSrch(){
-  const current = document.querySelector('#eeso');
-  current.className = 'blank'
-  const currentExp = document.querySelector('#eeso_exp');
-  currentExp.className = ''
+function toggleFilter(){
+    var top = document.querySelector('#ef_top')
+    var text = document.querySelector('#ef_top p')
+    var body = document.querySelector('#ef_body')
+    isCollapsed = body.getAttribute('collapsed') === 'true';
+    if (isCollapsed) {
+        top.className = top.className.replace(' shrink', '')
+        text.innerHTML = 'Shrink Filter Options'
+        body.setAttribute('collapsed', 'false')
+        expandSection(body)
+    } else {
+        top.className += ' shrink'
+        text.innerHTML = 'Expand Filter Options'
+        body.setAttribute('collapsed', 'true')
+        collapseSection(body)
+    }
+    filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
+    filters.forEach(id => {
+        if (document.querySelector("#" + id + "_ops").getAttribute('collapsed') === 'false') {
+            CycleList(id)
+        }
+    });
 }
-function shrinkExclSrch(){
-  const current = document.querySelector('#eeso');
-  current.className = 'smallBtn'
-  const currentExp = document.querySelector('#eeso_exp');
-  currentExp.className = 'blank'
-}
+
 function CycleList(dID){
-  id = dID + "_txt"
-  opsID = dID + "_ops"
-
-  searchCycle[dID] += 1
-  if (searchCycle[dID] > 1) searchCycle[dID] = 0
-
-  if (searchCycle[dID] == 1) document.getElementById(id).innerHTML = searchCycle["_" + dID] + searchCycle[searchCycle[dID]]
-  else document.getElementById(id).innerHTML = searchCycle["_" + dID] +
-        `<svg width="28px", height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg>`
-
-  if (searchCycle[dID] == 0){
-    const current = document.querySelector("#" + opsID)
-    current.className = "blank"
-  }else if (searchCycle[dID] == 1){
-    const current = document.querySelector("#" + opsID)
-    current.className = ""
-  }
+    ops = dID + "_ops"
+    var current = document.querySelector("#" + ops)
+    collapse(current)
+    var arrow = document.querySelector("#" + dID + "_arr")
+    isCollapsed = arrow.getAttribute('collapsed') === 'true'
+    if (!isCollapsed) {
+        arrow.classList += " rot-right"
+        arrow.setAttribute('collapsed', 'true')
+    } else {
+        arrow.classList.remove("rot-right")
+        arrow.setAttribute('collapsed', 'false')
+    }
 }
 
 function populateSpells(jsonResponse) {
@@ -447,36 +601,33 @@ function populateSpells(jsonResponse) {
     spellCount = data.spellscount
     maxPages = Math.ceil(spellCount/spellsPerPage)
     data.spells.forEach(spell => {
-        spells.innerHTML +=`<div>
-    <div class="spellContainer" id="${spell.spellid}">
-      <div onclick="expandSpellView('${spell.spellid}')" class="name spellHeight">
-        <p class="spellName overflow"> ${spell.name} - </p>
-      </div><div onclick="expandSpellView('${spell.spellid}')" class="level spellHeight">
-        <p class="spellDispDesc overflow hCentered">${spell.level}</p>
-      </div><div onclick="expandSpellView('${spell.spellid}')" class="classes spellHeight">
-        <p class="spellDispDesc overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
-      </div><div onclick="expandSpellView('${spell.spellid}')" class="school spellHeight">
-        <p class="spellDispDesc overflow">${spell.school}</p>
-      </div>
-      <div onclick="expandSpellView('${spell.spellid}')" class="closeBtn spellHeight">
-        <svg width="28px", height="20px">
-          <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-        </svg>
-      </div>
-    </div>
-    <div class="blank" id="${spell.spellid}_Exp">
-      <div class="spellContainer">
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft spellHeight">
-          <p class="spellName" style="white-space: nowrap;">${spell.name} - </p>
+        spells.innerHTML +=`
+<div id="${spell.spellid}">
+    <div class="h20"></div>
+    <div class="spellContainer" onClick="toggleSpellView('${spell.spellid}')" id="${spell.spellid+'_top'}">
+        <div class="name spellHeight" id="${spell.spellid+'_head0'}">
+            <p class="spellName overflow"> ${spell.name} - </p>
         </div>
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expTop spellHeight"></div>
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight spellHeight">
-          <p class="expandArrow">▼</p>
+        <div class="level spellHeight" id="${spell.spellid+'_head1'}">
+            <p class="spellDispDesc overflow hCentered">${spell.level}</p>
         </div>
-      </div>
-      <div class="expBody">
+        <div class="classes spellHeight" id="${spell.spellid+'_head2'}">
+            <p class="spellDispDesc overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
+        </div>
+        <div class="school spellHeight" id="${spell.spellid+'_head3'}">
+            <p class="spellDispDesc overflow">${spell.school}</p>
+        </div>
+        <div class="closeBtn spellHeight">
+            <div id="${spell.spellid+'_tarrow'}" class="arrow">
+                <svg class="arrow" style="margin: 0px;">
+                    <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+                </svg>
+            </div>
+       </div>
+   </div>
+    <div class="body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
         <br>
-        <p class="spellDispDescExp" style="margin-top: 20px;">Level: ${spell.level}</p>
+        <p class="spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
         <p class="spellDispDescExp">School: ${spell.school}</p>
         <p class="spellDispDescExp">Casting Time: ${spell.cast_time}</p>
         <p class="spellDispDescExp">Range: ${spell.range}</p>
@@ -489,24 +640,27 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
         <p class="spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
         <br>
-      </div>
-      <div class="rowContainer" style="margin-top: -28px;">
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expLeft spellHeight">
-          <p class="spellName" style="white-space: nowrap;">${spell.name} - </p>
-        </div>
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expBot spellHeight"></div>
-        <div onclick="shrinkSpellView('${spell.spellid}')" class="expRight spellHeight">
-          <p class="expandArrow">▲</p>
-        </div>
-      </div>
     </div>
-  </div>`
+    <div class="rowContainer bottom bottom_margin" onClick="toggleSpellView('${spell.spellid}')" id="${spell.spellid+'_bottom'}">
+        <div class="expLeft spellHeight">
+            <p class="spellName" style="white-space: nowrap;">${spell.name} - </p>
+        </div>
+        <div class="expBot spellHeight"></div>
+        <div class="closeBtn spellHeight">
+            <div id="${spell.spellid+'_barrow'}" class="arrow">
+                <svg class="arrow" style="margin: 0px;">
+                    <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>`
     })
 }
 
 function makeHTTPPostRequest(url, callback, data) {
     objXMLHttp=new XMLHttpRequest()
-    objXMLHttp.onreadystatechange  = callback
+    objXMLHttp.onreadystatechange = callback
     objXMLHttp.open("POST", url)
     objXMLHttp.setRequestHeader("Content-Type", "application/json");
     objXMLHttp.send(data)

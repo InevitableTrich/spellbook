@@ -2,6 +2,10 @@
   height: 52px;
 }
 
+.bottom_margin {
+    margin-top: -55px;
+}
+
 body {
   width: auto;
   min-width: 1216px;
@@ -58,7 +62,12 @@ body {
   display: flex;
   width: 100%;
   flex-direction: row;
-  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.h20 {
+  height: 20px;
 }
 
 .spellBox {
@@ -79,7 +88,7 @@ body {
   margin-top: auto;
   margin-bottom: auto;
   font-size: 150%;
-  z-index: 1;
+  z-index: 3;
   width: auto;
   line-height: 25px;
   color: rgb(222, 222, 222);
@@ -121,6 +130,28 @@ body {
   -webkit-user-select: none;
 }
 
+.arrow {
+    width: 28px;
+    height: 20px;
+    margin-left: 8px;
+    transition: transform .15s;
+}
+
+.filter_arrow {
+    width: 28px;
+    height: 20px;
+    margin-bottom: -2px;
+    transition: transform .15s;
+}
+
+.rot-right {
+    transform: rotate(90deg);
+}
+
+.rot-left {
+    transform: rotate(-90deg);
+}
+
 .expandArrow {
   width: 5%;
   margin: auto;
@@ -150,38 +181,27 @@ body {
   display: flex;
   width: 90%;
   background-color: rgb(50, 50, 50);
-  border-top: rgb(80,80,80) solid 3px;
+  border: rgb(80,80,80) solid 3px;
+  border-width: 3px 0px 3px 0px;
   line-height: 20px;
   flex-direction: row;
   cursor: pointer;
 }
 
-.expRight {
-  display: flex;
-  width: 5%;
-  background-color: rgb(50, 50, 50);
-  border: rgb(80,80,80) solid 3px;
-  border-left: 0px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  text-align: center;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-}
-
-.expBody {
+.body {
   width: 89.5%;
-  height: fit-content;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-top: 0px;
   border-bottom: 0px;
-  margin-top: -27px;
+  margin-top: -3px;
   margin-left: 5%;
   line-height: 20px;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+  transition: height .3s ease-in-out;
+  height: auto;
 }
 
 .expBot {
@@ -193,6 +213,17 @@ body {
   margin-top: 3px;
   flex-direction: row;
   cursor: pointer;
+}
+
+.bottom {
+    z-index: -1;
+    position: relative;
+    transition: margin-top .3s, z-index .3s;
+}
+
+.bottom_exp {
+    z-index: 2;
+    margin-top: -28px
 }
 
 .levelHeadTxt {
@@ -218,6 +249,10 @@ body {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+}
+
+.widen {
+    width: 95%;
 }
 
 .level {
@@ -297,10 +332,11 @@ body {
   height: 36px;
   margin: 20px;
   margin-top: -10px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
-  border-radius: 10px;
+  border-bottom: 0px;
+  border-radius: 10px 10px 0px 0px;
   justify-content: center;
   cursor: pointer;
   user-select: none;
@@ -308,23 +344,9 @@ body {
   -webkit-user-select: none;
 }
 
-.smallBtnExp {
-  display: flex;
-  width: 27.5%;
-  height: 36px;
-  margin: 20px;
-  margin-top: -10px;
-  margin-bottom: 0px;
-  background-color: rgb(50, 50, 50);
-  border: rgb(80,80,80) solid 3px;
-  border-bottom: 0px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  justify-content: center;
-  cursor: pointer;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
+.shrink {
+    border: rgb(80,80,80) solid 3px;
+    border-radius: 10px;
 }
 
 .cibl {
@@ -348,7 +370,13 @@ body {
 .ciTxt {
   color: rgb(222, 222, 222);
   font-size: 120%;
-  margin-top: 12px;
+  margin: 12px 0px 0px 0px;
+}
+
+.ciComma {
+    color: rgb(222, 222, 222);
+    font-size: 120%;
+    margin: 12px 4.5px 0px -4.5px;
 }
 
 .searchRowCon {
@@ -393,14 +421,23 @@ body {
   -webkit-user-select: none;
 }
 
+.ef_body {
+    overflow: hidden;
+    transition: height .3s;
+}
+
+.ef_op {
+    overflow: hidden;
+    transition: height .15s;
+}
+
 .searchColumnL {
   margin-left: 20px;
   width: 27.5%;
   background-color: rgb(50, 50, 50);
-  border-left: rgb(80,80,80) 3px solid;
-  border-bottom: rgb(80,80,80) 3px solid;
+  border: rgb(80,80,80) 3px solid;
+  border-top: 0px;
   border-bottom-left-radius: 10px;
-  margin-bottom: 20px;
 }
 
 .searchColumnTR {
@@ -410,7 +447,12 @@ body {
   border-left:0px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  margin-bottom: 20px;
+  margin-left: -3px;
+  overflow: hidden;
+}
+
+.bbrr {
+    border-bottom-right-radius: 10px;
 }
 
 .clrESO {
@@ -418,7 +460,6 @@ body {
   width: 17.5%;
   height: 36px;
   margin: 20px;
-  margin-top: 0px;
   background-color: rgb(50, 50, 50);
   border: rgb(80,80,80) solid 3px;
   border-radius: 10px;
@@ -474,16 +515,18 @@ body {
 }
 
 .stt {
-    text-align: center;
-    z-index: 2;
+    display: flex;
+    z-index: 99;
     position: fixed;
     bottom: 0;
     right: 0;
     margin: 20px;
     width: 56px;
     height: 56px;
-    background-color: rgba(50, 50, 50, .5);
-    border: rgba(80,80,80,.5) solid 3px;
+    background-color: rgb(50, 50, 50);
+    border: rgb(80,80,80) solid 3px;
+    opacity: .5;
+    transition: opacity .15s;
     border-radius: 10px;
     cursor: pointer;
     user-select: none;
@@ -491,30 +534,28 @@ body {
     -webkit-user-select: none;
 }
 .stt:hover {
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    transition: background-color .5s;
-    transition: border .5s;
+    opacity: 1;
 }
-.stttxt {
-    width: auto;
-    margin-top: 16px;
-    font-size: 150%;
-    white-space: nowrap;
-    color: rgba(255,255,255,.5);
+.sttarrow {
+    width: 28px;
+    height: 20px;
+    transform: rotate(270deg);
+    margin: auto;
 }
 
 .settings {
     text-align: center;
-    z-index: 2;
+    z-index: 99;
     position: fixed;
     bottom: 0;
     left: 0;
     margin: 20px;
     width: 56px;
     height: 56px;
-    background-color: rgba(50, 50, 50, .5);
-    border: rgba(80,80,80,.5) solid 3px;
+    background-color: rgba(50, 50, 50);
+    border: rgba(80,80,80) solid 3px;
+    opacity: .5;
+    transition: opacity .15s;
     border-radius: 10px;
     cursor: pointer;
     user-select: none;
@@ -522,10 +563,7 @@ body {
     -webkit-user-select: none;
 }
 .settings:hover {
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    transition: background-color .5s;
-    transition: border .5s;
+    opacity: 1;
 }
 .gear {
     margin: 8px;
@@ -645,6 +683,80 @@ body {
   border: rgb(70,70,70) solid 3px;
 }
 
+.accbtn {
+    text-align: center;
+    z-index: 2;
+    position: fixed;
+    bottom: 0;
+    right: 76px;
+    margin: 20px;
+    width: 56px;
+    height: 56px;
+    background-color: rgb(50, 50, 50);
+    border: rgb(80,80,80) solid 3px;
+    opacity: .5;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    display: none;
+}
+.accbtn:hover {
+    background-color: rgb(50, 50, 50);
+    border: rgb(80,80,80) solid 3px;
+    opacity: 1;
+    transition: background-color .5s;
+    transition: border .5s;
+    transition: opacity .5s;
+}
+.accsvg {
+    display: block;
+    margin: 8px;
+    opacity: inherit;
+}
+.accBack {
+    min-width: 1216px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.4);
+}
+.accPageL {
+    background-color: rgb(50, 50, 50);
+    min-width: 400px;
+    min-height: 600px;
+    width: 35%;
+    height: 70%;
+    position: fixed;
+    left: 15%;
+    bottom: 15%;
+    border: rgb(80,80,80) solid 3px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.accPageR {
+    background-color: rgb(50, 50, 50);
+    min-width: 400px;
+    min-height: 600px;
+    width: 35%;
+    height: 70%;
+    position: fixed;
+    right: 15%;
+    bottom: 15%;
+    border: rgb(80,80,80) solid 3px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.accInput {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+
 
 .lightScheme {
   background-color: rgb(255, 255, 255);
@@ -694,4 +806,8 @@ body {
   user-select: none;
   -moz-user-select: none;
   webkit-user-select: none;
+}
+
+.invis {
+    display: none;
 }

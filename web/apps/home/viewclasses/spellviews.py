@@ -15,10 +15,12 @@ class _BaseView(View):
         raise NotImplementedError
 
     def get(self, request, *args, **kwargs):
-        if self.TEMPLATE:
-            return SimpleTemplateResponse(self.TEMPLATE)
-        data = {key: val for key, val in request.GET.items()}
-        return HttpResponse(json.dumps(self.do_get(data, *args, **kwargs)), content_type='application/content')
+        try:
+            if self.TEMPLATE:
+                return SimpleTemplateResponse(self.TEMPLATE)
+        except:
+            data = {key: val for key, val in request.GET.items()}
+            return HttpResponse(json.dumps(self.do_get(data, *args, **kwargs)), content_type='application/content')
 
     def post(self, request, *args, **kwargs):
         data = {key: val for key, val in request.GET.items()}

@@ -1311,7 +1311,6 @@ def addsubs(spell):
     return spell
 
 
-
 col = getspellscollection()
 spells = [x for x in col.find(projection={'_id': False})]
 i = 0

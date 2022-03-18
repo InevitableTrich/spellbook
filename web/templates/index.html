@@ -41,28 +41,24 @@
   <h3 class="srchTxt" style="margin-top: 80px;">search:</h3>
   <input id="search" class="searchBar" type="text" placeholder="Search Here:" value="" onchange="search(value)">
 
-  <div class="smallBtn" id="eeso" onclick="expandExclSrch()">
+  <div class="smallBtn shrink" id="ef_top" onclick="toggleFilter()">
     <p class="smallTxt">
       Expand Filter Options
     </p>
   </div>
-  <div class="blank" id="eeso_exp">
-    <div class="smallBtnExp" onclick="shrinkExclSrch()">
-      <p class="smallTxt">
-        Shrink Filter Options
-      </p>
-    </div>
 
-    <div class="rowContainer">
+    <div class="rowContainer ef_body" id="ef_body" style="height: 0px;" collapsed="true">
 
-        <div class="searchColumnL">
+        <div class="searchColumnL" id="searchColumnL">
           <div class="clickObj" id="class" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="class_txt">Class: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg></p>
+            <p class="searchOpTxt" id="class_txt">Class:
+              <svg id="class_arr" class="filter_arrow">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+              </svg>
+            </p>
           </div>
 
-          <div id="class_ops" class="blank">
+          <div id="class_ops" class="ef_op" style="height: 0px;" collapsed="true">
             <div class="rowContainer">
               <div class="cibl"></div>
               <div class="searchRowCon">
@@ -78,9 +74,6 @@
                 <div class="classItem" id="druid" onclick="sortToggle(id, 'classes')">
                   <p class="ciTxt" id="_druid">Druid,</p>
                 </div>
-                <div class="classItem" id="fighter" onclick="sortToggle(id, 'classes')">
-                  <p class="ciTxt" id="_fighter">Fighter,</p>
-                </div>
                 <div class="classItem" id="monk" onclick="sortToggle(id, 'classes')">
                   <p class="ciTxt" id="_monk">Monk,</p>
                 </div>
@@ -89,9 +82,6 @@
                 </div>
                 <div class="classItem" id="ranger" onclick="sortToggle(id, 'classes')">
                   <p class="ciTxt" id="_ranger">Ranger,</p>
-                </div>
-                <div class="classItem" id="rogue" onclick="sortToggle(id, 'classes')">
-                  <p class="ciTxt" id="_rogue">Rogue,</p>
                 </div>
                 <div class="classItem" id="sorcerer" onclick="sortToggle(id, 'classes')">
                   <p class="ciTxt" id="_sorcerer">Sorcerer,</p>
@@ -107,12 +97,14 @@
           </div>
 
           <div class="clickObj" id="level" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="level_txt">Level: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg></p>
+            <p class="searchOpTxt" id="level_txt">Level:
+              <svg id="level_arr" class="filter_arrow">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+              </svg>
+            </p>
           </div>
 
-          <div id="level_ops" class="blank">
+          <div id="level_ops" class="ef_op" style="height: 0px;" collapsed="true">
             <div class="rowContainer">
               <div class="cibl"></div>
               <div class="searchRowCon">
@@ -151,12 +143,14 @@
           </div>
 
           <div class="clickObj" id="school" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="school_txt">School: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg></p>
+            <p class="searchOpTxt" id="school_txt">School:
+              <svg id="school_arr" class="filter_arrow">
+               <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+              </svg>
+            </p>
           </div>
 
-          <div id="school_ops" class="blank">
+          <div id="school_ops" class="ef_op" style="height: 0px;" collapsed="true">
             <div class="rowContainer">
               <div class="cibl"></div>
               <div class="searchRowCon">
@@ -189,12 +183,13 @@
           </div>
 
           <div class="clickObj" style="margin-bottom: 10px;" id="source" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="source_txt">Source: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg></p>
+            <p class="searchOpTxt" id="source_txt">Source:
+              <svg id="source_arr" class="filter_arrow">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+              </svg></p>
           </div>
 
-          <div id="source_ops" class="blank">
+          <div id="source_ops" class="ef_op" style="height: 0px;" collapsed="true">
             <div class="rowContainer">
               <div class="cibl"></div>
               <div class="searchRowCon">
@@ -224,210 +219,32 @@
 
 
         <div class="searchColumnTR">
-          <div class="clickObj" id="subclass" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="subclass_txt">Subclass: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg></p>
+          <div class="clickObj" id="subclass" onclick="CycleList(id)" style="margin-top: -3px;">
+            <p class="searchOpTxt" id="subclass_txt">Subclass:
+              <svg id="subclass_arr" class="filter_arrow">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+              </svg>
+            </p>
           </div>
 
-          <div id="subclass_ops" class="blank">
+          <div id="subclass_ops" class="ef_op" style="height: 0px;" collapsed="true">
             <div class="rowContainer">
               <div class="cibl"></div>
-              <div class="searchRowCon">
-                <div class="classItem" id="Artificer_-Alchemist-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Artificer_-Alchemist-">Artificer (Alchemist),</p>
-                </div>
-                <div class="classItem" id="Artificer_-Armorer-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Artificer_-Armorer-">Artificer (Armorer),</p>
-                </div>
-                <div class="classItem" id="Artificer_-Artillerist-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Artificer_-Artillerist-">Artificer (Artillerist),</p>
-                </div>
-                <div class="classItem" id="Artificer_-Battle_Smith-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Artificer_-Battle_Smith-">Artificer (Battle Smith),</p>
-                </div>
-                <div class="classItem" id="Bard_-Glamour-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Bard_-Glamour-">Bard (Glamour),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Arcana-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Arcana-">Cleric (Arcana),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Death-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Death-">Cleric (Death),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Forge-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Forge-">Cleric (Forge),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Grave-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Grave-">Cleric (Grave),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Knowledge-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Knowledge-">Cleric (Knowledge),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Life-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Life-">Cleric (Life),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Light-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Light-">Cleric (Light),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Nature-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Nature-">Cleric (Nature),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Order-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Order-">Cleric (Order),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Peace-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Peace-">Cleric (Peace),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Trickery-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Trickery-">Cleric (Trickery),</p>
-                </div>
-                <div class="classItem" id="Cleric_-Twilight-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-Twilight-">Cleric (Twilight),</p>
-                </div>
-                <div class="classItem" id="Cleric_-War-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Cleric_-War-">Cleric (War),</p>
-                </div>
-                <div class="classItem" id="Druid_-Arctic-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Arctic-">Druid (Arctic),</p>
-                </div>
-                <div class="classItem" id="Druid_-Coast-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Coast-">Druid (Coast),</p>
-                </div>
-                <div class="classItem" id="Druid_-Desert-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Desert-">Druid (Desert),</p>
-                </div>
-                <div class="classItem" id="Druid_-Forest-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Forest-">Druid (Forest),</p>
-                </div>
-                <div class="classItem" id="Druid_-Mountain-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Mountain-">Druid (Mountain),</p>
-                </div>
-                <div class="classItem" id="Druid_-Spores-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Spores-">Druid (Spores),</p>
-                </div>
-                <div class="classItem" id="Druid_-Stars-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Stars-">Druid (Stars),</p>
-                </div>
-                <div class="classItem" id="Druid_-Swamp-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Swamp-">Druid (Swamp),</p>
-                </div>
-                <div class="classItem" id="Druid_-Underdark-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Underdark-">Druid (Underdark),</p>
-                </div>
-                <div class="classItem" id="Druid_-Wildfire-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Druid_-Wildfire-">Druid (Wildfire),</p>
-                </div>
-                <div class="classItem" id="Monk_-Four_Elements-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Monk_-Four_Elements-">Monk (Four Elements),</p>
-                </div>
-                <div class="classItem" id="Monk_-Shadow-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Monk_-Shadow-">Monk (Shadow),</p>
-                </div>
-                <div class="classItem" id="Monk_-Sun_Soul-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Monk_-Sun_Soul-">Monk (Sun Soul),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Ancients-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Ancients-">Paladin (Ancients),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Conquest-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Conquest-">Paladin (Conquest),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Crown-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Crown-">Paladin (Crown),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Devotion-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Devotion-">Paladin (Devotion),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Glory-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Glory-">Paladin (Glory),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Oathbreaker-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Oathbreaker-">Paladin (Oathbreaker),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Redemption-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Redemption-">Paladin (Redemption),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Vengeance-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Vengeance-">Paladin (Vengeance),</p>
-                </div>
-                <div class="classItem" id="Paladin_-Watchers-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Paladin_-Watchers-">Paladin (Watchers),</p>
-                </div>
-                <div class="classItem" id="Ranger_-Fey_Wanderer-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Ranger_-Fey_Wanderer-">Ranger (Fey Wanderer),</p>
-                </div>
-                <div class="classItem" id="Ranger_-Gloom_Stalker-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Ranger_-Gloom_Stalker-">Ranger (Gloom Stalker),</p>
-                </div>
-                <div class="classItem" id="Ranger_-Horizon_Walker-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Ranger_-Horizon_Walker-">Ranger (Horizon Walker),</p>
-                </div>
-                <div class="classItem" id="Ranger_-Monster_Slayer-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Ranger_-Monster_Slayer-">Ranger (Monster Slayer),</p>
-                </div>
-                <div class="classItem" id="Ranger_-Swarmkeeper-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Ranger_-Swarmkeeper-">Ranger (Swarmkeeper),</p>
-                </div>
-                <div class="classItem" id="Sorcerer_-Aberrant_Mind-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Sorcerer_-Aberrant_Mind-">Sorcerer (Aberrant Mind),</p>
-                </div>
-                <div class="classItem" id="Sorcerer_-Clockwork_Soul-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Sorcerer_-Clockwork_Soul-">Sorcerer (Clockwork Soul),</p>
-                </div>
-                <div class="classItem" id="Sorcerer_-Divine_Soul-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Sorcerer_-Divine_Soul-">Sorcerer (Divine Soul),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Archfey-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Archfey-">Warlock (Archfey),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Celestial-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Celestial-">Warlock (Celestial),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Fathomless-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Fathomless-">Warlock (Fathomless),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Fiend-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Fiend-">Warlock (Fiend),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Genie_-_Djinni-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Genie_-_Djinni-">Warlock (Genie - Djinni),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Genie_-_Efreeti-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Genie_-_Efreeti-">Warlock (Genie - Efreeti),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Genie_-_Marid-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Genie_-_Marid-">Warlock (Genie - Marid),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Genie_Djinni-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Genie_Djinni-">Warlock (Genie Djinni),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Great_Old_One-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Great_Old_One-">Warlock (Great Old One),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Hexblade-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Hexblade-">Warlock (Hexblade),</p>
-                </div>
-                <div class="classItem" id="Warlock_-Undying-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Warlock_-Undying-">Warlock (Undying),</p>
-                </div>
-                <div class="classItem" id="Wizard_-Chronurgy-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Wizard_-Chronurgy-">Wizard (Chronurgy),</p>
-                </div>
-                <div class="classItem" id="Wizard_-Graviturgy-" onclick="sortToggle(id, 'subclasses')">
-                  <p class="ciTxt" id="_Wizard_-Graviturgy-">Wizard (Graviturgy)</p>
-                </div>
+              <div id="subs_con" class="searchRowCon">
+                <p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>
               </div>
             </div>
           </div>
 
           <div class="clickObj" id="action" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="action_txt">Action: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg></p>
+            <p class="searchOpTxt" id="action_txt">Action:
+              <svg id="action_arr" class="filter_arrow">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+              </svg>
+            </p>
           </div>
 
-          <div id="action_ops" class="blank">
+          <div id="action_ops" class="ef_op" style="height: 0px;" collapsed="true">
             <div class="rowContainer">
               <div class="cibl"></div>
               <div class="searchRowCon">
@@ -454,12 +271,14 @@
           </div>
 
           <div class="clickObj" id="concentration" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="concentration_txt">Concentration: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg></p>
+            <p class="searchOpTxt" id="concentration_txt">Concentration:
+              <svg id="concentration_arr" class="filter_arrow">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+              </svg>
+            </p>
           </div>
 
-          <div id="concentration_ops" class="blank">
+          <div id="concentration_ops" class="ef_op" style="height: 0px;" collapsed="true">
             <div class="rowContainer">
               <div class="cibl"></div>
               <div class="searchRowCon">
@@ -473,18 +292,22 @@
             </div>
           </div>
 
-          <div class="clickObj" id="ritual" onclick="CycleList(id)">
-            <p class="searchOpTxt" id="ritual_txt">Ritual: <svg width="28px" height="24px" style="position: relative; top: 1px; right: 5px;">
-          <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-        </svg></p>
+          <div class="clickObj" id="ritual" onclick="CycleList(id)" style="margin-bottom: 10px;">
+            <p class="searchOpTxt" id="ritual_txt">
+              Ritual:
+              <svg id="ritual_arr" class="filter_arrow">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3"/>
+              </svg>
+            </p>
           </div>
 
-          <div id="ritual_ops" class="blank">
+          <div id="ritual_ops" class = "ef_op" style="height: 0px;" collapsed="true">
             <div class="rowContainer">
               <div class="cibl"></div>
+
               <div class="searchRowCon">
-                <div class="classItem" id="_ritual" onclick="sortToggle(id, 'ritual')">
-                  <p class="ciTxt" id="__ritual">Ritual,</p>
+                <div class="classItem" id="s_ritual" onclick="sortToggle(id, 'ritual')">
+                  <p class="ciTxt" id="_s_ritual">Ritual,</p>
                 </div>
                 <div class="classItem" id="not_ritual" onclick="sortToggle(id, 'ritual')">
                   <p class="ciTxt" id="_not_ritual">Not Ritual</p>
@@ -521,7 +344,7 @@
 
 
   <div id="spellList">
-    <img src="/static/images/loading.gif" alt="Loading" width="3%" height="3%" style="display: block; margin: 0 auto;" rel="import">
+    <img src="/static/images/loading.gif" alt="Loading" width="3%" height="3%" style="display: block; margin: 0 auto; margin-top: 20px;" rel="import">
   </div>
 
 
@@ -543,11 +366,38 @@
   </div>
 
 <div class="stt" onclick="scrollToTop()">
-  <p class="stttxt">▲</p>
+  <svg class="sttarrow">
+      <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3"/>
+  </svg>
+</div>
+
+<div class="accbtn" onclick="toggleAcc()">
+    <svg class="accsvg" width="40px" height="40px" viewBox="0 0 10 10">
+      <path d="M 1.508 9 L 9 9 A 2.645 2.645 0 0 0 1.508 9" fill="rgb(185, 185, 185)"/>
+      <circle r="1.225" cx="5.25" cy="3px" stroke="rgb(185, 185, 185)" fill="rgb(185, 185, 185)"/>
+      <path d="M 0 10 L 7.5 10 A 2.645 2.645 0 0 0 0 10" fill="rgb(222, 222, 222)"/>
+      <circle r="1.225" cx="3.5" cy="4px" stroke="rgb(222, 222, 222)" fill="rgb(222, 222, 222)"/>
+    </svg>
+</div>
+
+<div id="accCon" class="accBack blank" onclick="toggleAcc()">
+  <div class="rowContainer">
+    <div class="accPageL" onclick="event.stopPropagation()">
+      <p class="sTitle">Log In</p>
+      <p class="sText">Email</p>
+      <input class="accInput" type="email">
+      <p class="sText">Password</p>
+      <input class="accInput" type="password">
+    </div>
+
+    <div class="accPageR" onclick="event.stopPropagation()">
+
+    </div>
+  </div>
 </div>
 
 <div class="settings" id="settingsGear" onclick="settingsToggle()">
-  <svg class="gear" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="rgba(255,255,255,.5)" d="M24 13.616v-3.232c-1.651-.587-2.693-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.749-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.743-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 3.384c-2.762 0-5-2.239-5-5s2.238-5 5-5 5 2.239 5 5-2.238 5-5 5zm3-5c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3z"/></svg>
+  <svg class="gear" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="rgb(255,255,255)" d="M24 13.616v-3.232c-1.651-.587-2.693-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.749-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.743-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 3.384c-2.762 0-5-2.239-5-5s2.238-5 5-5 5 2.239 5 5-2.238 5-5 5zm3-5c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3z"/></svg>
 </div>
 
 <div class="settingsBack blank" id="setCon" onclick="settingsToggle()">
@@ -556,7 +406,7 @@
     <p class="sText" id="perPageNum">Spells Per Page: 30</p>
     <div class="sliderContainer"><input type="range" min="5" max="100" value="30" class="sSlider" id="perPage" oninput="updateSettings(id)"></div>
     <p class="sText" id="spellHeightNum">Spell Height: 72px</p>
-    <div class="sliderContainer"><input type="range" min="36" max="108" value="52" class="sSlider" id="spellHeight" oninput="updateSettings(id);updatePreview()"></div>
+    <div class="sliderContainer"><input type="range" min="36" max="68" value="52" class="sSlider" id="spellHeight" oninput="updateSettings(id);updatePreview()"></div>
     <p class="sText">Settings Gear Location:</p>
     <div class="settingsLocCont">
       <div class="rowContainer" style="height: 33%; width: 100%;">
