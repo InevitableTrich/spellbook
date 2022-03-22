@@ -15,30 +15,26 @@
 
 </head>
 
-<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}})); setSetPos(6)">
-
+<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}}));">
   <div class="head">
     <h1 class="title" style="margin-bottom: 20px;">
       uaq's Spellbook
     </h1>
   </div>
 
-  <div style="margin-bottom: 20px;">
-    <a class="menuOption" style="position: relative; top: 20px;" href="https://forms.gle/xXn7vXJ6szEZ2Rsg8" target="_blank" rel="noopener noreferrer">
-      - Suggestions / Feedback
-    </a>
-    <br>
-    <a class="menuOption" style="position: relative; top: 40px;" href="https://discord.gg/U9tGMhKgq8" target="_blank" rel="noopener noreferrer">
-      - Official Discord
-    </a>
-  </div>
-  <div class="blank">
-    <h2 class="menuOption">
-      - Request New Spells
-    </h2>
+  <a rel="noreferrer noopener" target="_blank" href="https://discord.gg/U9tGMhKgq8"><div class="discord">
+    <svg class="discord_logo" viewBox="0 -8 71 71">
+      <g xmlns="http://www.w3.org/2000/svg" clip-path="url(#clip0)">
+        <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#ffffff"/>
+      </g>
+    </svg>
+  </div></a>
+
+  <div class="settings" id="settingsGear" onclick="settingsToggle()">
+    <svg class="gear" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="rgb(255,255,255)" d="M24 13.616v-3.232c-1.651-.587-2.693-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.749-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.743-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 3.384c-2.762 0-5-2.239-5-5s2.238-5 5-5 5 2.239 5 5-2.238 5-5 5zm3-5c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3z"/></svg>
   </div>
 
-  <h3 class="srchTxt" style="margin-top: 80px;">search:</h3>
+  <h3 class="srchTxt" style="margin-top: 30px;">search:</h3>
   <input id="search" class="searchBar" type="text" placeholder="Search Here:" value="" onchange="search(value)">
 
   <div class="smallBtn shrink" id="ef_top" onclick="toggleFilter()">
@@ -396,10 +392,6 @@
   </div>
 </div>
 
-<div class="settings" id="settingsGear" onclick="settingsToggle()">
-  <svg class="gear" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="rgb(255,255,255)" d="M24 13.616v-3.232c-1.651-.587-2.693-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.749-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.743-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 3.384c-2.762 0-5-2.239-5-5s2.238-5 5-5 5 2.239 5 5-2.238 5-5 5zm3-5c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3z"/></svg>
-</div>
-
 <div class="settingsBack blank" id="setCon" onclick="settingsToggle()">
   <div class="settingsPage" onclick="event.stopPropagation()">
     <p class="sTitle">Settings</p>
@@ -407,24 +399,6 @@
     <div class="sliderContainer"><input type="range" min="5" max="100" value="30" class="sSlider" id="perPage" oninput="updateSettings(id)"></div>
     <p class="sText" id="spellHeightNum">Spell Height: 72px</p>
     <div class="sliderContainer"><input type="range" min="36" max="68" value="52" class="sSlider" id="spellHeight" oninput="updateSettings(id);updatePreview()"></div>
-    <p class="sText">Settings Gear Location:</p>
-    <div class="settingsLocCont">
-      <div class="rowContainer" style="height: 33%; width: 100%;">
-        <div class="spaceItem clickable" style="border-top-left-radius: 10px;" id="setPos8" onclick="setSetPos(8)"></div>
-        <div class="spaceItem clickable" id="setPos1" onclick="setSetPos(1)"></div>
-        <div class="spaceItem clickable" style="border-top-right-radius: 10px;" id="setPos2" onclick="setSetPos(2)"></div>
-      </div>
-      <div class="rowContainer" style="height: 33.3%; width: 100%;">
-        <div class="spaceItem clickable" id="setPos7" onclick="setSetPos(7)"></div>
-        <div class="spaceItem" style="background-color: rgb(30,30,30); border: rgb(60,60,60) solid 3px;"></div>
-        <div class="spaceItem clickable" id="setPos3" onclick="setSetPos(3)"></div>
-      </div>
-      <div class="rowContainer" style="height: 33.3%; width: 100%;">
-        <div class="spaceItem clickable" style="border-bottom-left-radius: 10px;" id="setPos6" onclick="setSetPos(6)"></div>
-        <div class="spaceItem clickable" id="setPos5" onclick="setSetPos(5)"></div>
-        <div class="spaceItem" style="background-color: rgb(30,30,30); border: rgb(60,60,60) solid 3px; border-bottom-right-radius: 10px;"></div>
-      </div>
-    </div>
     <div class="previewSpell" id="previewSpell"><p class="spellName" style="margin-left: auto; margin-right: auto;">Size Preview</p></div>
     <div class="saveSettings" onclick="saveSettings()"><p class="saveTxt">Save</p></div>
   </div>

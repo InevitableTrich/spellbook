@@ -22,12 +22,12 @@ body {
 .head {
   display: flex;
   flex-direction: row;
-  width: auto;
+  width: 50%;
   height: auto;
 }
 
 .title {
-  margin: 3%;
+  margin: 6%;
   color: rgb(222, 222, 222);
 }
 
@@ -545,11 +545,9 @@ body {
 
 .settings {
     text-align: center;
-    z-index: 99;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    margin: 20px;
+    position: absolute;
+    right: 20px;
+    top: 14px;
     width: 56px;
     height: 56px;
     background-color: rgba(50, 50, 50);
@@ -664,23 +662,32 @@ body {
   left: 25px;
   bottom: 15px;
 }
-.settingsLocCont {
-  width: 17.5%;
-  height: 22%;
-  margin: 20px;
-  margin-left: 5%;
+
+.discord {
+    text-align: center;
+    position: absolute;
+    right: 96px;
+    top: 14px;
+    width: 56px;
+    height: 56px;
+    background-color: rgba(50, 50, 50);
+    border: rgba(80,80,80) solid 3px;
+    opacity: .5;
+    transition: opacity .15s;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
-.spaceItem {
-  width: 33.3%;
-  min-width: 52px;
-  max-width: 63px;
-  height: 48px;
-  background-color: rgb(50,50,50);
-  border: rgb(80,80,80) solid 3px;
+.discord:hover {
+    opacity: 1;
 }
-.spaceItem:hover {
-  background-color: rgb(40,40,40);
-  border: rgb(70,70,70) solid 3px;
+
+.discord_logo {
+    margin: 8px;
+    height: fit-content;
+    width: 40px;
 }
 
 .accbtn {

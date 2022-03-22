@@ -315,57 +315,7 @@ function saveSettings(){
     if (changed) resetPage()
     settingsToggle()
 }
-function setSetPos(pos) {
-    switch(pos){
-        case 1:
-            document.getElementById('settingsGear').style.top = 0
-            document.getElementById('settingsGear').style.left = "47.5%"
-            document.getElementById('settingsGear').style.right ="auto"
-            document.getElementById('settingsGear').style.bottom = "auto"
-            break
-        case 2:
-            document.getElementById('settingsGear').style.top = 0
-            document.getElementById('settingsGear').style.left = "auto"
-            document.getElementById('settingsGear').style.right = 0
-            document.getElementById('settingsGear').style.bottom = "auto"
-            break
-        case 3:
-            document.getElementById('settingsGear').style.top = "auto"
-            document.getElementById('settingsGear').style.left = "auto"
-            document.getElementById('settingsGear').style.right = 0
-            document.getElementById('settingsGear').style.bottom = "47.5%"
-            break
-        case 5:
-            document.getElementById('settingsGear').style.top = "auto"
-            document.getElementById('settingsGear').style.left = "47.5%"
-            document.getElementById('settingsGear').style.right = "auto"
-            document.getElementById('settingsGear').style.bottom = 0
-            break
-        case 6:
-            document.getElementById('settingsGear').style.top = "auto"
-            document.getElementById('settingsGear').style.left = 0
-            document.getElementById('settingsGear').style.right = "auto"
-            document.getElementById('settingsGear').style.bottom = 0
-            break
-        case 7:
-            document.getElementById('settingsGear').style.top = "47.5%"
-            document.getElementById('settingsGear').style.left = 0
-            document.getElementById('settingsGear').style.right = "auto"
-            document.getElementById('settingsGear').style.bottom = "auto"
-            break
-        case 8:
-            document.getElementById('settingsGear').style.top = 0
-            document.getElementById('settingsGear').style.left = 0
-            document.getElementById('settingsGear').style.right = "auto"
-            document.getElementById('settingsGear').style.bottom = "auto"
-            break
-    }
-    document.querySelectorAll("div.spaceItem").forEach(element => {
-        element.style.border = "rgb(80,80,80) solid 3px"
-    });
 
-    document.getElementById('setPos' + pos).style.border = "white solid 3px"
-}
 document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
         settingsToggle(close=true)
