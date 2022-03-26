@@ -30,6 +30,8 @@ def filter_spells(filters, pagestart, pageend, sort='name', sortby=pymongo.ASCEN
                 formatted_filter["$and"][0]["$or"].append({"classes": {"$in": values}})
             else:
                 formatted_filter["$and"].append({field: {"$in": values}})
+        if formatted_filter["$and"][0]["$or"] == [{"classes": {"$in": []}}]:
+            formatted_filter["$and"][0].pop("$or")
 
     spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}).sort(
         [(sort, sortby), ("name", sortby)])[pagestart:pageend]]
