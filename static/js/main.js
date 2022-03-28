@@ -1,4 +1,3 @@
-var staticurl = window.location.href
 var localhost = 'http://127.0.0.1:8000/filter'
 var currenturl = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells'
 var settings = false
@@ -9,121 +8,8 @@ var spellsPerPage = 30
 var spellHeight = 52
 var spellCount = 0
 var filterState = {}
-var oldFilter = {}
 var currentFilter = JSON.stringify({"filter": {}})
 var searchQuery = ''
-var filterIDs = {
-    "artificer": "Artificer",
-    "bard": "Bard",
-    "cleric": "Cleric",
-    "druid": "Druid",
-    "fighter": "Wizard",
-    "monk": "Monk",
-    "paladin": "Paladin",
-    "ranger": "Ranger",
-    "rogue": "Wizard",
-    "sorcerer": "Sorcerer",
-    "warlock": "Warlock",
-    "wizard": "Wizard",
-    "l0": "0",
-    "l1": "1",
-    "l2": "2",
-    "l3": "3",
-    "l4": "4",
-    "l5": "5",
-    "l6": "6",
-    "l7": "7",
-    "l8": "8",
-    "l9": "9",
-    "abjuration": "Abjuration",
-    "conjuration": "Conjuration",
-    "divination": "Divination",
-    "enchantment": "Enchantment",
-    "evocation": "Evocation",
-    "illusion": "Illusion",
-    "necromancy": "Necromancy",
-    "transmutation": "Transmutation",
-
-"artificer_alchemist": "Artificer (Alchemist)",
-"artificer_armorer": "Artificer (Armorer)",
-"artificer_artillerist": "Artificer (Artillerist)",
-"artificer_battle_smith": "Artificer (Battle Smith)",
-"bard_glamour": "Bard (Glamour)",
-"cleric_arcana": "Cleric (Arcana)",
-"cleric_death": "Cleric (Death)",
-"cleric_forge": "Cleric (Forge)",
-"cleric_grave": "Cleric (Grave)",
-"cleric_knowledge": "Cleric (Knowledge)",
-"cleric_life": "Cleric (Life)",
-"cleric_light": "Cleric (Light)",
-"cleric_nature": "Cleric (Nature)",
-"cleric_order": "Cleric (Order)",
-"cleric_peace": "Cleric (Peace)",
-"cleric_trickery": "Cleric (Trickery)",
-"cleric_twilight": "Cleric (Twilight)",
-"cleric_war": "Cleric (War)",
-"druid_arctic": "Druid (Arctic)",
-"druid_coast": "Druid (Coast)",
-"druid_desert": "Druid (Desert)",
-"druid_forest": "Druid (Forest)",
-"druid_mountain": "Druid (Mountain)",
-"druid_spores": "Druid (Spores)",
-"druid_stars": "Druid (Stars)",
-"druid_swamp": "Druid (Swamp)",
-"druid_underdark": "Druid (Underdark)",
-"druid_wildfire": "Druid (Wildfire)",
-"monk_four_elements": "Monk (Four Elements)",
-"monk_shadow": "Monk (Shadow)",
-"monk_sun_soul": "Monk (Sun Soul)",
-"paladin_ancients": "Paladin (Ancients)",
-"paladin_conquest": "Paladin (Conquest)",
-"paladin_crown": "Paladin (Crown)",
-"paladin_devotion": "Paladin (Devotion)",
-"paladin_glory": "Paladin (Glory)",
-"paladin_oathbreaker": "Paladin (Oathbreaker)",
-"paladin_redemption": "Paladin (Redemption)",
-"paladin_vengeance": "Paladin (Vengeance)",
-"paladin_watchers": "Paladin (Watchers)",
-"ranger_fey_wanderer": "Ranger (Fey Wanderer)",
-"ranger_gloom_stalker": "Ranger (Gloom Stalker)",
-"ranger_horizon_walker": "Ranger (Horizon Walker)",
-"ranger_monster_slayer": "Ranger (Monster Slayer)",
-"ranger_swarmkeeper": "Ranger (Swarmkeeper)",
-"sorcerer_aberrant_mind": "Sorcerer (Aberrant Mind)",
-"sorcerer_clockwork_soul": "Sorcerer (Clockwork Soul)",
-"sorcerer_divine_soul": "Sorcerer (Divine Soul)",
-"warlock_archfey": "Warlock (Archfey)",
-"warlock_celestial": "Warlock (Celestial)",
-"warlock_fathomless": "Warlock (Fathomless)",
-"warlock_fiend": "Warlock (Fiend)",
-"warlock_genie_-_djinni": "Warlock (Genie - Djinni)",
-"warlock_genie_-_efreeti": "Warlock (Genie - Efreeti)",
-"warlock_genie_-_marid": "Warlock (Genie - Marid)",
-"warlock_genie_djinni": "Warlock (Genie Djinni)",
-"warlock_great_old_one": "Warlock (Great Old One)",
-"warlock_hexblade": "Warlock (Hexblade)",
-"warlock_undying": "Warlock (Undying)",
-"wizard_chronurgy": "Wizard (Chronurgy)",
-"wizard_graviturgy": "Wizard (Graviturgy)",
-
-    "_action": "1 action",
-    "bonus_action": "1 bonus action",
-    "reaction": "1 reaction",
-    "minute": "1 minute",
-    "ten_minute": "10 minutes",
-    "hour": "1 hour",
-    "_concentration": true,
-    "not_concentration": false,
-    "_ritual": true,
-    "not_ritual": false,
-    "phb": "Players Handbook",
-    "xgte": "Xanathar's Guide to Everything",
-    "eepc": "Elemental Evil Player's Companion",
-    "acqinc": "Acquisitions Incorporated",
-    "tcoe": "Tasha's Cauldron of Everything",
-    "scag": "Sword Coast Adventurer's Guide",
-    "egtw": "Explorer's Guide to Wildemount"
-}
 var sortState = {
   0: '-',
   1: '▼',
@@ -138,27 +24,6 @@ var varCycle = {
   "levelSort": 0,
   "classSort": 0,
   "schoolSort": 0,
-}
-var searchCycle = {
-  1: "▼",
-  "class" : 0,
-  "subclass": 0,
-  "level" : 0,
-  "components" : 0,
-  "school" : 0,
-  "action" : 0,
-  "concentration" : 0,
-  "ritual" : 0,
-  "source": 0,
-  "_class": "Class: ",
-  "_subclass": "Subclass: ",
-  "_level": "Level: ",
-  "_components": "Components: ",
-  "_school": "School: ",
-  "_action": "Action: ",
-  "_concentration": "Concentration: ",
-  "_ritual": "Ritual: ",
-  "_source": "Source: "
 }
 
 function toggleSpellView(cName){
@@ -213,25 +78,24 @@ function expandSection(element) {
 }
 
 function cycleSort(id){
-  varCycle[id] += 1
-  if (varCycle[id] > 2) varCycle[id] = 0
-  document.getElementById(id).innerHTML = sortState[id] +
-  sortState[varCycle[id]]
+    varCycle[id] += 1
+    if (varCycle[id] > 2) varCycle[id] = 0
+    document.getElementById(id).innerHTML = sortState[id] +
+    sortState[varCycle[id]]
 
-  if (varCycle[id] == 0) {
-    makeFilterRequest('nameSort', 0, currentFilter)
-  } else {
-    makeFilterRequest(id, varCycle[id], currentFilter)
-  }
-
-  for([key] of Object.entries(varCycle)){
-    if (key != id){
-      varCycle[key] = 0
-      document.getElementById(key).innerHTML = sortState[key] +
-      sortState[varCycle[key]]
+    if (varCycle[id] == 0) {
+        makeFilterRequest('nameSort', 0, currentFilter)
+    } else {
+        makeFilterRequest(id, varCycle[id], currentFilter)
     }
-  }
 
+    for([key] of Object.entries(varCycle)){
+        if (key != id){
+            varCycle[key] = 0
+            document.getElementById(key).innerHTML = sortState[key] +
+            sortState[varCycle[key]]
+        }
+    }
 }
 
 function pageChange(inc) {
@@ -240,7 +104,7 @@ function pageChange(inc) {
     if (maxPages == 0) curPage = 1
     if (curPage > maxPages) curPage = 1
     document.getElementById("pageTxt").innerHTML = "Page " + curPage
-    document.getElementById("spellList").innerHTML = '<img src="/static/images/loading.gif" alt="Loading" width="3%" height="3%" style="display: block; margin: 0 auto;" rel="import">'
+    document.getElementById("spellList").innerHTML = '<img src="/static/images/loading.gif" alt="Loading" width="3%" height="3%" style="display: block; margin: 20px auto 0 auto;" rel="import">'
     sort = findSort()
     makeFilterRequest(sort, varCycle[sort], currentFilter)
 }
@@ -257,7 +121,7 @@ function scrollToTop() {
     window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'})
 }
 
-function settingsToggle(close=false){
+function toggleSettings(close=false){
     if (close) {
         document.getElementById("setCon").classList.add('blank')
         settings = false
@@ -313,29 +177,22 @@ function saveSettings(){
     sheet.deleteRule(1)
     sheet.insertRule(".bottom_margin {margin-top: -" + (spellHeight+3) + "px;}", 1)
     if (changed) resetPage()
-    settingsToggle()
+    toggleSettings()
 }
 
 document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
-        settingsToggle(close=true)
-        toggleAcc(close=true)
+        toggleSettings(close=true)
+        toggleBook(close=true)
     }
 });
 
-function toggleAcc(close=false) {
+function toggleBook(close=false) {
     if (close) {
-        document.getElementById("accCon").classList.add('blank')
-        accountView = false
+        document.getElementById("bookCon").classList.add('invis')
         return
     }
-    if (accountView) {
-        document.getElementById("accCon").classList.add('blank')
-        accountView = false
-    } else {
-        document.getElementById("accCon").classList.remove('blank')
-        accountView = true
-    }
+    document.getElementById("bookCon").classList.toggle('invis')
 }
 
 function search(query){
@@ -347,36 +204,82 @@ function search(query){
 }
 
 function sortToggle(id, field){
-  filterKey = filterIDs[id]
+    filterKey = getFilterIDs(id, field)
 
-  if (filterState[field]) {
-    if (filterState[field].includes(filterKey)) {
-        var index = filterState[field].indexOf(filterKey)
-        if (index !== -1) {
-          filterState[field].splice(index, 1);
-        }
-        if (filterState[field].length == 0) {
-          delete filterState[field]
+    if (filterState[field]) {
+        if (filterState[field].includes(filterKey)) {
+            var index = filterState[field].indexOf(filterKey)
+            if (index !== -1) {
+              filterState[field].splice(index, 1);
+            }
+            if (filterState[field].length == 0) {
+              delete filterState[field]
+            }
+        } else {
+            filterState[field].push(filterKey)
         }
     } else {
-        filterState[field].push(filterKey)
+        filterState[field] = [filterKey]
     }
-  } else {
-    filterState[field] = [filterKey]
-  }
-  currentFilter = "{\"filter\": " + JSON.stringify(filterState) + "}"
+    currentFilter = "{\"filter\": " + JSON.stringify(filterState) + "}"
 
-  toggle = document.getElementById(id)
-  toggle.classList.toggle("sortSelected")
-  toggle = document.getElementById("_" + id)
-  toggle.classList.toggle("sortSelectedTxt")
+    toggle = document.getElementById(id)
+    toggle.classList.toggle("sortSelected")
+    toggle = document.getElementById("_" + id)
+    toggle.classList.toggle("sortSelectedTxt")
 
-  if (field == "classes") {
-      getSubs(id)
-  }
+    if (field == "classes") {
+        getSubs(id)
+    }
 
-  sort = findSort()
-  makeFilterRequest(sort, varCycle[sort], currentFilter)
+    sort = findSort()
+    makeFilterRequest(sort, varCycle[sort], currentFilter)
+}
+
+function getFilterIDs(id, field) {
+    var tID = null
+
+    if (field == "classes" || field == "school") {
+        tID = id.charAt(0).toUpperCase() + id.slice(1)
+    } else if (field == "level") {
+        tID = id.slice(1)
+    } else if (field == "subs") {
+        tID = id.charAt(0).toUpperCase() + id.slice(1)
+        while (tID.indexOf("_") != -1) {
+            var ndx = tID.indexOf("_")
+            tID = tID.slice(0,ndx+1) + tID.charAt(ndx+1).toUpperCase() + tID.slice(ndx+2)
+            tID = tID.replace("_", " ")
+        }
+        tID = tID.replace(" ", " (") + ")"
+    } else if (field == "concentration" || field == "ritual") {
+        if (id.startsWith("not")) {
+            tID = false
+        } else {
+            tID = true
+        }
+    } else if (field == "cast_time") {
+        if (id == "ten_minute") {
+            tID = "10 minutes"
+        } else {
+            tID = "1 " + id.replace("_", " ")
+            tID = tID.replace("  ", " ")
+        }
+    } else if (field == "source") {
+        var sources = {
+            "phb": "Players Handbook",
+            "xgte": "Xanathar's Guide to Everything",
+            "eepc": "Elemental Evil Player's Companion",
+            "acqinc": "Acquisitions Incorporated",
+            "tcoe": "Tasha's Cauldron of Everything",
+            "scag": "Sword Coast Adventurer's Guide",
+            "egtw": "Explorer's Guide to Wildemount"
+        }
+        tID = sources[id]
+    } else {
+        console.log("Key Error in Filters")
+    }
+
+    return tID
 }
 
 function findSort(){
@@ -455,41 +358,54 @@ function clearSubs(class_name){
 }
 
 function clrESO(){
-  divs = document.querySelectorAll("div.sortSelected")
-  divs.forEach(element => {
-    element.classList.remove('sortSelected')
-  });
-  ps = document.querySelectorAll("p.sortSelectedTxt")
-  ps.forEach(element => {
-    element.classList.remove('sortSelectedTxt')
-  });
-  document.querySelector("#subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
-  for([key] of Object.entries(subs)){
-      subs[key][0] = false
-  }
-  subs_list = []
+    divs = document.querySelectorAll("div.sortSelected")
+    divs.forEach(element => {
+        element.classList.remove('sortSelected')
+    });
 
-  filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
-  filters.forEach(id => {
-      if (document.querySelector("#" + id + "_ops").getAttribute('collapsed') === 'false') {
-          CycleList(id)
-      }
-  });
+    ps = document.querySelectorAll("p.sortSelectedTxt")
+    ps.forEach(element => {
+        element.classList.remove('sortSelectedTxt')
+    });
 
-  currentFilter = JSON.stringify({"filter": {}})
-  filterState = {}
+    document.querySelector("#subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
+    for([key] of Object.entries(subs)){
+        subs[key][0] = false
+    }
+    subs_list = []
 
-  for([key] of Object.entries(varCycle)){
-      varCycle[key] = 0
-      document.getElementById(key).innerHTML = sortState[key] +
-      sortState[varCycle[key]]
-  }
+    filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
+    filters.forEach(id => {
+        if (document.querySelector("#" + id + "_ops").getAttribute('collapsed') === 'false') {
+            CycleList(id)
+        }
+    });
 
-  searchBar = document.getElementById('search')
-  searchBar.value = ""
-  searchQuery = ''
-  resetPage()
-  makeFilterRequest('nameSort', 0, currentFilter)
+    currentFilter = JSON.stringify({"filter": {}})
+    filterState = {}
+
+    for([key] of Object.entries(varCycle)){
+        varCycle[key] = 0
+        document.getElementById(key).innerHTML = sortState[key] +
+        sortState[varCycle[key]]
+    }
+
+    searchBar = document.getElementById('search')
+    searchBar.value = ""
+    searchQuery = ''
+    resetPage()
+    makeFilterRequest('nameSort', 0, currentFilter)
+}
+
+function addToBook(id) {
+    var container = document.querySelector("#bookContainer")
+    var spell = document.querySelector("#" + id)
+
+    container.innerHTML += `
+<div class="book_spell">
+    <p class="book_text">${id}</p>
+</div>
+    `
 }
 
 function makeFilterRequest(fieldid, direction, filter){
@@ -544,7 +460,7 @@ function CycleList(dID){
     }
 }
 
-function populateSpells(jsonResponse) {
+function populateSpells(jsonResponse) { // ADD A PLUS BUTTON ON CLOSED SPELL
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")
     spells.innerHTML = ''
@@ -576,6 +492,9 @@ function populateSpells(jsonResponse) {
        </div>
    </div>
     <div class="body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
+        <div class="spellToBook clickable" title="Add to Spellbook" onClick="addToBook('${spell.spellid}')">
+            <p class="spellToBookTxt">+</p>
+        </div>
         <br>
         <p class="spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
         <p class="spellDispDescExp">School: ${spell.school}</p>

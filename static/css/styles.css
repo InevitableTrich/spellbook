@@ -521,17 +521,6 @@ body {
     bottom: 0;
     right: 0;
     margin: 20px;
-    width: 56px;
-    height: 56px;
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    opacity: .5;
-    transition: opacity .15s;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
 }
 .stt:hover {
     opacity: 1;
@@ -544,21 +533,9 @@ body {
 }
 
 .settings {
-    text-align: center;
     position: absolute;
     right: 20px;
     top: 14px;
-    width: 56px;
-    height: 56px;
-    background-color: rgba(50, 50, 50);
-    border: rgba(80,80,80) solid 3px;
-    opacity: .5;
-    transition: opacity .15s;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
 }
 .settings:hover {
     opacity: 1;
@@ -566,7 +543,7 @@ body {
 .gear {
     margin: 8px;
 }
-.settingsBack {
+.menuBack {
     min-width: 1216px;
     position: fixed;
     bottom: 0;
@@ -576,7 +553,7 @@ body {
     height: 100%;
     background-color: rgba(0,0,0,.4);
 }
-.settingsPage {
+.menuPage {
     background-color: rgb(50, 50, 50);
     min-width: 800px;
     min-height: 600px;
@@ -664,10 +641,62 @@ body {
 }
 
 .discord {
-    text-align: center;
     position: absolute;
     right: 96px;
     top: 14px;
+}
+.discord:hover {
+    opacity: 1;
+}
+.discord_logo {
+    margin: 8px;
+    height: fit-content;
+    width: 40px;
+}
+
+.sb_part {
+    position: absolute;
+}
+
+.book_container {
+    margin: 2.5%;
+    height: 95%;
+    width: 95%;
+    overflow: auto;
+}
+
+.book_spell {
+    border: rgb(80, 80, 80) 3px solid;
+    background-color: rgb(50, 50, 50);
+    height: fit-content;
+    width: 90%;
+    margin: 10px auto;
+    border-radius: 10px;
+    flex-direction: row;
+}
+
+.book_text {
+    color: rgb(222, 222, 222);
+    font-size: 150%;
+    margin: 10px;
+}
+
+.spellToBook {
+    position: absolute;
+    right: 10px;
+    bottom: 50%;
+}
+
+.spellToBookTxt {
+    font-size: 300%;
+    font-weight: 750;
+    margin: 10px;
+    color: rgb(200, 200, 200);
+}
+
+
+.menu_button {
+    text-align: center;
     width: 56px;
     height: 56px;
     background-color: rgba(50, 50, 50);
@@ -679,101 +708,6 @@ body {
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
-}
-.discord:hover {
-    opacity: 1;
-}
-
-.discord_logo {
-    margin: 8px;
-    height: fit-content;
-    width: 40px;
-}
-
-.accbtn {
-    text-align: center;
-    z-index: 2;
-    position: fixed;
-    bottom: 0;
-    right: 76px;
-    margin: 20px;
-    width: 56px;
-    height: 56px;
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    opacity: .5;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    display: none;
-}
-.accbtn:hover {
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    opacity: 1;
-    transition: background-color .5s;
-    transition: border .5s;
-    transition: opacity .5s;
-}
-.accsvg {
-    display: block;
-    margin: 8px;
-    opacity: inherit;
-}
-.accBack {
-    min-width: 1216px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 3;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.4);
-}
-.accPageL {
-    background-color: rgb(50, 50, 50);
-    min-width: 400px;
-    min-height: 600px;
-    width: 35%;
-    height: 70%;
-    position: fixed;
-    left: 15%;
-    bottom: 15%;
-    border: rgb(80,80,80) solid 3px;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
-}
-.accPageR {
-    background-color: rgb(50, 50, 50);
-    min-width: 400px;
-    min-height: 600px;
-    width: 35%;
-    height: 70%;
-    position: fixed;
-    right: 15%;
-    bottom: 15%;
-    border: rgb(80,80,80) solid 3px;
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
-}
-.accInput {
-    display: block;
-    width: 90%;
-    margin: 0 auto;
-}
-
-
-.lightScheme {
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(211,211,211);
-}
-.lightText {
-  color: black
-}
-.bluerText {
-  color: rgb(5, 18, 197)
 }
 
 .sortSelected {
