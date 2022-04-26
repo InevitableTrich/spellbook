@@ -628,9 +628,7 @@ function populateSpells(jsonResponse) { // ADD A PLUS BUTTON ON CLOSED SPELL
 function popEmptySpellbook() {
     var spells = document.getElementById("bookContainer")
     spells.innerHTML = `
-<div class="book_head">
-  <p class="book_head_text">Placeholder</p>
-</div>
+<p class="book_head_text" style="margin: 20px auto 0px; width: fit-content;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
     `
 }
 
