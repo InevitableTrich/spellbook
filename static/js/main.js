@@ -25,19 +25,45 @@ var varCycle = {
   "classSort": 0,
   "schoolSort": 0,
 }
+var spellbook = []
 
-function toggleSpellView(cName){
+function toggleSpellView(cName) {
     var current = document.querySelector("#" + cName + "_body")
+
+    if (current.getAttribute("collapsed") === 'true') {
+        setTimeout(function(){
+            document.getElementById("book_btn_" + cName).classList.toggle("invis")
+            setTimeout(function(){
+                document.getElementById("book_btn_" + cName).classList.toggle("add_book_hidden")
+            }, 10);
+        }, 300);
+        toggleViewMain(cName, current)
+    } else {
+        document.getElementById("book_btn_" + cName).classList.toggle("add_book_hidden")
+        setTimeout(function(){
+            document.getElementById("book_btn_" + cName).classList.toggle("invis")
+            toggleViewMain(cName, current)
+        }, 200);
+    }
+}
+function toggleViewMain(cName, current) {
     collapse(current)
     suffix = ["head0", "head1", "head2", "head3", "bottom", "tarrow", "barrow"]
     rclass = ["widen", "invis", "invis", "invis", "bottom_exp", "rot-right", "rot-left"]
     for (var i = 0; i < suffix.length; i++) {
         current = document.querySelector('#' + cName + "_" + suffix[i]);
-        if (current.className.indexOf(rclass[i]) == -1) {
-            current.className += " " + rclass[i]
-        } else {
-            current.className = current.className.replace(" " + rclass[i], "")
-        }
+        current.classList.toggle(rclass[i])
+    }
+}
+
+function toggleBookSpellView(cName) {
+    var current = document.querySelector("#" + cName + "_body")
+    collapse(current)
+    suffix = ["bottom", "tarrow", "barrow", "action", "conc", "ritual", "name"]
+    rclass = ["book_bottom_exp", "rot-right", "rot-left", "invis", "invis", "invis", "book_widen"]
+    for (var i = 0; i < suffix.length; i++) {
+        current = document.querySelector("#" + cName + "_" + suffix[i])
+        current.classList.toggle(rclass[i])
     }
 }
 
@@ -110,10 +136,14 @@ function pageChange(inc) {
 }
 
 function resetPage() {
-    curPage = 1
-    document.getElementById("pageTxt").innerHTML = "Page " + curPage
+    pageOne()
     sort = findSort()
     makeFilterRequest(sort, varCycle[sort], currentFilter)
+}
+
+function pageOne() {
+    curPage = 1
+    document.getElementById("pageTxt").innerHTML = "Page " + curPage
     scrollToTop()
 }
 
@@ -232,6 +262,7 @@ function sortToggle(id, field){
         getSubs(id)
     }
 
+    pageOne()
     sort = findSort()
     makeFilterRequest(sort, varCycle[sort], currentFilter)
 }
@@ -397,15 +428,79 @@ function clrESO(){
     makeFilterRequest('nameSort', 0, currentFilter)
 }
 
-function addToBook(id) {
-    var container = document.querySelector("#bookContainer")
-    var spell = document.querySelector("#" + id)
+function updateSpellSlots() {
+    var classDef = {
+        "artificer": "sub",
+        "paladin": "sub",
+        "ranger": "sub",
+        "bard": "main",
+        "cleric": "main",
+        "druid": "main",
+        "sorcerer": "main",
+        "wizard": "main",
+        "warlock": "warlock"
+    }
 
-    container.innerHTML += `
-<div class="book_spell">
-    <p class="book_text">${id}</p>
-</div>
-    `
+    var spellSlots = {
+        "sub": [[2], [2],  [3], [3], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3, 2], [4, 3, 2], [4, 3, 3], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 1], [4, 3, 3, 2], [4, 3, 3, 2], [4, 3, 3, 3, 1], [4, 3, 3, 3, 1], [4, 3, 3, 3, 2], [4, 3, 3, 3, 2]],
+        "main": [[2], [3], [4, 2], [4, 3], [4, 3, 2], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 2], [4, 3, 3, 3, 1], [4, 3, 3, 3, 2], [4, 3, 3, 3, 2, 1], [4, 3, 3, 3, 2, 1], [4, 3, 3, 3, 2, 1, 1], [4, 3, 3, 3, 2, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1, 1], [4, 3, 3, 3, 3, 1, 1, 1, 1], [4, 3, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 3, 2, 2, 1, 1] ],
+        "warlock": [[1], [2], [0, 2], [0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4]]}
+
+
+    var class_name = document.getElementById("classes").selectedOptions[0].value
+    var lv = parseInt(document.getElementById("lvInput").value)
+
+    if (!Number.isInteger(lv) || lv < 1) {
+        document.getElementById("lvInput").value = 1
+        lv = 1
+    } else if (lv > 20) {
+        document.getElementById("lvInput").value = 20
+        lv = 20
+    }
+
+    var slot_list = spellSlots[classDef[class_name]][lv-1]
+
+    while (slot_list.length < 9) {
+        slot_list.push(0)
+    }
+
+    slot_list.forEach((amount, index) => {
+        var level = index+1
+        var lmnt = document.getElementById("slot_amt_" + level.toString())
+        lmnt.innerHTML = amount
+    })
+}
+
+
+function addToBook(id) {
+    var container = document.getElementById("bookContainer")
+    var spell = document.getElementById(id)
+    var btn_char = document.getElementById("book_btn_" + id).children[0]
+
+    if (spellbook.indexOf(id) == -1) {
+        spellbook.push(id)
+        btn_char.innerHTML = "Remove from Spellbook"
+    } else {
+        spellbook.splice(spellbook.indexOf(id), 1)
+        btn_char.innerHTML = "Add to Spellbook"
+    }
+
+    if (spellbook.length == 0) {
+        popEmptySpellbook()
+    } else {
+        makeBookRequest(spellbook)
+    }
+}
+
+function makeBookRequest(book) {
+    if (window.location.href == 'http://127.0.0.1:8000/') {
+        url = 'http://127.0.0.1:8000/book-spells'
+        loc = 'l'
+    } else {
+        url = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/book-spells'
+        loc = 's'
+    }
+    makeHTTPPostRequest(url+'?loc='+loc, handleSpellbookResponse, book)
 }
 
 function makeFilterRequest(fieldid, direction, filter){
@@ -489,26 +584,29 @@ function populateSpells(jsonResponse) { // ADD A PLUS BUTTON ON CLOSED SPELL
                     <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
                 </svg>
             </div>
-       </div>
-   </div>
-    <div class="body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
-        <div class="spellToBook clickable" title="Add to Spellbook" onClick="addToBook('${spell.spellid}')">
-            <p class="spellToBookTxt">+</p>
         </div>
-        <br>
-        <p class="spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
-        <p class="spellDispDescExp">School: ${spell.school}</p>
-        <p class="spellDispDescExp">Casting Time: ${spell.cast_time}</p>
-        <p class="spellDispDescExp">Range: ${spell.range}</p>
-        <p class="spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
-        <p class="spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
-        <p class="spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
-        <p class="spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
-        <p class="spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
-        <p class="spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
-        <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
-        <p class="spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
-        <br>
+    </div>
+    <div class="rowContainer">
+        <div class="body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
+            <br>
+            <p class="spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
+            <p class="spellDispDescExp">School: ${spell.school}</p>
+            <p class="spellDispDescExp">Casting Time: ${spell.cast_time}</p>
+            <p class="spellDispDescExp">Range: ${spell.range}</p>
+            <p class="spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
+            <p class="spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
+            <p class="spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
+            <p class="spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
+            <p class="spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
+            <p class="spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
+            <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
+            <p class="spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
+            <br>
+        </div>
+
+        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}" onClick="addToBook('${spell.spellid}')">
+            <p class="textToBook">Add to Spellbook</p>
+        </div>
     </div>
     <div class="rowContainer bottom bottom_margin" onClick="toggleSpellView('${spell.spellid}')" id="${spell.spellid+'_bottom'}">
         <div class="expLeft spellHeight">
@@ -527,6 +625,86 @@ function populateSpells(jsonResponse) { // ADD A PLUS BUTTON ON CLOSED SPELL
     })
 }
 
+function popEmptySpellbook() {
+    var spells = document.getElementById("bookContainer")
+    spells.innerHTML = `
+<div class="book_head">
+  <p class="book_head_text">Placeholder</p>
+</div>
+    `
+}
+
+function populateSpellbook(jsonResponse) {
+    var data = JSON.parse(jsonResponse.srcElement.response)
+    var spells = document.getElementById("bookContainer")
+    spells.innerHTML = ''
+    var heads = []
+
+    data.spells.forEach(spell => {
+        spell.spellid = spell.spellid + '_bk'
+        if (heads.indexOf(spell.level) == -1) {
+            heads.push(spell.level)
+            spells.innerHTML += `
+<div class="book_head">
+    <p class="book_head_text">${spell.level == 0 ? "Cantrips" : "Level " + spell.level}</p>
+</div>
+            `
+        }
+        spells.innerHTML +=`
+<div class="book_spell" id="${spell.spellid}">
+    <div class="book_spell_container clickable" onClick="toggleBookSpellView('${spell.spellid}')">
+        <div class="book_name" id="${spell.spellid + '_name'}">
+            <p class="book_spell_text overflow">${spell.name}</p>
+        </div>
+        <div class="book_action" id="${spell.spellid + '_action'}">
+            <p class="book_spell_text overflow">${spell.cast_time}</p>
+        </div>
+        <div class="book_conc" id="${spell.spellid + '_conc'}">
+            <p class="book_spell_text overflow">${spell.concentration ? "Concentration" : ""}</p>
+        </div>
+        <div class="book_conc"  id="${spell.spellid + '_ritual'}">
+            <p class="book_spell_text overflow">${spell.ritual ? "Ritual" : ""}</p>
+        </div>
+        <div class="book_close">
+            <svg id="${spell.spellid+'_tarrow'}" class="arrow" style="margin: 0px;margin-left: 10px;">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="book_body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
+        <br>
+        <p class="book_spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
+        <p class="book_spellDispDescExp">School: ${spell.school}</p>
+        <p class="book_spellDispDescExp">Casting Time: ${spell.cast_time}</p>
+        <p class="book_spellDispDescExp">Range: ${spell.range}</p>
+        <p class="book_spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
+        <p class="book_spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
+        <p class="book_spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
+        <p class="book_spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
+        <p class="book_spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
+        <p class="book_spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
+        <p class="book_spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
+        <p class="book_spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
+        <br>
+    </div>
+    <div class="book_spell_container_bottom book_bottom book_bottom_margin clickable" onClick="toggleBookSpellView('${spell.spellid}')" id="${spell.spellid+'_bottom'}">
+        <div class="book_bottom_name">
+            <p class="book_spell_text" style="white-space: nowrap;">${spell.name} - </p>
+        </div>
+        <div class="book_bottom_mid"></div>
+        <div class="book_close book_close_bottom">
+            <svg id="${spell.spellid+'_barrow'}" class="arrow" style="margin: 0px; margin-left: 10px;">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+            </svg>
+        </div>
+    </div>
+</div>
+<div class="h15"></div>
+    `
+    })
+}
+
 function makeHTTPPostRequest(url, callback, data) {
     objXMLHttp=new XMLHttpRequest()
     objXMLHttp.onreadystatechange = callback
@@ -538,5 +716,11 @@ function makeHTTPPostRequest(url, callback, data) {
 function handleSpellsResponse(data) {
     if (this.readyState == 4 && this.status == 200){
         populateSpells(data)
+    }
+}
+
+function handleSpellbookResponse(data) {
+    if (this.readyState == 4 && this.status == 200){
+        populateSpellbook(data)
     }
 }

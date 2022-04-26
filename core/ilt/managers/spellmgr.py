@@ -57,3 +57,16 @@ def search_filter_spells(filters, searchquery, pagestart, pageend, sort='name', 
 
     spellscount = col.count_documents(filter=formatted_filter)
     return spells, spellscount
+
+
+def get_book_spells(ids):
+    col = getspellscollection()
+    if len(ids) == 0:
+        return []
+    formatted_ids = {"$or": []}
+    for id in ids:
+        formatted_ids["$or"].append({"spellid": id})
+
+    spells = [x for x in col.find(filter=formatted_ids, projection={'_id': False}).sort([("level", pymongo.ASCENDING),
+                                                                                         ("name", pymongo.ASCENDING)])]
+    return spells

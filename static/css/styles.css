@@ -3,7 +3,7 @@
 }
 
 .bottom_margin {
-    margin-top: -55px;
+    margin-top: -58px;
 }
 
 body {
@@ -68,6 +68,9 @@ body {
 
 .h20 {
   height: 20px;
+}
+.h15 {
+  height: 15px;
 }
 
 .spellBox {
@@ -560,8 +563,8 @@ body {
     width: 70%;
     height: 70%;
     position: fixed;
-    right: 15%;
-    bottom: 15%;
+    left: 15%;
+    top: 15%;
     border: rgb(80,80,80) solid 3px;
     border-radius: 20px;
 }
@@ -659,39 +662,217 @@ body {
 }
 
 .book_container {
-    margin: 2.5%;
+    margin: 1%;
     height: 95%;
-    width: 95%;
+    width: 80%;
     overflow: auto;
+    padding-right: 7px;
 }
 
-.book_spell {
+.player_container {
+    width: 20%;
+    border-right: rgb(80, 80, 80) 3px solid;
+}
+.player_options {
+    height: 97.5%;
+    width: 97.5%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.char_text {
+    color: rgb(222, 222, 222);
+    font-size: 150%;
+    margin: 13px auto 6px auto;
+    display: flex;
+}
+.class_list {
+    background-color: #323232;
+    color: rgb(222, 222, 222);
+    width: 75%;
+    font-size: 100%;
+    border: rgb(80, 80, 80) 2.5px solid;
+    border-radius: 8px;
+    margin: 5px auto 10px auto;
+    padding: 1.5px;
+}
+
+.level_input {
+    height: 52px;
+    width: 52px;
+    color: rgb(222, 222, 222);
+    background-color: #323232;
+    border: rgb(80, 80, 80) 2.5px solid;
+    border-radius: 5px;
+    margin: 5px auto 10px auto;
+    font-size: 36px;
+    text-align: center;
+}
+
+.slot_left {
+    border: rgb(80, 80, 80) 2.5px solid;
+    border-right-width: 1.25px;
+    border-radius: 7px 0px 0px 7px;
+    background-color: #323232;
+    text-align: center;
+    height: 26px;
+    width: 51px;
+    margin-left: auto;
+    margin-top: 5px;
+}
+.slot_right {
+    border: rgb(80, 80, 80) 2.5px solid;
+    border-left-width: 1.25px;
+    border-radius: 0px 7px 7px 0px;
+    background-color: #323232;
+    text-align: center;
+    height: 26px;
+    width: 51px;
+    margin-right: auto;
+    margin-top: 5px;
+}
+.slot_text {
+    color: rgb(222, 222, 222);
+    margin: 2px;
+    font-size: 125%;
+}
+
+.book_head {
     border: rgb(80, 80, 80) 3px solid;
     background-color: rgb(50, 50, 50);
     height: fit-content;
-    width: 90%;
-    margin: 10px auto;
+    width: 99%;
+    margin: 10px auto 20px auto;
     border-radius: 10px;
     flex-direction: row;
 }
 
-.book_text {
+.book_head_text {
     color: rgb(222, 222, 222);
     font-size: 150%;
     margin: 10px;
 }
 
-.spellToBook {
-    position: absolute;
-    right: 10px;
-    bottom: 50%;
+.book_spell {
+    width: 95%;
+    margin-left: auto;
 }
 
-.spellToBookTxt {
-    font-size: 300%;
-    font-weight: 750;
-    margin: 10px;
-    color: rgb(200, 200, 200);
+.book_body {
+    width: 85.025%;
+    background-color: rgb(50, 50, 50);
+    border: rgb(80,80,80) solid 3px;
+    border-top: 0px;
+    border-bottom: 0px;
+    margin: -3px auto 0px auto;
+    line-height: 20px;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+    transition: height .3s ease-in-out;
+    height: auto;
+}
+
+.book_spellDispDescExp {
+    font-size: 125%;
+    margin-top: -5px;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: auto;
+    line-height: 22.5px;
+    color: rgb(200,200,200)
+}
+
+.book_spell_container {
+    border: rgb(80, 80, 80) 3px solid;
+    background-color: rgb(50, 50, 50);
+    height: fit-content;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.book_spell_text {
+    color: rgb(222,222,222);
+    font-size: 125%;
+    margin: 7.5px;
+}
+.book_name {
+    width: 32.5%;
+}
+.book_widen {
+    width: 78.25%;
+}
+.book_action {
+    width: 20%;
+}
+.book_conc {
+    width: 23.75%;
+}
+.book_close {
+    width: 7.5%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.book_spell_container_bottom {
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+}
+.book_bottom {
+    z-index: -1;
+    position: relative;
+    transition: margin-top .3s, z-index .3s;
+}
+.book_bottom_margin {
+    margin-top: -41px;
+}
+.book_bottom_exp {
+    z-index: 2;
+    margin-top: -35px;
+}
+.book_bottom_name {
+    border: rgb(80, 80, 80) solid;
+    border-width: 3px 0px 3px 3px;
+    border-radius: 10px 0px 0px 10px;
+    background-color: rgb(50, 50, 50);
+    width: 7.15%;
+    z-index: 0;
+}
+.book_bottom_mid {
+    width: 89.6%;
+    background-color: rgb(50, 50, 50);
+    border-bottom: rgb(80, 80, 80) 3px solid;
+}
+.book_close_bottom {
+    border: rgb(80, 80, 80) solid;
+    border-width: 3px 3px 3px 0px;
+    border-radius: 0px 10px 10px 00px;
+    background-color: rgb(50, 50, 50);
+}
+
+.spellToBook {
+    display: flex;
+    position: relative;
+    width: 36px;
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) 3px solid;
+    border-radius: 7px;
+    left: 0;
+    transition: left .3s;
+    overflow: hidden;
+    margin: 10px auto 40px auto;
+}
+
+.add_book_hidden {
+    left: -6%;
+}
+.textToBook {
+    color: rgb(222,222,222);
+    font-size: 130%;
+    white-space: nowrap;
+    margin: auto;
+    writing-mode: vertical-lr;
 }
 
 
@@ -740,6 +921,21 @@ body {
   margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    transition: width .3s;
+}
+::-webkit-scrollbar-track {
+    background-color: #323232;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(70,70,70);
+  border-radius: 7px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(80,80,80);
 }
 
 .clickable {

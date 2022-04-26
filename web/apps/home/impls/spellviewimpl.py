@@ -39,3 +39,12 @@ class FilterSpellsViewImpl(object):
         spells, spellscount = spellmgr.search_filter_spells(filterdata, searchquery, spellnumsstart, spellnumsend,
                                                             **spellskwargs)
         return {"spells": spells, "spellscount": spellscount}
+
+
+class BookSpellsViewImpl(object):
+    def do_post(self, data, *args, **kwargs):
+        id_str = data['body'].decode('utf-8')
+        id_list = id_str.split(",")
+
+        spells = spellmgr.get_book_spells(id_list)
+        return {"spells": spells}

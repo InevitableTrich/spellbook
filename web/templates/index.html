@@ -34,7 +34,7 @@
   </div>
 
   <h3 class="srchTxt" style="margin-top: 30px;">search:</h3>
-  <input id="search" class="searchBar" type="text" placeholder="Search Here:" list="items" value="" onchange="search(value)">
+  <input id="search" class="searchBar" autocomplete="off" type="text" placeholder="Search Here:" list="items" value="" onchange="search(value)">
   <datalist id="items"><option value=""></option></datalist>
 
   <div class="smallBtn shrink" id="ef_top" onclick="toggleFilter()">
@@ -314,7 +314,6 @@
 
         </div>
     </div>
-</div>
 
 <div class="clrESO" onclick="clrESO()">
   <p class="smallTxt">Clear Search Options</p>
@@ -393,10 +392,75 @@
 
 <div id="bookCon" class="menuBack invis" onclick="toggleBook()">
   <div class="menuPage" onclick="event.stopPropagation()">
-    <div id="bookContainer" class="book_container">
-      <div class="book_spell">
-        <p class="book_text">Cantrips:</p>
+    <div class="rowContainer" style="height: 100%;">
+      <div id="playerContainer" class="player_container">
+        <div id="player_options" class="player_options">
+          <label for="classes" id="class_dropdown" class="char_text">Class:</label>
+          <select id="classes" name="classes" class="class_list" onchange="updateSpellSlots()">
+            <option value="artificer">Artificer</option>
+            <option value="bard">Bard</option>
+            <option value="cleric">Cleric</option>
+            <option value="druid">Druid</option>
+            <option value="paladin">Paladin</option>
+            <option value="ranger">Ranger</option>
+            <option value="sorcerer">Sorcerer</option>
+            <option value="warlock">Warlock</option>
+            <option value="wizard" selected>Wizard</option>
+          </select>
+
+          <p id="player_level" class="char_text">Level:</p>
+          <input id="lvInput" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="updateSpellSlots()">
+
+          <p id="slots" class="char_text">Spell Slots:</p>
+          <div id="slots_container">
+            <div id="slots_1" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 1</p></div>
+              <div class="slot_right"><p id="slot_amt_1" class="slot_text">2</p></div>
+            </div>
+            <div id="slots_2" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 2</p></div>
+              <div class="slot_right"><p id="slot_amt_2" class="slot_text">0</p></div>
+            </div>
+            <div id="slots_3" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 3</p></div>
+              <div class="slot_right"><p id="slot_amt_3" class="slot_text">0</p></div>
+            </div>
+            <div id="slots_4" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 4</p></div>
+              <div class="slot_right"><p id="slot_amt_4" class="slot_text">0</p></div>
+            </div>
+            <div id="slots_5" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 5</p></div>
+              <div class="slot_right"><p id="slot_amt_5" class="slot_text">0</p></div>
+            </div>
+            <div id="slots_6" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 6</p></div>
+              <div class="slot_right"><p id="slot_amt_6" class="slot_text">0</p></div>
+            </div>
+            <div id="slots_7" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 7</p></div>
+              <div class="slot_right"><p id="slot_amt_7" class="slot_text">0</p></div>
+            </div>
+            <div id="slots_8" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 8</p></div>
+              <div class="slot_right"><p id="slot_amt_8" class="slot_text">0</p></div>
+            </div>
+            <div id="slots_9" class="rowContainer spell_container">
+              <div class="slot_left"><p class="slot_text">Lv. 9</p></div>
+              <div class="slot_right"><p id="slot_amt_9" class="slot_text">0</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="spellslots"></div>
       </div>
+
+      <div id="bookContainer" class="book_container">
+        <div class="book_head">
+          <p class="book_head_text">Placeholder</p>
+        </div>
+        <div class="spellContainer"></div>
+    </div>
     </div>
   </div>
 </div>
