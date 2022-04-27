@@ -854,7 +854,7 @@ body {
 .spellToBook {
     display: flex;
     position: relative;
-    width: 36px;
+    width: 2.5%;
     background-color: rgb(50,50,50);
     border: rgb(80,80,80) 3px solid;
     border-radius: 7px;
@@ -865,11 +865,12 @@ body {
 }
 
 .add_book_hidden {
-    left: -6%;
+    left: -5%;
 }
 .textToBook {
     color: rgb(222,222,222);
-    font-size: 130%;
+    width: auto;
+    font-size: 1.5vw;
     white-space: nowrap;
     margin: auto;
     writing-mode: vertical-lr;

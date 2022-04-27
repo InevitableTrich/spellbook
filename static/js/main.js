@@ -35,7 +35,7 @@ function toggleSpellView(cName) {
             document.getElementById("book_btn_" + cName).classList.toggle("invis")
             setTimeout(function(){
                 document.getElementById("book_btn_" + cName).classList.toggle("add_book_hidden")
-            }, 10);
+            }, 20);
         }, 300);
         toggleViewMain(cName, current)
     } else {
@@ -485,6 +485,8 @@ function addToBook(id) {
         btn_char.innerHTML = "Add to Spellbook"
     }
 
+    updateCookie()
+
     if (spellbook.length == 0) {
         popEmptySpellbook()
     } else {
@@ -497,10 +499,11 @@ function makeBookRequest(book) {
         url = 'http://127.0.0.1:8000/book-spells'
         loc = 'l'
     } else {
-        url = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/book-spells'
+        url = 'https://oyioi0suah.execute-api.us-east-1.amazonaws.com/default/book-spells'
         loc = 's'
     }
-    makeHTTPPostRequest(url+'?loc='+loc, handleSpellbookResponse, book)
+
+    makeHTTPPostRequest(url, handleSpellbookResponse, JSON.stringify({"book": book,"loc": loc}))
 }
 
 function makeFilterRequest(fieldid, direction, filter){
@@ -605,7 +608,7 @@ function populateSpells(jsonResponse) { // ADD A PLUS BUTTON ON CLOSED SPELL
         </div>
 
         <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}" onClick="addToBook('${spell.spellid}')">
-            <p class="textToBook">Add to Spellbook</p>
+            <p class="textToBook">${spellbook.indexOf(spell.spellid) != -1 ? "Remove from Spellbook" : "Add to Spellbook"}</p>
         </div>
     </div>
     <div class="rowContainer bottom bottom_margin" onClick="toggleSpellView('${spell.spellid}')" id="${spell.spellid+'_bottom'}">
@@ -720,5 +723,32 @@ function handleSpellsResponse(data) {
 function handleSpellbookResponse(data) {
     if (this.readyState == 4 && this.status == 200){
         populateSpellbook(data)
+    }
+}
+
+function updateCookie() {
+    var cList = []
+    cList.push(document.getElementById("classes").selectedIndex)
+    cList.push(document.getElementById("lvInput").value)
+    cList.push(spellbook)
+
+    document.cookie = `${cList}; expires=${new Date(9999, 0, 1).toUTCString()}`
+}
+
+function readCookie() {
+    var cookie = document.cookie
+    cookie = cookie.slice(cookie.indexOf(";")+2)
+    var name = parseInt(cookie.split(",", 2)[0])
+    var level = cookie.split(",", 2)[1].toString()
+    var spells = cookie.split(",").splice(2)
+
+    document.getElementById("classes").selectedIndex = name
+    document.getElementById("lvInput").value = level
+    updateSpellSlots()
+
+    spellbook = spells
+    if (spellbook.indexOf("") != -1) spellbook.pop(0)
+    if (spellbook.length > 0) {
+        makeBookRequest(spellbook)
     }
 }

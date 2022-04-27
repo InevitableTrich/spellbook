@@ -43,8 +43,10 @@ class FilterSpellsViewImpl(object):
 
 class BookSpellsViewImpl(object):
     def do_post(self, data, *args, **kwargs):
-        id_str = data['body'].decode('utf-8')
-        id_list = id_str.split(",")
+        try:
+            id_list = json.loads(data['body'])['book']
+        except:
+            id_list = data.get("book", {})
 
         spells = spellmgr.get_book_spells(id_list)
         return {"spells": spells}

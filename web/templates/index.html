@@ -14,7 +14,7 @@
 
 </head>
 
-<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}}));">
+<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}})); readCookie()">
   <div class="head">
     <h1 class="title" style="margin-bottom: 20px;">
       uaq's Spellbook
@@ -396,7 +396,7 @@
       <div id="playerContainer" class="player_container">
         <div id="player_options" class="player_options">
           <label for="classes" id="class_dropdown" class="char_text">Class:</label>
-          <select id="classes" name="classes" class="class_list" onchange="updateSpellSlots()">
+          <select id="classes" name="classes" class="class_list" onchange="updateSpellSlots(); updateCookie()">
             <option value="artificer">Artificer</option>
             <option value="bard">Bard</option>
             <option value="cleric">Cleric</option>
@@ -409,7 +409,7 @@
           </select>
 
           <p id="player_level" class="char_text">Level:</p>
-          <input id="lvInput" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="updateSpellSlots()">
+          <input id="lvInput" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="updateSpellSlots(); updateCookie()">
 
           <p id="slots" class="char_text">Spell Slots:</p>
           <div id="slots_container">
