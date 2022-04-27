@@ -759,12 +759,12 @@ body {
 }
 
 .book_body {
-    width: 85.025%;
+    width: 85%;
     background-color: rgb(50, 50, 50);
     border: rgb(80,80,80) solid 3px;
     border-top: 0px;
     border-bottom: 0px;
-    margin: -3px auto 0px auto;
+    margin: -3px 0px 0px 7.1%;
     line-height: 20px;
     z-index: 1;
     position: relative;
@@ -825,7 +825,7 @@ body {
     transition: margin-top .3s, z-index .3s;
 }
 .book_bottom_margin {
-    margin-top: -41px;
+    margin-top: -44px;
 }
 .book_bottom_exp {
     z-index: 2;
@@ -862,6 +862,21 @@ body {
     transition: left .3s;
     overflow: hidden;
     margin: 10px auto 40px auto;
+}
+.spellToBook_book {
+    display: flex;
+    position: relative;
+    width: 4.5%;
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) 3px solid;
+    border-radius: 7px;
+    left: 0;
+    transition: left .3s;
+    overflow: hidden;
+    margin: 10px auto 40px auto;
+}
+.add_book_hidden_book {
+    left: -7%;
 }
 
 .add_book_hidden {
