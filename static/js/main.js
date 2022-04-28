@@ -487,12 +487,21 @@ function updateSpellSlots() {
         var lmnt = document.getElementById("slot_amt_" + level.toString())
         lmnt.innerHTML = amount
     })
+    updateSlotCount()
 }
 
-function updateSlotCount(heads) {
+function updateSlotCount() {
+    heads = []
+    children = [...document.getElementById("bookContainer").children]
+    children.forEach(child =>{
+        if (child.id.startsWith("book_head_")) {
+            heads.push(child.id.slice(-1))
+        }
+    })
+
     for (var i = 1; i <= 9; i++) {
         var amount = parseInt(document.getElementById(`slot_amt_${i}`).innerHTML)
-        if (amount > 0 && heads.indexOf(i.toString()) != -1) {
+        if (heads.indexOf(i.toString()) != -1) {
             var cntr = document.getElementById(`slot_container_${i}`)
             cntr.innerHTML = ""
             for (var j = 0; j < amount; j++) {
@@ -718,7 +727,7 @@ function populateSpellbook(jsonResponse) {
             heads.push(spell.level)
 
             spells.innerHTML += `
-<div class="book_head">
+<div class="book_head" id="book_head_${spell.level}">
     <div class="rowContainer">
         <p class="book_head_text">${spell.level == 0 ? "Cantrips" : "Level " + spell.level}</p>
         <div class="slotContainerContainer">
@@ -788,7 +797,7 @@ function populateSpellbook(jsonResponse) {
 <div class="h15"></div>
     `
     })
-    updateSlotCount(heads)
+    updateSlotCount()
 }
 
 function makeHTTPPostRequest(url, callback, data) {
