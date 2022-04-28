@@ -489,6 +489,41 @@ function updateSpellSlots() {
     })
 }
 
+function updateSlotCount(heads) {
+    for (var i = 1; i <= 9; i++) {
+        var amount = parseInt(document.getElementById(`slot_amt_${i}`).innerHTML)
+        if (amount > 0 && heads.indexOf(i.toString()) != -1) {
+            var cntr = document.getElementById(`slot_container_${i}`)
+            cntr.innerHTML = ""
+            for (var j = 0; j < amount; j++) {
+                cntr.innerHTML +=`
+    <div class="spell_slot clickable" onClick="use_slot(${i}, ${j})"></div>
+                `
+            }
+        }
+    }
+}
+
+function use_slot(level, place) {
+    var container = document.getElementById(`slot_container_${level}`)
+    var children = container.children
+    if (children[place].className.indexOf("used") != -1) {
+        for(i = children.length-1; i >= 0; i--) {
+            if (children[i].className.indexOf("used") != -1) {
+                children[i].classList.toggle("used")
+                break
+            }
+        }
+    } else {
+        for(i = 0; i < children.length; i++) {
+            if (children[i].className.indexOf("used") == -1) {
+                children[i].classList.toggle("used")
+                break
+            }
+        }
+    }
+}
+
 
 function addToBook(id) {
     var container = document.getElementById("bookContainer")
@@ -681,9 +716,16 @@ function populateSpellbook(jsonResponse) {
         spell.spellid = spell.spellid + '_bk'
         if (heads.indexOf(spell.level) == -1) {
             heads.push(spell.level)
+
             spells.innerHTML += `
 <div class="book_head">
-    <p class="book_head_text">${spell.level == 0 ? "Cantrips" : "Level " + spell.level}</p>
+    <div class="rowContainer">
+        <p class="book_head_text">${spell.level == 0 ? "Cantrips" : "Level " + spell.level}</p>
+        <div class="slotContainerContainer">
+            <div class="slotContainer" id="slot_container_${spell.level}"></div>
+        </div>
+        <p class="book_head_text">Clear</p>
+    </div>
 </div>
             `
         }
@@ -746,6 +788,7 @@ function populateSpellbook(jsonResponse) {
 <div class="h15"></div>
     `
     })
+    updateSlotCount(heads)
 }
 
 function makeHTTPPostRequest(url, callback, data) {
