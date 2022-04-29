@@ -733,7 +733,7 @@ function populateSpellbook(jsonResponse) {
         <div class="slotContainerContainer">
             <div class="slotContainer" id="slot_container_${spell.level}"></div>
         </div>
-        <p class="book_head_text">Clear</p>
+        <p class="book_head_text"></p>
     </div>
 </div>
             `
