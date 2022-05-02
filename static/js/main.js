@@ -26,6 +26,7 @@ var varCycle = {
   "schoolSort": 0,
 }
 var spellbook = []
+var preplist = []
 
 function toggleSpellView(cName) {
     var current = document.querySelector("#" + cName + "_body")
@@ -533,6 +534,25 @@ function use_slot(level, place) {
     }
 }
 
+function prepSpell(id) {
+    var current = document.getElementById(id)
+    current.classList.toggle("prepped")
+    name = id.slice(0,-8)
+    if (preplist.indexOf(name) == -1) {
+        preplist.push(name)
+    } else {
+        preplist.splice(preplist.indexOf(name), 1)
+    }
+    updateCookie()
+}
+
+function updatePrepSpells() {
+    preplist.forEach(spell => {
+        var current = document.getElementById(spell+"_bk_prep")
+        current.classList.toggle("prepped")
+    })
+}
+
 
 function addToBook(id) {
     var container = document.getElementById("bookContainer")
@@ -739,58 +759,61 @@ function populateSpellbook(jsonResponse) {
             `
         }
         spells.innerHTML +=`
-<div class="book_spell" id="${spell.spellid}">
-    <div class="book_spell_container clickable" onClick="toggleBookSpellView('${spell.spellid}')">
-        <div class="book_name" id="${spell.spellid + '_name'}">
-            <p class="book_spell_text overflow">${spell.name}</p>
+<div class="rowContainer">
+    <div class="prep_spell clickable" id="${spell.spellid}_prep" onCLick="prepSpell(id)"></div>
+    <div class="book_spell" id="${spell.spellid}">
+        <div class="book_spell_container clickable" onClick="toggleBookSpellView('${spell.spellid}')">
+            <div class="book_name" id="${spell.spellid + '_name'}">
+                <p class="book_spell_text overflow">${spell.name}</p>
+            </div>
+            <div class="book_action" id="${spell.spellid + '_action'}">
+                <p class="book_spell_text overflow">${spell.cast_time}</p>
+            </div>
+            <div class="book_conc" id="${spell.spellid + '_conc'}">
+                <p class="book_spell_text overflow">${spell.concentration ? "Concentration" : ""}</p>
+            </div>
+            <div class="book_conc"  id="${spell.spellid + '_ritual'}">
+                <p class="book_spell_text overflow">${spell.ritual ? "Ritual" : ""}</p>
+            </div>
+            <div class="book_close">
+                <svg id="${spell.spellid+'_tarrow'}" class="arrow" style="margin: 0px;margin-left: 10px;">
+                    <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+                </svg>
+            </div>
         </div>
-        <div class="book_action" id="${spell.spellid + '_action'}">
-            <p class="book_spell_text overflow">${spell.cast_time}</p>
-        </div>
-        <div class="book_conc" id="${spell.spellid + '_conc'}">
-            <p class="book_spell_text overflow">${spell.concentration ? "Concentration" : ""}</p>
-        </div>
-        <div class="book_conc"  id="${spell.spellid + '_ritual'}">
-            <p class="book_spell_text overflow">${spell.ritual ? "Ritual" : ""}</p>
-        </div>
-        <div class="book_close">
-            <svg id="${spell.spellid+'_tarrow'}" class="arrow" style="margin: 0px;margin-left: 10px;">
-                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-            </svg>
-        </div>
-    </div>
-    <div class="rowContainer">
-        <div class="book_body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
-            <br>
-            <p class="book_spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
-            <p class="book_spellDispDescExp">School: ${spell.school}</p>
-            <p class="book_spellDispDescExp">Casting Time: ${spell.cast_time}</p>
-            <p class="book_spellDispDescExp">Range: ${spell.range}</p>
-            <p class="book_spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
-            <p class="book_spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
-            <p class="book_spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
-            <p class="book_spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
-            <p class="book_spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
-            <p class="book_spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
-            <p class="book_spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
-            <p class="book_spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
-            <br>
+        <div class="rowContainer">
+            <div class="book_body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
+                <br>
+                <p class="book_spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
+                <p class="book_spellDispDescExp">School: ${spell.school}</p>
+                <p class="book_spellDispDescExp">Casting Time: ${spell.cast_time}</p>
+                <p class="book_spellDispDescExp">Range: ${spell.range}</p>
+                <p class="book_spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
+                <p class="book_spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
+                <p class="book_spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
+                <p class="book_spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
+                <p class="book_spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
+                <p class="book_spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
+                <p class="book_spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
+                <p class="book_spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
+                <br>
+            </div>
+
+            <div class="spellToBook_book clickable invis add_book_hidden_book" id="book_btn_${spell.spellid}_bk" onClick="remove_from_book('${spell.spellid}')">
+                <p class="textToBook">Remove from Spellbook</p>
+            </div>
         </div>
 
-        <div class="spellToBook_book clickable invis add_book_hidden_book" id="book_btn_${spell.spellid}_bk" onClick="remove_from_book('${spell.spellid}')">
-            <p class="textToBook">Remove from Spellbook</p>
-        </div>
-    </div>
-
-    <div class="book_spell_container_bottom book_bottom book_bottom_margin clickable" onClick="toggleBookSpellView('${spell.spellid}')" id="${spell.spellid+'_bottom'}">
-        <div class="book_bottom_name">
-            <p class="book_spell_text" style="white-space: nowrap;">${spell.name} - </p>
-        </div>
-        <div class="book_bottom_mid"></div>
-        <div class="book_close book_close_bottom">
-            <svg id="${spell.spellid+'_barrow'}" class="arrow" style="margin: 0px; margin-left: 10px;">
-                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-            </svg>
+        <div class="book_spell_container_bottom book_bottom book_bottom_margin clickable" onClick="toggleBookSpellView('${spell.spellid}')" id="${spell.spellid+'_bottom'}">
+            <div class="book_bottom_name">
+                <p class="book_spell_text" style="white-space: nowrap;">${spell.name} - </p>
+            </div>
+            <div class="book_bottom_mid"></div>
+            <div class="book_close book_close_bottom">
+                <svg id="${spell.spellid+'_barrow'}" class="arrow" style="margin: 0px; margin-left: 10px;">
+                    <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+                </svg>
+            </div>
         </div>
     </div>
 </div>
@@ -798,6 +821,7 @@ function populateSpellbook(jsonResponse) {
     `
     })
     updateSlotCount()
+    updatePrepSpells()
 }
 
 function makeHTTPPostRequest(url, callback, data) {
@@ -825,16 +849,19 @@ function updateCookie() {
     cList.push(document.getElementById("classes").selectedIndex)
     cList.push(document.getElementById("lvInput").value)
     cList.push(spellbook)
+    cList.push(preplist)
 
-    document.cookie = `${cList}; expires=${new Date(9999, 0, 1).toUTCString()}`
+    document.cookie = `${cList.join("+")}; expires=${new Date(9999, 0, 1).toUTCString()}`
 }
 
 function readCookie() {
     var cookie = document.cookie
     cookie = cookie.slice(cookie.indexOf(";")+2)
-    var name = parseInt(cookie.split(",", 2)[0])
-    var level = cookie.split(",", 2)[1].toString()
-    var spells = cookie.split(",").splice(2)
+    data = cookie.split("+")
+    var name = parseInt(data[0])
+    var level = data[1].toString()
+    var spells = data[2].split(",")
+    var prep = data[3].split(",")
 
     document.getElementById("classes").selectedIndex = name
     document.getElementById("lvInput").value = level
@@ -845,4 +872,7 @@ function readCookie() {
     if (spellbook.length > 0) {
         makeBookRequest(spellbook)
     }
+
+    preplist = prep
+    if (preplist.indexOf("") != -1) preplist.pop(0)
 }

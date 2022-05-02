@@ -779,7 +779,16 @@ body {
 
 .book_spell {
     width: 95%;
-    margin-left: auto;
+}
+.prep_spell {
+    width: 12px;
+    height: 12px;
+    margin: auto;
+    border: rgb(222,222,222) solid 3px;
+    border-radius: 9px;
+}
+.prepped {
+    background-color: rgb(200,200,200);
 }
 
 .book_body {
