@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Frost Fingers",
+        "level": "1",
+        "classes": ["Wizard"],
+        "school": "Evocation",
+        "duration": "Instantaneous",
+        "range": "Self (15-foot cone)",
+        "components": ["V","S"],
+        "material": "",
+        "ritual": false,
+        "concentration": false,
+        "desc": ["Freezing cold blasts from your fingertips in a 15-foot cone. Each creature in that area must make a Constitution saving throw, taking 2d8 cold damage on a failed save, or half as much damage on a successful one.","The cold freezes nonmagical liquids in the area that aren't being worn or carried."],
+        "higher_level": ["When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st."],
+        "spellid": "frost-fingers",
+        "cast_time": "1 action",
+        "source": ["Icewind Dale: Rime of the Frostmaiden"]
+    },{
+        "name": "Create Magen",
+        "level": "7",
+        "classes": ["Wizard"],
+        "school": "Transmutation",
+        "duration": "Instantaneous",
+        "range": "Touch",
+        "components": ["V","S","M"],
+        "material": "a vial of quicksilver worth 500 gp and a life-sized human doll, both of which the spell consumes, and an intricate crystal rod worth at least 1,500 gp that is not consumed",
+        "ritual": false,
+        "concentration": false,
+        "desc": ["While casting this spell, you place a vial of quicksilver in the chest of a life-sized human doll stuffed with ash or dust. You then stitch up the doll and drip your blood on it. At the end of the casting, you tap the doll with a crystal rod, transforming it into a magen clothed in whatever chosen by you during the casting of the spell. See appendix C for different kinds of magen and their statistics.","When the magen appears, your hit point maximum decreases by an amount equal to the magen's challenge rating (minimum reduction of 1). Only a wish spell can undo this reduction to your hit point maximum.","Any magen you create with this spell obeys your commands without question."],
+        "higher_level": [],
+        "spellid": "create-magen",
+        "cast_time": "1 hour",
+        "source": ["Icewind Dale: Rime of the Frostmaiden"]
+    }
+]

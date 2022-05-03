@@ -1,0 +1,19 @@
+[
+    {
+        "name": "",
+        "level": "",
+        "classes": [""],
+        "school": "",
+        "duration": "",
+        "range": "",
+        "components": [""],
+        "material": "",
+        "ritual": false,
+        "concentration": false,
+        "desc": [""],
+        "higher_level": [],
+        "spellid": "",
+        "cast_time": "",
+        "source": [""]
+    }
+]

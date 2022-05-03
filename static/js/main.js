@@ -322,7 +322,11 @@ function getFilterIDs(id, field) {
             "acqinc": "Acquisitions Incorporated",
             "tcoe": "Tasha's Cauldron of Everything",
             "scag": "Sword Coast Adventurer's Guide",
-            "egtw": "Explorer's Guide to Wildemount"
+            "egtw": "Explorer's Guide to Wildemount",
+            "frost": "Icewind Dale: Rime of the Frostmaiden",
+            "ftod" :"Fizban's Treasury of Dragons",
+            "kwalish":"Lost Laboratory of Kwalish",
+            "strix":"Strixhaven: a Curriculum of Chaos"
         }
         tID = sources[id]
     } else {

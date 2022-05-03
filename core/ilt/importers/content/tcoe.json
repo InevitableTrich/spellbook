@@ -13,7 +13,7 @@
 	"higher_level": [],
 	"spellid": "blade-of-disaster",
 	"cast_time": "1 bonus action",
-	"source": ["Tasha's Cauldron of Everything"]
+	"source": ["Icewind Dale: Rime of the Frostmaiden","Tasha's Cauldron of Everything"]
 }, {
 	"name": "Booming Blade",
 	"level": "0",
