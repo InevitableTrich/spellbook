@@ -924,6 +924,48 @@ body {
     writing-mode: vertical-lr;
 }
 
+.book_side_container {
+    position: absolute;
+    top: 1.5%;
+    left: 99.7%;
+    width: fit-content;
+    height: 68%;
+    min-height: 586px;
+}
+.book_side_btn {
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) 3px solid;
+    width: 36px;
+    height: 24.2%;
+    border-radius: 0px 10px 10px 0px;
+    position: relative;
+    left: 3px;
+    display: flex;
+}
+.book_side_exp {
+    border-left: 0px;
+    width: 48px;
+}
+.book_side_text {
+    color: rgb(222,222,222);
+    height: fit-content;
+    max-height: 90%;
+    font-size: 150%;
+    margin: auto;
+    writing-mode: vertical-lr;
+}
+
+.character_input {
+    width: 60%;
+    border: rgb(80,80,80) 3px solid;
+    border-radius: 10px;
+    margin: 10px 20px;
+    padding: 3px 7px;
+    background-color: rgb(50,50,50);
+    font-size: 125%;
+    color: rgb(222,222,222);
+}
+
 
 .menu_button {
     text-align: center;

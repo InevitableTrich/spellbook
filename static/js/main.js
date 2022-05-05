@@ -25,6 +25,8 @@ var varCycle = {
   "classSort": 0,
   "schoolSort": 0,
 }
+
+var spellChar = 1
 var spellbook = []
 var preplist = []
 
@@ -497,7 +499,7 @@ function updateSpellSlots() {
 
 function updateSlotCount() {
     heads = []
-    children = [...document.getElementById("bookContainer").children]
+    var children = [...document.getElementById("bookContainer").children]
     children.forEach(child =>{
         if (child.id.startsWith("book_head_")) {
             heads.push(child.id.slice(-1))
@@ -557,6 +559,41 @@ function updatePrepSpells() {
     })
 }
 
+function book_switch_view(id) {
+    if (id.startsWith("char")) {
+        updateCookie()
+        spellChar = parseInt(id.slice(-1))
+        cookieUpdateChar()
+        readCookie()
+    } else {
+        characterPageSettings()
+    }
+
+    book_switch_vis(id)
+}
+
+function book_switch_vis(id) {
+    var current = document.getElementById(id)
+    var container = document.getElementById("book_side_container")
+    var children = [...container.children]
+
+    children.forEach(child => {
+        if (child === current) {
+            if (child.className.indexOf("book_side_exp") == -1) {
+                child.className += " book_side_exp"
+            }
+        } else {
+            if (child.className.indexOf("book_side_exp") != -1) {
+                child.className = child.className.replace(" book_side_exp","")
+            }
+        }
+    })
+}
+
+function cookieUpdateChar() {
+    var cookie = document.cookie.slice(document.cookie.indexOf(";")+2).slice(1)
+    document.cookie = `${spellChar+cookie}; expires=${new Date(9999, 0, 1).toUTCString()}`
+}
 
 function addToBook(id) {
     var container = document.getElementById("bookContainer")
@@ -578,6 +615,31 @@ function addToBook(id) {
     } else {
         makeBookRequest(spellbook)
     }
+}
+
+function characterPageSettings() {
+    var container = document.getElementById("bookContainer")
+    var cookie = document.cookie
+    cookie = cookie.slice(cookie.indexOf(";")+2)
+
+    var spellChar = parseInt(cookie.charAt(0))
+    book_switch_vis("char"+spellChar)
+    var charSett = cookie.split("^")[0].split("+")
+    container.innerHTML = `
+<p class="char_text">Character Names:</p>
+<input id="charName1" autocomplete="off" class="character_input" placeholder="Char 1" value="${charSett[1]}" onchange="updateCharName(id); updateCookie()">
+<input id="charName2" autocomplete="off" class="character_input" placeholder="Char 2" value="${charSett[2]}" onchange="updateCharName(id); updateCookie()">
+<input id="charName3" autocomplete="off" class="character_input" placeholder="Char 3" value="${charSett[3]}" onchange="updateCharName(id); updateCookie()">
+    `
+}
+
+function updateCharName(id) {
+    var char = document.getElementById("char"+id.slice(-1))
+    var name = document.getElementById(id).value
+    if (name == "") {
+        name = "Char " + id.slice(-1)
+    }
+    char.children[0].innerHTML = name
 }
 
 function remove_from_book(id) {
@@ -739,6 +801,17 @@ function popEmptySpellbook() {
     `
 }
 
+function updateButtons() {
+    var buttons = [...document.getElementsByClassName("textToBook")]
+    buttons.forEach(button => {
+        if (spellbook.indexOf(button.parentElement.id.slice(9)) == -1) {
+            button.innerHTML = "Add to Spellbook"
+        } else {
+            button.innerHTML = "Remove from Spellbook"
+        }
+    })
+}
+
 function populateSpellbook(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     var spells = document.getElementById("bookContainer")
@@ -826,6 +899,7 @@ function populateSpellbook(jsonResponse) {
     })
     updateSlotCount()
     updatePrepSpells()
+    updateButtons()
 }
 
 function makeHTTPPostRequest(url, callback, data) {
@@ -848,20 +922,54 @@ function handleSpellbookResponse(data) {
     }
 }
 
-function updateCookie() {
-    var cList = []
-    cList.push(document.getElementById("classes").selectedIndex)
-    cList.push(document.getElementById("lvInput").value)
-    cList.push(spellbook)
-    cList.push(preplist)
+function cookie_init() {
+    document.cookie = `1+Char 1+Char 2+Char 3^8+1++|8+1++|8+1++; expires=${new Date(9999, 0, 1).toUTCString()}`
+}
 
-    document.cookie = `${cList.join("+")}; expires=${new Date(9999, 0, 1).toUTCString()}`
+function updateCookie() {
+    var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
+
+    cookie = cookie.split("^")
+    var cList = cookie[1].split("|")
+    var cBook = []
+    cBook.push(document.getElementById("classes").selectedIndex)
+    cBook.push(document.getElementById("lvInput").value)
+    cBook.push(spellbook)
+    cBook.push(preplist)
+
+    cList[spellChar-1] = cBook.join("+")
+    var cAdd = cList.join("|")
+
+    var settings = []
+    settings.push(spellChar)
+    settings.push(document.getElementById("char1").children[0].innerHTML)
+    settings.push(document.getElementById("char2").children[0].innerHTML)
+    settings.push(document.getElementById("char3").children[0].innerHTML)
+    var cSett = settings.join("+")
+
+    document.cookie = `${cSett}^${cAdd}; expires=${new Date(9999, 0, 1).toUTCString()}`
 }
 
 function readCookie() {
+//    if (document.cookie.indexOf("^") == -1) {
+//        cookie_init()
+//    }
+
     var cookie = document.cookie
     cookie = cookie.slice(cookie.indexOf(";")+2)
-    data = cookie.split("+")
+
+    var spellChar = parseInt(cookie.charAt(0))
+    book_switch_vis("char"+spellChar)
+    var charSett = cookie.split("^")[0].split("+")
+    for (var i = 1; i <= 3; i++) {
+        document.getElementById("char"+i).children[0].innerHTML = charSett[i]
+    }
+
+    cookie = cookie.slice(cookie.indexOf("^")+1)
+
+    var book = cookie.split("|")[spellChar-1]
+    var data = book.split("+")
+
     var name = parseInt(data[0])
     var level = data[1].toString()
     var spells = data[2].split(",")
@@ -875,6 +983,8 @@ function readCookie() {
     if (spellbook.indexOf("") != -1) spellbook.pop(0)
     if (spellbook.length > 0) {
         makeBookRequest(spellbook)
+    } else {
+        popEmptySpellbook()
     }
 
     preplist = prep

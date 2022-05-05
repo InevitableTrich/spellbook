@@ -413,6 +413,20 @@
 
     <div id="bookCon" class="menuBack invis" onclick="toggleBook()">
         <div class="menuPage" onclick="event.stopPropagation()">
+            <div id="book_side_container" class="book_side_container">
+                <div id="char1" class="book_side_btn clickable book_side_exp" onclick="book_switch_view(id)">
+                    <p class="book_side_text overflow">Char 1</p>
+                </div>
+                <div id="char2" class="book_side_btn clickable" style="top:-3px;" onclick="book_switch_view(id)">
+                    <p class="book_side_text overflow">Char 2</p>
+                </div>
+                <div id="char3" class="book_side_btn clickable" style="top:-6px;" onclick="book_switch_view(id)">
+                    <p class="book_side_text overflow">Char 3</p>
+                </div>
+                <div id="setting" class="book_side_btn clickable" style="top:-9px;" onclick="book_switch_view(id)">
+                    <p class="book_side_text">Settings</p>
+                </div>
+            </div>
             <div class="rowContainer" style="height: 100%;">
                 <div id="playerContainer" class="player_container">
                     <div id="player_options" class="player_options">
