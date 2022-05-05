@@ -591,7 +591,12 @@ function book_switch_vis(id) {
 }
 
 function cookieUpdateChar() {
-    var cookie = document.cookie.slice(document.cookie.indexOf(";")+2).slice(1)
+    if (document.cookie.indexOf(";") != -1) {
+        var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
+    } else{
+        var cookie = document.cookie
+    }
+    cookie = cookie.slice(1)
     document.cookie = `${spellChar+cookie}; expires=${new Date(9999, 0, 1).toUTCString()}`
 }
 
@@ -619,8 +624,11 @@ function addToBook(id) {
 
 function characterPageSettings() {
     var container = document.getElementById("bookContainer")
-    var cookie = document.cookie
-    cookie = cookie.slice(cookie.indexOf(";")+2)
+    if (document.cookie.indexOf(";") != -1) {
+        var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
+    } else{
+        var cookie = document.cookie
+    }
 
     var spellChar = parseInt(cookie.charAt(0))
     book_switch_vis("char"+spellChar)
@@ -927,7 +935,11 @@ function cookie_init() {
 }
 
 function updateCookie() {
-    var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
+    if (document.cookie.indexOf(";") != -1) {
+        var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
+    } else{
+        var cookie = document.cookie
+    }
 
     cookie = cookie.split("^")
     var cList = cookie[1].split("|")
@@ -951,12 +963,15 @@ function updateCookie() {
 }
 
 function readCookie() {
-//    if (document.cookie.indexOf("^") == -1) {
-//        cookie_init()
-//    }
+    if (document.cookie.indexOf("^") == -1) {
+        cookie_init()
+    }
 
-    var cookie = document.cookie
-    cookie = cookie.slice(cookie.indexOf(";")+2)
+    if (document.cookie.indexOf(";") != -1) {
+        var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
+    } else{
+        var cookie = document.cookie
+    }
 
     var spellChar = parseInt(cookie.charAt(0))
     book_switch_vis("char"+spellChar)
