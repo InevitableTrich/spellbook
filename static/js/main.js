@@ -918,10 +918,10 @@ function updateButtons() {
     var buttons = [...document.getElementsByClassName("spellToBook")]
     buttons.forEach(button => {
         var target = button.children[0]
-        if (spellbook.indexOf(button.parentElement.id.slice(9)) == -1) {
-            button.innerHTML = "Add to Spellbook"
+        if (spellbook.indexOf(button.id.slice(9)) == -1) {
+            target.innerHTML = "Add to Spellbook"
         } else {
-            button.innerHTML = "Remove from Spellbook"
+            target.innerHTML = "Remove from Spellbook"
         }
     })
 }

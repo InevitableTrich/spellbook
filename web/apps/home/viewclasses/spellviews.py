@@ -32,6 +32,10 @@ class HomeView(_BaseView):
     TEMPLATE = 'index.html'
 
 
+class MobileView(_BaseView):
+    TEMPLATE = 'mobile.html'
+
+
 class FilterSpellsView(FilterSpellsViewImpl, _BaseView):
     pass
 

@@ -646,7 +646,7 @@ body {
 .discord {
     display: flex;
     position: absolute;
-    right: 96px;
+    right: 14px;
     top: 14px;
 }
 .discord:hover {
