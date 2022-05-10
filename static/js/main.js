@@ -732,6 +732,12 @@ function CycleList(dID){
     }
 }
 
+function spellFormatHigher(high) {
+    var higher = high != "" ? typeof(high) == "string" ? "At Higher Levels. " + high : "At Higher Levels. " + high.join("<BR/> &emsp;&emsp;") : ""
+    higher = "<bi>" + higher.slice(0,higher.indexOf(".")+1) + "</bi>" + higher.slice(higher.indexOf(".")+1,)
+    return higher
+}
+
 function spellFormatBody(spell) {
     var spellBody = []
     if (spell.desc.join().indexOf("#") > 0) {
@@ -739,9 +745,11 @@ function spellFormatBody(spell) {
     } else {
         spellBody = spell.desc
     }
+    if (spell.desc.join().indexOf("*") > 0) {
+        spellBody = descStyle(spellBody)
+    }
 
     if (spellBody.join().indexOf("|") > 0) {
-        console.log(`table on ${spell.spellid}`)
         spellBody = descTable(spellBody)
     } else {
         spellBody = `<p class="spellDispDescExp">${spellBody.join("<BR/> &emsp;&emsp;")}</p>`
@@ -750,6 +758,30 @@ function spellFormatBody(spell) {
     spellBody = spellBody.replaceAll("&emsp;&emsp;&emsp;&emsp;","&emsp;&emsp;")
 
     return spellBody
+}
+
+function descBold(desc) {
+    for (var i = 0; i < desc.length; i++) {
+        var para = desc[i]
+        if (para.indexOf("#####") != -1) {
+            para = para.replace("#####", "&emsp;&emsp;<tb>")
+            para += "</tb>"
+            desc[i] = para
+        }
+    }
+    return desc
+}
+
+function descStyle(desc) {
+    for (var i = 0; i < desc.length; i++) {
+        var para = desc[i]
+        if (para.indexOf("***") != -1) {
+            para = para.replace("***","<bi>")
+            para = para.replace("***","</bi>")
+            desc[i] = para
+        }
+    }
+    return desc
 }
 
 function descTable(body) {
@@ -802,18 +834,6 @@ function descTable(body) {
     return spellBody
 }
 
-function descBold(desc) {
-    for (var i = 0; i < desc.length; i++) {
-        var para = desc[i]
-        if (para.indexOf("#####") != -1) {
-            para = para.replace("#####", "&emsp;&emsp;<b>")
-            para += "</b>"
-            desc[i] = para
-        }
-    }
-    return desc
-}
-
 function populateSpells(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")
@@ -822,6 +842,7 @@ function populateSpells(jsonResponse) {
     maxPages = Math.ceil(spellCount/spellsPerPage)
     data.spells.forEach(spell => {
         var spellBody = spellFormatBody(spell)
+        var spellHigher = spellFormatHigher(spell.higher_level)
         spells.innerHTML +=`
 <div id="${spell.spellid}">
     <div class="h20"></div>
@@ -849,18 +870,18 @@ function populateSpells(jsonResponse) {
     <div class="rowContainer">
         <div class="body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
             <br>
-            <p class="spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
-            <p class="spellDispDescExp">School: ${spell.school}</p>
-            <p class="spellDispDescExp">Casting Time: ${spell.cast_time}</p>
-            <p class="spellDispDescExp">Range: ${spell.range}</p>
-            <p class="spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
-            <p class="spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
-            <p class="spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
-            <p class="spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
-            <p class="spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
+            <p class="spellDispDescExp" style="margin-top: -4px;"><b>Level:</b> ${spell.level}</p>
+            <p class="spellDispDescExp"><b>School:</b> ${spell.school}</p>
+            <p class="spellDispDescExp"><b>Casting Time:</b> ${spell.cast_time}</p>
+            <p class="spellDispDescExp"><b>Range:</b> ${spell.range}</p>
+            <p class="spellDispDescExp"><b>Components:</b> ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
+            <p class="spellDispDescExp"><b>Duration:</b> ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
+            <p class="spellDispDescExp">${spell.ritual == true ? "<b>Ritual:</b> Yes" : ""}</p>
+            <p class="spellDispDescExp">${spell.classes[0] ? "<b>Classes:</b> " + spell.classes.sort().join(", ") : ""}</p>
+            <p class="spellDispDescExp">${spell.subclasses ? "<b>Subclasses:</b> " + spell.subclasses.sort().join(", ") : ""}</p>
             ${spellBody}
-            <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
-            <p class="spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
+            <p class="spellDispDescExp">${spellHigher}</p>
+            <p class="spellDispDescExp">${spell.source.length > 2 ? "<b>Source:</b> " + spell.source : "<b>Sources:</b> " + spell.source.join(", ")}</p>
             <br>
         </div>
 

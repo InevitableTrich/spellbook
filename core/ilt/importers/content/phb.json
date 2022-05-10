@@ -226,7 +226,7 @@
 		"name": "Conjure Barrage",
 		"level": "3",
 		"classes": ["Ranger"],
-		"school": "conjuration",
+		"school": "Conjuration",
 		"duration": "Instantaneous",
 		"range": "Self (60-foot cone)",
 		"components": ["V", "S", "M"],

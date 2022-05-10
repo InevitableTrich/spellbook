@@ -984,10 +984,15 @@ tr:nth-child(odd) {
 
 
 
-b {
+tb {
     font-weight: bold;
     position: relative;
     top: 20px;
+}
+
+bi {
+    font-weight: bold;
+    font-style: italic;
 }
 
 .menu_button {

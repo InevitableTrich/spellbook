@@ -258,7 +258,7 @@
 	"name": "Summon Undead",
 	"level": "3",
 	"classes": ["Warlock", "Wizard"],
-	"school": "necromancy",
+	"school": "Necromancy",
 	"duration": "up to 1 hour",
 	"range": "90 feet",
 	"components": ["V", "S", "M"],
