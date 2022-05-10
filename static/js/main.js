@@ -64,16 +64,16 @@ function toggleBookSpellView(cName) {
 
     if (current.getAttribute("collapsed") === 'true') {
         setTimeout(function(){
-            document.getElementById("book_btn_" + cName + "_bk").classList.toggle("invis")
+            document.getElementById("book_btn_" + cName).classList.toggle("invis")
             setTimeout(function(){
-                document.getElementById("book_btn_" + cName + "_bk").classList.toggle("add_book_hidden_book")
+                document.getElementById("book_btn_" + cName).classList.toggle("add_book_hidden_book")
             }, 20);
         }, 300);
         toggleViewBook(current, cName)
     } else {
-        document.getElementById("book_btn_" + cName + "_bk").classList.toggle("add_book_hidden_book")
+        document.getElementById("book_btn_" + cName).classList.toggle("add_book_hidden_book")
         setTimeout(function(){
-            document.getElementById("book_btn_" + cName + "_bk").classList.toggle("invis")
+            document.getElementById("book_btn_" + cName).classList.toggle("invis")
             toggleViewBook(current, cName)
         }, 200);
     }
@@ -652,12 +652,13 @@ function updateCharName(id) {
 
 function remove_from_book(id) {
     id = id.slice(0, id.indexOf("_"))
-    var container = document.getElementById("bookContainer")
-    var spell = document.getElementById(id)
-    var btn_char = document.getElementById("book_btn_" + id).children[0]
+    try {
+        var container = document.getElementById("bookContainer")
+        var btn_char = document.getElementById("book_btn_" + id).children[0]
+        btn_char.innerHTML = "Add to Spellbook"
+    } catch(e) {}
 
     spellbook.splice(spellbook.indexOf(id), 1)
-    btn_char.innerHTML = "Add to Spellbook"
 
     updateCookie()
 
@@ -914,8 +915,9 @@ function popEmptySpellbook() {
 }
 
 function updateButtons() {
-    var buttons = [...document.getElementsByClassName("textToBook")]
+    var buttons = [...document.getElementsByClassName("spellToBook")]
     buttons.forEach(button => {
+        var target = button.children[0]
         if (spellbook.indexOf(button.parentElement.id.slice(9)) == -1) {
             button.innerHTML = "Add to Spellbook"
         } else {
@@ -931,7 +933,6 @@ function populateSpellbook(jsonResponse) {
     var heads = []
 
     data.spells.forEach(spell => {
-        spell.spellid = spell.spellid + '_bk'
         if (heads.indexOf(spell.level) == -1) {
             heads.push(spell.level)
 
@@ -947,6 +948,9 @@ function populateSpellbook(jsonResponse) {
 </div>
             `
         }
+        spell.spellid = spell.spellid + '_bk'
+        var spellBody = spellFormatBody(spell).replaceAll("spellDispDescExp", "book_spellDispDescExp")
+        var spellHigher = spellFormatHigher(spell.higher_level)
         spells.innerHTML +=`
 <div class="rowContainer">
     <div class="prep_spell clickable" id="${spell.spellid}_prep" onCLick="prepSpell(id)"></div>
@@ -973,22 +977,22 @@ function populateSpellbook(jsonResponse) {
         <div class="rowContainer">
             <div class="book_body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
                 <br>
-                <p class="book_spellDispDescExp" style="margin-top: -4px;">Level: ${spell.level}</p>
-                <p class="book_spellDispDescExp">School: ${spell.school}</p>
-                <p class="book_spellDispDescExp">Casting Time: ${spell.cast_time}</p>
-                <p class="book_spellDispDescExp">Range: ${spell.range}</p>
-                <p class="book_spellDispDescExp">Components: ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
-                <p class="book_spellDispDescExp">Duration: ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
-                <p class="book_spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
-                <p class="book_spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
-                <p class="book_spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
-                <p class="book_spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
-                <p class="book_spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
-                <p class="book_spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
+                <p class="book_spellDispDescExp" style="margin-top: -4px;"><b>Level:</b> ${spell.level}</p>
+                <p class="book_spellDispDescExp"><b>School:</b> ${spell.school}</p>
+                <p class="book_spellDispDescExp"><b>Casting Time:</b> ${spell.cast_time}</p>
+                <p class="book_spellDispDescExp"><b>Range:</b> ${spell.range}</p>
+                <p class="book_spellDispDescExp"><b>Components:</b> ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
+                <p class="book_spellDispDescExp"><b>Duration:</b> ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
+                <p class="book_spellDispDescExp">${spell.ritual == true ? "<b>Ritual:</b> Yes" : ""}</p>
+                <p class="book_spellDispDescExp">${spell.classes[0] ? "<b>Classes:</b> " + spell.classes.sort().join(", ") : ""}</p>
+                <p class="book_spellDispDescExp">${spell.subclasses ? "<b>Subclasses:</b> " + spell.subclasses.sort().join(", ") : ""}</p>
+                ${spellBody}
+                <p class="book_spellDispDescExp">${spellHigher}</p>
+                <p class="book_spellDispDescExp">${spell.source.length > 2 ? "<b>Source:</b> " + spell.source : "<b>Sources:</b> " + spell.source.join(", ")}</p>
                 <br>
             </div>
 
-            <div class="spellToBook_book clickable invis add_book_hidden_book" id="book_btn_${spell.spellid}_bk" onClick="remove_from_book('${spell.spellid}')">
+            <div class="spellToBook_book clickable invis add_book_hidden_book" id="book_btn_${spell.spellid}" onClick="remove_from_book('${spell.spellid}')">
                 <p class="textToBook">Remove from Spellbook</p>
             </div>
         </div>
