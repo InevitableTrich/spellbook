@@ -732,13 +732,96 @@ function CycleList(dID){
     }
 }
 
-function populateSpells(jsonResponse) { // ADD A PLUS BUTTON ON CLOSED SPELL
+function spellFormatBody(spell) {
+    var spellBody = []
+    if (spell.desc.join().indexOf("#") > 0) {
+        spellBody = descBold(spell.desc)
+    } else {
+        spellBody = spell.desc
+    }
+
+    if (spellBody.join().indexOf("|") > 0) {
+        console.log(`table on ${spell.spellid}`)
+        spellBody = descTable(spellBody)
+    } else {
+        spellBody = `<p class="spellDispDescExp">${spellBody.join("<BR/> &emsp;&emsp;")}</p>`
+    }
+
+    spellBody = spellBody.replaceAll("&emsp;&emsp;&emsp;&emsp;","&emsp;&emsp;")
+
+    return spellBody
+}
+
+function descTable(body) {
+    var tableIndexes = []
+    for (var i = 0; i < body.length; i++) {
+        if (body[i].indexOf("|") != -1) tableIndexes.push(i)
+    }
+    var tables = []
+    var c = tableIndexes[1]
+    var s = tableIndexes[0]
+    for (var i = 1; i < tableIndexes.length; i++) {
+        c = tableIndexes[i]
+        if (c == tableIndexes[i-1]+1) {
+        } else {
+            tables.push([s,tableIndexes[i-1]])
+            s = tableIndexes[i]
+        }
+    }
+    tables.push([s,tableIndexes[tableIndexes.length-1]])
+
+    var tableSet = []
+    for (var j = 0; j < tables.length; j++) {
+    var table = []
+        for (var i = tables[j][0]; i <= tables[j][1]; i++) {
+            if (i == tables[j][0]) {
+                table.push(`<tr><th>${body[i].slice(1,-1).replaceAll("|","</th><th>")}</th></tr>`)
+            } else {
+                var inp = `<tr><td>${body[i].slice(1,-1).replaceAll("|","</td><td>")}</td></tr>`
+                if (inp.indexOf('<td>---</td>') == -1) {
+                    table.push(inp)
+                }
+            }
+        }
+        tableSet.push(table)
+    }
+
+    var last_front = 0
+    var a_body_list = []
+    for (var i = 0; i < tableSet.length; i++) {
+        table = tableSet[i]
+        var front = body.slice(last_front, tables[i][0])
+        var a_table = "<table class='spell_table'>" + table.join("") + "</table>"
+        a_body_list.push(`<p class="spellDispDescExp">${front.join("<BR/> &emsp;&emsp;")}</p>`)
+        a_body_list.push(a_table)
+        last_front = tables[i][1]+1
+    }
+    a_body_list.push(`<p class="spellDispDescExp">${body.slice(last_front,).join("<BR/> &emsp;&emsp;")}</p>`)
+
+    spellBody = a_body_list.join("")
+    return spellBody
+}
+
+function descBold(desc) {
+    for (var i = 0; i < desc.length; i++) {
+        var para = desc[i]
+        if (para.indexOf("#####") != -1) {
+            para = para.replace("#####", "&emsp;&emsp;<b>")
+            para += "</b>"
+            desc[i] = para
+        }
+    }
+    return desc
+}
+
+function populateSpells(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")
     spells.innerHTML = ''
     spellCount = data.spellscount
     maxPages = Math.ceil(spellCount/spellsPerPage)
     data.spells.forEach(spell => {
+        var spellBody = spellFormatBody(spell)
         spells.innerHTML +=`
 <div id="${spell.spellid}">
     <div class="h20"></div>
@@ -775,7 +858,7 @@ function populateSpells(jsonResponse) { // ADD A PLUS BUTTON ON CLOSED SPELL
             <p class="spellDispDescExp">${spell.ritual == true ? "Ritual: Yes" : ""}</p>
             <p class="spellDispDescExp">${spell.classes[0] ? "Classes: " + spell.classes.sort().join(", ") : ""}</p>
             <p class="spellDispDescExp">${spell.subclasses ? "Subclasses: " + spell.subclasses.sort().join(", ") : ""}</p>
-            <p class="spellDispDescExp">${spell.desc.join("<BR/> &emsp;&emsp;")}</p>
+            ${spellBody}
             <p class="spellDispDescExp">${spell.higher_level != "" ? typeof(spell.higher_level) == "string" ? "At Higher Levels: " + spell.higher_level : "At Higher Levels: " + spell.higher_level.join("<BR/> &emsp;&emsp;") : ""}</p>
             <p class="spellDispDescExp">${spell.source.length > 2 ? "Source: " + spell.source : "Sources: " + spell.source.join(", ")}</p>
             <br>

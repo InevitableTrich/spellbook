@@ -966,6 +966,29 @@ body {
     color: rgb(222,222,222);
 }
 
+.spell_table {
+    border-collapse: collapse;
+    border-radius: 12px;
+    margin: 0px 100px;
+}
+
+th, td {
+    padding: 4px 8px;
+    color: rgb(222,222,222);
+    font-size: 125%;
+    min-width: 36.75px;
+}
+tr:nth-child(odd) {
+    background-color: rgb(60,60,60);
+}
+
+
+
+b {
+    font-weight: bold;
+    position: relative;
+    top: 20px;
+}
 
 .menu_button {
     text-align: center;
