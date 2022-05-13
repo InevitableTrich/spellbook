@@ -60,9 +60,12 @@ body {
 
 .spellContainer {
     display: flex;
-    width: 100%;
     flex-direction: row;
     position: relative;
+    width: 99.7%;
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) solid 3px;
+    border-radius: 10px;
     z-index: 1;
 }
 
@@ -120,17 +123,19 @@ body {
 .closeBtn {
     display: flex;
     width: 5%;
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    border-left: 0px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
     text-align: center;
     align-items: center;
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+}
+
+.bottomCloseBtn {
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) solid 3px;
+    border-left: 0px;
+    border-radius: 0px 10px 10px 0px;
 }
 
 .arrow {
@@ -229,6 +234,13 @@ body {
     margin-top: -28px
 }
 
+.sortContainer {
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) solid 3px;
+    border-radius: 10px;
+    width: 99%:
+}
+
 .levelHeadTxt {
     margin-left: 20px;
     font-size: 150%;
@@ -241,11 +253,6 @@ body {
 .name {
     display: flex;
     width: 20%;
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    border-right: 0px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
     line-height: 20px;
     flex-direction: row;
     cursor: pointer;
@@ -261,10 +268,6 @@ body {
 .level {
     display: flex;
     width: 12.5%;
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    border-right: 0px;
-    border-left: 0px;
     line-height: 20px;
     justify-content: center;
     flex-direction: row;
@@ -277,10 +280,6 @@ body {
 .classes {
     display: flex;
     width: 47.5%;
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    border-right: 0px;
-    border-left: 0px;
     line-height: 20px;
     flex-direction: row;
     cursor: pointer;
@@ -292,10 +291,6 @@ body {
 .school {
     display: flex;
     width: 15%;
-    background-color: rgb(50, 50, 50);
-    border: rgb(80,80,80) solid 3px;
-    border-right: 0px;
-    border-left: 0px;
     line-height: 20px;
     flex-direction: row;
     cursor: pointer;
@@ -373,7 +368,7 @@ body {
 .ciTxt {
     color: rgb(222, 222, 222);
     font-size: 120%;
-    margin: 12px 0px 0px 0px;
+    margin: 12px 0px 12px 0px;
 }
 
 .ciComma {

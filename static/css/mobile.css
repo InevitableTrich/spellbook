@@ -1,0 +1,185 @@
+body {
+    min-width: unset;
+}
+
+.title {
+    font-size: 400%;
+}
+
+.menu_button {
+    width: 106px;
+    height: 106px;
+    border-radius: 24px;
+    border-width: 6px;
+}
+
+.discord_logo {
+    width: 80px;
+}
+
+.srchTxt {
+    font-size: 300%;
+}
+
+.searchBar {
+    width: 65%;
+    font-size: 42px;
+    height: 56px;
+}
+
+.smallBtn {
+    width: 65%;
+    height: 56px;
+    position: relative;
+    z-index: 1;
+}
+
+.smallTxt {
+    margin: 0px;
+    font-size: 250%;
+    height: fit-content;
+    margin: auto;
+}
+
+.clrESO {
+    width: 65%;
+    height: 56px;
+}
+
+.ef_body {
+    top: -4px;
+    position: relative;
+    z-index: 0;
+}
+
+.searchOpTxt {
+    font-size: 250%;
+}
+
+.searchColumnL, .searchColumnTR {
+    width: 48%;
+}
+
+.searchColumnL {
+    border-right: 0px;
+}
+
+.filter_arrow {
+    width: unset;
+    height: 32px;
+    position: relative;
+    top: 7px;
+}
+
+.classItem {
+    height: unset;
+}
+
+.ciTxt {
+    font-size: 175%;
+}
+
+.sortSelected {
+    border-radius: 28px;
+}
+
+.name {
+    width: 33.3%;
+}
+
+.level {
+    width: 33.3%;
+}
+
+.classes {
+    width: 33.3%;
+}
+
+.levelHeadTxt {
+    margin: auto;
+    font-size: 225%;
+}
+
+.sortContainer {
+    height: 64px;
+    border-radius: 15px;
+    width: 99.5%;
+}
+
+.pagem1 {
+    display: flex;
+    margin-left: auto;
+    width: 11.5%;
+    height: 74px;
+}
+
+.pagep1 {
+    display: flex;
+    margin-right: auto;
+    width: 11.5%;
+    height: 74px;
+}
+
+.pageBtn {
+    position: relative;
+    top: -5px;
+    width: 48px;
+    height: 56px;
+    margin: auto;
+}
+
+.pageTxt {
+    font-size: 250%;
+}
+
+.spell_head_container {
+    height: 171px;
+    width: 99.5%;
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) solid 3px;
+    border-radius: 15px;
+    transition: height .3s;
+    overflow: hidden;
+}
+
+.spell_head_text {
+    color: rgb(222,222,222);
+    font-size: 200%;
+    margin: 15px;
+}
+
+.spell_body {
+    position: relative;
+    top: -4px;
+    z-index: 2;
+    transition: height .3s;
+    width: 85%;
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) solid;
+    border-width: 0px 3px 0px 3px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.spell_bottom {
+    position: relative;
+    top: -4px;
+    height: 62px;
+    margin-top: -68px;
+    width: 99.5%;
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) solid 3px;
+    border-radius: 15px;
+    transition: margin-top .3s, z-index .3s;
+    z-index: -1;``
+}
+
+.spell_bottom_exp {
+    margin-top: -4px;
+    z-index: 1;
+}
+
+.spellDispDescExp {
+    font-size: 200%;
+    line-height: 36px;
+}

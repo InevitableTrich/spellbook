@@ -13,7 +13,7 @@
     <script src="/static/js/main.js"></script>
 </head>
 
-<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}})); readCookie()">
+<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}})); readCookie()"> <!-- Redirect to mobile if screen width < 425px -->
     <div class="head">
         <h1 class="title" style="margin-bottom: 20px;">
             uaq's Spellbook
@@ -330,7 +330,7 @@
 
 
 
-    <div class="rowContainer">
+    <div class="rowContainer sortContainer spellHeight">
         <div class="name spellHeight" onclick="cycleSort('nameSort')">
             <p class="levelHeadTxt vCentered"  id="nameSort">Spell Name: -</p>
         </div>

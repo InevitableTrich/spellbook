@@ -88,17 +88,17 @@ function toggleViewBook(current, cName){
     }
 }
 
-function collapse(element) {
+function collapse(element, height = 0) {
     var isCollapsed = element.getAttribute('collapsed') === 'true';
     if(isCollapsed) {
         expandSection(element)
         element.setAttribute('collapsed', 'false')
     } else {
-        collapseSection(element)
+        collapseSection(element, height)
     }
 }
 
-function collapseSection(element) {
+function collapseSection(element, height = 0) {
     var sectionHeight = element.scrollHeight;
     var elementTransition = element.style.transition;
     element.style.transition = '';
@@ -106,7 +106,7 @@ function collapseSection(element) {
         element.style.height = sectionHeight + 'px';
         element.style.transition = elementTransition;
         requestAnimationFrame(function() {
-            element.style.height = 0 + 'px';
+            element.style.height = height + 'px';
         });
     });
     element.setAttribute('collapsed', 'true');
@@ -847,20 +847,20 @@ function populateSpells(jsonResponse) {
         spells.innerHTML +=`
 <div id="${spell.spellid}">
     <div class="h20"></div>
-    <div class="spellContainer" onClick="toggleSpellView('${spell.spellid}')" id="${spell.spellid+'_top'}">
-        <div class="name spellHeight" id="${spell.spellid+'_head0'}">
+    <div class="spellContainer spellHeight" onClick="toggleSpellView('${spell.spellid}')" id="${spell.spellid+'_top'}">
+        <div class="name" id="${spell.spellid+'_head0'}">
             <p class="spellName overflow"> ${spell.name} - </p>
         </div>
-        <div class="level spellHeight" id="${spell.spellid+'_head1'}">
+        <div class="level" id="${spell.spellid+'_head1'}">
             <p class="spellDispDesc overflow hCentered">${spell.level}</p>
         </div>
-        <div class="classes spellHeight" id="${spell.spellid+'_head2'}">
+        <div class="classes" id="${spell.spellid+'_head2'}">
             <p class="spellDispDesc overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
         </div>
-        <div class="school spellHeight" id="${spell.spellid+'_head3'}">
+        <div class="school" id="${spell.spellid+'_head3'}">
             <p class="spellDispDesc overflow">${spell.school}</p>
         </div>
-        <div class="closeBtn spellHeight">
+        <div class="closeBtn">
             <div id="${spell.spellid+'_tarrow'}" class="arrow">
                 <svg class="arrow" style="margin: 0px;">
                     <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -895,7 +895,7 @@ function populateSpells(jsonResponse) {
             <p class="spellName" style="white-space: nowrap;">${spell.name} - </p>
         </div>
         <div class="expBot spellHeight"></div>
-        <div class="closeBtn spellHeight">
+        <div class="closeBtn bottomCloseBtn spellHeight">
             <div id="${spell.spellid+'_barrow'}" class="arrow">
                 <svg class="arrow" style="margin: 0px;">
                     <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
