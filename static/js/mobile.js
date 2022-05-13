@@ -5,7 +5,13 @@ function toggle_spell(id) {
 
     bottom.classList.toggle("spell_bottom_exp")
 
-    collapse(container, height = "62")
+    if (container.getAttribute("collapsed") == "true") {
+        container.setAttribute("collapsed", "false")
+    } else {
+        container.setAttribute("collapsed", "true")
+    }
+    container.classList.toggle("spell_head_shr")
+
     collapse(body)
 }
 
@@ -22,7 +28,7 @@ function populateSpells(jsonResponse) {
         spells.innerHTML +=`
 <div id="${spell.spellid}">
     <div class="h20"></div>
-    <div class="spell_head_container" id="${spell.spellid}_cr" onmousedown="toggle_spell(id)" collapsed="false">
+    <div class="spell_head_container" id="${spell.spellid}_cr" ontouchend="toggle_spell(id)" collapsed="false">
         <p class="spell_head_text">${spell.name}</p>
         <p class="spell_head_text">Level ${spell.level}</p>
         <p class="spell_head_text overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
@@ -43,7 +49,7 @@ function populateSpells(jsonResponse) {
         <p class="spellDispDescExp">${spell.source.length > 2 ? "<b>Source:</b> " + spell.source : "<b>Sources:</b> " + spell.source.join(", ")}</p>
     </div>
 
-    <div class="spell_bottom" onmousedown="toggle_spell(\'${spell.spellid + '_cr'}\')">
+    <div class="spell_bottom" ontouchend="toggle_spell(\'${spell.spellid + '_cr'}\')">
         <p class="spell_head_text">${spell.name}</p>
     </div>
 </div>`

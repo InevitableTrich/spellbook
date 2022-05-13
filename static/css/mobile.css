@@ -141,6 +141,9 @@ body {
     transition: height .3s;
     overflow: hidden;
 }
+.spell_head_shr {
+    height: 62px;
+}
 
 .spell_head_text {
     color: rgb(222,222,222);
