@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/static/css/mobile.css">
     <link rel="icon" type="image/png" href="/static/images/icon.png">
 
+    <meta name="viewport" content="user-scalable=no">
+
     <script src="/static/js/main.js"></script>
     <script src="/static/js/mobile.js"></script>
 </head>
@@ -29,7 +31,7 @@
     <h3 class="srchTxt">search:</h3>
     <input id="search" class="searchBar" autocomplete="off" type="text" placeholder="Search Here:" value="" onchange="search(value)">
 
-    <div class="smallBtn shrink" id="ef_top" ontouchend="toggleFilter()">
+    <div class="smallBtn shrink" id="ef_top" onclick="toggleFilter()">
         <p class="smallTxt">
             Expand Filter Options
         </p>
@@ -37,7 +39,7 @@
 
     <div class="rowContainer ef_body" id="ef_body" style="height: 0px;" collapsed="true">
         <div class="searchColumnL" id="searchColumnL">
-            <div class="clickObj" id="class" ontouchend="CycleList(id)">
+            <div class="clickObj" id="class" onclick="CycleList(id)">
                 <p class="searchOpTxt" id="class_txt">Class:
                     <svg id="class_arr" class="filter_arrow" viewBox="0 0 24 24">
                         <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -49,41 +51,41 @@
                 <div class="rowContainer">
                     <div class="cibl"></div>
                     <div class="searchRowCon">
-                        <div class="classItem" id="artificer" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="artificer" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_artificer">Artificer,</p>
                         </div>
-                        <div class="classItem" id="bard" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="bard" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_bard">Bard,</p>
                         </div>
-                        <div class="classItem" id="cleric" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="cleric" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_cleric">Cleric,</p>
                         </div>
-                        <div class="classItem" id="druid" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="druid" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_druid">Druid,</p>
                         </div>
-                        <div class="classItem" id="monk" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="monk" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_monk">Monk,</p>
                         </div>
-                        <div class="classItem" id="paladin" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="paladin" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_paladin">Paladin,</p>
                         </div>
-                        <div class="classItem" id="ranger" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="ranger" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_ranger">Ranger,</p>
                         </div>
-                        <div class="classItem" id="sorcerer" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="sorcerer" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_sorcerer">Sorcerer,</p>
                         </div>
-                        <div class="classItem" id="warlock" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="warlock" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_warlock">Warlock,</p>
                         </div>
-                        <div class="classItem" id="wizard" ontouchend="sortToggle(id, 'classes')">
+                        <div class="classItem" id="wizard" onclick="sortToggle(id, 'classes')">
                             <p class="ciTxt" id="_wizard">Wizard</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="clickObj" id="level" ontouchend="CycleList(id)">
+            <div class="clickObj" id="level" onclick="CycleList(id)">
                 <p class="searchOpTxt" id="level_txt">Level:
                   <svg id="level_arr" class="filter_arrow" viewBox="0 0 24 24">
                       <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -95,41 +97,41 @@
                 <div class="rowContainer">
                     <div class="cibl"></div>
                     <div class="searchRowCon">
-                        <div class="classItem" id="l0" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l0" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l0">Level 0,</p>
                         </div>
-                        <div class="classItem" id="l1" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l1" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l1">Level 1,</p>
                         </div>
-                        <div class="classItem" id="l2" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l2" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l2">Level 2,</p>
                         </div>
-                        <div class="classItem" id="l3" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l3" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l3">Level 3,</p>
                         </div>
-                        <div class="classItem" id="l4" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l4" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l4">Level 4,</p>
                         </div>
-                        <div class="classItem" id="l5" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l5" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l5">Level 5,</p>
                         </div>
-                        <div class="classItem" id="l6" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l6" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l6">Level 6,</p>
                         </div>
-                        <div class="classItem" id="l7" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l7" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l7">Level 7,</p>
                         </div>
-                        <div class="classItem" id="l8" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l8" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l8">Level 8,</p>
                         </div>
-                        <div class="classItem" id="l9" ontouchend="sortToggle(id, 'level')">
+                        <div class="classItem" id="l9" onclick="sortToggle(id, 'level')">
                             <p class="ciTxt" id="_l9">Level 9</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="clickObj" id="school" ontouchend="CycleList(id)">
+            <div class="clickObj" id="school" onclick="CycleList(id)">
                 <p class="searchOpTxt" id="school_txt">School:
                     <svg id="school_arr" class="filter_arrow" viewBox="0 0 24 24">
                         <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -141,35 +143,35 @@
                 <div class="rowContainer">
                     <div class="cibl"></div>
                     <div class="searchRowCon">
-                        <div class="classItem" id="abjuration" ontouchend="sortToggle(id, 'school')">
+                        <div class="classItem" id="abjuration" onclick="sortToggle(id, 'school')">
                             <p class="ciTxt" id="_abjuration">Abjuration,</p>
                         </div>
-                        <div class="classItem" id="conjuration" ontouchend="sortToggle(id, 'school')">
+                        <div class="classItem" id="conjuration" onclick="sortToggle(id, 'school')">
                             <p class="ciTxt" id="_conjuration">Conjuration,</p>
                         </div>
-                        <div class="classItem" id="divination" ontouchend="sortToggle(id, 'school')">
+                        <div class="classItem" id="divination" onclick="sortToggle(id, 'school')">
                             <p class="ciTxt" id="_divination">Divination,</p>
                         </div>
-                        <div class="classItem" id="enchantment" ontouchend="sortToggle(id, 'school')">
+                        <div class="classItem" id="enchantment" onclick="sortToggle(id, 'school')">
                             <p class="ciTxt" id="_enchantment">Enchantment,</p>
                         </div>
-                        <div class="classItem" id="evocation" ontouchend="sortToggle(id, 'school')">
+                        <div class="classItem" id="evocation" onclick="sortToggle(id, 'school')">
                             <p class="ciTxt" id="_evocation">Evocation,</p>
                         </div>
-                        <div class="classItem" id="illusion" ontouchend="sortToggle(id, 'school')">
+                        <div class="classItem" id="illusion" onclick="sortToggle(id, 'school')">
                             <p class="ciTxt" id="_illusion">Illusion,</p>
                         </div>
-                        <div class="classItem" id="necromancy" ontouchend="sortToggle(id, 'school')">
+                        <div class="classItem" id="necromancy" onclick="sortToggle(id, 'school')">
                             <p class="ciTxt" id="_necromancy">Necromancy,</p>
                         </div>
-                        <div class="classItem" id="transmutation" ontouchend="sortToggle(id, 'school')">
+                        <div class="classItem" id="transmutation" onclick="sortToggle(id, 'school')">
                             <p class="ciTxt" id="_transmutation">Transmutation</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="clickObj" style="margin-bottom: 10px;" id="source" ontouchend="CycleList(id)">
+            <div class="clickObj" style="margin-bottom: 10px;" id="source" onclick="CycleList(id)">
                 <p class="searchOpTxt" id="source_txt">Source:
                     <svg id="source_arr" class="filter_arrow" viewBox="0 0 24 24">
                         <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -181,31 +183,31 @@
                 <div class="rowContainer">
                     <div class="cibl"></div>
                     <div class="searchRowCon">
-                        <div class="classItem" id="acqinc" ontouchend="sortToggle(id, 'source')" title="Acquisitions Incorporated">
+                        <div class="classItem" id="acqinc" onclick="sortToggle(id, 'source')" title="Acquisitions Incorporated">
                             <p class="ciTxt" id="_acqinc">AI,</p>
                         </div>
-                        <div class="classItem" id="eepc" ontouchend="sortToggle(id, 'source')" title="Elemental Evil Player's Companion">
+                        <div class="classItem" id="eepc" onclick="sortToggle(id, 'source')" title="Elemental Evil Player's Companion">
                             <p class="ciTxt" id="_eepc">EEPC,</p>
                         </div>
-                        <div class="classItem" id="ftod" ontouchend="sortToggle(id, 'source')" title="Fizban's Treasury of Dragons">
+                        <div class="classItem" id="ftod" onclick="sortToggle(id, 'source')" title="Fizban's Treasury of Dragons">
                             <p class="ciTxt" id="_ftod">FToD,</p>
                         </div>
-                        <div class="classItem" id="frost" ontouchend="sortToggle(id, 'source')" title="Icewind Dale: Rime of the Frostmaiden">
+                        <div class="classItem" id="frost" onclick="sortToggle(id, 'source')" title="Icewind Dale: Rime of the Frostmaiden">
                             <p class="ciTxt" id="_frost">ID:RotF,</p>
                         </div>
-                        <div class="classItem" id="kwalish" ontouchend="sortToggle(id, 'source')" title="Lost Laboratory of Kwalish">
+                        <div class="classItem" id="kwalish" onclick="sortToggle(id, 'source')" title="Lost Laboratory of Kwalish">
                             <p class="ciTxt" id="_kwalish">LLoK,</p>
                         </div>
-                        <div class="classItem" id="phb" ontouchend="sortToggle(id, 'source')" title="Player's Handbook">
+                        <div class="classItem" id="phb" onclick="sortToggle(id, 'source')" title="Player's Handbook">
                             <p class="ciTxt" id="_phb">PHB,</p>
                         </div>
-                        <div class="classItem" id="strix" ontouchend="sortToggle(id, 'source')" title="Strixhaven: a Curriculum of Chaos">
+                        <div class="classItem" id="strix" onclick="sortToggle(id, 'source')" title="Strixhaven: a Curriculum of Chaos">
                             <p class="ciTxt" id="_strix">S:aCoC,</p>
                         </div>
-                        <div class="classItem" id="tcoe" ontouchend="sortToggle(id, 'source')" title="Tasha's Cauldron of Everything">
+                        <div class="classItem" id="tcoe" onclick="sortToggle(id, 'source')" title="Tasha's Cauldron of Everything">
                             <p class="ciTxt" id="_tcoe">TCoE,</p>
                         </div>
-                        <div class="classItem" id="xgte" ontouchend="sortToggle(id, 'source')" title="Xanathar's Guide to Everything">
+                        <div class="classItem" id="xgte" onclick="sortToggle(id, 'source')" title="Xanathar's Guide to Everything">
                             <p class="ciTxt" id="_xgte">XGTE</p>
                         </div>
                     </div>
@@ -216,7 +218,7 @@
 
 
         <div class="searchColumnTR">
-            <div class="clickObj" id="subclass" ontouchend="CycleList(id)" style="margin-top: -3px;">
+            <div class="clickObj" id="subclass" onclick="CycleList(id)" style="margin-top: -3px;">
                 <p class="searchOpTxt" id="subclass_txt">Subclass:
                     <svg id="subclass_arr" class="filter_arrow" viewBox="0 0 24 24">
                         <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -233,7 +235,7 @@
                 </div>
             </div>
 
-            <div class="clickObj" id="action" ontouchend="CycleList(id)">
+            <div class="clickObj" id="action" onclick="CycleList(id)">
                 <p class="searchOpTxt" id="action_txt">Action:
                     <svg id="action_arr" class="filter_arrow" viewBox="0 0 24 24">
                         <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -245,29 +247,29 @@
                 <div class="rowContainer">
                     <div class="cibl"></div>
                     <div class="searchRowCon">
-                        <div class="classItem" id="_action" ontouchend="sortToggle(id, 'cast_time')">
+                        <div class="classItem" id="_action" onclick="sortToggle(id, 'cast_time')">
                             <p class="ciTxt" id="__action">Action,</p>
                         </div>
-                        <div class="classItem" id="bonus_action" ontouchend="sortToggle(id, 'cast_time')">
+                        <div class="classItem" id="bonus_action" onclick="sortToggle(id, 'cast_time')">
                             <p class="ciTxt" id="_bonus_action">Bonus Action,</p>
                         </div>
-                        <div class="classItem" id="reaction" ontouchend="sortToggle(id, 'cast_time')">
+                        <div class="classItem" id="reaction" onclick="sortToggle(id, 'cast_time')">
                             <p class="ciTxt" id="_reaction">Reaction,</p>
                         </div>
-                        <div class="classItem" id="minute" ontouchend="sortToggle(id, 'cast_time')">
+                        <div class="classItem" id="minute" onclick="sortToggle(id, 'cast_time')">
                             <p class="ciTxt" id="_minute">1 Minute,</p>
                         </div>
-                        <div class="classItem" id="ten_minute" ontouchend="sortToggle(id, 'cast_time')">
+                        <div class="classItem" id="ten_minute" onclick="sortToggle(id, 'cast_time')">
                             <p class="ciTxt" id="_ten_minute">10 Minutes,</p>
                         </div>
-                        <div class="classItem" id="hour" ontouchend="sortToggle(id, 'cast_time')">
+                        <div class="classItem" id="hour" onclick="sortToggle(id, 'cast_time')">
                             <p class="ciTxt" id="_hour">1 Hour</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="clickObj" id="concentration" ontouchend="CycleList(id)">
+            <div class="clickObj" id="concentration" onclick="CycleList(id)">
                 <p class="searchOpTxt" id="concentration_txt">Concentration:
                     <svg id="concentration_arr" class="filter_arrow" viewBox="0 0 24 24">
                         <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -279,17 +281,17 @@
                 <div class="rowContainer">
                     <div class="cibl"></div>
                     <div class="searchRowCon">
-                        <div class="classItem" id="_concentration" ontouchend="sortToggle(id, 'concentration')">
+                        <div class="classItem" id="_concentration" onclick="sortToggle(id, 'concentration')">
                             <p class="ciTxt" id="__concentration">Concentration,</p>
                         </div>
-                        <div class="classItem" id="not_concentration" ontouchend="sortToggle(id, 'concentration')">
+                        <div class="classItem" id="not_concentration" onclick="sortToggle(id, 'concentration')">
                             <p class="ciTxt" id="_not_concentration">Not Concentration</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="clickObj" id="ritual" ontouchend="CycleList(id)" style="margin-bottom: 10px;">
+            <div class="clickObj" id="ritual" onclick="CycleList(id)" style="margin-bottom: 10px;">
                 <p class="searchOpTxt" id="ritual_txt">Ritual:
                     <svg id="ritual_arr" class="filter_arrow" viewBox="0 0 24 24">
                         <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3"/>
@@ -301,10 +303,10 @@
                 <div class="rowContainer">
                     <div class="cibl"></div>
                     <div class="searchRowCon">
-                        <div class="classItem" id="s_ritual" ontouchend="sortToggle(id, 'ritual')">
+                        <div class="classItem" id="s_ritual" onclick="sortToggle(id, 'ritual')">
                             <p class="ciTxt" id="_s_ritual">Ritual,</p>
                         </div>
-                        <div class="classItem" id="not_ritual" ontouchend="sortToggle(id, 'ritual')">
+                        <div class="classItem" id="not_ritual" onclick="sortToggle(id, 'ritual')">
                             <p class="ciTxt" id="_not_ritual">Not Ritual</p>
                         </div>
                   </div>
@@ -314,7 +316,7 @@
         </div>
     </div>
 
-    <div class="clrESO" ontouchend="clrESO()">
+    <div class="clrESO" onclick="clrESO()">
         <p class="smallTxt">Clear Search Options</p>
     </div>
 
@@ -323,12 +325,12 @@
     </div>
 
     <div class="rowContainer">
-        <div class="pagem1" ontouchend="pageChange(-1)">
+        <div class="pagem1" onclick="pageChange(-1)">
             <svg class="pageBtn" viewBox="0 0 24 24" style="right: 8px;">
                 <polygon points="23.324,6 23.324,24 6,15" style="fill:white;stroke-width:3" />
             </svg>
         </div>
-        <div class="pagep1" ontouchend="pageChange(1)">
+        <div class="pagep1" onclick="pageChange(1)">
             <svg class="pageBtn" viewBox="0 0 24 24">
                 <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
             </svg>
