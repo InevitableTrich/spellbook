@@ -10,9 +10,54 @@ function toggle_spell(id) {
     } else {
         container.setAttribute("collapsed", "true")
     }
-    container.classList.toggle("spell_head_shr")
+    toggle_head(id)
 
     collapse(body)
+}
+
+function toggle_head(id) {
+    var container = document.getElementById(id)
+    var name = container.children[0]
+    var level = container.children[1]
+    var classes = container.children[2]
+
+    name.classList.toggle("vis")
+    level.classList.toggle("invis")
+    classes.classList.toggle("invis")
+}
+
+function clrESO(){
+    divs = document.querySelectorAll("div.sortSelected")
+    divs.forEach(element => {
+        element.classList.remove('sortSelected')
+    });
+
+    ps = document.querySelectorAll("p.sortSelectedTxt")
+    ps.forEach(element => {
+        element.classList.remove('sortSelectedTxt')
+    });
+
+    document.querySelector("#subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
+    for([key] of Object.entries(subs)){
+        subs[key][0] = false
+    }
+    subs_list = []
+
+    filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
+    filters.forEach(id => {
+        if (document.querySelector("#" + id + "_ops").getAttribute('collapsed') === 'false') {
+            CycleList(id)
+        }
+    });
+
+    currentFilter = JSON.stringify({"filter": {}})
+    filterState = {}
+
+    searchBar = document.getElementById('search')
+    searchBar.value = ""
+    searchQuery = ''
+    resetPage()
+    makeFilterRequest('nameSort', 0, currentFilter)
 }
 
 function populateSpells(jsonResponse) {
@@ -29,9 +74,9 @@ function populateSpells(jsonResponse) {
 <div id="${spell.spellid}">
     <div class="h20"></div>
     <div class="spell_head_container" id="${spell.spellid}_cr" onclick="toggle_spell(id)" collapsed="false">
-        <p class="spell_head_text">${spell.name}</p>
-        <p class="spell_head_text">Level ${spell.level}</p>
-        <p class="spell_head_text overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
+        <p class="spell_head_text head_name overflow">${spell.name}</p>
+        <p class="spell_head_text head_level">${spell.level}</p>
+        <p class="spell_head_text head_class overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
     </div>
     <div class="spell_body" style="height: 0px" id="${spell.spellid+'_body'}" collapsed="true">
         <br>

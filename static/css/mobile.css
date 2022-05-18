@@ -1,5 +1,6 @@
 body {
     min-width: unset;
+    touch-action: manipulation;
 }
 
 .title {
@@ -15,6 +16,20 @@ body {
 
 .discord_logo {
     width: 80px;
+    margin: 22px 13px;
+}
+
+.discord:hover {
+    opacity: .5;
+}
+
+.sttarrow {
+    width: unset;
+    height: 40px;
+}
+
+.stt:hover {
+    opacity: .5;
 }
 
 .srchTxt {
@@ -133,22 +148,34 @@ body {
 }
 
 .spell_head_container {
-    height: 171px;
+    display: flex;
+    height: 66px;
     width: 99.5%;
     background-color: rgb(50,50,50);
     border: rgb(80,80,80) solid 3px;
     border-radius: 15px;
-    transition: height .3s;
     overflow: hidden;
-}
-.spell_head_shr {
-    height: 62px;
 }
 
 .spell_head_text {
     color: rgb(222,222,222);
     font-size: 200%;
     margin: 15px;
+}
+
+.head_name {
+    width: 35%;
+}
+.vis {
+    overflow: visible;
+}
+
+.head_level {
+    width: 5%;
+}
+
+.head_class {
+    width: 60%;
 }
 
 .spell_body {
