@@ -233,7 +233,7 @@ function saveSettings(){
 
 document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
-        toggleSettings(close=true)
+//        toggleSettings(close=true)
         toggleBook(close=true)
     }
 });
@@ -910,7 +910,7 @@ function populateSpells(jsonResponse) {
 function popEmptySpellbook() {
     var spells = document.getElementById("bookContainer")
     spells.innerHTML = `
-<p class="book_head_text" style="margin: 20px auto 0px; width: fit-content;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
+<p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
     `
 }
 

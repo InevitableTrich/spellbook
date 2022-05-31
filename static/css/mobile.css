@@ -190,8 +190,21 @@ body {
     background-color: rgb(50,50,50);
     border: rgb(80,80,80) solid;
     border-width: 0px 3px 0px 3px;
-    margin: auto;
+    margin-left: 5.5%;
     overflow: hidden;
+}
+
+.spellToBook {
+    width: 4.5%;
+    margin: 20px auto 30px;
+}
+
+.textToBook {
+    font-size: 3vw;
+}
+
+.add_book_hidden {
+    left: -9%;
 }
 
 .spell_bottom {
@@ -204,7 +217,7 @@ body {
     border: rgb(80,80,80) solid 3px;
     border-radius: 15px;
     transition: margin-top .3s, z-index .3s;
-    z-index: -1;``
+    z-index: -1;
 }
 
 .spell_bottom_exp {
@@ -215,4 +228,84 @@ body {
 .spellDispDescExp {
     font-size: 200%;
     line-height: 36px;
+}
+
+.menuPage {
+    position: absolute;
+    left: 5%;
+    top: 15%;
+}
+
+.player_info_container {
+    height: 20%;
+    border-bottom: rgb(80,80,80) solid 3px;
+}
+
+.class_container {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.char_text {
+    font-size: 225%;
+    width: fit-content;
+}
+
+.class_list {
+    width: 90%;
+    font-size: 175%;
+}
+
+.level_input {
+    height: 90px;
+    width: 90px;
+    font-size: 64px;
+    border-radius: 15px;
+}
+
+.slot_box {
+    width: fit-content;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.slots_list_container {
+    width: 75%;
+}
+
+.slot_container {
+    width: fit-content;
+    height: fit-content;
+    border: rgb(80,80,80) solid 3px;
+    border-radius: 12.5px;
+    margin: 20px 7px;
+}
+
+.slot_top, .slot_bot {
+    display: flex;
+    width: fit-content;
+    height: 60px;
+    justify-content: center;
+}
+.slot_top {
+    border-bottom: rgb(80,80,80) solid 3px;
+}
+
+.slot_text {
+    font-size: 200%;
+    margin: auto 6px;
+}
+
+.book_container {
+    width: unset;
+}
+
+.book_head_text {
+    font-size: 200%;
+}
+
+.column_container {
+    display: flex;
+    flex-direction: column;
 }

@@ -34,7 +34,7 @@
         </svg>
     </div>
 
-    <h3 class="srchTxt">search:</h3>
+
     <input id="search" class="searchBar" autocomplete="off" type="text" placeholder="Search Here:" value="" onchange="search(value)">
 
     <div class="smallBtn shrink" id="ef_top" onclick="toggleFilter()">
@@ -345,6 +345,96 @@
 
     <div class="middle">
         <p class="pageTxt" id="pageTxt">Page 1</p>
+    </div>
+
+
+    <div class="menu_button stt" style="left: 0; right: unset;" onclick="toggleBook()">
+        <svg viewBox="0 0 10 10" class="sb_part">
+            <path fill="rgb(80,80,80)" d="M 0.6 1.6 L 0.6 8.4 L 9.4 8.4 L 9.4 1.6 z"></path>
+        </svg>
+        <svg viewBox="0 0 20 20" class="sb_part" height="64px" style="margin-top: 21.1px; margin-left: 12.16px;">
+            <path fill="white" d="M 0 0 L 0 20 L 6 20 C 10.5 20 13 20 13 17.5 L 13 2.5 C 13 0 10.5 0 6 0 Z"/>
+        </svg>
+        <svg viewBox="0 0 20 20" class="sb_part" height="64px" style="transform: rotate(180deg);margin-top: 21.1px;margin-left: 30.59px;">
+            <path fill="white" d="M 0 0 L 0 20 L 6 20 C 10.5 20 13 20 13 17.5 L 13 2.5 C 13 0 10.5 0 6 0 Z"></path>
+        </svg>
+    </div>
+
+    <div id="bookCon" class="menuBack invis" onclick="toggleBook()">
+        <div class="menuPage" onclick="event.stopPropagation()">
+            <div class="column_container">
+                <div class="player_info_container">
+                    <div class="rowContainer">
+                        <div class="class_container">
+                            <label for="classes" id="class_dropdown" class="char_text">Class:</label>
+                            <select id="classes" name="classes" class="class_list" onchange="updateSpellSlots(); updateCookie()">
+                                <option value="artificer">Artificer</option>
+                                <option value="bard">Bard</option>
+                                <option value="cleric">Cleric</option>
+                                <option value="druid">Druid</option>
+                                <option value="paladin">Paladin</option>
+                                <option value="ranger">Ranger</option>
+                                <option value="sorcerer">Sorcerer</option>
+                                <option value="warlock">Warlock</option>
+                                <option value="wizard">Wizard</option>
+                            </select>
+
+                            <p id="player_level" class="char_text">Level:</p>
+                            <input id="lvInput" autocomplete="off" class="level_input" style="margin-bottom: 20px;" placeholder="Lv" value="1" onchange="updateSpellSlots(); updateCookie()">
+                        </div>
+
+                        <div class="slots_list_container">
+                            <p class="char_text">Spell Slots:</p>
+                            <div class="rowContainer slot_box">
+                                <div class="column_container" style="margin: 20px 0px;">
+                                    <p class="slot_text">lvl:</p>
+                                    <p class="slot_text">amt:</p>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">1</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_1" class="slot_text">0</p></div>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">2</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_2" class="slot_text">0</p></div>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">3</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_3" class="slot_text">0</p></div>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">4</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_4" class="slot_text">0</p></div>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">5</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_5" class="slot_text">0</p></div>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">6</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_6" class="slot_text">0</p></div>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">7</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_7" class="slot_text">0</p></div>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">8</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_8" class="slot_text">0</p></div>
+                                </div>
+                                <div class="slot_container column_container">
+                                    <div class="slot_top"><p class="slot_text">9</p></div>
+                                    <div class="slot_bot"><p id="slot_amt_9" class="slot_text">0</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="bookContainer" class="book_container">
+                    <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

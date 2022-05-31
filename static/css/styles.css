@@ -29,6 +29,8 @@ body {
 .title {
     margin: 6%;
     color: rgb(222, 222, 222);
+    text-decoration: underline;
+    text-decoration-color: rgb(80,80,80);
 }
 
 .darkOption {
@@ -301,7 +303,7 @@ body {
 
 .searchBar {
     margin: 20px;
-    margin-top: -10px;
+    margin-top: 30px;
     margin-bottom: 30px;
     width: 27.3%;
     size: inherit;
@@ -514,7 +516,7 @@ body {
 
 .stt {
     display: flex;
-    z-index: 99;
+    z-index: 3;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -559,7 +561,7 @@ body {
     height: 70%;
     position: fixed;
     left: 15%;
-    top: 15%;
+    top: 10%;
     border: rgb(80,80,80) solid 3px;
     border-radius: 20px;
 }
@@ -769,7 +771,6 @@ body {
     font-size: 150%;
     margin: 10px;
     width: 90px;
-    white-space: nowrap;
 }
 
 .book_spell {
