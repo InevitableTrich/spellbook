@@ -105,7 +105,7 @@ function populateSpells(jsonResponse) {
             <p class="spellDispDescExp">${spell.source.length > 2 ? "<b>Source:</b> " + spell.source : "<b>Sources:</b> " + spell.source.join(", ")}</p>
         </div>
 
-        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}_cr" onClick="addToBook('${spell.spellid}')">
+        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}_cr" onClick="addToBook('${spell.spellid}_cr')">
             <p class="textToBook">${spellbook.indexOf(spell.spellid) != -1 ? "Remove from Spellbook" : "Add to Spellbook"}</p>
         </div>
     </div>

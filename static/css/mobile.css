@@ -294,7 +294,7 @@ body {
 
 .slot_text {
     font-size: 200%;
-    margin: auto 6px;
+    margin: auto 7.5px;
 }
 
 .book_container {
@@ -304,6 +304,29 @@ body {
 .book_head_text {
     font-size: 200%;
 }
+
+.char_container {
+    position: absolute;
+    top: 85%;
+    left: 7.5%;
+    width: 90%;
+}
+
+.book_char_tab {
+    border: rgb(80,80,80) 3px solid;
+    background-color: rgb(50,50,50);
+    width: 17.5%;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.book_char_text {
+    color: white;
+    font-size: 200%;
+    margin: 10px auto;
+    width: fit-content;
+}
+
+
 
 .column_container {
     display: flex;
