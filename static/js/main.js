@@ -584,17 +584,17 @@ function book_switch_view(id) {
 
 function book_switch_vis(id) {
     var current = document.getElementById(id)
-    var container = document.getElementById("book_side_container")
+    var container = document.getElementById("book_char_container")
     var children = [...container.children]
 
     children.forEach(child => {
         if (child === current) {
-            if (child.className.indexOf("book_side_exp") == -1) {
-                child.className += " book_side_exp"
+            if (child.className.indexOf("book_char_exp") == -1) {
+                child.className += " book_char_exp"
             }
         } else {
-            if (child.className.indexOf("book_side_exp") != -1) {
-                child.className = child.className.replace(" book_side_exp","")
+            if (child.className.indexOf("book_char_exp") != -1) {
+                child.className = child.className.replace(" book_char_exp","")
             }
         }
     })
@@ -953,7 +953,6 @@ function populateSpellbook(jsonResponse) {
         <div class="slotContainerContainer">
             <div class="slotContainer" id="slot_container_${spell.level}"></div>
         </div>
-        <p class="book_head_text"></p>
     </div>
 </div>
             `

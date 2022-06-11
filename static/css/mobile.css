@@ -299,6 +299,7 @@ body {
 
 .book_container {
     width: unset;
+    height: 80%;
 }
 
 .book_head_text {
@@ -307,25 +308,79 @@ body {
 
 .char_container {
     position: absolute;
-    top: 85%;
-    left: 7.5%;
-    width: 90%;
+    top: 100%;
+    left: 2.5%;
+    width: 95%;
+    z-index: 0;
 }
 
 .book_char_tab {
+    position: relative;
+    display: flex;
     border: rgb(80,80,80) 3px solid;
     background-color: rgb(50,50,50);
-    width: 17.5%;
+    width: 25%;
+    height: 57px;
     border-radius: 0px 0px 20px 20px;
 }
 
 .book_char_text {
     color: white;
     font-size: 200%;
-    margin: 10px auto;
+    margin: auto;
     width: fit-content;
 }
 
+.book_char_exp {
+    top: -1px;
+    height: 76px;
+    border-top: 0px;
+}
+
+.prep_spell {
+    width: 24px;
+    height: 24px;
+    border-radius: 16px;
+}
+
+.book_spell {
+    width: 90%;
+}
+
+.book_spell_text {
+    font-size: 200%;
+}
+
+.book_bottom_margin {
+    margin-top: -61px;
+}
+
+.book_spellDispDescExp {
+    font-size: 200%;
+    line-height: 37.5px;
+}
+
+.book_body {
+    margin-left: 3.6%;
+}
+
+.spellToBook_book {
+    width: 5.5%;
+}
+
+.book_bottom_name {
+    width: 3.6%;
+}
+.book_bottom_mid {
+    width: 84.9%;
+}
+.book_close {
+    width: 11.5%;
+}
+
+.book_bottom_exp {
+    margin-top: -35px;
+}
 
 
 .column_container {

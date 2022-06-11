@@ -116,3 +116,29 @@ function populateSpells(jsonResponse) {
 </div>`
     })
 }
+
+function addToBook(id) {
+    if (id.endsWith("_cr")) {
+        id = id.slice(0,id.indexOf("_cr"))
+    }
+
+    var container = document.getElementById("bookContainer")
+    var btn = document.getElementById("book_btn_" + id + "_cr")
+    var btn_char = btn.children[0]
+
+    if (spellbook.indexOf(id) == -1) {
+        spellbook.push(id)
+        btn_char.innerHTML = "Remove from Spellbook"
+    } else {
+        spellbook.splice(spellbook.indexOf(id), 1)
+        btn_char.innerHTML = "Add to Spellbook"
+    }
+
+    updateBook()
+
+    if (spellbook.length == 0) {
+        popEmptySpellbook()
+    } else {
+        makeBookRequest(spellbook)
+    }
+}

@@ -17,7 +17,7 @@
     <script src="/static/js/mobile.js"></script>
 </head>
 
-<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}}))">
+<body onload="makeFilterRequest('nameSort', 0, JSON.stringify({'filter': {}})); readCookie()">
     <h1 class="title" style="margin-bottom: 20px;">
         uaq's Spellbook
     </h1>
@@ -362,7 +362,7 @@
 
     <div id="bookCon" class="menuBack invis" onclick="toggleBook()">
         <div class="menuPage" onclick="event.stopPropagation()">
-            <div class="column_container">
+            <div class="column_container" style="height: 100%;">
                 <div class="player_info_container">
                     <div class="rowContainer">
                         <div class="class_container">
@@ -434,19 +434,19 @@
                     <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
                 </div>
             </div>
-        </div>
-        <div class="rowContainer char_container">
-            <div id="char1" class="book_char_tab">
-                <p class="book_char_text overflow">Char 1</p>
-            </div>
-            <div id="char2" class="book_char_tab" style="left: -3px">
-                <p class="book_char_text overflow">Char 2</p>
-            </div>
-            <div id="char3" class="book_char_tab" style="left: -6px">
-                <p class="book_char_text overflow">Char 3</p>
-            </div>
-            <div id="settings" class="book_char_tab" style="left: -9px">
-                <p class="book_char_text overflow">Settings</p>
+            <div class="rowContainer char_container"  id="book_char_container">
+                <div id="char1" class="book_char_tab" onclick="book_switch_view(id)">
+                    <p class="book_char_text overflow">Char 1</p>
+                </div>
+                <div id="char2" class="book_char_tab" style="left: -3px" onclick="book_switch_view(id)">
+                    <p class="book_char_text overflow">Char 2</p>
+                </div>
+                <div id="char3" class="book_char_tab" style="left: -6px" onclick="book_switch_view(id)">
+                    <p class="book_char_text overflow">Char 3</p>
+                </div>
+                <div id="settings" class="book_char_tab" style="left: -9px" onclick="book_switch_view(id)">
+                    <p class="book_char_text overflow">Settings</p>
+                </div>
             </div>
         </div>
     </div>
