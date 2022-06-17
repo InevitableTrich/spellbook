@@ -249,8 +249,11 @@ body {
 }
 
 .class_list {
-    width: 90%;
+    width: 25%;
+    height: fit-content;
     font-size: 175%;
+    padding: 5px 10px;
+    margin: 12.5px 54px 0px 15px;
 }
 
 .level_input {
@@ -299,6 +302,10 @@ body {
 
 .book_head_text {
     font-size: 200%;
+}
+
+.level_arrow {
+    margin: 7.5px;
 }
 
 .char_container {

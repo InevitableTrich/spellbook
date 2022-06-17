@@ -1,3 +1,4 @@
+import certifi
 import pymongo
 from pymongo import MongoClient
 from ilt.config import env
@@ -14,7 +15,7 @@ def connect():
         username = mongodbconfig['username']
         password = mongodbconfig['password']
         mongodburl = mongodbconfig['connectionstring']
-        return MongoClient('mongodb+srv://' + username + ':' + password + '@' + mongodburl)
+        return MongoClient('mongodb+srv://' + username + ':' + password + '@' + mongodburl, tlsCAFile=certifi.where())
 
     return MongoClient(config['mongodb']['connectionstring'])
 

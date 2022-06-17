@@ -738,7 +738,7 @@ body {
 .slotContainerContainer {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: fit-content;
 }
 .slotContainer {
     margin: 0px auto;
@@ -770,7 +770,7 @@ body {
     color: rgb(222, 222, 222);
     font-size: 150%;
     margin: 10px;
-    width: 100%;
+    width: 50%;
 }
 
 .book_spell {
@@ -949,6 +949,20 @@ body {
     font-size: 150%;
     margin: auto;
     writing-mode: vertical-lr;
+}
+
+.level_container {
+    height: fit-content;
+    overflow: hidden;
+    transition: height .3s;
+}
+
+.level_arrow {
+    position: absolute;
+    right: 28px;
+    margin: 1px 7.5px;
+    width: 35px;
+    height: 25px;
 }
 
 .character_input {

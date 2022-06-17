@@ -142,3 +142,16 @@ function addToBook(id) {
         makeBookRequest(spellbook)
     }
 }
+
+function updateButtons() {
+    var buttons = [...document.getElementsByClassName("spellToBook")]
+    buttons.forEach(button => {
+        var target = button.children[0]
+        var btn_id = button.id.slice(9,button.id.indexOf("_cr"))
+        if (spellbook.indexOf(btn_id) == -1) {
+            target.innerHTML = "Add to Spellbook"
+        } else {
+            target.innerHTML = "Remove from Spellbook"
+        }
+    })
+}

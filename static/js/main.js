@@ -658,6 +658,9 @@ function updateCharName(id) {
         name = "Char " + id.slice(-1)
     }
     char.children[0].innerHTML = name
+
+    settings.characters[id.slice(-1) - 1] = name
+    updateCookie()
 }
 
 function remove_from_book(id) {
@@ -680,7 +683,7 @@ function remove_from_book(id) {
 }
 
 function makeBookRequest(book) {
-    if (window.location.href == 'http://127.0.0.1:8000/') {
+    if (window.location.href.startsWith('http://127.0.0.1:8000/')) {
         url = 'http://127.0.0.1:8000/book-spells'
         loc = 'l'
     } else {
@@ -936,6 +939,13 @@ function updateButtons() {
     })
 }
 
+function collapse_slots(lvl) {
+    var container = document.getElementById(`container_${lvl}`)
+    collapse(container)
+    var arrow = document.getElementById(`arr_${lvl}`)
+    arrow.classList.toggle("rot-right")
+}
+
 function populateSpellbook(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     var spells = document.getElementById("bookContainer")
@@ -947,20 +957,29 @@ function populateSpellbook(jsonResponse) {
             heads.push(spell.level)
 
             spells.innerHTML += `
-<div class="book_head" id="book_head_${spell.level}">
+<div class="book_head" id="book_head_${spell.level}"  onclick="collapse_slots(${spell.level})">
     <div class="rowContainer">
         <p class="book_head_text">${spell.level == 0 ? "Cantrips" : "Level " + spell.level}</p>
         <div class="slotContainerContainer">
             <div class="slotContainer" id="slot_container_${spell.level}"></div>
         </div>
+        <div class="book_head_text">
+            <svg id="arr_${spell.level}" class="arrow level_arrow rot-right" viewbox="0 0 28 20">
+                <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
+            </svg>
+        </div>
     </div>
+</div>
+<div id="container_${spell.level}" class="level_container" collapsed="false">
+
 </div>
             `
         }
         spell.spellid = spell.spellid + '_bk'
         var spellBody = spellFormatBody(spell).replaceAll("spellDispDescExp", "book_spellDispDescExp")
         var spellHigher = spellFormatHigher(spell.higher_level)
-        spells.innerHTML +=`
+        book_con = document.getElementById(`container_${spell.level}`)
+        book_con.innerHTML +=`
 <div class="rowContainer">
     <div class="prep_spell clickable" id="${spell.spellid}_prep" onCLick="prepSpell(id)"></div>
     <div class="book_spell" id="${spell.spellid}">
@@ -1154,6 +1173,9 @@ function updateBook() {
 
     // gets character's prep list
     settings.prepped[ndx] = preplist
+
+    // update cookie
+    updateCookie()
 }
 
 function readBook() {
