@@ -575,6 +575,7 @@ function book_switch_view(id) {
         spellChar = parseInt(id.slice(-1))
         settings.main = spellChar
         readBook()
+        update_storage()
     } else {
         characterPageSettings()
     }
@@ -600,15 +601,11 @@ function book_switch_vis(id) {
     })
 }
 
-function cookieUpdateChar() {
-    if (document.cookie.indexOf(";") != -1) {
-        var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
-    } else{
-        var cookie = document.cookie
-    }
-    cookie = cookie.slice(1)
-    document.cookie = `${spellChar+cookie}; expires=${new Date(9999, 0, 1).toUTCString()}`
-}
+//function cookieUpdateChar() {
+//    var cookie = localStorage.getItem("book")
+//    cookie = cookie.slice(1)
+//    localStorage.setItem("book", `${spellChar+cookie}`)
+//}
 
 function addToBook(id) {
     var container = document.getElementById("bookContainer")
@@ -634,20 +631,15 @@ function addToBook(id) {
 
 function characterPageSettings() {
     var container = document.getElementById("bookContainer")
-    if (document.cookie.indexOf(";") != -1) {
-        var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
-    } else{
-        var cookie = document.cookie
-    }
 
-    var spellChar = parseInt(cookie.charAt(0))
+    var spellChar = settings.main
     book_switch_vis("char"+spellChar)
-    var charSett = cookie.split("^")[0].split("+")
+    var charSett = settings.characters
     container.innerHTML = `
 <p class="char_text">Character Names:</p>
-<input id="charName1" autocomplete="off" class="character_input" placeholder="Char 1" value="${charSett[1]}" onchange="updateCharName(id); updateBook()">
-<input id="charName2" autocomplete="off" class="character_input" placeholder="Char 2" value="${charSett[2]}" onchange="updateCharName(id); updateBook()">
-<input id="charName3" autocomplete="off" class="character_input" placeholder="Char 3" value="${charSett[3]}" onchange="updateCharName(id); updateBook()">
+<input id="charName1" autocomplete="off" class="character_input" placeholder="Char 1" value="${charSett[0]}" onchange="updateCharName(id); updateBook()">
+<input id="charName2" autocomplete="off" class="character_input" placeholder="Char 2" value="${charSett[1]}" onchange="updateCharName(id); updateBook()">
+<input id="charName3" autocomplete="off" class="character_input" placeholder="Char 3" value="${charSett[2]}" onchange="updateCharName(id); updateBook()">
     `
 }
 
@@ -660,7 +652,7 @@ function updateCharName(id) {
     char.children[0].innerHTML = name
 
     settings.characters[id.slice(-1) - 1] = name
-    updateCookie()
+    update_storage()
 }
 
 function remove_from_book(id) {
@@ -672,6 +664,7 @@ function remove_from_book(id) {
     } catch(e) {}
 
     spellbook.splice(spellbook.indexOf(id), 1)
+    preplist.splice(spellbook.indexOf(id), 1)
 
     updateBook()
 
@@ -1066,77 +1059,142 @@ function handleSpellbookResponse(data) {
     }
 }
 
-function cookie_init() {
-    document.cookie = `1+Char 1+Char 2+Char 3^8+1++|8+1++|8+1++; expires=${new Date(9999, 0, 1).toUTCString()}`
+//function init_storage() {
+//    localStorage.setItem("book", `1+Char 1+Char 2+Char 3^8+1++|8+1++|8+1++`)
+//}
+//
+//function update_storage() {
+//    // init
+//    var cookie = settings.main + "+"
+//    var names = settings.characters.join("+")
+//    cookie += names + "^"
+//    var characters = []
+//
+//    // get character class, level, books, prep
+//    for (var i = 0; i < 3; i++) {
+//        var char = settings.classes[i]
+//        char += "+" + settings.levels[i]
+//        char += "+" + settings.books[i].join(",")
+//        char += "+" + settings.prepped[i].join(",")
+//        characters.push(char)
+//    }
+//    cookie += characters.join("|")
+//
+//    localStorage.setItem("book", `${cookie}; expires=${new Date(9999, 0, 1).toUTCString()}`)
+//}
+//
+//function read_storage() {
+//    // init cookie
+//    if (localStorage.getItem("book") == null) {
+//        init_storage()
+//    }
+//
+//    var cookie = localStorage.getItem("book")
+//
+//    // get current character and set book to that character
+//    var spellChar = parseInt(cookie.charAt(0))
+//    book_switch_vis("char"+spellChar)
+//    settings.main = spellChar
+//
+//    // set character names on tabs
+//    var charSett = cookie.split("^")[0].split("+")
+//    for (var i = 1; i <= 3; i++) {
+//        document.getElementById("char"+i).children[0].innerHTML = charSett[i]
+//        settings.characters[i-1] = charSett[i]
+//    }
+//
+//    // remove character data
+//    cookie = cookie.slice(cookie.indexOf("^")+1)
+//
+//    // set class variables
+//    var chars = cookie.split("|")
+//    chars.forEach(function(book, ndx){
+//        var data = book.split("+")
+//
+//        settings.classes[ndx] = parseInt(data[0])
+//        settings.levels[ndx] = data[1].toString()
+//        settings.books[ndx] = data[2].split(",")
+//        settings.prepped[ndx] = data[3].split(",")
+//    })
+//
+//    // get current book, split into list of class, level, book, prepped
+//    var book = cookie.split("|")[spellChar-1]
+//    data = book.split("+")
+//
+//    var clas = parseInt(data[0])
+//    var level = data[1].toString()
+//    var spells = data[2].split(",")
+//    var prep = data[3].split(",")
+//
+//    // set data gathered
+//    document.getElementById("classes").selectedIndex = clas
+//    document.getElementById("lvInput").value = level
+//    updateSpellSlots()
+//
+//    // set spellbook
+//    spellbook = spells
+//
+//    // check for empty spellbook
+//    if (spellbook.indexOf("") != -1) spellbook.pop(0)
+//
+//    // populate spellbook if there are spells, or set empty spellbook text
+//    if (spellbook.length > 0) {
+//        makeBookRequest(spellbook)
+//    } else {
+//        popEmptySpellbook()
+//    }
+//
+//    // set prep list
+//    preplist = prep
+//
+//    // check for empty prep list
+//    if (preplist.indexOf("") != -1) preplist.pop(0)
+//}
+//
+//this.main = 1
+//this.characters = ["", "", ""]
+//this.classes = ["", "", ""]
+//this.levels = ["", "", ""]
+//this.books = [[],[],[]]
+//this.prepped = [[],[],[]]
+function init_storage() {
+    localStorage.setItem("main", "1")
+    localStorage.setItem("characters", "Char 1+Char 2+Char 3")
+    localStorage.setItem("classes", "8+8+8")
+    localStorage.setItem("levels", "1+1+1")
+    localStorage.setItem("books", "++")
+    localStorage.setItem("prepped", "++")
 }
 
-function updateCookie() {
-    // init
-    var cookie = settings.main + "+"
-    var names = settings.characters.join("+")
-    cookie += names + "^"
-    var characters = []
+// 1+Char 1+Char 2+Char 3^8+1++|8+1++|8+1++
+function read_storage() {
+    if (localStorage.getItem("main") == null) init_storage()
 
-    // get character class, level, books, prep
+    settings.main = parseInt(localStorage.getItem("main"))
+    settings.characters = localStorage.getItem("characters").split("+")
+    settings.classes = localStorage.getItem("classes").split("+")
+    settings.levels = localStorage.getItem("levels").split("+")
+    var books = localStorage.getItem("books").split("+")
+    var prepped = localStorage.getItem("prepped").split("+")
     for (var i = 0; i < 3; i++) {
-        var char = settings.classes[i]
-        char += "+" + settings.levels[i]
-        char += "+" + settings.books[i].join(",")
-        char += "+" + settings.prepped[i].join(",")
-        characters.push(char)
-    }
-    cookie += characters.join("|")
-
-    document.cookie = `${cookie}; expires=${new Date(9999, 0, 1).toUTCString()}`
-}
-
-function readCookie() {
-    // init cookie
-    if (document.cookie.indexOf("^") == -1) {
-        cookie_init()
-    }
-
-    // check for token at start
-    if (document.cookie.indexOf(";") != -1) {
-        var cookie = document.cookie.slice(document.cookie.indexOf(";")+2)
-    } else{
-        var cookie = document.cookie
+        settings.books[i] = books[i].split(",")
+        settings.prepped[i] = prepped[i].split(",")
     }
 
     // get current character and set book to that character
-    var spellChar = parseInt(cookie.charAt(0))
-    book_switch_vis("char"+spellChar)
-    settings.main = spellChar
+    book_switch_vis("char"+settings.main)
 
     // set character names on tabs
-    var charSett = cookie.split("^")[0].split("+")
     for (var i = 1; i <= 3; i++) {
-        document.getElementById("char"+i).children[0].innerHTML = charSett[i]
-        settings.characters[i-1] = charSett[i]
+        document.getElementById("char"+i).children[0].innerHTML = settings.characters[i-1]
     }
 
-    // remove character data
-    cookie = cookie.slice(cookie.indexOf("^")+1)
-
-    // set class variables
-    var chars = cookie.split("|")
-    chars.forEach(function(book, ndx){
-        var data = book.split("+")
-
-        settings.classes[ndx] = parseInt(data[0])
-        settings.levels[ndx] = data[1].toString()
-        settings.books[ndx] = data[2].split(",")
-        settings.prepped[ndx] = data[3].split(",")
-    })
-
     // get current book, split into list of class, level, book, prepped
-    var book = cookie.split("|")[spellChar-1]
-    data = book.split("+")
-
-    var clas = parseInt(data[0])
-    var level = data[1].toString()
-    var spells = data[2].split(",")
-    var prep = data[3].split(",")
+    var ndx = parseInt(settings.main) - 1
+    var clas = parseInt(settings.classes[ndx])
+    var level = settings.levels[ndx]
+    var spells = settings.books[ndx]
+    var prep = settings.prepped[ndx]
 
     // set data gathered
     document.getElementById("classes").selectedIndex = clas
@@ -1163,10 +1221,25 @@ function readCookie() {
     if (preplist.indexOf("") != -1) preplist.pop(0)
 }
 
+function update_storage() {
+    localStorage.setItem("main", settings.main)
+    localStorage.setItem("characters", settings.characters.join("+"))
+    localStorage.setItem("classes", settings.classes.join("+"))
+    localStorage.setItem("levels", settings.levels.join("+"))
+    localStorage.setItem("books", settings.books.join("+"))
+    localStorage.setItem("prepped", settings.prepped.join("+"))
+}
+
 function updateBook() {
     // gets current character
     settings.main = spellChar
     var ndx = spellChar - 1
+
+    // gets character's class
+    settings.classes[ndx] = document.getElementById("classes").selectedIndex
+
+    // gets character's level
+    settings.levels[ndx] = document.getElementById("lvInput").value
 
     // gets character's spellbook
     settings.books[ndx] = spellbook
@@ -1174,8 +1247,8 @@ function updateBook() {
     // gets character's prep list
     settings.prepped[ndx] = preplist
 
-    // update cookie
-    updateCookie()
+    // update storage
+    update_storage()
 }
 
 function readBook() {
