@@ -1036,7 +1036,6 @@ function populateSpellbook(jsonResponse) {
     })
     updateSlotCount()
     updatePrepSpells()
-    updateButtons()
 }
 
 function makeHTTPPostRequest(url, callback, data) {
@@ -1268,6 +1267,7 @@ function readBook() {
     } else {
         popEmptySpellbook()
     }
+    updateButtons()
 
     // set prep list
     preplist = settings.prepped[ndx]
