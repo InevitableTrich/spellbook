@@ -41,6 +41,13 @@ class Settings {
 }
 var settings = new Settings()
 
+function check_mobile() {
+    var mobile = navigator.userAgent.toLowerCase().match(/mobile/i)
+    if (mobile) {
+        location.href.endsWith("/") ? location.href += "mobile" : location.href += "/mobile"
+    }
+}
+
 function toggleSpellView(cName) {
     var current = document.querySelector("#" + cName + "_body")
 
