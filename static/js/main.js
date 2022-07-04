@@ -958,10 +958,10 @@ function populateSpellbook(jsonResponse) {
 
             spells.innerHTML += `
 <div class="book_head" id="book_head_${spell.level}"  onclick="collapse_slots(${spell.level})">
-    <div class="rowContainer">
+    <div class="rowContainer clickable">
         <p class="book_head_text">${spell.level == 0 ? "Cantrips" : "Level " + spell.level}</p>
         <div class="slotContainerContainer">
-            <div class="slotContainer" id="slot_container_${spell.level}"></div>
+            <div class="slotContainer non_clickable" id="slot_container_${spell.level}" onclick="event.stopPropagation()"></div>
         </div>
         <div class="book_head_text">
             <svg id="arr_${spell.level}" class="arrow level_arrow rot-right" viewbox="0 0 28 20">

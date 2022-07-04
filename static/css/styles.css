@@ -1081,6 +1081,10 @@ bi {
     webkit-user-select: none;
 }
 
+.non_clickable {
+    cursor: default;
+}
+
 .invis {
     display: none;
 }
