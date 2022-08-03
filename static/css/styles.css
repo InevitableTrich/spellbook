@@ -560,7 +560,7 @@ body {
     width: 70%;
     height: 70%;
     position: fixed;
-    left: 15%;
+    right: 15%;
     top: 10%;
     border: rgb(80,80,80) solid 3px;
     border-radius: 20px;

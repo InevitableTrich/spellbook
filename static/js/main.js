@@ -28,8 +28,10 @@ var varCycle = {
 var spellChar = 1
 var spellbook = []
 var preplist = []
+var slots_used = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+var col_heads = []
 
-class Settings {
+class Spellbook_Data {
     constructor() {
         this.main = 1
         this.characters = ["", "", ""]
@@ -37,9 +39,11 @@ class Settings {
         this.levels = ["", "", ""]
         this.books = [[],[],[]]
         this.prepped = [[],[],[]]
+        this.slots = [[],[],[]]
+        this.collapsed = [[],[],[]]
     }
 }
-var settings = new Settings()
+var settings = new Spellbook_Data()
 
 function check_mobile() {
     var mobile = navigator.userAgent.toLowerCase().match(/mobile/i)
@@ -516,7 +520,7 @@ function updateSpellSlots() {
 }
 
 function updateSlotCount() {
-    heads = []
+    var heads = []
     var children = [...document.getElementById("bookContainer").children]
     children.forEach(child =>{
         if (child.id.startsWith("book_head_")) {
@@ -536,26 +540,52 @@ function updateSlotCount() {
             }
         }
     }
+    try {
+        read_used_slots(heads)
+    }
+    catch {}
 }
 
 function use_slot(level, place) {
     var container = document.getElementById(`slot_container_${level}`)
     var children = container.children
-    if (children[place].className.indexOf("used") != -1) {
-        for(i = children.length-1; i >= 0; i--) {
+    if (children[place].className.indexOf("used") != -1) { // if clicked on a used slot, remove use
+        slots_used[level - 1] -= 1
+        for(var i = children.length-1; i >= 0; i--) {
             if (children[i].className.indexOf("used") != -1) {
                 children[i].classList.toggle("used")
                 break
             }
         }
-    } else {
-        for(i = 0; i < children.length; i++) {
+    } else { // if clicked on an unused slot, use it
+        slots_used[level - 1] += 1
+        for(var i = 0; i < children.length; i++) {
             if (children[i].className.indexOf("used") == -1) {
                 children[i].classList.toggle("used")
                 break
             }
         }
     }
+
+    save_used_slots()
+}
+
+function save_used_slots() {
+    settings.slots[settings.main - 1] = slots_used
+    localStorage.setItem("slots", settings.slots.join("+"))
+}
+
+function read_used_slots(heads) {
+    slots_used.forEach((used, index) => {
+        var ndx = index + 1
+        if (heads.indexOf(ndx.toString()) == -1) return
+        var slot_list = document.getElementById(`slot_container_${ndx}`).children
+
+        for(var i = 0; i < used; i++) {
+            var slot = slot_list[i]
+            slot.classList.toggle("used")
+        }
+    })
 }
 
 function prepSpell(id) {
@@ -574,6 +604,12 @@ function updatePrepSpells() {
     preplist.forEach(spell => {
         var current = document.getElementById(spell+"_bk_prep")
         current.classList.toggle("prepped")
+    })
+}
+
+function collapseHeads() {
+    col_heads.forEach(head => {
+        vis_collapse(head)
     })
 }
 
@@ -940,10 +976,25 @@ function updateButtons() {
 }
 
 function collapse_slots(lvl) {
+    if (col_heads.includes(lvl.toString())) {
+        col_heads.splice(col_heads.indexOf(lvl.toString()), 1)
+    } else {
+        col_heads.push(lvl.toString())
+    }
+    vis_collapse(lvl)
+    save_collapsed()
+}
+
+function vis_collapse(lvl) {
     var container = document.getElementById(`container_${lvl}`)
     collapse(container)
     var arrow = document.getElementById(`arr_${lvl}`)
     arrow.classList.toggle("rot-right")
+}
+
+function save_collapsed() {
+    settings.collapsed[settings.main - 1] = col_heads
+    localStorage.setItem("collapsed", settings.collapsed.join("+"))
 }
 
 function populateSpellbook(jsonResponse) {
@@ -1043,6 +1094,7 @@ function populateSpellbook(jsonResponse) {
     })
     updateSlotCount()
     updatePrepSpells()
+    if (col_heads[0] != "") collapseHeads()
 }
 
 function makeHTTPPostRequest(url, callback, data) {
@@ -1065,126 +1117,55 @@ function handleSpellbookResponse(data) {
     }
 }
 
-//function init_storage() {
-//    localStorage.setItem("book", `1+Char 1+Char 2+Char 3^8+1++|8+1++|8+1++`)
-//}
-//
-//function update_storage() {
-//    // init
-//    var cookie = settings.main + "+"
-//    var names = settings.characters.join("+")
-//    cookie += names + "^"
-//    var characters = []
-//
-//    // get character class, level, books, prep
-//    for (var i = 0; i < 3; i++) {
-//        var char = settings.classes[i]
-//        char += "+" + settings.levels[i]
-//        char += "+" + settings.books[i].join(",")
-//        char += "+" + settings.prepped[i].join(",")
-//        characters.push(char)
-//    }
-//    cookie += characters.join("|")
-//
-//    localStorage.setItem("book", `${cookie}; expires=${new Date(9999, 0, 1).toUTCString()}`)
-//}
-//
-//function read_storage() {
-//    // init cookie
-//    if (localStorage.getItem("book") == null) {
-//        init_storage()
-//    }
-//
-//    var cookie = localStorage.getItem("book")
-//
-//    // get current character and set book to that character
-//    var spellChar = parseInt(cookie.charAt(0))
-//    book_switch_vis("char"+spellChar)
-//    settings.main = spellChar
-//
-//    // set character names on tabs
-//    var charSett = cookie.split("^")[0].split("+")
-//    for (var i = 1; i <= 3; i++) {
-//        document.getElementById("char"+i).children[0].innerHTML = charSett[i]
-//        settings.characters[i-1] = charSett[i]
-//    }
-//
-//    // remove character data
-//    cookie = cookie.slice(cookie.indexOf("^")+1)
-//
-//    // set class variables
-//    var chars = cookie.split("|")
-//    chars.forEach(function(book, ndx){
-//        var data = book.split("+")
-//
-//        settings.classes[ndx] = parseInt(data[0])
-//        settings.levels[ndx] = data[1].toString()
-//        settings.books[ndx] = data[2].split(",")
-//        settings.prepped[ndx] = data[3].split(",")
-//    })
-//
-//    // get current book, split into list of class, level, book, prepped
-//    var book = cookie.split("|")[spellChar-1]
-//    data = book.split("+")
-//
-//    var clas = parseInt(data[0])
-//    var level = data[1].toString()
-//    var spells = data[2].split(",")
-//    var prep = data[3].split(",")
-//
-//    // set data gathered
-//    document.getElementById("classes").selectedIndex = clas
-//    document.getElementById("lvInput").value = level
-//    updateSpellSlots()
-//
-//    // set spellbook
-//    spellbook = spells
-//
-//    // check for empty spellbook
-//    if (spellbook.indexOf("") != -1) spellbook.pop(0)
-//
-//    // populate spellbook if there are spells, or set empty spellbook text
-//    if (spellbook.length > 0) {
-//        makeBookRequest(spellbook)
-//    } else {
-//        popEmptySpellbook()
-//    }
-//
-//    // set prep list
-//    preplist = prep
-//
-//    // check for empty prep list
-//    if (preplist.indexOf("") != -1) preplist.pop(0)
-//}
-//
-//this.main = 1
-//this.characters = ["", "", ""]
-//this.classes = ["", "", ""]
-//this.levels = ["", "", ""]
-//this.books = [[],[],[]]
-//this.prepped = [[],[],[]]
-function init_storage() {
-    localStorage.setItem("main", "1")
-    localStorage.setItem("characters", "Char 1+Char 2+Char 3")
-    localStorage.setItem("classes", "8+8+8")
-    localStorage.setItem("levels", "1+1+1")
-    localStorage.setItem("books", "++")
-    localStorage.setItem("prepped", "++")
+function check_storage() {
+    var checks = [
+        "main", // 1
+        "characters", // 2
+        "classes", // 3
+        "levels", // 4
+        "books", // 5
+        "prepped", // 6
+        "slots", // 7
+        "collapsed" // 8
+    ]
+    var values = [
+        "1", // 1
+        "Char 1+Char 2+Char 3", // 2
+        "8+8+8", // 3
+        "1+1+1", // 4
+        "++", // 5
+        "++", // 6
+        "0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0", // 7
+        "++" // 8
+    ]
+    checks.forEach((check, index) => {
+        if (localStorage.getItem(check) == null) localStorage.setItem(check, values[index])
+    })
 }
 
-// 1+Char 1+Char 2+Char 3^8+1++|8+1++|8+1++
 function read_storage() {
-    if (localStorage.getItem("main") == null) init_storage()
+    check_storage()
 
     settings.main = parseInt(localStorage.getItem("main"))
+    spellChar = settings.main
     settings.characters = localStorage.getItem("characters").split("+")
     settings.classes = localStorage.getItem("classes").split("+")
     settings.levels = localStorage.getItem("levels").split("+")
     var books = localStorage.getItem("books").split("+")
     var prepped = localStorage.getItem("prepped").split("+")
+    var slots = localStorage.getItem("slots").split("+")
+    var col_head = localStorage.getItem("collapsed").split("+")
     for (var i = 0; i < 3; i++) {
         settings.books[i] = books[i].split(",")
         settings.prepped[i] = prepped[i].split(",")
+        settings.collapsed[i] = col_head[i].split(",")
+
+        // Make sure they're `int`s
+        var lst = slots[i].split(",") // slots
+        var ints = lst.map(function(x) {
+            return parseInt(x)
+        })
+        isNaN(ints[0]) ? settings.slots[i] = [] : settings.slots[i] = ints
     }
 
     // get current character and set book to that character
@@ -1195,17 +1176,19 @@ function read_storage() {
         document.getElementById("char"+i).children[0].innerHTML = settings.characters[i-1]
     }
 
-    // get current book, split into list of class, level, book, prepped
+    // get current book, split into list of class, level, book, prepped, etc
     var ndx = parseInt(settings.main) - 1
     var clas = parseInt(settings.classes[ndx])
     var level = settings.levels[ndx]
     var spells = settings.books[ndx]
     var prep = settings.prepped[ndx]
+    var slots_list = settings.slots[ndx]
+    var col_head_list = settings.collapsed[ndx]
 
     // set data gathered
     document.getElementById("classes").selectedIndex = clas
     document.getElementById("lvInput").value = level
-    updateSpellSlots()
+    updateSpellSlots(true)
 
     // set spellbook
     spellbook = spells
@@ -1225,6 +1208,15 @@ function read_storage() {
 
     // check for empty prep list
     if (preplist.indexOf("") != -1) preplist.pop(0)
+
+    // set slot list
+    slots_used = slots_list
+
+    // set collapsed heads list
+    col_heads = col_head_list
+
+    // chcek for empty collapsed list
+    if (col_heads.indexOf("") != -1) col_heads.splice(0,1)
 }
 
 function update_storage() {
@@ -1289,5 +1281,11 @@ function readBook() {
     // set data gathered
     document.getElementById("classes").selectedIndex = clas
     document.getElementById("lvInput").value = level
-    updateSpellSlots()
+    updateSpellSlots(false)
+
+    // get slots used
+    slots_used = settings.slots[ndx]
+
+    // get collapsed headers
+    col_heads = settings.collapsed[ndx]
 }
