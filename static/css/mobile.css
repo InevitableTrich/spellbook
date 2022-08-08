@@ -264,8 +264,15 @@ body {
 }
 
 .slot_box {
-    width: fit-content;
-    margin: auto;
+    z-index: unset;
+    margin: 0px auto 0px 20px;
+}
+
+.clr_text {
+    text-decoration: underline;
+    font-size: 175%;
+    margin: auto 20px auto auto;
+    color: rgb(222, 222, 222);
 }
 
 .slots_list_container {

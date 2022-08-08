@@ -1065,6 +1065,13 @@ bi {
     transform: translate(-50%, -50%);
 }
 
+.v_text_r {
+    writing-mode: vertical-lr;
+}
+.v_text_l {
+    writing-mode: vertical-rl;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     transition: width .3s;
