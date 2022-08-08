@@ -588,6 +588,19 @@ function read_used_slots(heads) {
     })
 }
 
+function clear_used_slots(){
+    // visually remove slots
+    Array.from(document.getElementsByClassName("used")).forEach(slot => {
+        slot.classList.toggle("used")
+    })
+
+    // remove from settings
+    settings.slots[spellChar-1] = [0, 0, 0, 0, 0, 0, 0 ,0 , 0]
+
+    // remove from local storage
+    localStorage.slots = settings.slots.join("+")
+}
+
 function prepSpell(id) {
     var current = document.getElementById(id)
     current.classList.toggle("prepped")

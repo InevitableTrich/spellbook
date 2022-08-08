@@ -427,7 +427,7 @@
             <div class="rowContainer" style="height: 100%;">
                 <div id="playerContainer" class="player_container">
                     <div id="player_options" class="player_options">
-                        <label for="classes" id="class_dropdown" class="char_text">Class:</label>
+                        <label for="classes" id="class_dropdown" class="char_text" style="margin-top: 10px;">Class:</label>
                         <select id="classes" name="classes" class="class_list" onchange="updateSpellSlots(); updateBook()">
                             <option value="artificer">Artificer</option>
                             <option value="bard">Bard</option>
@@ -443,7 +443,7 @@
                         <p id="player_level" class="char_text">Level:</p>
                         <input id="lvInput" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="updateSpellSlots(); updateBook()">
 
-                        <p id="slots" class="char_text">Spell Slots:</p>
+                        <p id="slots" class="char_text" style="margin-bottom: 0px;">Spell Slots:</p>
                         <div id="slots_container">
                             <div id="slots_1" class="rowContainer spell_container">
                                 <div class="slot_left"><p class="slot_text">Lv. 1</p></div>
@@ -482,6 +482,7 @@
                                 <div class="slot_right"><p id="slot_amt_9" class="slot_text">0</p></div>
                             </div>
                         </div>
+                        <p class="clr_slots_txt clickable" onclick="clear_used_slots()">Clear Used Slots</p>
                     </div>
 
                     <div id="spellslots"></div>

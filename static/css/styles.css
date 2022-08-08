@@ -560,7 +560,7 @@ body {
     width: 70%;
     height: 70%;
     position: fixed;
-    right: 15%;
+    left: 15%;
     top: 10%;
     border: rgb(80,80,80) solid 3px;
     border-radius: 20px;
@@ -681,7 +681,7 @@ body {
 .char_text {
     color: rgb(222, 222, 222);
     font-size: 150%;
-    margin: 13px auto 6px auto;
+    margin: 0px auto 6px auto;
     display: flex;
 }
 .class_list {
@@ -693,6 +693,12 @@ body {
     border-radius: 8px;
     margin: 5px auto 10px auto;
     padding: 1.5px;
+}
+.clr_slots_txt {
+    color: rgb(222, 222, 222);
+    font-size: 100%;
+    text-decoration: underline;
+    margin: 16px auto 0px auto;
 }
 
 .level_input {
