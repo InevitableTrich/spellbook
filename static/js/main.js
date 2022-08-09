@@ -1,15 +1,11 @@
-var localhost = 'http://127.0.0.1:8000/filter'
-var currenturl = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells'
-var accountView = false
 var curPage = 1
 var maxPages = 0
 var spellsPerPage = 30
-var spellHeight = 52
 var spellCount = 0
 var filterState = {}
 var currentFilter = JSON.stringify({"filter": {}})
 var searchQuery = ''
-var sortState = {
+var sortState = { // CLEAN UP LATER
   0: '-',
   1: '▼',
   2: '▲',
@@ -43,7 +39,7 @@ class Spellbook_Data {
         this.collapsed = [[],[],[]]
     }
 }
-var settings = new Spellbook_Data()
+var character = new Spellbook_Data()
 
 function check_mobile() {
     var mobile = navigator.userAgent.toLowerCase().match(/mobile/i)
@@ -194,68 +190,8 @@ function scrollToTop() {
     window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'})
 }
 
-//function toggleSettings(close=false){
-//    if (close) {
-//        document.getElementById("setCon").classList.add('blank')
-//        settings = false
-//        loadSettings()
-//        return
-//    }
-//    if (settings) {
-//        document.getElementById("setCon").classList.add('blank')
-//        settings = false
-//    }
-//    else if (settings == false){
-//        document.getElementById("setCon").classList.remove('blank')
-//        settings = true
-//    }
-//    loadSettings()
-//}
-//function loadSettings(){
-//    document.getElementById("perPageNum").innerHTML = "Spells Per Page: " + spellsPerPage
-//    document.getElementById("perPage").value = spellsPerPage
-//    document.getElementById("spellHeightNum").innerHTML = "Spell Height: " + spellHeight + "px"
-//    document.getElementById("spellHeight").value = spellHeight
-//}
-//function updateSettings(id){
-//    idNum = id + "Num"
-//    slider = document.getElementById(id)
-//    num = document.getElementById(idNum)
-//    preText = ""
-//    postText = ""
-//
-//    if (id == "perPage") {
-//        preText = "Spells Per Page: "
-//        postText = ""
-//    } else if (id == "spellHeight") {
-//        preText = "Spell Height: "
-//        postText = "px"
-//    }
-//    num.innerHTML = preText + slider.value + postText
-//}
-//function updatePreview() {
-//    document.getElementById('previewSpell').style.height = parseInt(document.getElementById("spellHeight").value) + "px"
-//}
-//function saveSettings(){
-//    if (spellsPerPage == parseInt(document.getElementById("perPage").value)) {
-//        changed = false
-//    } else {
-//        changed = true
-//    }
-//    spellsPerPage = parseInt(document.getElementById("perPage").value)
-//    spellHeight = parseInt(document.getElementById("spellHeight").value)
-//    sheet = document.styleSheets[0]
-//    sheet.deleteRule(0)
-//    sheet.insertRule(".spellHeight {height: " + spellHeight + "px;}", 0)
-//    sheet.deleteRule(1)
-//    sheet.insertRule(".bottom_margin {margin-top: -" + (spellHeight+3) + "px;}", 1)
-//    if (changed) resetPage()
-//    toggleSettings()
-//}
-
 document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
-//        toggleSettings(close=true)
         toggleBook(close=true)
     }
 });
@@ -571,8 +507,8 @@ function use_slot(level, place) {
 }
 
 function save_used_slots() {
-    settings.slots[settings.main - 1] = slots_used
-    localStorage.setItem("slots", settings.slots.join("+"))
+    character.slots[character.main - 1] = slots_used
+    localStorage.setItem("slots", character.slots.join("+"))
 }
 
 function read_used_slots(heads) {
@@ -595,10 +531,10 @@ function clear_used_slots(){
     })
 
     // remove from settings
-    settings.slots[spellChar-1] = [0, 0, 0, 0, 0, 0, 0 ,0 , 0]
+    character.slots[spellChar-1] = [0, 0, 0, 0, 0, 0, 0 ,0 , 0]
 
     // remove from local storage
-    localStorage.slots = settings.slots.join("+")
+    localStorage.slots = character.slots.join("+")
 }
 
 function prepSpell(id) {
@@ -629,7 +565,7 @@ function collapseHeads() {
 function book_switch_view(id) {
     if (id.startsWith("char")) {
         spellChar = parseInt(id.slice(-1))
-        settings.main = spellChar
+        character.main = spellChar
         readBook()
         update_storage()
     } else {
@@ -657,12 +593,6 @@ function book_switch_vis(id) {
     })
 }
 
-//function cookieUpdateChar() {
-//    var cookie = localStorage.getItem("book")
-//    cookie = cookie.slice(1)
-//    localStorage.setItem("book", `${spellChar+cookie}`)
-//}
-
 function addToBook(id) {
     var container = document.getElementById("bookContainer")
     var spell = document.getElementById(id)
@@ -688,9 +618,9 @@ function addToBook(id) {
 function characterPageSettings() {
     var container = document.getElementById("bookContainer")
 
-    var spellChar = settings.main
+    var spellChar = character.main
     book_switch_vis("char"+spellChar)
-    var charSett = settings.characters
+    var charSett = character.characters
     container.innerHTML = `
 <p class="char_text">Character Names:</p>
 <input id="charName1" autocomplete="off" class="character_input" placeholder="Char 1" value="${charSett[0]}" onchange="updateCharName(id); updateBook()">
@@ -707,7 +637,7 @@ function updateCharName(id) {
     }
     char.children[0].innerHTML = name
 
-    settings.characters[id.slice(-1) - 1] = name
+    character.characters[id.slice(-1) - 1] = name
     update_storage()
 }
 
@@ -745,10 +675,10 @@ function makeBookRequest(book) {
 
 function makeFilterRequest(fieldid, direction, filter){
     if (window.location.href == 'http://127.0.0.1:8000/') {
-        url = localhost
+        url = 'http://127.0.0.1:8000/filter'
         loc = 'l'
     } else {
-        url = currenturl
+        url = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells'
         loc = 's'
     }
 
@@ -1006,8 +936,8 @@ function vis_collapse(lvl) {
 }
 
 function save_collapsed() {
-    settings.collapsed[settings.main - 1] = col_heads
-    localStorage.setItem("collapsed", settings.collapsed.join("+"))
+    character.collapsed[character.main - 1] = col_heads
+    localStorage.setItem("collapsed", character.collapsed.join("+"))
 }
 
 function populateSpellbook(jsonResponse) {
@@ -1159,44 +1089,44 @@ function check_storage() {
 function read_storage() {
     check_storage()
 
-    settings.main = parseInt(localStorage.getItem("main"))
-    spellChar = settings.main
-    settings.characters = localStorage.getItem("characters").split("+")
-    settings.classes = localStorage.getItem("classes").split("+")
-    settings.levels = localStorage.getItem("levels").split("+")
+    character.main = parseInt(localStorage.getItem("main"))
+    spellChar = character.main
+    character.characters = localStorage.getItem("characters").split("+")
+    character.classes = localStorage.getItem("classes").split("+")
+    character.levels = localStorage.getItem("levels").split("+")
     var books = localStorage.getItem("books").split("+")
     var prepped = localStorage.getItem("prepped").split("+")
     var slots = localStorage.getItem("slots").split("+")
     var col_head = localStorage.getItem("collapsed").split("+")
     for (var i = 0; i < 3; i++) {
-        settings.books[i] = books[i].split(",")
-        settings.prepped[i] = prepped[i].split(",")
-        settings.collapsed[i] = col_head[i].split(",")
+        character.books[i] = books[i].split(",")
+        character.prepped[i] = prepped[i].split(",")
+        character.collapsed[i] = col_head[i].split(",")
 
         // Make sure they're `int`s
         var lst = slots[i].split(",") // slots
         var ints = lst.map(function(x) {
             return parseInt(x)
         })
-        isNaN(ints[0]) ? settings.slots[i] = [] : settings.slots[i] = ints
+        isNaN(ints[0]) ? character.slots[i] = [] : character.slots[i] = ints
     }
 
     // get current character and set book to that character
-    book_switch_vis("char"+settings.main)
+    book_switch_vis("char"+character.main)
 
     // set character names on tabs
     for (var i = 1; i <= 3; i++) {
-        document.getElementById("char"+i).children[0].innerHTML = settings.characters[i-1]
+        document.getElementById("char"+i).children[0].innerHTML = character.characters[i-1]
     }
 
     // get current book, split into list of class, level, book, prepped, etc
-    var ndx = parseInt(settings.main) - 1
-    var clas = parseInt(settings.classes[ndx])
-    var level = settings.levels[ndx]
-    var spells = settings.books[ndx]
-    var prep = settings.prepped[ndx]
-    var slots_list = settings.slots[ndx]
-    var col_head_list = settings.collapsed[ndx]
+    var ndx = parseInt(character.main) - 1
+    var clas = parseInt(character.classes[ndx])
+    var level = character.levels[ndx]
+    var spells = character.books[ndx]
+    var prep = character.prepped[ndx]
+    var slots_list = character.slots[ndx]
+    var col_head_list = character.collapsed[ndx]
 
     // set data gathered
     document.getElementById("classes").selectedIndex = clas
@@ -1233,30 +1163,30 @@ function read_storage() {
 }
 
 function update_storage() {
-    localStorage.setItem("main", settings.main)
-    localStorage.setItem("characters", settings.characters.join("+"))
-    localStorage.setItem("classes", settings.classes.join("+"))
-    localStorage.setItem("levels", settings.levels.join("+"))
-    localStorage.setItem("books", settings.books.join("+"))
-    localStorage.setItem("prepped", settings.prepped.join("+"))
+    localStorage.setItem("main", character.main)
+    localStorage.setItem("characters", character.characters.join("+"))
+    localStorage.setItem("classes", character.classes.join("+"))
+    localStorage.setItem("levels", character.levels.join("+"))
+    localStorage.setItem("books", character.books.join("+"))
+    localStorage.setItem("prepped", character.prepped.join("+"))
 }
 
 function updateBook() {
     // gets current character
-    settings.main = spellChar
+    character.main = spellChar
     var ndx = spellChar - 1
 
     // gets character's class
-    settings.classes[ndx] = document.getElementById("classes").selectedIndex
+    character.classes[ndx] = document.getElementById("classes").selectedIndex
 
     // gets character's level
-    settings.levels[ndx] = document.getElementById("lvInput").value
+    character.levels[ndx] = document.getElementById("lvInput").value
 
     // gets character's spellbook
-    settings.books[ndx] = spellbook
+    character.books[ndx] = spellbook
 
     // gets character's prep list
-    settings.prepped[ndx] = preplist
+    character.prepped[ndx] = preplist
 
     // update storage
     update_storage()
@@ -1264,11 +1194,11 @@ function updateBook() {
 
 function readBook() {
     // gets current character
-    spellChar = settings.main
+    spellChar = character.main
     var ndx = spellChar - 1
 
     // get spellbook
-    spellbook = settings.books[ndx]
+    spellbook = character.books[ndx]
 
     // check for empty spellbook
     if (spellbook.indexOf("") != -1) spellbook.pop(0)
@@ -1282,14 +1212,14 @@ function readBook() {
     updateButtons()
 
     // set prep list
-    preplist = settings.prepped[ndx]
+    preplist = character.prepped[ndx]
 
     // check for empty prep list
     if (preplist.indexOf("") != -1) preplist.pop(0)
 
     // get character data
-    var clas = settings.classes[ndx]
-    var level = settings.levels[ndx]
+    var clas = character.classes[ndx]
+    var level = character.levels[ndx]
 
     // set data gathered
     document.getElementById("classes").selectedIndex = clas
@@ -1297,8 +1227,8 @@ function readBook() {
     updateSpellSlots(false)
 
     // get slots used
-    slots_used = settings.slots[ndx]
+    slots_used = character.slots[ndx]
 
     // get collapsed headers
-    col_heads = settings.collapsed[ndx]
+    col_heads = character.collapsed[ndx]
 }

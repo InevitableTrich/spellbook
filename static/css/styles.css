@@ -560,7 +560,7 @@ body {
     width: 70%;
     height: 70%;
     position: fixed;
-    left: 15%;
+    right: 15%;
     top: 10%;
     border: rgb(80,80,80) solid 3px;
     border-radius: 20px;
@@ -938,7 +938,7 @@ body {
 .book_side_btn {
     background-color: rgb(50,50,50);
     border: rgb(80,80,80) 3px solid;
-    width: 36px;
+    width: 30px;
     height: 24.2%;
     border-radius: 0px 10px 10px 0px;
     position: relative;
@@ -947,13 +947,13 @@ body {
 }
 .book_char_exp {
     border-left: 0px;
-    width: 48px;
+    width: 40px;
 }
 .book_side_text {
     color: rgb(222,222,222);
     height: fit-content;
     max-height: 90%;
-    font-size: 150%;
+    font-size: 125%;
     margin: auto;
     writing-mode: vertical-lr;
 }
@@ -974,6 +974,7 @@ body {
 
 .character_input {
     width: 60%;
+    max-width: 147px;
     border: rgb(80,80,80) 3px solid;
     border-radius: 10px;
     margin: 10px 20px;
