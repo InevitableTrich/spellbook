@@ -144,56 +144,64 @@ def checknames(spell):
     return spell
 
 
-transport = AIOHTTPTransport(url="https://www.dnd5eapi.co/graphql")
+def main():
+    # transport = AIOHTTPTransport(url="https://www.dnd5eapi.co/graphql")
+    #
+    # client = Client(transport=transport, fetch_schema_from_transport=True)
+    #
+    # query = gql(
+    #     """
+    #     query getSpells {
+    #         spells(limit:500) {
+    #             index
+    #             name
+    #             level
+    #             classes{name}
+    #             school{name}
+    #             casting_time
+    #             duration
+    #             range
+    #             components
+    #             material
+    #             ritual
+    #             concentration
+    #             desc
+    #             higher_level
+    #         }
+    #     }
+    # """
+    # )
+    #
+    # result = client.execute(query)
+    # spells = result['spells']
+    #
+    # for spell in spells:
+    #     preparedclasses = [spellclass['name'] for spellclass in spell['classes']]
+    #     preparedschool = spell['school']['name']
+    #
+    #     spell['classes'] = preparedclasses
+    #     spell['school'] = preparedschool
+    #     if not spell['material']:
+    #         spell['material'] = ''
+    #     spell['spellid'] = spell.pop('index')
+    #     spell['cast_time'] = spell.pop('casting_time')
+    #     spell['level'] = str(spell['level'])
+    #     spell['source'] = "Players Handbook"
+    #     spell = checknames(spell)
+    #     spell = addartificer(spell)
+    #
+    #     mongodb.getcollection('spells').replace_one({'spellid': spell['spellid']}, spell, upsert=True)
 
-client = Client(transport=transport, fetch_schema_from_transport=True)
+    root_importers_path = ilt.__path__[0]
+    filelocation = os.path.join(root_importers_path, 'importers', 'content', 'phb.json')
 
-query = gql(
-    """
-    query getSpells {
-        spells(limit:500) {
-            index
-            name
-            level
-            classes{name}
-            school{name}
-            casting_time
-            duration
-            range
-            components
-            material
-            ritual
-            concentration
-            desc
-            higher_level
-        }
-    }
-"""
-)
+    with open(filelocation) as file:
+        phb = json.load(file)
+        for spell in phb:
+            mongodb.getcollection('spells').replace_one({'spellid': spell['spellid']}, spell, upsert=True)
 
-result = client.execute(query)
-spells = result['spells']
+    return 1
 
-for spell in spells:
-    preparedclasses = [spellclass['name'] for spellclass in spell['classes']]
-    preparedschool = spell['school']['name']
 
-    spell['classes'] = preparedclasses
-    spell['school'] = preparedschool
-    if not spell['material']:
-        spell['material'] = ''
-    spell['spellid'] = spell.pop('index')
-    spell['cast_time'] = spell.pop('casting_time')
-    spell['level'] = str(spell['level'])
-    spell['source'] = "Players Handbook"
-    spell = checknames(spell)
-    spell = addartificer(spell)
-
-    mongodb.getcollection('spells').replace_one({'spellid': spell['spellid']}, spell, upsert=True)
-
-root_importers_path = ilt.__path__[0]
-filelocation = os.path.join(root_importers_path, 'importers', 'content', 'phb.json')
-with open(filelocation) as file:
-    phb = json.load(file)
-    for spell in phb:
-        mongodb.getcollection('spells').replace_one({'spellid': spell['spellid']}, spell, upsert=True)
+if __name__ == "__main__":
+    main()

@@ -1311,9 +1311,14 @@ def addsubs(spell):
     return spell
 
 
-col = getspellscollection()
-spells = [x for x in col.find(projection={'_id': False})]
-i = 0
-for spell in spells:
-    updatedspell = addsubs(spell)
-    mongodb.getcollection('spells').replace_one({'spellid': updatedspell['spellid']}, updatedspell, upsert=True)
+def main():
+    col = getspellscollection()
+    spells = [x for x in col.find(projection={'_id': False})]
+    i = 0
+    for spell in spells:
+        updatedspell = addsubs(spell)
+        mongodb.getcollection('spells').replace_one({'spellid': updatedspell['spellid']}, updatedspell, upsert=True)
+
+
+if __name__ == "__main__":
+    main()
