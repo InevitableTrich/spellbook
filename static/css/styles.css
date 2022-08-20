@@ -19,6 +19,11 @@ body {
     z-index: -1;
 }
 
+.columnContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 .head {
     display: flex;
     flex-direction: row;
@@ -800,7 +805,7 @@ body {
     border: rgb(80,80,80) solid 3px;
     border-top: 0px;
     border-bottom: 0px;
-    margin: -4px 0px 0px 7.1%;
+    margin: -3px 0px 0px 7.1%;
     line-height: 20px;
     z-index: 1;
     position: relative;
@@ -845,7 +850,7 @@ body {
     width: 23.75%;
 }
 .book_close {
-    width: 7.5%;
+    width: 7%;
     display: flex;
     text-align: center;
     align-items: center;
@@ -872,11 +877,11 @@ body {
     border-width: 3px 0px 3px 3px;
     border-radius: 10px 0px 0px 10px;
     background-color: rgb(50, 50, 50);
-    width: 7.15%;
+    width: 7.1%;
     z-index: 0;
 }
 .book_bottom_mid {
-    width: 89.6%;
+    width: 85%;
     background-color: rgb(50, 50, 50);
     border-bottom: rgb(80, 80, 80) 3px solid;
 }
