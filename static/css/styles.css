@@ -1005,6 +1005,57 @@ tr:nth-child(odd) {
     background-color: rgb(60,60,60);
 }
 
+.char_select {
+    outline: white 2px solid
+}
+
+.select_button {
+    display: flex;
+    background-color: rgb(60,60,60);
+    border: rgb(80,80,80) 3px solid;
+    border-radius: 10px;
+    height: 28.5px;
+    width: 84px;
+    margin: 10px 0px;
+}
+
+.select_text {
+    color: rgb(222,222,222);
+    font-size: 125%;
+    margin: 3px auto;
+}
+
+.delete_button {
+    width: 250px;
+    position: absolute;
+    right: 17px;
+    bottom: 7px;
+}
+
+.delete_prompt {
+    display: flex;
+    position: fixed;
+    top: 40%;
+    left: 25%;
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) 3px solid;
+    border-radius: 10px;
+    width: 50%;
+    height: 20%;
+}
+
+.delete_text {
+    color: rgb(222,222,222);
+    font-size: 150%;
+    padding: 8px 18px;
+    margin: unset;
+}
+
+.confirm_button {
+    position: absolute;
+    width: 84px;
+}
+
 
 
 tb {

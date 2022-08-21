@@ -567,7 +567,7 @@ function book_switch_view(id) {
     var prev = spellChar
 
     spellChar = num
-    if (num <= 3) {  // if character tab:=
+    if (num <= 3) {  // if character tab:
         // update spellChar
         character.main = spellChar
 
@@ -592,8 +592,12 @@ function book_switch_view(id) {
 
         // save
         update_storage()
-
     } else {  // settings
+        // remove names with char select
+        [...document.getElementsByClassName("char_select")].forEach(e => e.classList.toggle("char_select"))
+
+        // select most recent character
+        document.getElementById("charName"+prev).classList.toggle("char_select")
     }
 
     book_switch_vis(id) // tabs
@@ -627,6 +631,9 @@ function book_switch_vis(id) {  // switches tab visibility
 }
 
 function addToBook(id) {
+    // check for settings and abort
+    if (spellChar == 4) return
+
     var container = document.getElementById("bookContainer")
     var spell = document.getElementById(id)
     var btn_char = document.getElementById("book_btn_" + id).children[0]
@@ -694,6 +701,46 @@ function remove_from_book(id) {
             lvl_cntnr.remove()  // remove container
         }
     }
+}
+
+function select_character(num) {
+    // remove names with char select
+    [...document.getElementsByClassName("char_select")].forEach(e => e.classList.toggle("char_select"))
+
+    // select most recent character
+    document.getElementById("charName"+num).classList.toggle("char_select")
+}
+
+function delete_prompt() {
+    document.getElementById("delete_back").classList.toggle("invis")
+    document.getElementById("ch").innerHTML = [...document.getElementsByClassName("char_select")][0].value
+}
+
+function delete_character() {
+    var ndx = parseInt([...document.getElementsByClassName("char_select")][0].id.slice(-1))-1
+    var num = ndx + 1
+
+    // delete from character variable
+    character.characters[ndx] = "Char " + num
+    character.classes[ndx] = 8
+    character.levels[ndx] = 1
+    character.books[ndx] = []
+    character.prepped[ndx] = []
+    character.slots[ndx] = [0,0,0,0,0,0,0,0,0]
+    character.collapsed[ndx] = []
+
+    // return visible names to default
+    document.getElementById("charName"+num).value = "Char " + num
+    document.getElementById("char" + num).children[0].innerHTML = "Char " + num
+
+    // remove all present spells
+    popEmptySpellbook(num)
+
+    // close prompt
+    delete_prompt()
+
+    // delete from localStorage
+    update_storage()
 }
 
 function makeBookRequest(book) {
@@ -932,8 +979,8 @@ function populateSpells(jsonResponse) {
     })
 }
 
-function popEmptySpellbook() {
-    var spells = document.getElementById("book_container_"+spellChar)
+function popEmptySpellbook(char = spellChar) {
+    var spells = document.getElementById("book_container_"+char)
     spells.innerHTML = `
 <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
     `
