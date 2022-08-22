@@ -391,6 +391,34 @@ body {
     margin-top: -35px;
 }
 
+.character_input {
+    max-width: unset;
+    font-size: 175%;
+}
+
+.select_button {
+    margin: 15px auto;
+    width: 128px;
+    height: 40px;
+}
+
+.select_text {
+    font-size: 175%;
+}
+
+.delete_button {
+    width: 352px;
+}
+
+.delete_prompt {
+    height: 10%;
+    top: 45%;
+}
+
+.delete_text {
+    font-size: 200%;
+}
+
 
 .column_container {
     display: flex;

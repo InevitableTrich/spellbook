@@ -436,8 +436,34 @@
                         </div>
                     </div>
                 </div>
-                <div id="bookContainer" class="book_container">
+                <div id="book_container_1" class="book_container invis">
                     <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
+                </div>
+                <div id="book_container_2" class="book_container invis">
+                    <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
+                </div>
+                <div id="book_container_3" class="book_container invis">
+                    <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
+                </div>
+                <div id="book_container_4" class="book_container invis">
+                    <div id="bookContainer" class="book_container">
+                        <p class="char_text">Character Names:</p>
+                        <div class="columnContainer">
+                            <div class="rowContainer" style="z-index: unset;">
+                                <input id="charName1" autocomplete="off" class="character_input" placeholder="Char 1" value="Char 1" onchange="updateCharName(id)">
+                                <input id="charName2" autocomplete="off" class="character_input" placeholder="Char 2" value="Char 2" onchange="updateCharName(id)">
+                                <input id="charName3" autocomplete="off" class="character_input" placeholder="Char 3" value="Char 3" onchange="updateCharName(id)">
+                            </div>
+                            <div class="rowContainer" style="z-index: unset;">
+                                <div class="select_button clickable" onclick="select_character(1)"><p class="select_text">Select</p></div>
+                                <div class="select_button clickable" onclick="select_character(2)"><p class="select_text">Select</p></div>
+                                <div class="select_button clickable" onclick="select_character(3)"><p class="select_text">Select</p></div>
+                            </div>
+                        </div>
+                        <div class="select_button delete_button clickable" onclick="delete_prompt()">
+                            <p class="select_text">Delete Selected Character</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="rowContainer char_container"  id="book_char_container">
@@ -450,12 +476,24 @@
                 <div id="char3" class="book_char_tab" style="left: -6px" onclick="book_switch_view(id)">
                     <p class="book_char_text overflow">Char 3</p>
                 </div>
-                <div id="settings" class="book_char_tab" style="left: -9px" onclick="book_switch_view(id)">
+                <div id="setting4" class="book_char_tab" style="left: -9px" onclick="book_switch_view(id)">
                     <p class="book_char_text overflow">Settings</p>
                 </div>
             </div>
         </div>
     </div>
-
+    <div id="delete_back" class="menuBack invis" style="z-index: 4;">
+        <div id="delete_prompt" class="delete_prompt columnContainer" onclick="event.stopPropagation()">
+            <p class="delete_text">
+                Are you sure you want to delete character "<ch id="ch">test_name</ch>"? This action cannot be undone.
+            </p>
+            <div class="select_button confirm_button clickable" style="bottom: 0px; left: 9px;" onclick="delete_prompt()">
+                <p class="select_text">Cancel</p>
+            </div>
+            <div class="select_button confirm_button clickable" style="bottom: 0px; right: 9px;" onclick="delete_character()">
+                <p class="select_text">Delete</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

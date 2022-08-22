@@ -1022,7 +1022,7 @@ tr:nth-child(odd) {
 .select_text {
     color: rgb(222,222,222);
     font-size: 125%;
-    margin: 3px auto;
+    margin: auto;
 }
 
 .delete_button {

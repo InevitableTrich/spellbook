@@ -479,7 +479,7 @@ function updateSlotCount(char = spellChar) {
     try {
         read_used_slots(heads)
     }
-    catch {}
+    catch (e) {}
 }
 
 function use_slot(level, place) {
@@ -565,6 +565,8 @@ function collapseHeads(char) {
 function book_switch_view(id) {
     var num = parseInt(id.slice(-1))
     var prev = spellChar
+
+    if (num == prev && num == 4) return
 
     spellChar = num
     if (num <= 3) {  // if character tab:
@@ -1265,9 +1267,10 @@ function load_all_books() {
 
     spellChar = save
 
-    // update spellbook, prepped, and collapsed
+    // update spellbook, prepped, slots, and collapsed
     spellbook = character.books[spellChar-1]
     preplist = character.prepped[spellChar-1]
+    slots_used = character.slots[spellChar-1]
     col_heads = [...character.collapsed[spellChar-1]]
 }
 
