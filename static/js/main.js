@@ -540,6 +540,7 @@ function clear_used_slots(){
 function prepSpell(id) {
     var current = document.getElementById(id)
     current.classList.toggle("prepped")
+
     name = id.slice(0,-12)
     if (preplist.indexOf(name) == -1) {
         preplist.push(name)
@@ -551,7 +552,7 @@ function prepSpell(id) {
 
 function updatePrepSpells(char) {
     character.prepped[char-1].forEach(spell => {
-        var current = document.getElementById(spell+"_bk_prep_"+char)
+        var current = document.getElementById(spell+"_bk_"+char+"_prep_"+char)
         current.classList.toggle("prepped")
     })
 }
@@ -588,6 +589,9 @@ function book_switch_view(id) {
         // check used slots
         slots_used = character.slots[ndx]
         updateSpellSlots()
+
+        // get prepped spells
+        preplist = [...character.prepped[ndx]]
 
         // update buttons on main spells
         updateButtons()
@@ -1186,10 +1190,11 @@ function read_storage() {
     var col_head = localStorage.getItem("collapsed").split("+")
     for (var i = 0; i < 3; i++) {
         character.books[i] = books[i].split(",")
-        character.prepped[i] = prepped[i].split(",")
+        character.prepped[i] = [...prepped[i].split(",")]
         character.collapsed[i] = col_head[i].split(",")
 
-        // remove blanks from collapsed
+        // remove blanks from prepped and collapsed
+        if (character.prepped[i].indexOf("") != -1) character.prepped[i].splice(0,1)
         if (character.collapsed[i].indexOf("") != -1) character.collapsed[i].splice(0,1)
 
         // Make sure `slots` gets given `int`s
@@ -1246,7 +1251,7 @@ function load_all_books() {
 
 
         // set prep list
-        preplist = prep
+        preplist = [...prep]
 
         // check for empty prep list
         if (preplist.indexOf("") != -1) preplist.pop(0)
@@ -1269,7 +1274,7 @@ function load_all_books() {
 
     // update spellbook, prepped, slots, and collapsed
     spellbook = character.books[spellChar-1]
-    preplist = character.prepped[spellChar-1]
+    preplist = [...character.prepped[spellChar-1]]
     slots_used = character.slots[spellChar-1]
     col_heads = [...character.collapsed[spellChar-1]]
 }
@@ -1298,7 +1303,7 @@ function updateBook() {
     character.books[ndx] = spellbook
 
     // gets character's prep list
-    character.prepped[ndx] = preplist
+    character.prepped[ndx] = [...preplist]
 
     // update storage
     update_storage()
@@ -1324,7 +1329,7 @@ function readBook() {
     updateButtons()
 
     // set prep list
-    preplist = character.prepped[ndx]
+    preplist = [...character.prepped[ndx]]
 
     // check for empty prep list
     if (preplist.indexOf("") != -1) preplist.pop(0)
