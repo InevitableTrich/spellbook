@@ -17,8 +17,7 @@ var sortState = { // CLEAN UP LATER
 var varCycle = {
   "nameSort": 0,
   "levelSort": 0,
-  "classSort": 0,
-  "schoolSort": 0,
+  "classSort": 0
 }
 
 var spellChar = 1
@@ -636,20 +635,28 @@ function book_switch_vis(id) {  // switches tab visibility
     })
 }
 
+function checkBookStatus(id) {
+    if (spellbook.indexOf(id) == -1) {  // is in spellbook
+        addToBook(id)
+    } else {  // isn't in spellbook
+        remove_from_book(id)
+    }
+}
+
 function addToBook(id) {
     // check for settings and abort
     if (spellChar == 4) return
 
-    var container = document.getElementById("bookContainer")
-    var spell = document.getElementById(id)
     var btn_char = document.getElementById("book_btn_" + id).children[0]
 
     if (spellbook.indexOf(id) == -1) {
         spellbook.push(id)
         btn_char.innerHTML = "Remove from Spellbook"
+        document.getElementById(id+"_head3").children[0].innerHTML = "Quick Remove"
     } else {
         spellbook.splice(spellbook.indexOf(id), 1)
         btn_char.innerHTML = "Add to Spellbook"
+        document.getElementById(id+"_head3").children[0].innerHTML = "Quick Add"
     }
 
     updateBook()
@@ -661,24 +668,19 @@ function addToBook(id) {
     }
 }
 
-function updateCharName(id) {
-    var char = document.getElementById("char"+id.slice(-1))
-    var name = document.getElementById(id).value
-    if (name == "") {
-        name = "Char " + id.slice(-1)
-    }
-    char.children[0].innerHTML = name
-
-    character.characters[id.slice(-1) - 1] = name
-    update_storage()
-}
-
 function remove_from_book(id) {
-    id = id.slice(0, id.indexOf("_"))
+    // check for settings and abort
+    if (spellChar == 4) return
+
+    if (id.indexOf("_") != -1) {
+        id = id.slice(0, id.indexOf("_"))
+    }
+
     try {
         var container = document.getElementById("bookContainer")
         var btn_char = document.getElementById("book_btn_" + id).children[0]
         btn_char.innerHTML = "Add to Spellbook"
+        document.getElementById(id+"_head3").children[0].innerHTML = "Quick Add"
     } catch(e) {}
 
     spellbook.splice(spellbook.indexOf(id), 1)
@@ -707,6 +709,18 @@ function remove_from_book(id) {
             lvl_cntnr.remove()  // remove container
         }
     }
+}
+
+function updateCharName(id) {
+    var char = document.getElementById("char"+id.slice(-1))
+    var name = document.getElementById(id).value
+    if (name == "") {
+        name = "Char " + id.slice(-1)
+    }
+    char.children[0].innerHTML = name
+
+    character.characters[id.slice(-1) - 1] = name
+    update_storage()
 }
 
 function select_character(num) {
@@ -935,8 +949,8 @@ function populateSpells(jsonResponse) {
         <div class="classes" id="${spell.spellid+'_head2'}">
             <p class="spellDispDesc overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
         </div>
-        <div class="school" id="${spell.spellid+'_head3'}">
-            <p class="spellDispDesc overflow">${spell.school}</p>
+        <div class="quick_add" id="${spell.spellid+'_head3'}" onclick="checkBookStatus('${spell.spellid}'); event.stopPropagation()">
+            <p class="spellDispDesc overflow" style="margin: auto;">${spellbook.indexOf(spell.spellid) != -1 ? "Quick Remove" : "Quick Add"}</p>
         </div>
         <div class="closeBtn">
             <div id="${spell.spellid+'_tarrow'}" class="arrow">
@@ -964,7 +978,7 @@ function populateSpells(jsonResponse) {
             <br>
         </div>
 
-        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}" onClick="addToBook('${spell.spellid}')">
+        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}" onClick="checkBookStatus('${spell.spellid}')">
             <p class="textToBook">${spellbook.indexOf(spell.spellid) != -1 ? "Remove from Spellbook" : "Add to Spellbook"}</p>
         </div>
     </div>
@@ -992,7 +1006,7 @@ function popEmptySpellbook(char = spellChar) {
     `
 }
 
-function updateButtons() {
+function updateButtons() { // rewrite this
     var buttons = [...document.getElementsByClassName("spellToBook")]
     buttons.forEach(button => {
         var target = button.children[0]
@@ -1000,6 +1014,7 @@ function updateButtons() {
             target.innerHTML = "Add to Spellbook"
         } else {
             target.innerHTML = "Remove from Spellbook"
+            document.getElementById(button.id.slice(9)+"_head3")
         }
     })
 }
