@@ -411,7 +411,8 @@ body {
 }
 
 .delete_prompt {
-    height: 10%;
+    height: 15%;
+    width: 60%;
     top: 45%;
 }
 

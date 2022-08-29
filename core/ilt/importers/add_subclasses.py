@@ -534,7 +534,7 @@ def addsubs(spell):
         'Ceremony',
         'Command',
         'Create or Destroy Water',
-        'CureWounds',
+        'Cure Wounds',
         'Detect Evil and Good',
         'Detect Poison and Disease',
         'Guiding Bolt',
@@ -1096,10 +1096,10 @@ def addsubs(spell):
         pass
     else:
         if 'subclasses' in spell:
-            if not 'Druid (Mountain)' in spell['subclasses']:
-                spell['subclasses'].append('Druid (Mountain)')
+            if not 'Druid (Grassland)' in spell['subclasses']:
+                spell['subclasses'].append('Druid (Grassland)')
         else:
-            spell['subclasses'] = ['Druid (Mountain)']
+            spell['subclasses'] = ['Druid (Grassland)']
 
     if not any(x in spell['name'] for x in subspellsforest):
         pass
@@ -1168,10 +1168,10 @@ def addsubs(spell):
         pass
     else:
         if 'subclasses' in spell:
-            if not 'Cleric (Trickery)' in spell['subclasses']:
-                spell['subclasses'].append('Cleric (Trickery)')
+            if not 'Cleric (Tempest)' in spell['subclasses']:
+                spell['subclasses'].append('Cleric (Tempest)')
         else:
-            spell['subclasses'] = ['Cleric (Trickery)']
+            spell['subclasses'] = ['Cleric (Tempest)']
 
     if not any(x in spell['name'] for x in subspellspeace):
         pass
