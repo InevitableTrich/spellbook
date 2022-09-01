@@ -5,7 +5,7 @@ var spellCount = 0
 var filterState = {}
 var currentFilter = JSON.stringify({"filter": {}})
 var searchQuery = ''
-var sortState = { // CLEAN UP LATER
+var sortState = {
   0: '-',
   1: '▼',
   2: '▲',
@@ -47,7 +47,7 @@ function check_mobile() {
 }
 
 function toggleSpellView(cName) {
-    var current = document.querySelector("#" + cName + "_body")
+    var current = document.getElementById(cName + "_body")
 
     if (current.getAttribute("collapsed") === 'true') {
         setTimeout(function(){
@@ -70,13 +70,13 @@ function toggleViewMain(cName, current) {
     suffix = ["head0", "head1", "head2", "head3", "bottom", "tarrow", "barrow"]
     rclass = ["widen", "invis", "invis", "invis", "bottom_exp", "rot-right", "rot-left"]
     for (var i = 0; i < suffix.length; i++) {
-        current = document.querySelector('#' + cName + "_" + suffix[i]);
+        current = document.getElementById(cName + "_" + suffix[i]);
         current.classList.toggle(rclass[i])
     }
 }
 
 function toggleBookSpellView(cName) {
-    var current = document.querySelector("#" + cName + "_body" + "_" + spellChar)
+    var current = document.getElementById(cName + "_body" + "_" + spellChar)
 
     if (current.getAttribute("collapsed") === 'true') {
         setTimeout(function(){
@@ -99,7 +99,7 @@ function toggleViewBook(current, cName){
     var suffix = ["bottom", "tarrow", "barrow", "action", "conc", "ritual", "name"]
     var rclass = ["book_bottom_exp", "rot-right", "rot-left", "invis", "invis", "invis", "book_widen"]
     for (var i = 0; i < suffix.length; i++) {
-        current = document.querySelector("#" + cName + "_" + suffix[i] + "_" + spellChar)
+        current = document.getElementById(cName + "_" + suffix[i] + "_" + spellChar)
         current.classList.toggle(rclass[i])
     }
 }
@@ -162,8 +162,8 @@ function cycleSort(id){
 function pageChange(inc) {
     curPage += inc
     if (curPage < 1) curPage = maxPages
-    if (maxPages == 0) curPage = 1
-    if (curPage > maxPages) curPage = 1
+    else if (maxPages == 0) curPage = 1
+    else if (curPage > maxPages) curPage = 1
     document.getElementById("pageTxt").innerHTML = "Page " + curPage
     document.getElementById("spellList").innerHTML = '<img src="/static/images/loading.gif" alt="Loading" width="3%" height="3%" style="display: block; margin: 20px auto 0 auto;" rel="import">'
     sort = findSort()
@@ -188,7 +188,8 @@ function scrollToTop() {
 
 document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
-        toggleBook(close=true)
+        var r = delete_prompt(close=true)
+        if (r > 0) toggleBook(close=true)
     }
 });
 
@@ -299,37 +300,35 @@ function findSort(){
     return 'nameSort'
 }
 
-var subs = {
-    "artificer": [false, ["alchemist", "armorer", "artillerist", "battle smith"]],
-
-    "bard": [false, ["glamour"]],
-
-    "cleric": [false, ["arcana", "death", "forge", "grave", "knowledge", "life", "light", "nature", "order", "peace",
-        "trickery", "twilight", "war"]],
-
-    "druid": [false, ["arctic", "coast", "desert", "forest", "mountain", "spores", "stars", "swamp", "underdark",
-        "wildfire"]],
-
-    "monk": [false, ["four elements", "shadow", "sun soul"]],
-
-    "paladin": [false, ["ancients", "conquest", "crown", "devotion", "glory", "oathbreaker", "redemption", "vengeance",
-        "watchers"]],
-
-    "ranger": [false, ["fey wanderer", "gloom stalker", "horizon walker", "monster slayer", "swarmkeeper"]],
-
-    "sorcerer": [false, ["aberrant mind", "clockwork soul", "divine soul"]],
-
-    "warlock": [false, ["archfey", "celestial", "fathomless", "fiend", "genie - djinni", "genie - efreeti", "genie - marid",
-        "great old one", "hexblade", "undying"]],
-
-    "wizard": [false, ["chronurgy", "graviturgy"]]
+class Subclass {
+    constructor() {
+        this.enabled = false
+        this.subclass_names = []
+    }
 }
-var subs_list = []
 
 function getSubs(class_name) {
+    var subs = {
+        "artificer": [false, ["alchemist", "armorer", "artillerist", "battle smith"]],
+        "bard": [false, ["glamour"]],
+        "cleric": [false, ["arcana", "death", "forge", "grave", "knowledge", "life", "light", "nature", "order", "peace",
+            "trickery", "twilight", "war"]],
+        "druid": [false, ["arctic", "coast", "desert", "forest", "mountain", "spores", "stars", "swamp", "underdark",
+            "wildfire"]],
+        "monk": [false, ["four elements", "shadow", "sun soul"]],
+        "paladin": [false, ["ancients", "conquest", "crown", "devotion", "glory", "oathbreaker", "redemption", "vengeance",
+            "watchers"]],
+        "ranger": [false, ["fey wanderer", "gloom stalker", "horizon walker", "monster slayer", "swarmkeeper"]],
+        "sorcerer": [false, ["aberrant mind", "clockwork soul", "divine soul"]],
+        "warlock": [false, ["archfey", "celestial", "fathomless", "fiend", "genie - djinni", "genie - efreeti", "genie - marid",
+            "great old one", "hexblade", "undying"]],
+        "wizard": [false, ["chronurgy", "graviturgy"]]
+    }
+    var subs_list = []
+
     clearSubs(class_name)
     var up_class = class_name.charAt(0).toUpperCase() + class_name.slice(1)
-    if (subs[class_name][0] === false) {
+    if (!subs[class_name][0]) {
         subs[class_name][1].forEach(sub => {
             var ssub = sub.replaceAll(" ", "_")
             var id = `${class_name}_${ssub}`
@@ -811,7 +810,13 @@ function select_character(num) {
     document.getElementById("charName"+num).classList.toggle("char_select")
 }
 
-function delete_prompt() {
+function delete_prompt(close=false) {
+    if (close) {
+        var r = 0
+        if (document.getElementById("delete_back").classList.contains('invis')) r = 1
+        document.getElementById("delete_back").classList.add('invis')
+        return r
+    }
     document.getElementById("delete_back").classList.toggle("invis")
     document.getElementById("ch").innerHTML = [...document.getElementsByClassName("char_select")][0].value
 }
