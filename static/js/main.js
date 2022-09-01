@@ -300,64 +300,75 @@ function findSort(){
     return 'nameSort'
 }
 
-class Subclass {
-    constructor() {
+class Subclass_List {
+    constructor(subclass_names) {
         this.enabled = false
-        this.subclass_names = []
+        this.subclass_names = [...subclass_names]
     }
 }
 
+var artificer = new Subclass_List(["alchemist", "armorer", "artillerist", "battle smith"])
+var bard = new Subclass_List(["glamour"])
+var cleric = new Subclass_List(["arcana", "death", "forge", "grave", "knowledge", "life", "light", "nature", "order",
+                           "peace", "trickery", "twilight", "war"])
+var druid = new Subclass_List(["arctic", "coast", "desert", "forest", "mountain", "spores", "stars", "swamp",
+                          "underdark", "wildfire"])
+var monk = new Subclass_List(["four elements", "shadow", "sun soul"])
+var paladin = new Subclass_List(["ancients", "conquest", "crown", "devotion", "glory", "oathbreaker", "redemption",
+                            "vengeance", "watchers"])
+var ranger = new Subclass_List(["fey wanderer", "gloom stalker", "horizon walker", "monster slayer", "swarmkeeper"])
+var sorcerer = new Subclass_List(["aberrant mind", "clockwork soul", "divine soul"])
+var warlock = new Subclass_List(["archfey", "celestial", "fathomless", "fiend", "genie - djinni", "genie - efreeti",
+                            "genie - marid", "great old one", "hexblade", "undying"])
+var wizard = new Subclass_List(["chronurgy", "graviturgy"])
+var subclass_lists = {
+    'artificer': artificer,
+    'bard': bard,
+    'cleric': cleric,
+    'druid': druid,
+    'monk': monk,
+    'paladin': paladin,
+    'ranger': ranger,
+    'sorcerer': sorcerer,
+    'warlock': warlock,
+    'wizard': wizard
+}
+var visible_subclasses = []
+
 function getSubs(class_name) {
-    var subs = {
-        "artificer": [false, ["alchemist", "armorer", "artillerist", "battle smith"]],
-        "bard": [false, ["glamour"]],
-        "cleric": [false, ["arcana", "death", "forge", "grave", "knowledge", "life", "light", "nature", "order", "peace",
-            "trickery", "twilight", "war"]],
-        "druid": [false, ["arctic", "coast", "desert", "forest", "mountain", "spores", "stars", "swamp", "underdark",
-            "wildfire"]],
-        "monk": [false, ["four elements", "shadow", "sun soul"]],
-        "paladin": [false, ["ancients", "conquest", "crown", "devotion", "glory", "oathbreaker", "redemption", "vengeance",
-            "watchers"]],
-        "ranger": [false, ["fey wanderer", "gloom stalker", "horizon walker", "monster slayer", "swarmkeeper"]],
-        "sorcerer": [false, ["aberrant mind", "clockwork soul", "divine soul"]],
-        "warlock": [false, ["archfey", "celestial", "fathomless", "fiend", "genie - djinni", "genie - efreeti", "genie - marid",
-            "great old one", "hexblade", "undying"]],
-        "wizard": [false, ["chronurgy", "graviturgy"]]
-    }
-    var subs_list = []
 
     clearSubs(class_name)
-    var up_class = class_name.charAt(0).toUpperCase() + class_name.slice(1)
-    if (!subs[class_name][0]) {
-        subs[class_name][1].forEach(sub => {
-            var ssub = sub.replaceAll(" ", "_")
-            var id = `${class_name}_${ssub}`
-            var up_sub = sub.split(" ").map(function(word){return word[0].toUpperCase() + word.substr(1)}).join(" ")
-            subs_list.push(
-                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sortToggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${up_class} (${up_sub})</p></div>`
+
+    var capitalized_class = class_name.charAt(0).toUpperCase() + class_name.slice(1)
+    if (!subclass_lists[class_name].enabled) {
+        subclass_lists[class_name].subclass_names.forEach(sub => {
+            var sub_no_spaces = sub.replaceAll(" ", "_")
+            var id = `${class_name}_${sub_no_spaces}`
+            var capitalized_sub = sub.split(" ").map(function(word){return word[0].toUpperCase() + word.substr(1)}).join(" ")
+            visible_subclasses.push(
+                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sortToggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${capitalized_class} (${capitalized_sub})</p></div>`
             )
         });
-        subs[class_name][0] = true
+        subclass_lists[class_name].enabled = true
     } else {
-        subs[class_name][1].forEach(sub => {
-            var ssub = sub.replaceAll(" ", "_")
-            var id = `${class_name}_${ssub}`
-            var up_sub = sub.split(" ").map(function(word){return word[0].toUpperCase() + word.substr(1)}).join(" ")
-            ndx = subs_list.indexOf(
-                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sortToggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${up_class} (${up_sub})</p></div>`
+        subclass_lists[class_name].subclass_names.forEach(sub => {
+            var sub_no_spaces = sub.replaceAll(" ", "_")
+            var id = `${class_name}_${sub_no_spaces}`
+            var capitalized_sub = sub.split(" ").map(function(word){return word[0].toUpperCase() + word.substr(1)}).join(" ")
+            var ndx = visible_subclasses.indexOf(
+                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sortToggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${capitalized_class} (${capitalized_sub})</p></div>`
             )
-            subs_list = subs_list.slice(0,ndx).concat(subs_list.slice(ndx+1))
+            visible_subclasses = visible_subclasses.slice(0,ndx).concat(visible_subclasses.slice(ndx+1))
         });
-        subs[class_name][0] = false
+        subclass_lists[class_name].enabled = false
     }
 
-    subs_list.sort()
-    var subs_string = ""
-    subs_string = subs_list.join('<p class="ciComma">,</p></div>') + "</div>"
-    if (subs_list.length > 0) {
+    visible_subclasses.sort()
+    if (visible_subclasses.length > 0) {
+        var subs_string = visible_subclasses.join('<p class="ciComma">,</p></div>') + "</div>"
         document.querySelector("#subs_con").innerHTML = subs_string
-        document.getElementById("subclasses").innerHTML += `
-            <div id="add_subclass_spells" class="clickable" onclick="add_subclass_spells()" style="margin-left: 10.5px;">
+        if (document.getElementById("add_subclass_spells") == null) document.getElementById("subclasses").innerHTML += `
+            <div id="add_subclass_spells" class="clickable" onclick="add_subclass_spells()">
                 <p class="add_subs_text">Add Subclass Spells to Book</p>
             </div>
             `
@@ -367,7 +378,7 @@ function getSubs(class_name) {
     }
 }
 
-function clearSubs(class_name){
+function clearSubs(class_name){  // left off here
     delete filterState["subs"]
     currentFilter = "{\"filter\": " + JSON.stringify(filterState) + "}"
 }
