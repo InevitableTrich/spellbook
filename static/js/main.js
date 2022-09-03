@@ -1,11 +1,11 @@
-var curPage = 1
-var maxPages = 0
-var spellsPerPage = 30
-var spellCount = 0
-var filterState = {}
-var currentFilter = JSON.stringify({"filter": {}})
-var searchQuery = ''
-var sortState = {
+var cur_page = 1
+var max_pages = 0
+var spells_per_page = 30
+var spells_count = 0
+var filter_state = {}
+var current_filter = JSON.stringify({"filter": {}})
+var search_query = ''
+var sort_state = {
   0: '-',
   1: '▼',
   2: '▲',
@@ -13,13 +13,13 @@ var sortState = {
   "levelSort": "Spell Level: ",
   "classSort": "Classes: "
 }
-var varCycle = {
+var var_cycle = {
   "nameSort": 0,
   "levelSort": 0,
   "classSort": 0
 }
 
-var spellChar = 1
+var spell_char = 1
 var spellbook = []
 var preplist = []
 var slots_used = [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -46,7 +46,7 @@ function check_mobile() {
     }
 }
 
-function toggleSpellView(cName) {
+function toggle_spell_view(cName) {
     var current = document.getElementById(cName + "_body")
 
     if (current.getAttribute("collapsed") === 'true') {
@@ -56,16 +56,16 @@ function toggleSpellView(cName) {
                 document.getElementById("book_btn_" + cName).classList.toggle("add_book_hidden")
             }, 20);
         }, 300);
-        toggleViewMain(cName, current)
+        toggle_view_main(cName, current)
     } else {
         document.getElementById("book_btn_" + cName).classList.toggle("add_book_hidden")
         setTimeout(function(){
             document.getElementById("book_btn_" + cName).classList.toggle("invis")
-            toggleViewMain(cName, current)
+            toggle_view_main(cName, current)
         }, 200);
     }
 }
-function toggleViewMain(cName, current) {
+function toggle_view_main(cName, current) {
     collapse(current)
     suffix = ["head0", "head1", "head2", "head3", "bottom", "tarrow", "barrow"]
     rclass = ["widen", "invis", "invis", "invis", "bottom_exp", "rot-right", "rot-left"]
@@ -75,31 +75,31 @@ function toggleViewMain(cName, current) {
     }
 }
 
-function toggleBookSpellView(cName) {
-    var current = document.getElementById(cName + "_body" + "_" + spellChar)
+function toggle_book_spell_view(cName) {
+    var current = document.getElementById(cName + "_body" + "_" + spell_char)
 
     if (current.getAttribute("collapsed") === 'true') {
         setTimeout(function(){
-            document.getElementById("book_btn_" + cName + "_" + spellChar).classList.toggle("invis")
+            document.getElementById("book_btn_" + cName + "_" + spell_char).classList.toggle("invis")
             setTimeout(function(){
-                document.getElementById("book_btn_" + cName + "_" + spellChar).classList.toggle("add_book_hidden_book")
+                document.getElementById("book_btn_" + cName + "_" + spell_char).classList.toggle("add_book_hidden_book")
             }, 20);
         }, 300);
-        toggleViewBook(current, cName)
+        toggle_view_book(current, cName)
     } else {
-        document.getElementById("book_btn_" + cName + "_" + spellChar).classList.toggle("add_book_hidden_book")
+        document.getElementById("book_btn_" + cName + "_" + spell_char).classList.toggle("add_book_hidden_book")
         setTimeout(function(){
-            document.getElementById("book_btn_" + cName + "_" + spellChar).classList.toggle("invis")
-            toggleViewBook(current, cName)
+            document.getElementById("book_btn_" + cName + "_" + spell_char).classList.toggle("invis")
+            toggle_view_book(current, cName)
         }, 200);
     }
 }
-function toggleViewBook(current, cName){
+function toggle_view_book(current, cName){
     collapse(current)
     var suffix = ["bottom", "tarrow", "barrow", "action", "conc", "ritual", "name"]
     var rclass = ["book_bottom_exp", "rot-right", "rot-left", "invis", "invis", "invis", "book_widen"]
     for (var i = 0; i < suffix.length; i++) {
-        current = document.getElementById(cName + "_" + suffix[i] + "_" + spellChar)
+        current = document.getElementById(cName + "_" + suffix[i] + "_" + spell_char)
         current.classList.toggle(rclass[i])
     }
 }
@@ -107,14 +107,14 @@ function toggleViewBook(current, cName){
 function collapse(element, height = 0) {
     var isCollapsed = element.getAttribute('collapsed') === 'true';
     if(isCollapsed) {
-        expandSection(element)
+        expand_section(element)
         element.setAttribute('collapsed', 'false')
     } else {
-        collapseSection(element, height)
+        collapse_section(element, height)
     }
 }
 
-function collapseSection(element, height = 0) {
+function collapse_section(element, height = 0) {
     var sectionHeight = element.scrollHeight;
     var elementTransition = element.style.transition;
     element.style.transition = '';
@@ -128,7 +128,7 @@ function collapseSection(element, height = 0) {
     element.setAttribute('collapsed', 'true');
 }
 
-function expandSection(element) {
+function expand_section(element) {
     var sectionHeight = element.scrollHeight;
     element.style.height = sectionHeight + 'px';
 
@@ -140,60 +140,60 @@ function expandSection(element) {
     element.setAttribute('collapsed', 'false');
 }
 
-function cycleSort(id){
-    varCycle[id] += 1
-    if (varCycle[id] > 2) varCycle[id] = 0
-    document.getElementById(id).innerHTML = sortState[id] + sortState[varCycle[id]]
+function cycle_sort(id){
+    var_cycle[id] += 1
+    if (var_cycle[id] > 2) var_cycle[id] = 0
+    document.getElementById(id).innerHTML = sort_state[id] + sort_state[var_cycle[id]]
 
-    if (varCycle[id] == 0) {
-        makeFilterRequest('nameSort', 0, currentFilter)
+    if (var_cycle[id] == 0) {
+        make_filter_request('nameSort', 0, current_filter)
     } else {
-        makeFilterRequest(id, varCycle[id], currentFilter)
+        make_filter_request(id, var_cycle[id], current_filter)
     }
 
-    for([key] of Object.entries(varCycle)){
+    for([key] of Object.entries(var_cycle)){
         if (key != id){
-            varCycle[key] = 0
-            document.getElementById(key).innerHTML = sortState[key] + sortState[varCycle[key]]
+            var_cycle[key] = 0
+            document.getElementById(key).innerHTML = sort_state[key] + sort_state[var_cycle[key]]
         }
     }
 }
 
-function pageChange(inc) {
-    curPage += inc
-    if (curPage < 1) curPage = maxPages
-    else if (maxPages == 0) curPage = 1
-    else if (curPage > maxPages) curPage = 1
-    document.getElementById("pageTxt").innerHTML = "Page " + curPage
+function page_change(inc) {
+    cur_page += inc
+    if (cur_page < 1) cur_page = max_pages
+    else if (max_pages == 0) cur_page = 1
+    else if (cur_page > max_pages) cur_page = 1
+    document.getElementById("pageTxt").innerHTML = "Page " + cur_page
     document.getElementById("spellList").innerHTML = '<img src="/static/images/loading.gif" alt="Loading" width="3%" height="3%" style="display: block; margin: 20px auto 0 auto;" rel="import">'
-    sort = findSort()
-    makeFilterRequest(sort, varCycle[sort], currentFilter)
+    sort = find_sort()
+    make_filter_request(sort, var_cycle[sort], current_filter)
 }
 
-function resetPage() {
-    pageOne()
-    sort = findSort()
-    makeFilterRequest(sort, varCycle[sort], currentFilter)
+function reset_page() {
+    page_one()
+    sort = find_sort()
+    make_filter_request(sort, var_cycle[sort], current_filter)
 }
 
-function pageOne() {
-    curPage = 1
-    document.getElementById("pageTxt").innerHTML = "Page " + curPage
-    scrollToTop()
+function page_one() {
+    cur_page = 1
+    document.getElementById("pageTxt").innerHTML = "Page " + cur_page
+    scroll_to_top()
 }
 
-function scrollToTop() {
+function scroll_to_top() {
     window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'})
 }
 
 document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
         var r = delete_prompt(close=true)
-        if (r > 0) toggleBook(close=true)
+        if (r > 0) toggle_book(close=true)
     }
 });
 
-function toggleBook(close=false) {
+function toggle_book(close=false) {
     if (close) {
         document.getElementById("bookCon").classList.add('invis')
         return
@@ -202,32 +202,32 @@ function toggleBook(close=false) {
 }
 
 function search(query){
-    if (query != "") searchQuery = "\"" + query + "\""
-    else searchQuery = ""
-    sort = findSort()
-    resetPage()
-    makeFilterRequest(sort, varCycle[sort], currentFilter)
+    if (query != "") search_query = "\"" + query + "\""
+    else search_query = ""
+    sort = find_sort()
+    reset_page()
+    make_filter_request(sort, var_cycle[sort], current_filter)
 }
 
-function sortToggle(id, field){
-    filterKey = getFilterIDs(id, field)
+function sort_toggle(id, field){
+    filterKey = get_filter_IDs(id, field)
 
-    if (filterState[field]) {
-        if (filterState[field].includes(filterKey)) {
-            var index = filterState[field].indexOf(filterKey)
+    if (filter_state[field]) {
+        if (filter_state[field].includes(filterKey)) {
+            var index = filter_state[field].indexOf(filterKey)
             if (index !== -1) {
-              filterState[field].splice(index, 1);
+              filter_state[field].splice(index, 1);
             }
-            if (filterState[field].length == 0) {
-              delete filterState[field]
+            if (filter_state[field].length == 0) {
+              delete filter_state[field]
             }
         } else {
-            filterState[field].push(filterKey)
+            filter_state[field].push(filterKey)
         }
     } else {
-        filterState[field] = [filterKey]
+        filter_state[field] = [filterKey]
     }
-    currentFilter = "{\"filter\": " + JSON.stringify(filterState) + "}"
+    current_filter = "{\"filter\": " + JSON.stringify(filter_state) + "}"
 
     toggle = document.getElementById(id)
     toggle.classList.toggle("sortSelected")
@@ -235,15 +235,15 @@ function sortToggle(id, field){
     toggle.classList.toggle("sortSelectedTxt")
 
     if (field == "classes") {
-        getSubs(id)
+        get_subs(id)
     }
 
-    pageOne()
-    sort = findSort()
-    makeFilterRequest(sort, varCycle[sort], currentFilter)
+    page_one()
+    sort = find_sort()
+    make_filter_request(sort, var_cycle[sort], current_filter)
 }
 
-function getFilterIDs(id, field) {
+function get_filter_IDs(id, field) {
     var tID = null
 
     if (field == "classes" || field == "school") {
@@ -293,9 +293,9 @@ function getFilterIDs(id, field) {
     return tID
 }
 
-function findSort(){
-    for([key] of Object.entries(varCycle)){
-        if (varCycle[key] != 0) return key
+function find_sort(){
+    for([key] of Object.entries(var_cycle)){
+        if (var_cycle[key] != 0) return key
     }
     return 'nameSort'
 }
@@ -335,9 +335,9 @@ var subclass_lists = {
 }
 var visible_subclasses = []
 
-function getSubs(class_name) {
+function get_subs(class_name) {
 
-    clearSubs(class_name)
+    clear_subs(class_name)
 
     var capitalized_class = class_name.charAt(0).toUpperCase() + class_name.slice(1)
     if (!subclass_lists[class_name].enabled) {
@@ -346,7 +346,7 @@ function getSubs(class_name) {
             var id = `${class_name}_${sub_no_spaces}`
             var capitalized_sub = sub.split(" ").map(function(word){return word[0].toUpperCase() + word.substr(1)}).join(" ")
             visible_subclasses.push(
-                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sortToggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${capitalized_class} (${capitalized_sub})</p></div>`
+                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sort_toggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${capitalized_class} (${capitalized_sub})</p></div>`
             )
         });
         subclass_lists[class_name].enabled = true
@@ -356,7 +356,7 @@ function getSubs(class_name) {
             var id = `${class_name}_${sub_no_spaces}`
             var capitalized_sub = sub.split(" ").map(function(word){return word[0].toUpperCase() + word.substr(1)}).join(" ")
             var ndx = visible_subclasses.indexOf(
-                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sortToggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${capitalized_class} (${capitalized_sub})</p></div>`
+                `<div class="rowContainer"><div class="classItem" id=${id} onclick="sort_toggle(id, 'subs')"><p class="ciTxt" id=${`_${id}`}>${capitalized_class} (${capitalized_sub})</p></div>`
             )
             visible_subclasses = visible_subclasses.slice(0,ndx).concat(visible_subclasses.slice(ndx+1))
         });
@@ -378,13 +378,13 @@ function getSubs(class_name) {
     }
 }
 
-function clearSubs(class_name){
-    delete filterState["subs"]
-    currentFilter = "{\"filter\": " + JSON.stringify(filterState) + "}"
+function clear_subs(class_name){
+    delete filter_state["subs"]
+    current_filter = "{\"filter\": " + JSON.stringify(filter_state) + "}"
 }
 
 function add_subclass_spells() {
-    if (filterState['subs'] == undefined) return
+    if (filter_state['subs'] == undefined) return
 
     var subclass_spells = {
         'Artificer (Alchemist)': ['Healing Word','Ray of Sickness','Flaming Sphere','Melf\'s Acid Arrow','Gaseous Form','Mass Healing Word','Blight','Death Ward','Cloudkill','Raise Dead'],
@@ -452,7 +452,7 @@ function add_subclass_spells() {
 
     var to_format = []
 
-    filterState['subs'].forEach(sub => {
+    filter_state['subs'].forEach(sub => {
         var chosen_spells = subclass_spells[sub]
         chosen_spells.forEach(spell => {
             if (spellbook.indexOf(spell) == -1) to_format.push(spell)
@@ -464,10 +464,10 @@ function add_subclass_spells() {
         spellbook.push(spell)
     })
 
-    makeBookRequest(spellbook)
+    make_book_request(spellbook)
 }
 
-function clrESO(){
+function clear_filters(){
     [...document.getElementsByClassName("sortSelected")].forEach(e => {
         e.classList.toggle("sortSelected")
     })
@@ -483,26 +483,26 @@ function clrESO(){
     filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
     filters.forEach(id => {
         if (document.getElementById(id + "_ops").getAttribute('collapsed') === 'false') {
-            CycleList(id)
+            cycle_list(id)
         }
     });
 
-    currentFilter = JSON.stringify({"filter": {}})
-    filterState = {}
+    current_filter = JSON.stringify({"filter": {}})
+    filter_state = {}
 
-    for([key] of Object.entries(varCycle)){
-        varCycle[key] = 0
-        document.getElementById(key).innerHTML = sortState[key] + sortState[varCycle[key]]
+    for([key] of Object.entries(var_cycle)){
+        var_cycle[key] = 0
+        document.getElementById(key).innerHTML = sort_state[key] + sort_state[var_cycle[key]]
     }
 
     searchBar = document.getElementById('search')
     searchBar.value = ""
-    searchQuery = ''
-    resetPage()
-    makeFilterRequest('nameSort', 0, currentFilter)
+    search_query = ''
+    reset_page()
+    make_filter_request('nameSort', 0, current_filter)
 }
 
-function updateSpellSlots() {
+function update_spell_slots() {
     var classDef = {
         "artificer": "sub",
         "paladin": "sub",
@@ -544,10 +544,10 @@ function updateSpellSlots() {
         var lmnt = document.getElementById("slot_amt_" + level.toString())
         lmnt.innerHTML = amount
     })
-    updateSlotCount()
+    update_slot_count()
 }
 
-function updateSlotCount(char = spellChar) {
+function update_slot_count(char = spell_char) {
     var heads = []
     var children = [...document.getElementById("book_container_"+char).children]
     children.forEach(child =>{
@@ -575,7 +575,7 @@ function updateSlotCount(char = spellChar) {
 }
 
 function use_slot(level, place) {
-    var container = document.getElementById(`slot_container_${spellChar}_${level}`)
+    var container = document.getElementById(`slot_container_${spell_char}_${level}`)
     var children = container.children
     if (children[place].className.indexOf("used") != -1) { // if clicked on a used slot, remove use
         slots_used[level - 1] -= 1
@@ -607,7 +607,7 @@ function read_used_slots(heads) {
     slots_used.forEach((used, index) => {
         var ndx = index + 1
         if (heads.indexOf(ndx.toString()) == -1) return
-        var slot_list = document.getElementById(`slot_container_${spellChar}_${ndx}`).children
+        var slot_list = document.getElementById(`slot_container_${spell_char}_${ndx}`).children
 
         for(var i = 0; i < used; i++) {
             var slot = slot_list[i]
@@ -623,13 +623,13 @@ function clear_used_slots(){
     })
 
     // remove from settings
-    character.slots[spellChar-1] = [0, 0, 0, 0, 0, 0, 0 ,0 , 0]
+    character.slots[spell_char-1] = [0, 0, 0, 0, 0, 0, 0 ,0 , 0]
 
     // remove from local storage
     localStorage.slots = character.slots.join("+")
 }
 
-function prepSpell(id) {
+function prep_spell(id) {
     var current = document.getElementById(id)
     current.classList.toggle("prepped")
 
@@ -642,14 +642,14 @@ function prepSpell(id) {
     updateBook()
 }
 
-function updatePrepSpells(char) {
+function update_prep_spells(char) {
     character.prepped[char-1].forEach(spell => {
         var current = document.getElementById(spell+"_bk_"+char+"_prep_"+char)
         current.classList.toggle("prepped")
     })
 }
 
-function collapseHeads(char) {
+function collapse_heads(char) {
     character.collapsed[char-1].forEach(head => {
         vis_collapse(head, char)
     })
@@ -657,20 +657,20 @@ function collapseHeads(char) {
 
 function book_switch_view(id) {
     var num = parseInt(id.slice(-1))
-    var prev = spellChar
+    var prev = spell_char
 
     if (num == prev && num == 4) return
 
-    spellChar = num
+    spell_char = num
     if (num <= 3) {  // if character tab:
-        // update spellChar
-        character.main = spellChar
+        // update spell_char
+        character.main = spell_char
 
         // update spellbook var
-        spellbook = character.books[spellChar-1]
+        spellbook = character.books[spell_char-1]
 
         // read char info
-        var ndx = spellChar - 1
+        var ndx = spell_char - 1
         var clas = parseInt(character.classes[ndx])
         var level = character.levels[ndx]
 
@@ -680,13 +680,13 @@ function book_switch_view(id) {
 
         // check used slots
         slots_used = character.slots[ndx]
-        updateSpellSlots()
+        update_spell_slots()
 
         // get prepped spells
         preplist = [...character.prepped[ndx]]
 
         // update buttons on main spells
-        updateButtons()
+        update_buttons()
 
         // save
         update_storage()
@@ -718,17 +718,17 @@ function book_switch_vis(num, prev) {  // switches tab visibility
     next.classList.toggle("book_char_exp")
 }
 
-function checkBookStatus(id) {
+function check_book_status(id) {
     if (spellbook.indexOf(id) == -1) {  // is in spellbook
-        addToBook(id)
+        add_to_book(id)
     } else {  // isn't in spellbook
         remove_from_book(id)
     }
 }
 
-function addToBook(id) {
+function add_to_book(id) {
     // check for settings and abort
-    if (spellChar == 4) return
+    if (spell_char == 4) return
 
     var btn_char = document.getElementById("book_btn_" + id).children[0]
 
@@ -745,15 +745,15 @@ function addToBook(id) {
     updateBook()
 
     if (spellbook.length == 0) {
-        popEmptySpellbook()
+        pop_empty_spellbook()
     } else {
-        makeBookRequest(spellbook)
+        make_book_request(spellbook)
     }
 }
 
 function remove_from_book(id) {
     // check for settings and abort
-    if (spellChar == 4) return
+    if (spell_char == 4) return
 
     if (id.indexOf("_") != -1) {
         id = id.slice(0, id.indexOf("_"))
@@ -774,10 +774,10 @@ function remove_from_book(id) {
     updateBook()
 
     if (spellbook.length == 0) {
-        popEmptySpellbook()
+        pop_empty_spellbook()
     } else {
         // remove spell
-        var book_spell = document.getElementById(id + '_bk_' + spellChar)  // spell
+        var book_spell = document.getElementById(id + '_bk_' + spell_char)  // spell
         var prep_book_cntnr = book_spell.parentElement  // spell+prep
         var lvl_cntnr = prep_book_cntnr.parentElement  // level container
         var ndx = [...lvl_cntnr.children].indexOf(prep_book_cntnr) // index of spell
@@ -794,7 +794,7 @@ function remove_from_book(id) {
     }
 }
 
-function updateCharName(id) {  // update name on tabs
+function update_char_name(id) {  // update name on tabs
     var char = document.getElementById("char"+id.slice(-1))
     var name = document.getElementById(id).value
     if (name == "") {
@@ -843,7 +843,7 @@ function delete_character() {
     document.getElementById("char" + num).children[0].innerHTML = "Char " + num
 
     // remove all present spells
-    popEmptySpellbook(num)
+    pop_empty_spellbook(num)
 
     // close prompt
     delete_prompt()
@@ -852,17 +852,17 @@ function delete_character() {
     update_storage()
 }
 
-function makeBookRequest(book) {
+function make_book_request(book) {
     if (window.location.href.startsWith('http://127.0.0.1:8000/')) {
         url = 'http://127.0.0.1:8000/book-spells'
     } else {
         url = 'https://oyioi0suah.execute-api.us-east-1.amazonaws.com/default/book-spells'
     }
 
-    makeHTTPPostRequest(url, handleSpellbookResponse, JSON.stringify({"book": book,"char": spellChar}))
+    make_HTTP_post_request(url, handle_spellbook_response, JSON.stringify({"book": book,"char": spell_char}))
 }
 
-function makeFilterRequest(fieldid, direction, filter){
+function make_filter_request(fieldid, direction, filter){
     if (window.location.href.startsWith == 'http://127.0.0.1:8000/') {
         url = 'http://127.0.0.1:8000/filter'
         loc = 'l'
@@ -871,11 +871,11 @@ function makeFilterRequest(fieldid, direction, filter){
         loc = 's'
     }
 
-    makeHTTPPostRequest(url+'?pagenum='+curPage+'&spellsperpage='+spellsPerPage+'&field='+fieldid+'&direction='+direction+'&searchquery='+searchQuery+'&loc='+loc, handleSpellsResponse, filter);
+    make_HTTP_post_request(url+'?pagenum='+cur_page+'&spellsperpage='+spells_per_page+'&field='+fieldid+'&direction='+direction+'&searchquery='+search_query+'&loc='+loc, handle_spells_response, filter);
 
 }
 
-function toggleFilter(){
+function toggle_filter(){
     var top = document.getElementById('ef_top')
     var text = document.getElementById('ef_top').children[0]
     var body = document.getElementById('ef_body')
@@ -885,21 +885,21 @@ function toggleFilter(){
     if (isCollapsed) {
         text.innerHTML = 'Shrink Filter Options'
         body.setAttribute('collapsed', 'false')
-        expandSection(body)
+        expand_section(body)
     } else {
         text.innerHTML = 'Expand Filter Options'
         body.setAttribute('collapsed', 'true')
-        collapseSection(body)
+        collapse_section(body)
         filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
         filters.forEach(id => {
             if (document.getElementById(id + "_ops").getAttribute('collapsed') === 'false') {
-                CycleList(id)
+                cycle_list(id)
             }
         });
     }
 }
 
-function CycleList(dID){  // toggle filter sections
+function cycle_list(dID){  // toggle filter sections
     var ops = dID + "_ops"
     var current = document.getElementById(ops)
     collapse(current)
@@ -914,25 +914,25 @@ function CycleList(dID){  // toggle filter sections
     }
 }
 
-function spellFormatHigher(high) {
+function spell_format_higher(high) {
     var higher = high != "" ? typeof(high) == "string" ? "At Higher Levels. " + high : "At Higher Levels. " + high.join("<BR/> &emsp;&emsp;") : ""
     higher = "<bi>" + higher.slice(0,higher.indexOf(".")+1) + "</bi>" + higher.slice(higher.indexOf(".")+1,)
     return higher
 }
 
-function spellFormatBody(spell) {
+function spell_format_body(spell) {
     var spellBody = []
     if (spell.desc.join().indexOf("#") > 0) {
-        spellBody = descBold(spell.desc)
+        spellBody = desc_bold(spell.desc)
     } else {
         spellBody = spell.desc
     }
     if (spell.desc.join().indexOf("*") > 0) {
-        spellBody = descStyle(spellBody)
+        spellBody = desc_style(spellBody)
     }
 
     if (spellBody.join().indexOf("|") > 0) {
-        spellBody = descTable(spellBody)
+        spellBody = desc_table(spellBody)
     } else {
         spellBody = `<p class="spellDispDescExp">${spellBody.join("<BR/> &emsp;&emsp;")}</p>`
     }
@@ -942,7 +942,7 @@ function spellFormatBody(spell) {
     return spellBody
 }
 
-function descBold(desc) {
+function desc_bold(desc) {
     for (var i = 0; i < desc.length; i++) {
         var para = desc[i]
         if (para.indexOf("#####") != -1) {
@@ -954,7 +954,7 @@ function descBold(desc) {
     return desc
 }
 
-function descStyle(desc) {
+function desc_style(desc) {
     for (var i = 0; i < desc.length; i++) {
         var para = desc[i]
         if (para.indexOf("***") != -1) {
@@ -966,7 +966,7 @@ function descStyle(desc) {
     return desc
 }
 
-function descTable(body) {
+function desc_table(body) {
     var tableIndexes = []
     for (var i = 0; i < body.length; i++) {
         if (body[i].indexOf("|") != -1) tableIndexes.push(i)
@@ -1016,19 +1016,19 @@ function descTable(body) {
     return spellBody
 }
 
-function populateSpells(jsonResponse) {
+function populate_spells(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")
     spells.innerHTML = ''
-    spellCount = data.spellscount
-    maxPages = Math.ceil(spellCount/spellsPerPage)
+    spells_count = data.spellscount
+    max_pages = Math.ceil(spells_count/spells_per_page)
     data.spells.forEach(spell => {
-        var spellBody = spellFormatBody(spell)
-        var spellHigher = spellFormatHigher(spell.higher_level)
+        var spellBody = spell_format_body(spell)
+        var spellHigher = spell_format_higher(spell.higher_level)
         spells.innerHTML +=`
 <div id="${spell.spellid}">
     <div class="h20"></div>
-    <div class="spellContainer spellHeight" onClick="toggleSpellView('${spell.spellid}')" id="${spell.spellid+'_top'}">
+    <div class="spellContainer spellHeight" onClick="toggle_spell_view('${spell.spellid}')" id="${spell.spellid+'_top'}">
         <div class="name" id="${spell.spellid+'_head0'}">
             <p class="spellName overflow"> ${spell.name} - </p>
         </div>
@@ -1038,7 +1038,7 @@ function populateSpells(jsonResponse) {
         <div class="classes" id="${spell.spellid+'_head2'}">
             <p class="spellDispDesc overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
         </div>
-        <div class="quick_add" id="${spell.spellid+'_head3'}" onclick="checkBookStatus('${spell.spellid}'); event.stopPropagation()">
+        <div class="quick_add" id="${spell.spellid+'_head3'}" onclick="check_book_status('${spell.spellid}'); event.stopPropagation()">
             <p class="spellDispDesc overflow" style="margin: auto;">${spellbook.indexOf(spell.spellid) != -1 ? "Quick Remove" : "Quick Add"}</p>
         </div>
         <div class="closeBtn">
@@ -1067,11 +1067,11 @@ function populateSpells(jsonResponse) {
             <br>
         </div>
 
-        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}" onClick="checkBookStatus('${spell.spellid}')">
+        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}" onClick="check_book_status('${spell.spellid}')">
             <p class="textToBook">${spellbook.indexOf(spell.spellid) != -1 ? "Remove from Spellbook" : "Add to Spellbook"}</p>
         </div>
     </div>
-    <div class="rowContainer bottom bottom_margin" onClick="toggleSpellView('${spell.spellid}')" id="${spell.spellid+'_bottom'}">
+    <div class="rowContainer bottom bottom_margin" onClick="toggle_spell_view('${spell.spellid}')" id="${spell.spellid+'_bottom'}">
         <div class="expLeft spellHeight">
             <p class="spellName" style="white-space: nowrap;">${spell.name} - </p>
         </div>
@@ -1088,14 +1088,14 @@ function populateSpells(jsonResponse) {
     })
 }
 
-function popEmptySpellbook(char = spellChar) {
+function pop_empty_spellbook(char = spell_char) {
     var spells = document.getElementById("book_container_"+char)
     spells.innerHTML = `
         <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells.</p>
     `
 }
 
-function updateButtons() {
+function update_buttons() {
     var buttons = [...document.getElementsByClassName("spellToBook")]
     buttons.forEach(button => {
         var target = button.children[0]
@@ -1117,7 +1117,7 @@ function collapse_slots(lvl) {
     save_collapsed()
 }
 
-function vis_collapse(lvl, char = spellChar) {
+function vis_collapse(lvl, char = spell_char) {
     var container = document.getElementById(`container_${char}_${lvl}`)
     collapse(container)
     var arrow = document.getElementById(`arr_${char}_${lvl}`)
@@ -1125,11 +1125,11 @@ function vis_collapse(lvl, char = spellChar) {
 }
 
 function save_collapsed() {
-    character.collapsed[spellChar - 1] = [...col_heads]
+    character.collapsed[spell_char - 1] = [...col_heads]
     localStorage.setItem("collapsed", character.collapsed.join("+"))
 }
 
-function populateSpellbook(jsonResponse) {
+function populate_spellbook(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     var char = data.char
     var spells = document.getElementById("book_container_"+char)
@@ -1160,14 +1160,14 @@ function populateSpellbook(jsonResponse) {
             `
         }
         spell.spellid = spell.spellid + '_bk_' + char
-        var spellBody = spellFormatBody(spell).replaceAll("spellDispDescExp", "book_spellDispDescExp")
-        var spellHigher = spellFormatHigher(spell.higher_level)
+        var spellBody = spell_format_body(spell).replaceAll("spellDispDescExp", "book_spellDispDescExp")
+        var spellHigher = spell_format_higher(spell.higher_level)
         var book_con = document.getElementById(`container_${char}_${spell.level}`)
         book_con.innerHTML +=`
 <div class="rowContainer">
-    <div class="prep_spell clickable" id="${spell.spellid}_prep_${char}" onCLick="prepSpell(id)"></div>
+    <div class="prep_spell clickable" id="${spell.spellid}_prep_${char}" onCLick="prep_spell(id)"></div>
     <div class="book_spell" id="${spell.spellid}">
-        <div class="book_spell_container clickable" onClick="toggleBookSpellView('${spell.spellid}')">
+        <div class="book_spell_container clickable" onClick="toggle_book_spell_view('${spell.spellid}')">
             <div class="book_name" id="${spell.spellid}_name_${char}">
                 <p class="book_spell_text overflow">${spell.name}</p>
             </div>
@@ -1209,7 +1209,7 @@ function populateSpellbook(jsonResponse) {
             </div>
         </div>
 
-        <div class="book_spell_container_bottom book_bottom book_bottom_margin clickable" onClick="toggleBookSpellView('${spell.spellid}')" id="${spell.spellid}_bottom_${char}">
+        <div class="book_spell_container_bottom book_bottom book_bottom_margin clickable" onClick="toggle_book_spell_view('${spell.spellid}')" id="${spell.spellid}_bottom_${char}">
             <div class="book_bottom_name">
                 <p class="book_spell_text" style="white-space: nowrap;">${spell.name} - </p>
             </div>
@@ -1225,12 +1225,12 @@ function populateSpellbook(jsonResponse) {
 <div class="h15"></div>
     `
     })
-    updateSlotCount(char)
-    updatePrepSpells(char)
-    if (col_heads[0] != "") collapseHeads(char)
+    update_slot_count(char)
+    update_prep_spells(char)
+    if (col_heads[0] != "") collapse_heads(char)
 }
 
-function makeHTTPPostRequest(url, callback, data) {
+function make_HTTP_post_request(url, callback, data) {
     objXMLHttp=new XMLHttpRequest()
     objXMLHttp.onreadystatechange = callback
     objXMLHttp.open("POST", url)
@@ -1238,15 +1238,15 @@ function makeHTTPPostRequest(url, callback, data) {
     objXMLHttp.send(data)
 }
 
-function handleSpellsResponse(data) {
+function handle_spells_response(data) {
     if (this.readyState == 4 && this.status == 200){
-        populateSpells(data)
+        populate_spells(data)
     }
 }
 
-function handleSpellbookResponse(data) {
+function handle_spellbook_response(data) {
     if (this.readyState == 4 && this.status == 200){
-        populateSpellbook(data)
+        populate_spellbook(data)
     }
 }
 
@@ -1282,8 +1282,8 @@ function read_storage() {
 
     //read from localStorage and write to 'character' class
     character.main = parseInt(localStorage.getItem("main"))
-    spellChar = character.main
-    if (spellChar >=4) spellChar = 1
+    spell_char = character.main
+    if (spell_char >=4) spell_char = 1
     character.characters = localStorage.getItem("characters").split("+")
     character.classes = localStorage.getItem("classes").split("+")
     character.levels = localStorage.getItem("levels").split("+")
@@ -1326,19 +1326,19 @@ function read_storage() {
     // set data gathered
     document.getElementById("classes").selectedIndex = clas
     document.getElementById("lvInput").value = level
-    updateSpellSlots()
+    update_spell_slots()
 
     load_all_books()
 }
 
 function load_all_books() {
-    // save spellChar for later
-    var save = spellChar
+    // save spell_char for later
+    var save = spell_char
 
     // populate all 3 spellbooks
     for (var ndx = 0; ndx < 3; ndx++) {
-        // set spellChar for loading into spellbook
-        spellChar = ndx + 1
+        // set spell_char for loading into spellbook
+        spell_char = ndx + 1
 
         // get needed variables from character
         var spells = character.books[ndx]
@@ -1361,9 +1361,9 @@ function load_all_books() {
 
         // set empty spellbook text if empty spellbook, or populate spellbook
         if (spellbook.length < 1) {
-            popEmptySpellbook()
+            pop_empty_spellbook()
         } else {
-            makeBookRequest(spellbook)
+            make_book_request(spellbook)
 
             // set collapsed heads list
             col_heads = [...col_head_list]
@@ -1373,13 +1373,13 @@ function load_all_books() {
         }
     }
 
-    spellChar = save
+    spell_char = save
 
     // update spellbook, prepped, slots, and collapsed
-    spellbook = character.books[spellChar-1]
-    preplist = [...character.prepped[spellChar-1]]
-    slots_used = character.slots[spellChar-1]
-    col_heads = [...character.collapsed[spellChar-1]]
+    spellbook = character.books[spell_char-1]
+    preplist = [...character.prepped[spell_char-1]]
+    slots_used = character.slots[spell_char-1]
+    col_heads = [...character.collapsed[spell_char-1]]
 }
 
 function update_storage() {
@@ -1395,8 +1395,8 @@ function update_storage() {
 
 function updateBook() {
     // gets current character
-    character.main = spellChar
-    var ndx = spellChar - 1
+    character.main = spell_char
+    var ndx = spell_char - 1
 
     // gets character's class
     character.classes[ndx] = document.getElementById("classes").selectedIndex
