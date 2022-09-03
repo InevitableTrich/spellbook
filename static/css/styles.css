@@ -1159,6 +1159,12 @@ bi {
     -moz-user-select: none;
     webkit-user-select: none;
 }
+.unclickable {
+    cursor: unset;
+    user-select: unset;
+    -moz-user-select: unset;
+    -webkit-user-select: unset;
+}
 
 .non_clickable {
     cursor: default;

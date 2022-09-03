@@ -328,6 +328,20 @@
         <p class="smallTxt">Clear Search Options</p>
     </div>
 
+    <div class="rowContainer sortContainer">
+        <div class="name" onclick="cycle_sort('nameSort')">
+            <p class="levelHeadTxt vCentered"  id="nameSort">Spell Name: -</p>
+        </div>
+        <div class="level hCentered" onclick="cycle_sort('levelSort')">
+          <p  class="levelHeadTxt vCentered" id="levelSort">Spell Level: -</p>
+        </div>
+        <div class="classes unclickable">
+        </div>
+        <div class="quick_add unclickable">
+        </div>
+        <div class="closeBtn unclickable"></div>
+    </div>
+
     <div id="spellList">
 
     </div>
@@ -478,7 +492,7 @@
                 <div id="char3" class="book_char_tab" style="left: -6px" onclick="book_switch_view(id)">
                     <p class="book_char_text overflow">Char 3</p>
                 </div>
-                <div id="setting4" class="book_char_tab" style="left: -9px" onclick="book_switch_view(id)">
+                <div id="char4" class="book_char_tab" style="left: -9px" onclick="book_switch_view(id)">
                     <p class="book_char_text overflow">Settings</p>
                 </div>
             </div>

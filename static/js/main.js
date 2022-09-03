@@ -10,13 +10,11 @@ var sort_state = {
   1: '▼',
   2: '▲',
   "nameSort": "Spell Name: ",
-  "levelSort": "Spell Level: ",
-  "classSort": "Classes: "
+  "levelSort": "Spell Level: "
 }
 var var_cycle = {
   "nameSort": 0,
-  "levelSort": 0,
-  "classSort": 0
+  "levelSort": 0
 }
 
 var spell_char = 1
@@ -473,7 +471,7 @@ function clear_filters(){
     })
 
     document.getElementById("subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
-    document.getElementById("add_subclass_spells").remove()
+    try {document.getElementById("add_subclass_spells").remove()} catch(e){}
     for([key] of Object.entries(subclass_lists)){
         subclass_lists[key].enabled = false
     }
@@ -569,7 +567,7 @@ function update_slot_count(char = spell_char) {
         }
     }
     try {
-        read_used_slots(heads)
+        read_used_slots(char, heads)
     }
     catch (e) {}
 }
@@ -603,11 +601,11 @@ function save_used_slots() {
     localStorage.setItem("slots", character.slots.join("+"))
 }
 
-function read_used_slots(heads) {
+function read_used_slots(char, heads) {
     slots_used.forEach((used, index) => {
         var ndx = index + 1
         if (heads.indexOf(ndx.toString()) == -1) return
-        var slot_list = document.getElementById(`slot_container_${spell_char}_${ndx}`).children
+        var slot_list = document.getElementById(`slot_container_${char}_${ndx}`).children
 
         for(var i = 0; i < used; i++) {
             var slot = slot_list[i]
@@ -1311,6 +1309,7 @@ function read_storage() {
     // get current character and set book view to that character
     book_switch_view("char"+character.main)
     document.getElementById("book_container_"+character.main).classList.toggle("invis")
+    document.getElementById("char"+character.main).classList.toggle("book_char_exp")
 
     // set character names on tabs
     for (var i = 1; i <= 3; i++) {
@@ -1326,7 +1325,6 @@ function read_storage() {
     // set data gathered
     document.getElementById("classes").selectedIndex = clas
     document.getElementById("lvInput").value = level
-    update_spell_slots()
 
     load_all_books()
 }
@@ -1351,7 +1349,6 @@ function load_all_books() {
 
         // check for empty spellbook
         if (spellbook.indexOf("") != -1) spellbook.pop(0)
-
 
         // set prep list
         preplist = [...prep]

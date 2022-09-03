@@ -29,10 +29,12 @@ function toggle_head(id) {
     var name = container.children[0]
     var level = container.children[1]
     var classes = container.children[2]
+    var quick_add = container.children[3]
 
     name.classList.toggle("vis")
     level.classList.toggle("invis")
     classes.classList.toggle("invis")
+    quick_add.classList.toggle("invis")
 }
 
 function clear_filters(){
