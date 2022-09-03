@@ -55,29 +55,29 @@ function clear_filters(){
     filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
     filters.forEach(id => {
         if (document.querySelector("#" + id + "_ops").getAttribute('collapsed') === 'false') {
-            CycleList(id)
+            cycle_list(id)
         }
     });
 
-    currentFilter = JSON.stringify({"filter": {}})
-    filterState = {}
+    current_filter = JSON.stringify({"filter": {}})
+    filter_state = {}
 
     searchBar = document.getElementById('search')
     searchBar.value = ""
     searchQuery = ''
-    resetPage()
-    makeFilterRequest('nameSort', 0, currentFilter)
+    reset_page()
+    make_filter_request('nameSort', 0, currentFilter)
 }
 
 function populate_spells(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")
     spells.innerHTML = ''
-    spellCount = data.spellscount
-    maxPages = Math.ceil(spellCount/spellsPerPage)
+    spell_count = data.spellscount
+    max_pages = Math.ceil(spell_count/spells_per_page)
     data.spells.forEach(spell => {
-        var spellBody = spellFormatBody(spell)
-        var spellHigher = spellFormatHigher(spell.higher_level)
+        var spellBody = spell_format_body(spell)
+        var spellHigher = spell_format_higher(spell.higher_level)
 
         spells.innerHTML +=`
 <div id="${spell.spellid}">
@@ -86,7 +86,7 @@ function populate_spells(jsonResponse) {
         <p class="spell_head_text head_name overflow">${spell.name}</p>
         <p class="spell_head_text head_level">${spell.level}</p>
         <p class="spell_head_text head_class overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
-        <p id="${spell.spellid}_head3" class="spell_head_text" style="margin: auto;" onclick="checkBookStatus('${spell.spellid}'); event.stopPropagation()">${spellbook.indexOf(spell.spellid) != -1 ? "Quick Remove" : "Quick Add"}</p>
+        <p id="${spell.spellid}_head3" class="spell_head_text" style="margin: auto;" onclick="check_book_status('${spell.spellid}'); event.stopPropagation()">${spellbook.indexOf(spell.spellid) != -1 ? "Quick Remove" : "Quick Add"}</p>
     </div>
 
     <div class="rowContainer">
@@ -106,7 +106,7 @@ function populate_spells(jsonResponse) {
             <p class="spellDispDescExp">${spell.source.length > 2 ? "<b>Source:</b> " + spell.source : "<b>Sources:</b> " + spell.source.join(", ")}</p>
         </div>
 
-        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}_cr" onClick="checkBookStatus('${spell.spellid}_cr')">
+        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}_cr" onClick="check_book_status('${spell.spellid}_cr')">
             <p class="textToBook">${spellbook.indexOf(spell.spellid) != -1 ? "Remove from Spellbook" : "Add to Spellbook"}</p>
         </div>
     </div>
@@ -120,7 +120,7 @@ function populate_spells(jsonResponse) {
 
 function add_to_book(id) {
     // check for settings and abort
-    if (spellChar == 4) return
+    if (spell_char == 4) return
 
     if (id.endsWith("_cr")) {
         id = id.slice(0,id.indexOf("_cr"))
@@ -139,18 +139,18 @@ function add_to_book(id) {
         document.getElementById(id+"_head3").innerHTML = "Quick Add"
     }
 
-    updateBook()
+    update_book()
 
     if (spellbook.length == 0) {
-        popEmptySpellbook()
+        pop_empty_spellbook()
     } else {
-        makeBookRequest(spellbook)
+        make_book_request(spellbook)
     }
 }
 
 function remove_from_book(id) {
     // check for settings and abort
-    if (spellChar == 4) return
+    if (spell_char == 4) return
 
     if (id.indexOf("_") != -1) {
         id = id.slice(0, id.indexOf("_"))
@@ -167,13 +167,13 @@ function remove_from_book(id) {
         preplist.splice(preplist.indexOf(id), 1)
     }
 
-    updateBook()
+    update_book()
 
     if (spellbook.length == 0) {
-        popEmptySpellbook()
+        pop_empty_spellbook()
     } else {
         // remove spell
-        var book_spell = document.getElementById(id + '_bk_' + spellChar)  // spell
+        var book_spell = document.getElementById(id + '_bk_' + spell_char)  // spell
         var prep_book_cntnr = book_spell.parentElement  // spell+prep
         var lvl_cntnr = prep_book_cntnr.parentElement  // level container
         var ndx = [...lvl_cntnr.children].indexOf(prep_book_cntnr) // index of spell

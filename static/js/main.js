@@ -639,7 +639,7 @@ function prep_spell(id) {
     } else {
         preplist.splice(preplist.indexOf(name), 1)
     }
-    updateBook()
+    update_book()
 }
 
 function update_prep_spells(char) {
@@ -742,7 +742,7 @@ function add_to_book(id) {
         document.getElementById(id+"_head3").children[0].innerHTML = "Quick Add"
     }
 
-    updateBook()
+    update_book()
 
     if (spellbook.length == 0) {
         pop_empty_spellbook()
@@ -771,7 +771,7 @@ function remove_from_book(id) {
         preplist.splice(preplist.indexOf(id), 1)
     }
 
-    updateBook()
+    update_book()
 
     if (spellbook.length == 0) {
         pop_empty_spellbook()
@@ -1393,7 +1393,7 @@ function update_storage() {
     localStorage.setItem("collapsed", character.collapsed.join("+"))
 }
 
-function updateBook() {
+function update_book() {
     // gets current character
     character.main = spell_char
     var ndx = spell_char - 1

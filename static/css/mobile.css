@@ -420,6 +420,10 @@ body {
     font-size: 200%;
 }
 
+.add_subs_text {
+    font-size: 175%;
+}
+
 
 .column_container {
     display: flex;
