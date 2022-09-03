@@ -35,7 +35,7 @@ function toggle_head(id) {
     classes.classList.toggle("invis")
 }
 
-function clrESO(){
+function clear_filters(){
     divs = document.querySelectorAll("div.sortSelected")
     divs.forEach(element => {
         element.classList.remove('sortSelected')
@@ -69,7 +69,7 @@ function clrESO(){
     makeFilterRequest('nameSort', 0, currentFilter)
 }
 
-function populateSpells(jsonResponse) {
+function populate_spells(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")
     spells.innerHTML = ''
@@ -118,7 +118,7 @@ function populateSpells(jsonResponse) {
     })
 }
 
-function addToBook(id) {
+function add_to_book(id) {
     // check for settings and abort
     if (spellChar == 4) return
 
@@ -190,7 +190,7 @@ function remove_from_book(id) {
     }
 }
 
-function updateButtons() {
+function update_buttons() {
     var buttons = [...document.getElementsByClassName("spellToBook")]
     buttons.forEach(button => {
         var target = button.children[0]
