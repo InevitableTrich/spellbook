@@ -378,7 +378,7 @@ function getSubs(class_name) {
     }
 }
 
-function clearSubs(class_name){  // left off here
+function clearSubs(class_name){
     delete filterState["subs"]
     currentFilter = "{\"filter\": " + JSON.stringify(filterState) + "}"
 }
@@ -472,15 +472,17 @@ function clrESO(){
         e.classList.toggle("sortSelected")
     })
 
-    document.querySelector("#subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
-    for([key] of Object.entries(subs)){
-        subs[key][0] = false
+    document.getElementById("subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
+    document.getElementById("add_subclass_spells").remove()
+    for([key] of Object.entries(subclass_lists)){
+        subclass_lists[key].enabled = false
     }
-    subs_list = []
+
+    visible_subclasses = []
 
     filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
     filters.forEach(id => {
-        if (document.querySelector("#" + id + "_ops").getAttribute('collapsed') === 'false') {
+        if (document.getElementById(id + "_ops").getAttribute('collapsed') === 'false') {
             CycleList(id)
         }
     });
@@ -516,7 +518,8 @@ function updateSpellSlots() {
     var spellSlots = {
         "sub": [[2], [2],  [3], [3], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3, 2], [4, 3, 2], [4, 3, 3], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 1], [4, 3, 3, 2], [4, 3, 3, 2], [4, 3, 3, 3, 1], [4, 3, 3, 3, 1], [4, 3, 3, 3, 2], [4, 3, 3, 3, 2]],
         "main": [[2], [3], [4, 2], [4, 3], [4, 3, 2], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 2], [4, 3, 3, 3, 1], [4, 3, 3, 3, 2], [4, 3, 3, 3, 2, 1], [4, 3, 3, 3, 2, 1], [4, 3, 3, 3, 2, 1, 1], [4, 3, 3, 3, 2, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1, 1], [4, 3, 3, 3, 3, 1, 1, 1, 1], [4, 3, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 3, 2, 2, 1, 1] ],
-        "warlock": [[1], [2], [0, 2], [0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4]]}
+        "warlock": [[1], [2], [0, 2], [0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4]]
+    }
 
 
     var class_name = document.getElementById("classes").selectedOptions[0].value
@@ -695,7 +698,7 @@ function book_switch_view(id) {
         document.getElementById("charName"+prev).classList.toggle("char_select")
     }
 
-    book_switch_vis(id) // tabs
+    book_switch_vis(num, prev) // tabs
     book_switch_main(num, prev)  // main container
 }
 
@@ -707,22 +710,12 @@ function book_switch_main(id, prev_id) {  // switches main page visibility
     next.classList.toggle("invis")
 }
 
-function book_switch_vis(id) {  // switches tab visibility
-    var current = document.getElementById(id)
-    var container = document.getElementById("book_char_container")
-    var children = [...container.children]
+function book_switch_vis(num, prev) {  // switches tab visibility
+    var prev = document.getElementById("char"+prev)
+    var next = document.getElementById("char"+num)
 
-    children.forEach(child => {
-        if (child === current) {
-            if (child.className.indexOf("book_char_exp") == -1) {
-                child.className += " book_char_exp"
-            }
-        } else {
-            if (child.className.indexOf("book_char_exp") != -1) {
-                child.className = child.className.replace(" book_char_exp","")
-            }
-        }
-    })
+    prev.classList.toggle("book_char_exp")
+    next.classList.toggle("book_char_exp")
 }
 
 function checkBookStatus(id) {
@@ -801,7 +794,7 @@ function remove_from_book(id) {
     }
 }
 
-function updateCharName(id) {
+function updateCharName(id) {  // update name on tabs
     var char = document.getElementById("char"+id.slice(-1))
     var name = document.getElementById(id).value
     if (name == "") {
@@ -870,7 +863,7 @@ function makeBookRequest(book) {
 }
 
 function makeFilterRequest(fieldid, direction, filter){
-    if (window.location.href == 'http://127.0.0.1:8000/') {
+    if (window.location.href.startsWith == 'http://127.0.0.1:8000/') {
         url = 'http://127.0.0.1:8000/filter'
         loc = 'l'
     } else {
@@ -883,40 +876,40 @@ function makeFilterRequest(fieldid, direction, filter){
 }
 
 function toggleFilter(){
-    var top = document.querySelector('#ef_top')
-    var text = document.querySelector('#ef_top p')
-    var body = document.querySelector('#ef_body')
+    var top = document.getElementById('ef_top')
+    var text = document.getElementById('ef_top').children[0]
+    var body = document.getElementById('ef_body')
     isCollapsed = body.getAttribute('collapsed') === 'true';
+
+    top.classList.toggle('shrink')
     if (isCollapsed) {
-        top.className = top.className.replace(' shrink', '')
         text.innerHTML = 'Shrink Filter Options'
         body.setAttribute('collapsed', 'false')
         expandSection(body)
     } else {
-        top.className += ' shrink'
         text.innerHTML = 'Expand Filter Options'
         body.setAttribute('collapsed', 'true')
         collapseSection(body)
+        filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
+        filters.forEach(id => {
+            if (document.getElementById(id + "_ops").getAttribute('collapsed') === 'false') {
+                CycleList(id)
+            }
+        });
     }
-    filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
-    filters.forEach(id => {
-        if (document.querySelector("#" + id + "_ops").getAttribute('collapsed') === 'false') {
-            CycleList(id)
-        }
-    });
 }
 
-function CycleList(dID){
-    ops = dID + "_ops"
-    var current = document.querySelector("#" + ops)
+function CycleList(dID){  // toggle filter sections
+    var ops = dID + "_ops"
+    var current = document.getElementById(ops)
     collapse(current)
-    var arrow = document.querySelector("#" + dID + "_arr")
+    var arrow = document.getElementById(dID + "_arr")
+
+    arrow.classList.toggle("rot-right")
     isCollapsed = arrow.getAttribute('collapsed') === 'true'
     if (!isCollapsed) {
-        arrow.classList += " rot-right"
         arrow.setAttribute('collapsed', 'true')
     } else {
-        arrow.classList.remove("rot-right")
         arrow.setAttribute('collapsed', 'false')
     }
 }
