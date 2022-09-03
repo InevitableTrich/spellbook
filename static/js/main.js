@@ -1091,11 +1091,11 @@ function populateSpells(jsonResponse) {
 function popEmptySpellbook(char = spellChar) {
     var spells = document.getElementById("book_container_"+char)
     spells.innerHTML = `
-<p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
+        <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells.</p>
     `
 }
 
-function updateButtons() { // rewrite this
+function updateButtons() {
     var buttons = [...document.getElementsByClassName("spellToBook")]
     buttons.forEach(button => {
         var target = button.children[0]
@@ -1103,7 +1103,6 @@ function updateButtons() { // rewrite this
             target.innerHTML = "Add to Spellbook"
         } else {
             target.innerHTML = "Remove from Spellbook"
-            document.getElementById(button.id.slice(9)+"_head3")
         }
     })
 }
@@ -1413,45 +1412,4 @@ function updateBook() {
 
     // update storage
     update_storage()
-}
-
-function readBook() {
-    // gets current character
-    spellChar = character.main
-    var ndx = spellChar - 1
-
-    // get spellbook
-    spellbook = character.books[ndx]
-
-    // check for empty spellbook
-    if (spellbook.indexOf("") != -1) spellbook.pop(0)
-
-    // populate spellbook if there are spells, or set empty spellbook text
-    if (spellbook.length > 0) {
-        makeBookRequest(spellbook)
-    } else {
-        popEmptySpellbook()
-    }
-    updateButtons()
-
-    // set prep list
-    preplist = [...character.prepped[ndx]]
-
-    // check for empty prep list
-    if (preplist.indexOf("") != -1) preplist.pop(0)
-
-    // get character data
-    var clas = character.classes[ndx]
-    var level = character.levels[ndx]
-
-    // set data gathered
-    document.getElementById("classes").selectedIndex = clas
-    document.getElementById("lvInput").value = level
-    updateSpellSlots()
-
-    // get slots used
-    slots_used = character.slots[ndx]
-
-    // get collapsed headers
-    col_heads = [...character.collapsed[ndx]]
 }
