@@ -16,7 +16,7 @@ def getspells(sort='name', sortby=pymongo.ASCENDING):
     return spells
 
 
-def filter_spells(filters, pagestart, pageend, sort='name', sortby=pymongo.ASCENDING):
+def filter_spells(filters, pagestart, sort='name', sortby=pymongo.ASCENDING):
     col = getspellscollection()
 
     formatted_filter = {'$and': [{'$or': [{"classes": {"$in": []}}]}]}
@@ -33,14 +33,14 @@ def filter_spells(filters, pagestart, pageend, sort='name', sortby=pymongo.ASCEN
         if formatted_filter["$and"][0]["$or"] == [{"classes": {"$in": []}}]:
             formatted_filter["$and"][0].pop("$or")
 
-    spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}).sort(
-        [(sort, sortby), ("name", sortby)])[pagestart:pageend]]
+    spells = [x for x in col.find(filter=formatted_filter, skip=pagestart, batch_size=30, projection={'_id': False}).sort(
+        [(sort, sortby), ("name", sortby)])]
 
     spellscount = col.count_documents(filter=formatted_filter)
     return spells, spellscount
 
 
-def search_filter_spells(filters, searchquery, pagestart, pageend, sort='name', sortby=pymongo.ASCENDING):
+def search_filter_spells(filters, searchquery, pagestart, sort='name', sortby=pymongo.ASCENDING):
     col = getspellscollection()
 
     formatted_filter = {}
@@ -50,10 +50,10 @@ def search_filter_spells(filters, searchquery, pagestart, pageend, sort='name', 
 
     if sort == "name":
         spells = [x for x in
-                  col.find(filter=formatted_filter, projection={'_id': False}).sort(sort, sortby)[pagestart:pageend]]
+                  col.find(filter=formatted_filter, projection={'_id': False}, skip=pagestart, batch_size=30).sort(sort, sortby)]
     else:
-        spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}).sort(
-            [(sort, sortby), ("name", sortby)])[pagestart:pageend]]
+        spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}, skip=pagestart, batch_size=30).sort(
+            [(sort, sortby), ("name", sortby)])]
 
     spellscount = col.count_documents(filter=formatted_filter)
     return spells, spellscount

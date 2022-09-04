@@ -18,7 +18,6 @@ class FilterSpellsViewImpl(object):
         spellskwargs = {}
 
         spellnumsstart = (page - 1) * spellsperpage
-        spellnumsend = (page * spellsperpage)
 
         if field:
             sortfield = field[0:-4]
@@ -33,10 +32,10 @@ class FilterSpellsViewImpl(object):
             sortdir = pymongo.DESCENDING
             spellskwargs['sortby'] = sortdir
         if searchquery == '':
-            spells, spellscount = spellmgr.filter_spells(filterdata, spellnumsstart, spellnumsend, **spellskwargs)
+            spells, spellscount = spellmgr.filter_spells(filterdata, spellnumsstart, **spellskwargs)
             return {"spells": spells, "spellscount": spellscount}
 
-        spells, spellscount = spellmgr.search_filter_spells(filterdata, searchquery, spellnumsstart, spellnumsend,
+        spells, spellscount = spellmgr.search_filter_spells(filterdata, searchquery, spellnumsstart,
                                                             **spellskwargs)
         return {"spells": spells, "spellscount": spellscount}
 
