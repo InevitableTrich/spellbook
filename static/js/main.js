@@ -6,9 +6,9 @@ var filter_state = {}
 var current_filter = JSON.stringify({"filter": {}})
 var search_query = ''
 var sort_state = {
-  0: '-',
-  1: '▼',
-  2: '▲',
+  0: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 2 4.5 l 0 1 l 6 0 l 0 -1 z"/></svg>',
+  1: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 0 0 l 10 0 l -5 8.65 z"/></svg>',
+  2: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 0 8.65 l 10 0 l -5 -8.65 z"/></svg>',
   "nameSort": "Spell Name: ",
   "levelSort": "Spell Level: "
 }

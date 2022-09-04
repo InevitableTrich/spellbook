@@ -1094,6 +1094,12 @@ tr:nth-child(odd) {
     transition: opacity 3s ease-in, visibility 0s linear 3s;
 }
 
+.sort_arrow {
+    width: 22px;
+    margin: -6px;
+    margin-left: 3px;
+}
+
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 
