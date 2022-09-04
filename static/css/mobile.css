@@ -427,6 +427,16 @@ body {
     font-size: 175%;
 }
 
+.settings_popup {
+    width: 40%;
+    height: 3%;
+}
+.popup_text {
+    font-size: 175%;
+}
+.popup_mark {
+    font-size: 350%;
+}
 
 .column_container {
     display: flex;

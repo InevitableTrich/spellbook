@@ -716,7 +716,13 @@ function book_switch_vis(num, prev) {  // switches tab visibility
     next.classList.toggle("book_char_exp")
 }
 
-function check_book_status(id) {
+function check_book_status(id, event) {
+    // check for settings and abort
+    if (spell_char == 4) {
+        settings_popup(event)
+        return
+    }
+
     if (spellbook.indexOf(id) == -1) {  // is in spellbook
         add_to_book(id)
     } else {  // isn't in spellbook
@@ -724,10 +730,24 @@ function check_book_status(id) {
     }
 }
 
-function add_to_book(id) {
-    // check for settings and abort
-    if (spell_char == 4) return
+function settings_popup(event) {
+    var popup = document.getElementById("settings_popup")
+    popup.classList.remove("zero_opacity")
+//    popup.classList.remove("invis")
 
+    var pos_x = event.pageX - popup.clientWidth
+    var pos_y = event.pageY - popup.clientHeight
+
+    popup.style.left = pos_x + 'px'
+    popup.style.top = pos_y + 'px'
+    popup.classList.add("zero_opacity")
+//    setTimeout(function(){
+//        popup.classList.add("invis")
+//    }, 3000);
+
+}
+
+function add_to_book(id) {
     var btn_char = document.getElementById("book_btn_" + id).children[0]
 
     if (spellbook.indexOf(id) == -1) {
@@ -750,9 +770,6 @@ function add_to_book(id) {
 }
 
 function remove_from_book(id) {
-    // check for settings and abort
-    if (spell_char == 4) return
-
     if (id.indexOf("_") != -1) {
         id = id.slice(0, id.indexOf("_"))
     }
@@ -1036,7 +1053,7 @@ function populate_spells(jsonResponse) {
         <div class="classes" id="${spell.spellid+'_head2'}">
             <p class="spellDispDesc overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
         </div>
-        <div class="quick_add" id="${spell.spellid+'_head3'}" onclick="check_book_status('${spell.spellid}'); event.stopPropagation()">
+        <div class="quick_add" id="${spell.spellid+'_head3'}" onclick="check_book_status('${spell.spellid}', event); event.stopPropagation()">
             <p class="spellDispDesc overflow" style="margin: auto;">${spellbook.indexOf(spell.spellid) != -1 ? "Quick Remove" : "Quick Add"}</p>
         </div>
         <div class="closeBtn">
@@ -1065,7 +1082,7 @@ function populate_spells(jsonResponse) {
             <br>
         </div>
 
-        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}" onClick="check_book_status('${spell.spellid}')">
+        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}" onClick="check_book_status('${spell.spellid}', event)">
             <p class="textToBook">${spellbook.indexOf(spell.spellid) != -1 ? "Remove from Spellbook" : "Add to Spellbook"}</p>
         </div>
     </div>

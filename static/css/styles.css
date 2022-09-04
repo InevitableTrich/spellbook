@@ -1065,6 +1065,37 @@ tr:nth-child(odd) {
     width: 84px;
 }
 
+.settings_popup {
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    opacity: 1;
+    width: 19%;
+    height: 6%;
+    background-color: rgb(60, 60, 60);
+    border: rgb(90, 90, 90) solid 3px;
+    border-radius: 10px;
+}
+.popup_text {
+    color: rgb(232, 232, 232);
+    font-size: 125%;
+    margin: auto;
+    text-align: center;
+}
+.popup_mark {
+    color: rgb(232, 232, 232);
+    font-weight: 900;
+    font-size: 250%;
+    margin: auto 0px;
+}
+.zero_opacity {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 3s ease-in, visibility 0s linear 3s;
+}
+
+
+/*-------------------------------------------------------------------------------------------------------------------*/
 
 
 tb {

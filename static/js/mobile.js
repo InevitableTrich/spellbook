@@ -88,7 +88,7 @@ function populate_spells(jsonResponse) {
         <p class="spell_head_text head_name overflow">${spell.name}</p>
         <p class="spell_head_text head_level">${spell.level}</p>
         <p class="spell_head_text head_class overflow">${spell.classes[0] ? spell.subclasses ? spell.classes.sort().join(", ") + ", " + spell.subclasses.sort().join(", ") : spell.classes.sort().join(", ") : spell.subclasses.sort().join(", ")}</p>
-        <p id="${spell.spellid}_head3" class="spell_head_text" style="margin: auto;" onclick="check_book_status('${spell.spellid}'); event.stopPropagation()">${spellbook.indexOf(spell.spellid) != -1 ? "Quick Remove" : "Quick Add"}</p>
+        <p id="${spell.spellid}_head3" class="spell_head_text" style="margin: auto;" onclick="check_book_status('${spell.spellid}', event); event.stopPropagation()">${spellbook.indexOf(spell.spellid) != -1 ? "Quick Remove" : "Quick Add"}</p>
     </div>
 
     <div class="rowContainer">
@@ -108,7 +108,7 @@ function populate_spells(jsonResponse) {
             <p class="spellDispDescExp">${spell.source.length > 2 ? "<b>Source:</b> " + spell.source : "<b>Sources:</b> " + spell.source.join(", ")}</p>
         </div>
 
-        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}_cr" onClick="check_book_status('${spell.spellid}_cr')">
+        <div class="spellToBook clickable invis add_book_hidden" id="book_btn_${spell.spellid}_cr" onClick="check_book_status('${spell.spellid}_cr', event)">
             <p class="textToBook">${spellbook.indexOf(spell.spellid) != -1 ? "Remove from Spellbook" : "Add to Spellbook"}</p>
         </div>
     </div>
