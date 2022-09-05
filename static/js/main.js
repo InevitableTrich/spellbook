@@ -189,6 +189,8 @@ document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
         var r = delete_prompt(close=true)
         if (r > 0) toggle_book(close=true)
+    } else if (event.key == 'b') {
+        if (document.getElementById('delete_back').classList.contains('invis')) toggle_book()
     }
 });
 
