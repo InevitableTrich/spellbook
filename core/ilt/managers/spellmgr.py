@@ -43,9 +43,19 @@ def filter_spells(filters, pagestart, sort='name', sortby=pymongo.ASCENDING):
 def search_filter_spells(filters, searchquery, pagestart, sort='name', sortby=pymongo.ASCENDING):
     col = getspellscollection()
 
-    formatted_filter = {}
-    for field, values in filters.items():
-        formatted_filter[field] = {"$in": values}
+    formatted_filter = {'$and': [{'$or': [{"classes": {"$in": []}}]}]}
+    if filters == {}:
+        formatted_filter = {}
+    else:
+        for field, values in filters.items():
+            if field == "subs":
+                formatted_filter["$and"][0]["$or"].append({"subclasses": {"$in": values}})
+            elif field == "classes":
+                formatted_filter["$and"][0]["$or"].append({"classes": {"$in": values}})
+            else:
+                formatted_filter["$and"].append({field: {"$in": values}})
+        if formatted_filter["$and"][0]["$or"] == [{"classes": {"$in": []}}]:
+            formatted_filter["$and"][0].pop("$or")
     formatted_filter["$text"] = {"$search": searchquery}
 
     if sort == "name":
