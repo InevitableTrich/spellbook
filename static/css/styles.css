@@ -30,8 +30,6 @@ body {
 .title {
     margin: 6%;
     color: rgb(222, 222, 222);
-    text-decoration: underline;
-    text-decoration-color: rgb(80,80,80);
 }
 
 .darkOption {
@@ -573,8 +571,8 @@ body {
     min-height: 600px;
     width: 70%;
     height: 70%;
-    position: fixed;
-    right: 15%;
+    position: absolute;
+    left: 15%;
     top: 10%;
     border: rgb(80,80,80) solid 3px;
     border-radius: 20px;
@@ -1124,6 +1122,35 @@ tr:nth-child(odd) {
     100% {transform: rotate(360deg)}
 }
 
+.book_char_spec_tab {
+    position: absolute;
+    left: -4.5%;
+    top: 3%;
+    transition: left .3s;
+    background-color: rgb(50,50,50);
+    border: rgb(80,80,80) 3px solid;
+    border-radius: 15px 0px 0px 15px;
+    width: 17%;
+    height: 92%;
+    z-index: -1;
+}
+.book_char_spec_tab_out {
+    left: -17.5%;
+}
+.book_char_spec_text {
+    color: rgb(222,222,222);
+    font-size: 125%;
+    margin: auto;
+    padding: 0px 5px;
+}
+.book_char_spec_container0 {
+    display: flex;
+    border-right: rgb(80,80,80) 3px solid;
+    margin: 0px;
+    height: 100%;
+    width: max(0px, 23%);
+}
+
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 
@@ -1196,7 +1223,8 @@ bi {
     writing-mode: vertical-lr;
 }
 .v_text_l {
-    writing-mode: vertical-rl;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg)
 }
 
 ::-webkit-scrollbar {
