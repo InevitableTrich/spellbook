@@ -33,8 +33,8 @@ def filter_spells(filters, pagestart, sort='name', sortby=pymongo.ASCENDING):
         if formatted_filter["$and"][0]["$or"] == [{"classes": {"$in": []}}]:
             formatted_filter["$and"][0].pop("$or")
 
-    spells = [x for x in col.find(filter=formatted_filter, skip=pagestart, batch_size=30, projection={'_id': False}).sort(
-        [(sort, sortby), ("name", sortby)])]
+    spells = [x for x in col.find(filter=formatted_filter, skip=pagestart, projection={'_id': False}).sort(
+        [(sort, sortby), ("name", sortby)]).limit(30)]
 
     spellscount = col.count_documents(filter=formatted_filter)
     return spells, spellscount
@@ -50,10 +50,10 @@ def search_filter_spells(filters, searchquery, pagestart, sort='name', sortby=py
 
     if sort == "name":
         spells = [x for x in
-                  col.find(filter=formatted_filter, projection={'_id': False}, skip=pagestart, batch_size=30).sort(sort, sortby)]
+                  col.find(filter=formatted_filter, projection={'_id': False}, skip=pagestart).sort(sort, sortby).limit(30)]
     else:
-        spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}, skip=pagestart, batch_size=30).sort(
-            [(sort, sortby), ("name", sortby)])]
+        spells = [x for x in col.find(filter=formatted_filter, projection={'_id': False}, skip=pagestart).sort(
+            [(sort, sortby), ("name", sortby)]).limit(30)]
 
     spellscount = col.count_documents(filter=formatted_filter)
     return spells, spellscount

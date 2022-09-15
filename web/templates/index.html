@@ -427,7 +427,7 @@
                 <div id="playerContainer" class="player_container">
                     <div id="player_options" class="player_options">
                         <label for="classes" id="class_dropdown" class="char_text" style="margin-top: 10px;">Class:</label>
-                        <select id="classes" name="classes" class="class_list" onchange="update_spell_slots(); updateBook()">
+                        <select id="classes" name="classes" class="class_list" onchange="update_spell_slots(); make_class_trackers();update_book()">
                             <option value="artificer">Artificer</option>
                             <option value="bard">Bard</option>
                             <option value="cleric">Cleric</option>
@@ -441,7 +441,7 @@
                         </select>
 
                         <p id="player_level" class="char_text">Level:</p>
-                        <input id="lvInput" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="update_spell_slots(); updateBook()">
+                        <input id="lvInput" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="update_spell_slots(); update_book()">
 
                         <p id="slots" class="char_text" style="margin-bottom: 0px;">Spell Slots:</p>
                         <div id="slots_container">

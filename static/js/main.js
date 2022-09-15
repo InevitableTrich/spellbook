@@ -189,7 +189,7 @@ document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
         var r = delete_prompt(close=true)
         if (r > 0) toggle_book(close=true)
-    } else if (event.key == 'b') {
+    } else if (event.key == 'b' && document.activeElement.nodeName != 'INPUT') {
         if (document.getElementById('delete_back').classList.contains('invis')) toggle_book()
     }
 });
@@ -882,7 +882,7 @@ function make_book_request(book) {
 }
 
 function make_filter_request(fieldid, direction, filter){
-    if (window.location.href.startsWith == 'http://127.0.0.1:8000/') {
+    if (window.location.href.startsWith('http://127.0.0.1:8000/')) {
         url = 'http://127.0.0.1:8000/filter'
         loc = 'l'
     } else {
