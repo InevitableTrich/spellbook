@@ -678,6 +678,7 @@ function book_switch_view(id) {
         // set char info
         document.getElementById("classes").selectedIndex = clas
         document.getElementById("lvInput").value = level
+        update_char_spec_tab(clas)
 
         // check used slots
         slots_used = character.slots[ndx]
@@ -736,7 +737,6 @@ function check_book_status(id, event) {
 function settings_popup(event) {
     var popup = document.getElementById("settings_popup")
     popup.classList.remove("zero_opacity")
-//    popup.classList.remove("invis")
 
     var pos_x = event.pageX - popup.clientWidth
     var pos_y = event.pageY - popup.clientHeight
@@ -744,10 +744,6 @@ function settings_popup(event) {
     popup.style.left = pos_x + 'px'
     popup.style.top = pos_y + 'px'
     popup.classList.add("zero_opacity")
-//    setTimeout(function(){
-//        popup.classList.add("invis")
-//    }, 3000);
-
 }
 
 function add_to_book(id) {
@@ -931,6 +927,30 @@ function cycle_list(dID){  // toggle filter sections
     } else {
         arrow.setAttribute('collapsed', 'false')
     }
+}
+
+function update_char_spec_tab(ndx) {
+    var class_name = document.getElementById("classes")[ndx].innerHTML
+    document.getElementById("book_char_spec_text").innerHTML = "Open " + class_name + " Menu"
+
+    var class_counters = {
+        "Artificer": ["Prepared", "Tinkering", "Infusions", "Flash"],
+        "Bard": ["Prepared", "Inspiration", "Extra 1", "Extra 2"],
+        "Cleric": ["Prepared", "Divinity", "Extra 1", "Extra 2"],
+        "Druid": ["Prepared", "Wild Shape", "Extra 1", "Extra 2"],
+        "Monk": ["Ki", "Extra 1", "Extra 2", "Extra 3"],
+        "Paladin": ["Prepared", "Lay on Hands", "Extra 1", "Extra 2"],
+        "Ranger": ["Known", "Extra 1", "Extra 2", "Extra 3"],
+        "Sorcerer": ["Known", "Points", "Extra 1", "Extra 2"],
+        "Warlock": ["Known", "Extra 1", "Extra 2", "Extra 3"],
+        "Wizard": ["Prepared", "Extra 1", "Extra 2", "Extra 3"]
+    }
+
+    i = 1
+    class_counters[class_name].forEach(name => {
+        document.getElementById("count_"+i+"_text").innerHTML = name
+        i += 1
+    })
 }
 
 function spell_format_higher(high) {
@@ -1278,7 +1298,8 @@ function check_storage() {
         "books", // 5
         "prepped", // 6
         "slots", // 7
-        "collapsed" // 8
+        "collapsed", // 8
+        "class_spec" // 9
     ]
     var values = [
         "1", // 1
@@ -1288,7 +1309,8 @@ function check_storage() {
         "++", // 5
         "++", // 6
         "0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0", // 7
-        "++" // 8
+        "++", // 8
+        "++" // 9
     ]
     checks.forEach((check, index) => {
         if (localStorage.getItem(check) == null) localStorage.setItem(check, values[index])
@@ -1346,6 +1368,7 @@ function read_storage() {
     // set data gathered
     document.getElementById("classes").selectedIndex = clas
     document.getElementById("lvInput").value = level
+    update_char_spec_tab(clas)
 
     load_all_books()
 }

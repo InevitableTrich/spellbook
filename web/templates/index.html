@@ -426,7 +426,25 @@
             <div id="book_char_spec_tab" class="book_char_spec_tab">
                 <div class="rowContainer" style="height: 100%;">
                     <div class="book_char_spec_container0 clickable" onclick="document.getElementById('book_char_spec_tab').classList.toggle('book_char_spec_tab_out')">
-                        <p id="book_char_spec_text" class="book_char_spec_text v_text_l">Open Class Specific Menu</p>
+                        <p id="book_char_spec_text" class="book_char_spec_text v_text_l">Open Class Menu</p>
+                    </div>
+                    <div id="class_spec_main" class="columnContainer" style="margin: auto; height: 90%; justify-content: space-evenly;">
+                        <div class="columnContainer" style="text-align: center;">
+                            <p id="count_1_text" class="char_text">count_1:</p>
+                            <input id="count_1" autocomplete="off" class="level_input" placeholder="c1" value="1" onchange="">
+                        </div>
+                        <div class="columnContainer" style="text-align: center;">
+                            <p id="count_2_text" class="char_text">count_2:</p>
+                            <input id="count_2" autocomplete="off" class="level_input" placeholder="c2" value="1" onchange="">
+                        </div>
+                        <div class="columnContainer" style="text-align: center;">
+                            <p id="count_3_text" class="char_text">count_3:</p>
+                            <input id="count_3" autocomplete="off" class="level_input" placeholder="c3" value="1" onchange="">
+                        </div>
+                        <div class="columnContainer" style="text-align: center;">
+                            <p id="count_4_text" class="char_text">count_4:</p>
+                            <input id="count_4" autocomplete="off" class="level_input" placeholder="c4" value="1" onchange="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -434,7 +452,7 @@
                 <div id="playerContainer" class="player_container">
                     <div id="player_options" class="player_options">
                         <label for="classes" id="class_dropdown" class="char_text" style="margin-top: 10px;">Class:</label>
-                        <select id="classes" name="classes" class="class_list" onchange="update_spell_slots(); make_class_trackers();update_book()">
+                        <select id="classes" name="classes" class="class_list" onchange="update_spell_slots(); update_char_spec_tab(selectedIndex); update_book()">
                             <option value="artificer">Artificer</option>
                             <option value="bard">Bard</option>
                             <option value="cleric">Cleric</option>
