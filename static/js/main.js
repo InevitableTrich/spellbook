@@ -191,8 +191,10 @@ document.addEventListener('keydown', function(event) {
     if(event.key == 'Escape') {
         var r = delete_prompt(close=true)
         if (r > 0) toggle_book(close=true)
-    } else if (event.key == 'b' && document.activeElement.nodeName != 'INPUT') {
-        if (document.getElementById('delete_back').classList.contains('invis')) toggle_book()
+    } else if (event.key == 'b' && document.activeElement.nodeName != 'INPUT' && document.getElementById('delete_back').classList.contains('invis')) {
+        toggle_book()
+    } else if (event.key == 'c' && document.activeElement.nodeName != 'INPUT' && !document.getElementById('bookCon').classList.contains('invis')) {
+        document.getElementById('book_char_spec_tab').classList.toggle('book_char_spec_tab_out')
     }
 });
 
@@ -949,23 +951,24 @@ function update_char_spec_tab(ndx) {
     }
 
     for (var i = 0; i < 4; i++) {
-        if (character.spec_names[spell_char-1][i] == "x") {
+        if (character.spec_names[spell_char-1][i] == "") {
             document.getElementById("count_"+(i+1)+"_text").innerHTML = class_counters[class_name][i]
         } else {
             document.getElementById("count_"+(i+1)+"_text").innerHTML = character.spec_names[spell_char-1][i]
         }
-        if (character.spec_values[spell_char-1][i] == "-1"){
-            document.getElementById("count_"+(i+1)).value = 1
+        if (character.spec_values[spell_char-1][i] == ""){
+            document.getElementById("count_"+(i+1)).value = 0
         } else {
             document.getElementById("count_"+(i+1)).value = character.spec_values[spell_char-1][i]
         }
     }
-//
-//    i = 1
-//    class_counters[class_name].forEach(name => {
-//        document.getElementById("count_"+i+"_text").innerHTML = name
-//        i += 1
-//    })
+}
+
+function update_class_values() {
+    var values = []
+    for (var i = 1; i <= 4; i++) values.push(document.getElementById("count_"+(i)).value)
+    character.spec_values[spell_char-1] = [...values]
+    localStorage.setItem("spec_values", character.spec_values.join("+"))
 }
 
 function spell_format_higher(high) {
@@ -1326,8 +1329,8 @@ function check_storage() {
         "++", // 6
         "0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0", // 7
         "++", // 8
-        "x,x,x,x+x,x,x,x+x,x,x,x", // 9
-        "-1,-1,-1,-1+-1,-1,-1,-1+-1,-1,-1,-1" // 10
+        ",,,+,,,+,,,", // 9
+        ",,,+,,,+,,," // 10
     ]
     checks.forEach((check, index) => {
         if (localStorage.getItem(check) == null) localStorage.setItem(check, values[index])
