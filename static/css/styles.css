@@ -1166,6 +1166,14 @@ bi {
     font-style: italic;
 }
 
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
 .menu_button {
     width: 56px;
     height: 56px;

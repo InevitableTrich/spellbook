@@ -34,6 +34,8 @@ class Spellbook_Data {
         this.prepped = [[],[],[]]
         this.slots = [[],[],[]]
         this.collapsed = [[],[],[]]
+        this.spec_names = [["", "", "", ""],["", "", "", ""],["", "", "", ""]]
+        this.spec_values = [[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0]]
     }
 }
 var character = new Spellbook_Data()
@@ -946,11 +948,24 @@ function update_char_spec_tab(ndx) {
         "Wizard": ["Prepared", "Extra 1", "Extra 2", "Extra 3"]
     }
 
-    i = 1
-    class_counters[class_name].forEach(name => {
-        document.getElementById("count_"+i+"_text").innerHTML = name
-        i += 1
-    })
+    for (var i = 0; i < 4; i++) {
+        if (character.spec_names[spell_char-1][i] == "x") {
+            document.getElementById("count_"+(i+1)+"_text").innerHTML = class_counters[class_name][i]
+        } else {
+            document.getElementById("count_"+(i+1)+"_text").innerHTML = character.spec_names[spell_char-1][i]
+        }
+        if (character.spec_values[spell_char-1][i] == "-1"){
+            document.getElementById("count_"+(i+1)).value = 1
+        } else {
+            document.getElementById("count_"+(i+1)).value = character.spec_values[spell_char-1][i]
+        }
+    }
+//
+//    i = 1
+//    class_counters[class_name].forEach(name => {
+//        document.getElementById("count_"+i+"_text").innerHTML = name
+//        i += 1
+//    })
 }
 
 function spell_format_higher(high) {
@@ -1299,7 +1314,8 @@ function check_storage() {
         "prepped", // 6
         "slots", // 7
         "collapsed", // 8
-        "class_spec" // 9
+        "spec_names", // 9
+        "spec_values" // 10
     ]
     var values = [
         "1", // 1
@@ -1310,7 +1326,8 @@ function check_storage() {
         "++", // 6
         "0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0", // 7
         "++", // 8
-        "++" // 9
+        "x,x,x,x+x,x,x,x+x,x,x,x", // 9
+        "-1,-1,-1,-1+-1,-1,-1,-1+-1,-1,-1,-1" // 10
     ]
     checks.forEach((check, index) => {
         if (localStorage.getItem(check) == null) localStorage.setItem(check, values[index])
@@ -1332,10 +1349,14 @@ function read_storage() {
     var prepped = localStorage.getItem("prepped").split("+")
     var slots = localStorage.getItem("slots").split("+")
     var col_head = localStorage.getItem("collapsed").split("+")
+    var spec_names = localStorage.getItem("spec_names").split("+")
+    var spec_values = localStorage.getItem("spec_values").split("+")
     for (var i = 0; i < 3; i++) {
         character.books[i] = books[i].split(",")
         character.prepped[i] = [...prepped[i].split(",")]
         character.collapsed[i] = col_head[i].split(",")
+        character.spec_names[i] = spec_names[i].split(",")
+        character.spec_values[i] = spec_values[i].split(",")
 
         // remove blanks from prepped and collapsed
         if (character.prepped[i].indexOf("") != -1) character.prepped[i].splice(0,1)
@@ -1432,6 +1453,8 @@ function update_storage() {
     localStorage.setItem("prepped", character.prepped.join("+"))
     localStorage.setItem("slots", character.slots.join("+"))
     localStorage.setItem("collapsed", character.collapsed.join("+"))
+    localStorage.setItem("spec_names", character.spec_names.join("+"))
+    localStorage.setItem("spec_values", character.spec_values.join("+"))
 }
 
 function update_book() {
