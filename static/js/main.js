@@ -34,8 +34,8 @@ class Spellbook_Data {
         this.prepped = [[],[],[]]
         this.slots = [[],[],[]]
         this.collapsed = [[],[],[]]
-        this.spec_names = [["", "", "", ""],["", "", "", ""],["", "", "", ""]]
-        this.spec_values = [[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0]]
+        this.spec_names = [[],[],[]]
+        this.spec_values = [[],[],[]]
     }
 }
 var character = new Spellbook_Data()
@@ -195,6 +195,8 @@ document.addEventListener('keydown', function(event) {
         toggle_book()
     } else if (event.key == 'c' && document.activeElement.nodeName != 'INPUT' && !document.getElementById('bookCon').classList.contains('invis')) {
         document.getElementById('book_char_spec_tab').classList.toggle('book_char_spec_tab_out')
+    } else if ((event.key == '1' || event.key == '2' || event.key == '3' || event.key == '4') && document.activeElement.nodeName != 'INPUT' && !document.getElementById('bookCon').classList.contains('invis')) {
+        book_switch_view(event.key)
     }
 });
 
@@ -702,6 +704,8 @@ function book_switch_view(id) {
 
         // select most recent character
         document.getElementById("charName"+prev).classList.toggle("char_select")
+        // set char spec names
+        update_settings_char_spec_names(prev)
     }
 
     book_switch_vis(num, prev) // tabs
@@ -830,6 +834,42 @@ function select_character(num) {
 
     // select most recent character
     document.getElementById("charName"+num).classList.toggle("char_select")
+
+    // load counter names + values to sidebar
+    update_char_spec_tab(character.classes[num-1], `${num}`)
+    //load counter names to settings
+    update_settings_char_spec_names(num)
+}
+
+function update_settings_char_spec_names(num) {
+    var class_name = document.getElementById("classes")[character.classes[parseInt(num)-1]].innerHTML
+    for (var i = 0; i < 4; i++){
+        if (character.spec_names[num-1][i] == "") {
+            document.getElementById("counter_name_"+(i+1)).value = counter_name_defaults[class_name][i]
+        } else {
+            document.getElementById("counter_name_"+(i+1)).value = character.spec_names[num-1][i]
+        }
+        document.getElementById("counter_name_"+(i+1)).placeholder = counter_name_defaults[class_name][i]
+    }
+}
+
+function save_char_spec_names(num) {
+    var name = document.getElementById("counter_name_"+num)
+
+    if (name.value == "") {
+        document.getElementById("count_"+num+"_text").innerHTML = name.placeholder
+    } else {
+        document.getElementById("count_"+num+"_text").innerHTML = name.value
+    }
+
+    var char = parseInt([...document.getElementsByClassName("char_select")][0].id.slice(-1))
+    var names = []
+    for (var i = 0; i < 4; i++) {
+        names.push(document.getElementById("counter_name_"+(i+1)).value)
+    }
+
+    character.spec_names[char-1] = names
+    localStorage.setItem("spec_names", character.spec_names.join("+"))
 }
 
 function delete_prompt(close=false) {
@@ -933,33 +973,32 @@ function cycle_list(dID){  // toggle filter sections
     }
 }
 
-function update_char_spec_tab(ndx) {
+counter_name_defaults = {
+    "Artificer": ["Prepared", "Tinkering", "Infusions", "Flash"],
+    "Bard": ["Prepared", "Inspiration", "Extra 1", "Extra 2"],
+    "Cleric": ["Prepared", "Divinity", "Extra 1", "Extra 2"],
+    "Druid": ["Prepared", "Wild Shape", "Extra 1", "Extra 2"],
+    "Monk": ["Ki", "Extra 1", "Extra 2", "Extra 3"],
+    "Paladin": ["Prepared", "Lay on Hands", "Extra 1", "Extra 2"],
+    "Ranger": ["Known", "Extra 1", "Extra 2", "Extra 3"],
+    "Sorcerer": ["Known", "Points", "Extra 1", "Extra 2"],
+    "Warlock": ["Known", "Extra 1", "Extra 2", "Extra 3"],
+    "Wizard": ["Prepared", "Extra 1", "Extra 2", "Extra 3"]
+}
+function update_char_spec_tab(ndx, char=spell_char) {
     var class_name = document.getElementById("classes")[ndx].innerHTML
-    document.getElementById("book_char_spec_text").innerHTML = "Open " + class_name + " Menu"
-
-    var class_counters = {
-        "Artificer": ["Prepared", "Tinkering", "Infusions", "Flash"],
-        "Bard": ["Prepared", "Inspiration", "Extra 1", "Extra 2"],
-        "Cleric": ["Prepared", "Divinity", "Extra 1", "Extra 2"],
-        "Druid": ["Prepared", "Wild Shape", "Extra 1", "Extra 2"],
-        "Monk": ["Ki", "Extra 1", "Extra 2", "Extra 3"],
-        "Paladin": ["Prepared", "Lay on Hands", "Extra 1", "Extra 2"],
-        "Ranger": ["Known", "Extra 1", "Extra 2", "Extra 3"],
-        "Sorcerer": ["Known", "Points", "Extra 1", "Extra 2"],
-        "Warlock": ["Known", "Extra 1", "Extra 2", "Extra 3"],
-        "Wizard": ["Prepared", "Extra 1", "Extra 2", "Extra 3"]
-    }
+    document.getElementById("book_char_spec_text").innerHTML = "Open " + class_name + " Counters"
 
     for (var i = 0; i < 4; i++) {
-        if (character.spec_names[spell_char-1][i] == "") {
-            document.getElementById("count_"+(i+1)+"_text").innerHTML = class_counters[class_name][i]
+        if (character.spec_names[char-1][i] == "") {
+            document.getElementById("count_"+(i+1)+"_text").innerHTML = counter_name_defaults[class_name][i]
         } else {
-            document.getElementById("count_"+(i+1)+"_text").innerHTML = character.spec_names[spell_char-1][i]
+            document.getElementById("count_"+(i+1)+"_text").innerHTML = character.spec_names[char-1][i]
         }
-        if (character.spec_values[spell_char-1][i] == ""){
+        if (character.spec_values[char-1][i] == ""){
             document.getElementById("count_"+(i+1)).value = 0
         } else {
-            document.getElementById("count_"+(i+1)).value = character.spec_values[spell_char-1][i]
+            document.getElementById("count_"+(i+1)).value = character.spec_values[char-1][i]
         }
     }
 }
@@ -1393,6 +1432,7 @@ function read_storage() {
     document.getElementById("classes").selectedIndex = clas
     document.getElementById("lvInput").value = level
     update_char_spec_tab(clas)
+    update_settings_char_spec_names(ndx+1, ndx+1)
 
     load_all_books()
 }

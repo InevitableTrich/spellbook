@@ -426,7 +426,7 @@
             <div id="book_char_spec_tab" class="book_char_spec_tab">
                 <div class="rowContainer" style="height: 100%;">
                     <div class="book_char_spec_container0 clickable" onclick="document.getElementById('book_char_spec_tab').classList.toggle('book_char_spec_tab_out')">
-                        <p id="book_char_spec_text" class="book_char_spec_text v_text_l">Open Class Menu</p>
+                        <p id="book_char_spec_text" class="book_char_spec_text v_text_l">Open Class Counters</p>
                     </div>
                     <div id="class_spec_main" class="columnContainer" style="margin: auto; height: 90%; justify-content: space-evenly;">
                         <div class="columnContainer" style="text-align: center;">
@@ -539,6 +539,15 @@
                                 <div class="select_button clickable" onclick="select_character(3)"><p class="select_text">Select</p></div>
                             </div>
                         </div>
+
+                        <p class="char_text" style="margin-top: 24px;">Class Counter Names:</p>
+                        <div class="columnContainer">
+                            <input id="counter_name_1" autocomplete="off" class="character_input" onchange="save_char_spec_names(1)">
+                            <input id="counter_name_2" autocomplete="off" class="character_input" onchange="save_char_spec_names(2)">
+                            <input id="counter_name_3" autocomplete="off" class="character_input" onchange="save_char_spec_names(3)">
+                            <input id="counter_name_4" autocomplete="off" class="character_input" onchange="save_char_spec_names(4)">
+                        </div>
+
                         <div class="select_button delete_button clickable" onclick="delete_prompt()">
                             <p class="select_text">Delete Selected Character</p>
                         </div>
