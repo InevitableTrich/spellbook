@@ -886,6 +886,7 @@ function delete_prompt(close=false) {
 function delete_character() {
     var ndx = parseInt([...document.getElementsByClassName("char_select")][0].id.slice(-1))-1
     var num = ndx + 1
+    var class_name = document.getElementById("classes")[character.classes[ndx]].innerHTML
 
     // delete from character variable
     character.characters[ndx] = "Char " + num
@@ -895,10 +896,18 @@ function delete_character() {
     character.prepped[ndx] = []
     character.slots[ndx] = [0,0,0,0,0,0,0,0,0]
     character.collapsed[ndx] = []
+    character.spec_names[ndx] = ["","","",""]
+    character.spec_values[ndx] = ["","","",""]
 
     // return visible names to default
     document.getElementById("charName"+num).value = "Char " + num
     document.getElementById("char" + num).children[0].innerHTML = "Char " + num
+
+    // return counter names + values to default
+    for(var i = 1; i <= 4; i++) {
+        document.getElementById("count_"+i+"_text").innerHTML = counter_name_defaults[class_name][i-1]
+        document.getElementById("count_"+i).value = 0
+    }
 
     // remove all present spells
     pop_empty_spellbook(num)
@@ -1003,10 +1012,11 @@ function update_char_spec_tab(ndx, char=spell_char) {
     }
 }
 
-function update_class_values() {
+function update_class_values(char = spell_char) {
+    if (spell_char == 4) char = parseInt([...document.getElementsByClassName("char_select")][0].id.slice(-1))
     var values = []
     for (var i = 1; i <= 4; i++) values.push(document.getElementById("count_"+(i)).value)
-    character.spec_values[spell_char-1] = [...values]
+    character.spec_values[char-1] = [...values]
     localStorage.setItem("spec_values", character.spec_values.join("+"))
 }
 
