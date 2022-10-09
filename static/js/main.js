@@ -906,6 +906,7 @@ function delete_character() {
     // return counter names + values to default
     for(var i = 1; i <= 4; i++) {
         document.getElementById("count_"+i+"_text").innerHTML = counter_name_defaults[class_name][i-1]
+        document.getElementById("counter_name_"+i).value = counter_name_defaults[class_name][i-1]
         document.getElementById("count_"+i).value = 0
     }
 
