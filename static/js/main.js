@@ -835,9 +835,15 @@ function select_character(num) {
     // select most recent character
     document.getElementById("charName"+num).classList.toggle("char_select")
 
+    // update class/level/slots
+    document.getElementById("classes").selectedIndex = character.classes[num-1]
+    document.getElementById("lvInput").value = character.levels[num-1]
+    update_spell_slots()
+
+
     // load counter names + values to sidebar
     update_char_spec_tab(character.classes[num-1], `${num}`)
-    //load counter names to settings
+    //load counter names to settings page
     update_settings_char_spec_names(num)
 }
 
@@ -996,6 +1002,7 @@ counter_name_defaults = {
     "Wizard": ["Prepared", "Extra 1", "Extra 2", "Extra 3"]
 }
 function update_char_spec_tab(ndx, char=spell_char) {
+    if (char == 4) char = parseInt([...document.getElementsByClassName("char_select")][0].id.slice(-1))
     var class_name = document.getElementById("classes")[ndx].innerHTML
     document.getElementById("book_char_spec_text").innerHTML = "Open " + class_name + " Counters"
 
@@ -1511,10 +1518,11 @@ function update_storage() {
     localStorage.setItem("spec_values", character.spec_values.join("+"))
 }
 
-function update_book() {
+function update_book(char = spell_char) {
     // gets current character
-    character.main = spell_char
-    var ndx = spell_char - 1
+    if (char == 4) char = parseInt([...document.getElementsByClassName("char_select")][0].id.slice(-1))
+    character.main = char
+    var ndx = char - 1
 
     // gets character's class
     character.classes[ndx] = document.getElementById("classes").selectedIndex
