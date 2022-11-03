@@ -444,7 +444,7 @@ body {
 
 .book_char_spec_tab {
     left: 5%;
-    top: -4%;
+    top: -62px;
     transition: top .3s;
     border-radius: 15px 15px 0px 0px;
     width: 90%;
