@@ -442,6 +442,28 @@ body {
     margin: -3px;
 }
 
+.book_char_spec_tab {
+    left: 5%;
+    top: -4%;
+    transition: top .3s;
+    border-radius: 15px 15px 0px 0px;
+    width: 90%;
+    height: 260px;
+}
+.book_char_spec_tab_out {
+    top: -260px;
+}
+.book_char_spec_text {
+    font-size: 250%;
+    padding: 5px 0px;
+}
+.book_char_spec_container0 {
+    border-bottom: rgb(80,80,80) 3px solid;
+    border-right: unset;
+    height: 56px;
+    width: 100%;
+}
+
 
 
 

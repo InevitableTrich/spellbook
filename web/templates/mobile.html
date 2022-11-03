@@ -378,12 +378,12 @@
 
     <div id="bookCon" class="menuBack invis" onclick="toggle_book()">
         <div class="menuPage" onclick="event.stopPropagation()">
-            <div id="book_char_spec_tab" class="book_char_spec_tab invis">
-                <div class="rowContainer" style="height: 100%;">
+            <div id="book_char_spec_tab" class="book_char_spec_tab">
+                <div class="columnContainer" style="width: 100%;">
                     <div class="book_char_spec_container0 clickable" onclick="document.getElementById('book_char_spec_tab').classList.toggle('book_char_spec_tab_out')">
-                        <p id="book_char_spec_text" class="book_char_spec_text v_text_l">Open Class Counters</p>
+                        <p id="book_char_spec_text" class="book_char_spec_text">Open Class Counters</p>
                     </div>
-                    <div id="class_spec_main" class="columnContainer" style="margin: auto; height: 90%; justify-content: space-evenly;">
+                    <div id="class_spec_main" class="rowContainer" style="margin: auto; width: 90%; height: 201px; justify-content: space-evenly; align-items: center;">
                         <div class="columnContainer" style="text-align: center;">
                             <p id="count_1_text" class="char_text">count_1:</p>
                             <input id="count_1" type="number" autocomplete="off" class="level_input" placeholder="0" value="0" onchange="update_class_values()">
@@ -501,8 +501,8 @@
                                 <div class="select_button clickable" onclick="select_character(3)"><p class="select_text">Select</p></div>
                             </div>
 
-                            <p class="char_text invis" style="margin-top: 24px;">Class Counter Names:</p>
-                            <div class="columnContainer invis">
+                            <p class="char_text" style="margin-top: 24px;">Class Counter Names:</p>
+                            <div class="columnContainer">
                                 <input id="counter_name_1" autocomplete="off" class="character_input" onchange="save_char_spec_names(1)">
                                 <input id="counter_name_2" autocomplete="off" class="character_input" onchange="save_char_spec_names(2)">
                                 <input id="counter_name_3" autocomplete="off" class="character_input" onchange="save_char_spec_names(3)">
