@@ -211,7 +211,7 @@
   ],
   "higher_level": [],
   "spellid": "hellish-rebuke",
-  "cast_time": "1 reaction",
+  "cast_time": ["1 reaction", "which you take in response to being damaged by a creature within 60 feet of you that you can see"],
   "source": "Players Handbook"
 },{
   "name": "Hold Monster",
@@ -1842,7 +1842,7 @@
     "When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used."
   ],
   "spellid": "counterspell",
-  "cast_time": "1 reaction",
+  "cast_time": ["1 reaction", "which you take when you see a creature within 60 feet of you casting a spell"],
   "source": "Players Handbook"
 },{
   "name": "Daylight",
@@ -3355,7 +3355,7 @@
   ],
   "higher_level": [],
   "spellid": "feather-fall",
-  "cast_time": "1 reaction",
+  "cast_time": ["1 reaction", "which you take when you or a creature within 60 feet of you falls"],
   "source": "Players Handbook"
 },{
   "name": "Forcecage",
@@ -5860,7 +5860,7 @@
   ],
   "higher_level": [],
   "spellid": "shield",
-  "cast_time": "1 reaction",
+  "cast_time": ["1 reaction", "which you take when you are hit by an attack or targeted by the magic missile spell"],
   "source": "Players Handbook"
 },{
   "name": "Shillelagh",

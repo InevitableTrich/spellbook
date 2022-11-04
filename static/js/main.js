@@ -1168,7 +1168,7 @@ function populate_spells(jsonResponse) {
             <br>
             <p class="spellDispDescExp" style="margin-top: -4px;"><b>Level:</b> ${spell.level}</p>
             <p class="spellDispDescExp"><b>School:</b> ${spell.school}</p>
-            <p class="spellDispDescExp"><b>Casting Time:</b> ${spell.cast_time}</p>
+            <p class="spellDispDescExp"><b>Casting Time:</b> ${typeof(spell.cast_time) == "string" ? spell.cast_time : spell.cast_time.join(", ")}</p>
             <p class="spellDispDescExp"><b>Range:</b> ${spell.range}</p>
             <p class="spellDispDescExp"><b>Components:</b> ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
             <p class="spellDispDescExp"><b>Duration:</b> ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
@@ -1286,7 +1286,7 @@ function populate_spellbook(jsonResponse) {
                 <p class="book_spell_text overflow">${spell.name}</p>
             </div>
             <div class="book_action" id="${spell.spellid}_action_${char}">
-                <p class="book_spell_text overflow">${spell.cast_time}</p>
+                <p class="book_spell_text overflow">${typeof(spell.cast_time) == "string" ? spell.cast_time : spell.cast_time[0]}</p>
             </div>
             <div class="book_conc" id="${spell.spellid}_conc_${char}">
                 <p class="book_spell_text overflow">${spell.concentration ? "Concentration" : ""}</p>
@@ -1305,7 +1305,7 @@ function populate_spellbook(jsonResponse) {
                 <br>
                 <p class="book_spellDispDescExp" style="margin-top: -4px;"><b>Level:</b> ${spell.level}</p>
                 <p class="book_spellDispDescExp"><b>School:</b> ${spell.school}</p>
-                <p class="book_spellDispDescExp"><b>Casting Time:</b> ${spell.cast_time}</p>
+                <p class="book_spellDispDescExp"><b>Casting Time:</b> ${typeof(spell.cast_time) == "string" ? spell.cast_time : spell.cast_time.join(", ")}</p>
                 <p class="book_spellDispDescExp"><b>Range:</b> ${spell.range}</p>
                 <p class="book_spellDispDescExp"><b>Components:</b> ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
                 <p class="book_spellDispDescExp"><b>Duration:</b> ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>

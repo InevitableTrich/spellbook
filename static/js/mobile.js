@@ -96,7 +96,7 @@ function populate_spells(jsonResponse) {
             <br>
             <p class="spellDispDescExp" style="margin-top: -4px;"><b>Level:</b> ${spell.level}</p>
             <p class="spellDispDescExp"><b>School:</b> ${spell.school}</p>
-            <p class="spellDispDescExp"><b>Casting Time:</b> ${spell.cast_time}</p>
+            <p class="spellDispDescExp"><b>Casting Time:</b> ${typeof(spell.cast_time) == "string" ? spell.cast_time : spell.cast_time.join(", ")}</p>
             <p class="spellDispDescExp"><b>Range:</b> ${spell.range}</p>
             <p class="spellDispDescExp"><b>Components:</b> ${spell.components.join(", ")} ${spell.material != "" ? '('+ spell.material + ')' : ''}</p>
             <p class="spellDispDescExp"><b>Duration:</b> ${spell.concentration == true ? "Concentration, " : ""} ${spell.duration}</p>
