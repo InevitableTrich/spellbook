@@ -409,7 +409,7 @@
                         <div class="class_container">
                             <div class="aCentered column_container">
                                 <p id="player_level" class="char_text">Level:</p>
-                                <input id="lvInput" autocomplete="off" class="level_input" style="margin-bottom: 20px;" placeholder="Lv" value="1" onchange="updateSpellSlots(); updateBook()">
+                                <input id="lvInput" autocomplete="off" class="level_input" style="margin-bottom: 20px;" placeholder="Lv" value="1" onchange="update_spell_slots(); update_book()">
                             </div>
                         </div>
 
@@ -417,7 +417,7 @@
                             <div class="rowContainer">
                                 <p class="char_text">Spell Slots:</p>
                                 <label for="classes" id="class_dropdown" class="char_text" style="margin-right: 0px;">Class:</label>
-                                <select id="classes" name="classes" class="class_list" onchange="updateSpellSlots(); updateBook()">
+                                <select id="classes" name="classes" class="class_list" onchange="update_spell_slots(); update_book()">
                                     <option value="artificer">Artificer</option>
                                     <option value="bard">Bard</option>
                                     <option value="cleric">Cleric</option>
