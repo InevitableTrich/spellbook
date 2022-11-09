@@ -568,12 +568,12 @@ body {
 .menuPage {
     background-color: rgb(50, 50, 50);
     min-width: 800px;
-    min-height: 600px;
+    min-height: 450px;
     width: 70%;
     height: 70%;
     position: absolute;
     left: 15%;
-    top: 10%;
+    top: 15%;
     border: rgb(80,80,80) solid 3px;
     border-radius: 20px;
 }
@@ -682,6 +682,7 @@ body {
 .player_container {
     width: 20%;
     border-right: rgb(80, 80, 80) 3px solid;
+    overflow: auto;
 }
 .player_options {
     height: 97.5%;
@@ -941,11 +942,11 @@ body {
 
 .book_side_container {
     position: absolute;
-    top: 1.5%;
+    top: 2.5%;
     left: 99.6%;
     width: fit-content;
-    height: 68%;
-    min-height: 586px;
+    height: 95%;
+    min-height: 427.5px;
 }
 .book_side_btn {
     background-color: rgb(50,50,50);

@@ -487,12 +487,7 @@ function clear_filters(){
 
     visible_subclasses = []
 
-    filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
-    filters.forEach(id => {
-        if (document.getElementById(id + "_ops").getAttribute('collapsed') === 'false') {
-            cycle_list(id)
-        }
-    });
+    toggle_filter()
 
     current_filter = JSON.stringify({"filter": {}})
     filter_state = {}
