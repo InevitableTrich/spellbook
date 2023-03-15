@@ -260,8 +260,8 @@ body {
 }
 
 .level_input {
-    height: 90px;
-    width: 90px;
+    height: 60px;
+    width: 60px;
     font-size: 64px;
     border-radius: 15px;
 }
@@ -449,10 +449,10 @@ body {
     transition: top .3s;
     border-radius: 15px 15px 0px 0px;
     width: 90%;
-    height: 260px;
+    height: 240px;
 }
 .book_char_spec_tab_out {
-    top: -260px;
+    top: -240px;
 }
 .book_char_spec_text {
     font-size: 250%;

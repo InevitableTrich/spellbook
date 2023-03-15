@@ -288,9 +288,10 @@ function get_filter_IDs(id, field) {
             "scag": "Sword Coast Adventurer's Guide",
             "egtw": "Explorer's Guide to Wildemount",
             "frost": "Icewind Dale: Rime of the Frostmaiden",
-            "ftod" :"Fizban's Treasury of Dragons",
-            "kwalish":"Lost Laboratory of Kwalish",
-            "strix":"Strixhaven: a Curriculum of Chaos"
+            "ftod": "Fizban's Treasury of Dragons",
+            "kwalish": "Lost Laboratory of Kwalish",
+            "strix": "Strixhaven: a Curriculum of Chaos",
+            "srd": "Standard Reference Document"
         }
         tID = sources[id]
     } else {
@@ -961,6 +962,7 @@ function toggle_filter(){
         body.setAttribute('collapsed', 'true')
         collapse_section(body)
         filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
+        // ^^ add "tag"
         filters.forEach(id => {
             if (document.getElementById(id + "_ops").getAttribute('collapsed') === 'false') {
                 cycle_list(id)

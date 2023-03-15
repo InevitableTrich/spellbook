@@ -174,7 +174,7 @@
                 </div>
             </div>
 
-            <div class="clickObj" style="margin-bottom: 10px;" id="source" onclick="cycle_list(id)">
+            <div class="clickObj" id="source" onclick="cycle_list(id)">
                 <p class="searchOpTxt" id="source_txt">Source:
                     <svg id="source_arr" class="filter_arrow">
                         <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
@@ -207,6 +207,9 @@
                         <div class="classItem" id="strix" onclick="sort_toggle(id, 'source')" title="Strixhaven: a Curriculum of Chaos">
                             <p class="ciTxt" id="_strix">S:aCoC,</p>
                         </div>
+                        <div class="classItem" id="srd" onclick="sort_toggle(id, 'source')" title="Standard Reference Document">
+                            <p class="ciTxt" id="_srd">SRD,</p>
+                        </div>
                         <div class="classItem" id="tcoe" onclick="sort_toggle(id, 'source')" title="Tasha's Cauldron of Everything">
                             <p class="ciTxt" id="_tcoe">TCoE,</p>
                         </div>
@@ -216,6 +219,28 @@
                     </div>
                 </div>
             </div>
+
+<!--            <div class="clickObj" style="margin-bottom: 10px;" id="tag" onclick="cycle_list(id)">-->
+<!--                <p class="searchOpTxt" id="tag_txt">Tags:-->
+<!--                    <svg id="tag_arr" class="filter_arrow">-->
+<!--                        <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />-->
+<!--                    </svg>-->
+<!--                </p>-->
+<!--            </div>-->
+
+<!--            <div id="tag_ops" class="ef_op" style="height: 0px;" collapsed="true">-->
+<!--                <div class="rowContainer">-->
+<!--                    <div class="cibl"></div>-->
+<!--                    <div class="searchRowCon">-->
+<!--                        <div class="classItem" id="attack" onclick="sort_toggle(id, 'tags')">-->
+<!--                            <p class="ciTxt" id="_attack">Attack,</p>-->
+<!--                        </div>-->
+<!--                        <div class="classItem" id="support" onclick="sort_toggle(id, 'tags')">-->
+<!--                            <p class="ciTxt" id="_support">Support,</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
 
@@ -451,7 +476,6 @@
             <div class="rowContainer" style="height: 100%;">
                 <div id="playerContainer" class="player_container">
                     <div id="player_options" class="player_options">
-                        <label for="classes" id="class_dropdown" class="char_text" style="margin-top: 10px;">Class:</label>
                         <select id="classes" name="classes" class="class_list" onchange="update_spell_slots(); update_char_spec_tab(selectedIndex); update_book()">
                             <option value="artificer">Artificer</option>
                             <option value="bard">Bard</option>
@@ -465,7 +489,6 @@
                             <option value="wizard">Wizard</option>
                         </select>
 
-                        <p id="player_level" class="char_text">Level:</p>
                         <input id="lvInput" type="number" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="update_spell_slots(); update_book()">
 
                         <p id="slots" class="char_text" style="margin-bottom: 0px;">Spell Slots:</p>
