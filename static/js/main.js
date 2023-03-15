@@ -478,6 +478,7 @@ function add_subclass_spells() {
 function clear_filters(){
     [...document.getElementsByClassName("sortSelected")].forEach(e => {
         e.classList.toggle("sortSelected")
+        e.children[0].classList.toggle("sortSelectedTxt")
     })
 
     document.getElementById("subs_con").innerHTML = `<p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>`
@@ -488,7 +489,9 @@ function clear_filters(){
 
     visible_subclasses = []
 
-    toggle_filter()
+    if (!document.getElementById("ef_top").classList.contains("shrink")) {
+        toggle_filter()
+    }
 
     current_filter = JSON.stringify({"filter": {}})
     filter_state = {}
@@ -962,7 +965,6 @@ function toggle_filter(){
         body.setAttribute('collapsed', 'true')
         collapse_section(body)
         filters = ["class", "level", "school", "source", "subclass", "action", "concentration", "ritual"]
-        // ^^ add "tag"
         filters.forEach(id => {
             if (document.getElementById(id + "_ops").getAttribute('collapsed') === 'false') {
                 cycle_list(id)
