@@ -658,13 +658,20 @@ body {
     right: 14px;
     top: 14px;
 }
-.discord:hover {
-    opacity: 1;
-}
 .discord_logo {
     margin: auto;
-    height: fit-content;
     width: 40px;
+}
+
+.send_mobile {
+    display: flex;
+    position: absolute;
+    right: 90px;
+    top: 14px;
+}
+.mobile_logo {
+    margin: auto;
+    width: 48px;
 }
 
 .sb_part {
@@ -1187,6 +1194,9 @@ input[type=number] {
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+}
+.menu_button:hover {
+    opacity: 1;
 }
 
 .sortSelected {

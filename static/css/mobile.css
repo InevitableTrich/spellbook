@@ -13,22 +13,24 @@ body {
     border-radius: 24px;
     border-width: 6px;
 }
+.menu_button:hover {
+    opacity: .5;
+}
 
 .discord_logo {
     width: 80px;
 }
 
-.discord:hover {
-    opacity: .5;
+.send_desktop {
+    right: 146px
+}
+.desktop_logo {
+    width: 90px
 }
 
 .sttarrow {
     width: unset;
     height: 40px;
-}
-
-.stt:hover {
-    opacity: .5;
 }
 
 .srchTxt {
