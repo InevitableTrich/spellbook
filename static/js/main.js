@@ -41,7 +41,7 @@ class Spellbook_Data {
 var character = new Spellbook_Data()
 
 function check_mobile() {
-    if (document.referrer == "http://127.0.0.1:8000/mobile") return
+    if (document.referrer == window.location.origin+"/mobile") return
     var mobile = navigator.userAgent.toLowerCase().match(/mobile/i)
     if (mobile) {
         location.href.endsWith("/") ? location.href += "mobile" : location.href += "/mobile"
