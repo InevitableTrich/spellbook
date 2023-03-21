@@ -21,10 +21,13 @@ body {
     width: 80px;
 }
 
-.send_mobile {
-    right: 146px
+.send_desktop {
+    display: flex;
+    position: absolute;
+    right: 146px;
+    top: 14px;
 }
-.mobile_logo {
+.desktop_logo {
     width: 90px
 }
 
