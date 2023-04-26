@@ -37,7 +37,7 @@
 
 <!--    search bar-->
     <input id="search" class="searchBar" autocomplete="off" type="text" placeholder="Search Here:" list="items" value="" onchange="search(value)">
-    <datalist id="items"><option value=""></option></datalist>
+    <datalist id="items"></datalist>
 
 <!--    expand filter buttons-->
     <div class="smallBtn shrink" id="ef_top" onclick="toggle_filter()">
@@ -456,16 +456,17 @@
                 <div id="playerContainer" class="player_container">
                     <div id="player_options" class="player_options">
                         <select id="classes" name="classes" class="class_list" onchange="update_spell_slots(); update_char_spec_tab(selectedIndex); update_book()">
-                            <option value="artificer">Artificer</option>
-                            <option value="bard">Bard</option>
-                            <option value="cleric">Cleric</option>
-                            <option value="druid">Druid</option>
-<!--                            <option value="monk">Monk</option>-->
-                            <option value="paladin">Paladin</option>
-                            <option value="ranger">Ranger</option>
-                            <option value="sorcerer">Sorcerer</option>
-                            <option value="warlock">Warlock</option>
-                            <option value="wizard">Wizard</option>
+                            <option value="artificer" class_num="0">Artificer</option>
+                            <option value="bard" class_num="1">Bard</option>
+                            <option value="cleric" class_num="2">Cleric</option>
+                            <option value="druid" class_num="3">Druid</option>
+                            <option value="fighter" class_num="9">Fighter</option>
+                            <option value="monk" class_num="10">Monk</option>
+                            <option value="paladin" class_num="4">Paladin</option>
+                            <option value="ranger" class_num="5">Ranger</option>
+                            <option value="sorcerer" class_num="6">Sorcerer</option>
+                            <option value="warlock" class_num="7">Warlock</option>
+                            <option value="wizard" class_num="8">Wizard</option>
                         </select>
 
                         <input id="lvInput" type="number" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="update_spell_slots(); update_book()">

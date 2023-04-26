@@ -519,13 +519,17 @@ function update_spell_slots() {
         "druid": "main",
         "sorcerer": "main",
         "wizard": "main",
-        "warlock": "warlock"
+        "warlock": "warlock",
+        "fighter": "fighter",
+        "monk": "none"
     }
 
     var spellSlots = {
         "sub": [[2], [2],  [3], [3], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3, 2], [4, 3, 2], [4, 3, 3], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 1], [4, 3, 3, 2], [4, 3, 3, 2], [4, 3, 3, 3, 1], [4, 3, 3, 3, 1], [4, 3, 3, 3, 2], [4, 3, 3, 3, 2]],
         "main": [[2], [3], [4, 2], [4, 3], [4, 3, 2], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 2], [4, 3, 3, 3, 1], [4, 3, 3, 3, 2], [4, 3, 3, 3, 2, 1], [4, 3, 3, 3, 2, 1], [4, 3, 3, 3, 2, 1, 1], [4, 3, 3, 3, 2, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1, 1], [4, 3, 3, 3, 3, 1, 1, 1, 1], [4, 3, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 3, 2, 2, 1, 1] ],
-        "warlock": [[1], [2], [0, 2], [0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4]]
+        "warlock": [[1], [2], [0, 2], [0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 2], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4]],
+        "fighter": [[], [], [2], [3], [3], [3], [4, 2], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3], [4, 3, 2], [4, 3, 2], [4, 3, 2], [4, 3, 3], [4, 3, 3], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 1]],
+        "none": [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
     }
 
 
@@ -678,13 +682,14 @@ function book_switch_view(id) {
 
         // read char info
         var ndx = spell_char - 1
-        var clas = parseInt(character.classes[ndx])
+        var class_num = parseInt(character.classes[ndx])
         var level = character.levels[ndx]
 
         // set char info
-        document.getElementById("classes").selectedIndex = clas
+        var class_option = document.querySelectorAll('[class_num="'+class_num+'"]')[0]
+        document.getElementById("classes").value = class_option.value
         document.getElementById("lvInput").value = level
-        update_char_spec_tab(clas)
+        update_char_spec_tab(class_num)
 
         // check used slots
         slots_used = character.slots[ndx]
@@ -836,7 +841,9 @@ function select_character(num) {
     document.getElementById("charName"+num).classList.toggle("char_select")
 
     // update class/level/slots
-    document.getElementById("classes").selectedIndex = character.classes[num-1]
+    var class_option = document.querySelectorAll('[class_num="'+character.classes[num-1]+'"]')[0]
+    document.getElementById("classes").value = class_option.value
+
     document.getElementById("lvInput").value = character.levels[num-1]
     update_spell_slots()
 
@@ -999,7 +1006,8 @@ counter_name_defaults = {
     "Ranger": ["Known", "Extra 1", "Extra 2", "Extra 3"],
     "Sorcerer": ["Known", "Points", "Extra 1", "Extra 2"],
     "Warlock": ["Known", "Extra 1", "Extra 2", "Extra 3"],
-    "Wizard": ["Prepared", "Extra 1", "Extra 2", "Extra 3"]
+    "Wizard": ["Prepared", "Extra 1", "Extra 2", "Extra 3"],
+    "Fighter": ["Known", "Extra 1", "Extra 2", "Extra 3"]
 }
 function update_char_spec_tab(ndx, char=spell_char) {
     if (char == 4) char = parseInt([...document.getElementsByClassName("char_select")][0].id.slice(-1))
@@ -1443,13 +1451,8 @@ function read_storage() {
 
     // get current book, split into list of class and level
     var ndx = parseInt(character.main) - 1
-    var clas = parseInt(character.classes[ndx])
-    var level = character.levels[ndx]
 
     // set data gathered
-    document.getElementById("classes").selectedIndex = clas
-    document.getElementById("lvInput").value = level
-    update_char_spec_tab(clas)
     update_settings_char_spec_names(ndx+1, ndx+1)
 
     load_all_books()
@@ -1525,7 +1528,7 @@ function update_book(char = spell_char) {
     var ndx = char - 1
 
     // gets character's class
-    character.classes[ndx] = document.getElementById("classes").selectedIndex
+    character.classes[ndx] = document.getElementById("classes").selectedOptions[0].attributes.class_num.value
 
     // gets character's level
     character.levels[ndx] = document.getElementById("lvInput").value
