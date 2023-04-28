@@ -1009,9 +1009,9 @@ counter_name_defaults = {
     "Wizard": ["Prepared", "Extra 1", "Extra 2", "Extra 3"],
     "Fighter": ["Known", "Extra 1", "Extra 2", "Extra 3"]
 }
-function update_char_spec_tab(ndx, char=spell_char) {
+function update_char_spec_tab(class_num, char=spell_char) {
     if (char == 4) char = parseInt([...document.getElementsByClassName("char_select")][0].id.slice(-1))
-    var class_name = document.getElementById("classes")[ndx].innerHTML
+    var class_name = document.querySelectorAll('[class_num="'+class_num+'"]')[0].innerHTML
     document.getElementById("book_char_spec_text").innerHTML = "Open " + class_name + " Counters"
 
     for (var i = 0; i < 4; i++) {
