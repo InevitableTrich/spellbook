@@ -68,7 +68,7 @@ function clear_filters(){
     searchBar.value = ""
     searchQuery = ''
     reset_page()
-    make_filter_request('nameSort', 0, currentFilter)
+    make_filter_request('nameSort', 0, current_filter)
 }
 
 function populate_spells(jsonResponse) {

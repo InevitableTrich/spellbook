@@ -359,6 +359,10 @@ body {
     height: 24px;
     border-radius: 16px;
 }
+.sub_spell {
+    width: 40px;
+    margin: auto;
+}
 
 .book_spell {
     width: 90%;
