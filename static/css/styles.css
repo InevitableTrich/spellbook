@@ -810,6 +810,17 @@ body {
     border: rgb(222,222,222) solid 3px;
     border-radius: 9px;
 }
+.sub_spell {
+    width: 24px;
+    margin: auto;
+}
+.sub_star {
+    stroke: rgb(222, 222, 222);
+    fill: none;
+}
+.star_prepped {
+    fill: rgb(200, 200, 200);
+}
 .prepped {
     background-color: rgb(200,200,200);
 }

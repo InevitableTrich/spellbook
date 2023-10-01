@@ -21,6 +21,7 @@ var loading_svg = '<svg viewbox="0 0 10 10" class="loading_svg"><path fill="rgb(
 var spell_char = 1
 var spellbook = []
 var preplist = []
+var sub_prep_list = []
 var slots_used = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 var col_heads = []
 
@@ -32,6 +33,7 @@ class Spellbook_Data {
         this.levels = ["", "", ""]
         this.books = [[],[],[]]
         this.prepped = [[],[],[]]
+        this.sub_prepped = [[],[],[]]
         this.slots = [[],[],[]]
         this.collapsed = [[],[],[]]
         this.spec_names = [[],[],[]]
@@ -463,8 +465,13 @@ function add_subclass_spells() {
 
     filter_state['subs'].forEach(sub => {
         var chosen_spells = subclass_spells[sub]
+        var id = ""
         chosen_spells.forEach(spell => {
             if (spellbook.indexOf(spell) == -1) to_format.push(spell)
+
+            id = spell.toLowerCase().replaceAll(" ", "-")
+            if (preplist.indexOf(spell) == -1) preplist.push(id)
+            add_sub_spell(id + "------------", false)
         })
     })
 
@@ -473,6 +480,7 @@ function add_subclass_spells() {
         spellbook.push(spell)
     })
 
+    update_book()
     make_book_request(spellbook)
 }
 
@@ -656,7 +664,11 @@ function prep_spell(id) {
 function update_prep_spells(char) {
     character.prepped[char-1].forEach(spell => {
         var current = document.getElementById(spell+"_bk_"+char+"_prep_"+char)
-        current.classList.toggle("prepped")
+        if (sub_prep_list.indexOf(spell) == -1) {
+            current.classList.toggle("prepped")
+        } else {
+            current.children[0].classList.toggle("star_prepped")
+        }
     })
 }
 
@@ -907,10 +919,18 @@ function delete_character() {
     character.levels[ndx] = 1
     character.books[ndx] = []
     character.prepped[ndx] = []
+    character.sub_prepped[ndx] = []
     character.slots[ndx] = [0,0,0,0,0,0,0,0,0]
     character.collapsed[ndx] = []
     character.spec_names[ndx] = ["","","",""]
     character.spec_values[ndx] = ["","","",""]
+
+    // delete from other variablesvar spell_char = 1
+    spellbook = []
+    preplist = []
+    sub_prep_list = []
+    slots_used = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    col_heads = []
 
     // return visible names to default
     document.getElementById("charName"+num).value = "Char " + num
@@ -1251,12 +1271,90 @@ function save_collapsed() {
     localStorage.setItem("collapsed", character.collapsed.join("+"))
 }
 
+function is_prep_sub(id) {
+    var spell_name = id.slice(0,-5);
+
+    if (sub_prep_list.indexOf(spell_name) != -1) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function prep_sub_spell(id) {
+    var current = document.getElementById(id)
+    current.children[0].classList.toggle("star_prepped")
+
+    name = id.slice(0,-12)
+    if (preplist.indexOf(name) == -1) {
+        preplist.push(name)
+    } else {
+        preplist.splice(preplist.indexOf(name), 1)
+    }
+    update_book()
+}
+
+function toggle_sub_spell(id) {
+    var current_icon = document.getElementById(id)
+    var parentElement = current_icon.parentElement
+
+    current_icon.remove()
+
+    if (current_icon.classList.contains("sub_spell")) {
+        parentElement.innerHTML = `
+            <div class="prep_spell clickable" id="${id}" onCLick="handle_prep_click(event, id)"></div>
+        ` + parentElement.innerHTML
+
+        if (current_icon.children[0].classList.value.indexOf("prepped") != -1) {
+            document.getElementById(id).classList.toggle('prepped')
+        }
+    } else {
+        parentElement.innerHTML = `
+            <svg viewbox="-1 -1 12 12" class="sub_spell clickable" id="${id}" onCLick="handle_prep_click(event, id)">
+                <path class="sub_star" d="M 5 0 L 6.122 3.455 L 9.755 3.455 L 6.817 5.591 L 7.939 9.045 L 5 6.912 L 2.061 9.045 L 3.183 5.591 L 0.245 3.455 L 3.878 3.455 Z"></path>
+            </svg>
+        ` + parentElement.innerHTML
+
+        if (current_icon.classList.value.indexOf("prepped") != -1) {
+            document.getElementById(id).children[0].classList.toggle('star_prepped')
+        }
+    }
+
+    add_sub_spell(id)
+    update_book()
+}
+
+function add_sub_spell(id, remove=true) {
+    name = id.slice(0,-12)
+
+    if (sub_prep_list.indexOf(name) == -1) {
+        sub_prep_list.push(name)
+    } else if (remove) {
+        sub_prep_list.splice(sub_prep_list.indexOf(name), 1)
+    }
+}
+
+function handle_prep_click(event, id) {
+    if (event.shiftKey) {
+        toggle_sub_spell(id)
+        return
+    }
+
+    if (sub_prep_list.indexOf(id.slice(0,-12)) == -1) {
+        prep_spell(id);
+    } else {
+        prep_sub_spell(id);
+    }
+}
+
 function populate_spellbook(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     var char = data.char
     var spells = document.getElementById("book_container_"+char)
     spells.innerHTML = ''
     var heads = []
+
+    var prep_icon = ""
 
     data.spells.forEach(spell => {
         if (heads.indexOf(spell.level) == -1) {
@@ -1285,9 +1383,19 @@ function populate_spellbook(jsonResponse) {
         var spellBody = spell_format_body(spell).replaceAll("spellDispDescExp", "book_spellDispDescExp")
         var spellHigher = spell_format_higher(spell.higher_level)
         var book_con = document.getElementById(`container_${char}_${spell.level}`)
+
+        if (is_prep_sub(spell.spellid)) {
+            prep_icon = `
+                <svg viewbox="-1 -1 12 12" class="sub_spell clickable" id="${spell.spellid}_prep_${char}" onCLick="handle_prep_click(event, id)">
+                    <path class="sub_star" d="M 5 0 L 6.122 3.455 L 9.755 3.455 L 6.817 5.591 L 7.939 9.045 L 5 6.912 L 2.061 9.045 L 3.183 5.591 L 0.245 3.455 L 3.878 3.455 Z"></path>
+                </svg>`
+        } else {
+            prep_icon = `<div class="prep_spell clickable" id="${spell.spellid}_prep_${char}" onCLick="handle_prep_click(event, id)"></div>`
+        }
+
         book_con.innerHTML +=`
 <div class="rowContainer">
-    <div class="prep_spell clickable" id="${spell.spellid}_prep_${char}" onCLick="prep_spell(id)"></div>
+    ${prep_icon}
     <div class="book_spell" id="${spell.spellid}">
         <div class="book_spell_container clickable" onClick="toggle_book_spell_view('${spell.spellid}')">
             <div class="book_name" id="${spell.spellid}_name_${char}">
@@ -1383,7 +1491,8 @@ function check_storage() {
         "slots", // 7
         "collapsed", // 8
         "spec_names", // 9
-        "spec_values" // 10
+        "spec_values", // 10
+        "sub_prepped" // 11
     ]
     var values = [
         "1", // 1
@@ -1395,7 +1504,8 @@ function check_storage() {
         "0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0+0,0,0,0,0,0,0,0,0", // 7
         "++", // 8
         ",,,+,,,+,,,", // 9
-        ",,,+,,,+,,," // 10
+        ",,,+,,,+,,,", // 10
+        "++" // 11
     ]
     checks.forEach((check, index) => {
         if (localStorage.getItem(check) == null) localStorage.setItem(check, values[index])
@@ -1415,6 +1525,7 @@ function read_storage() {
     character.levels = localStorage.getItem("levels").split("+")
     var books = localStorage.getItem("books").split("+")
     var prepped = localStorage.getItem("prepped").split("+")
+    var sub_prepped = localStorage.getItem("sub_prepped").split("+")
     var slots = localStorage.getItem("slots").split("+")
     var col_head = localStorage.getItem("collapsed").split("+")
     var spec_names = localStorage.getItem("spec_names").split("+")
@@ -1422,12 +1533,14 @@ function read_storage() {
     for (var i = 0; i < 3; i++) {
         character.books[i] = books[i].split(",")
         character.prepped[i] = [...prepped[i].split(",")]
+        character.sub_prepped[i] = [...sub_prepped[i].split(",")]
         character.collapsed[i] = col_head[i].split(",")
         character.spec_names[i] = spec_names[i].split(",")
         character.spec_values[i] = spec_values[i].split(",")
 
         // remove blanks from prepped and collapsed
         if (character.prepped[i].indexOf("") != -1) character.prepped[i].splice(0,1)
+        if (character.sub_prepped[i].indexOf("") != -1) character.sub_prepped[i].splice(0,1)
         if (character.collapsed[i].indexOf("") != -1) character.collapsed[i].splice(0,1)
 
         // Make sure `slots` gets given `int`s
@@ -1470,6 +1583,7 @@ function load_all_books() {
         // get needed variables from character
         var spells = character.books[ndx]
         var prep = character.prepped[ndx]
+        var sub_prep = character.sub_prepped[ndx]
         var slots_list = character.slots[ndx]
         var col_head_list = character.collapsed[ndx]
 
@@ -1504,6 +1618,7 @@ function load_all_books() {
     // update spellbook, prepped, slots, and collapsed
     spellbook = character.books[spell_char-1]
     preplist = [...character.prepped[spell_char-1]]
+    sub_prep_list = [...character.sub_prepped[spell_char-1]]
     slots_used = character.slots[spell_char-1]
     col_heads = [...character.collapsed[spell_char-1]]
 }
@@ -1515,6 +1630,7 @@ function update_storage() {
     localStorage.setItem("levels", character.levels.join("+"))
     localStorage.setItem("books", character.books.join("+"))
     localStorage.setItem("prepped", character.prepped.join("+"))
+    localStorage.setItem("sub_prepped", character.sub_prepped.join("+"))
     localStorage.setItem("slots", character.slots.join("+"))
     localStorage.setItem("collapsed", character.collapsed.join("+"))
     localStorage.setItem("spec_names", character.spec_names.join("+"))
@@ -1538,6 +1654,7 @@ function update_book(char = spell_char) {
 
     // gets character's prep list
     character.prepped[ndx] = [...preplist]
+    character.sub_prepped[ndx] = [...sub_prep_list]
 
     // update storage
     update_storage()
