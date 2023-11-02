@@ -1,12 +1,7 @@
 import json
-import pymongo
-from gql.transport.aiohttp import AIOHTTPTransport
-from ilt.managers import spellmgr
 
 
 def lambda_handler(event, context):
-    print(len(spellmgr.getspells()))
-
     field = event['queryStringParameters']['field']
     page = int(event['queryStringParameters']['pagenum'])
     direction = event['queryStringParameters']['direction']

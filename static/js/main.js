@@ -1,20 +1,16 @@
-var cur_page = 1
-var max_pages = 0
-var spells_per_page = 30
-var spells_count = 0
 var filter_state = {}
 var current_filter = JSON.stringify({"filter": {}})
 var search_query = ''
 var sort_state = {
-  0: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 2 4.5 l 0 1 l 6 0 l 0 -1 z"/></svg>',
-  1: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 0 0 l 10 0 l -5 8.65 z"/></svg>',
-  2: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 0 8.65 l 10 0 l -5 -8.65 z"/></svg>',
-  "nameSort": "Spell Name: ",
-  "levelSort": "Spell Level: "
+    0: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 2 4.5 l 0 1 l 6 0 l 0 -1 z"/></svg>',
+    1: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 0 0 l 10 0 l -5 8.65 z"/></svg>',
+    2: '<svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 0 8.65 l 10 0 l -5 -8.65 z"/></svg>',
+    "nameSort": "Spell Name: ",
+    "levelSort": "Spell Level: "
 }
 var var_cycle = {
-  "nameSort": 0,
-  "levelSort": 0
+    "nameSort": 0,
+    "levelSort": 0
 }
 var loading_svg = '<svg viewbox="0 0 10 10" class="loading_svg"><path fill="rgb(90,90,90)" d="M 4.5 1.5 Q 4.5 1 5 1 Q 5.5 1 5.5 1.5 L 5.5 2.5 Q 5.5 3 5 3 Q 4.5 3 4.5 2.5 Z"/><path fill="rgb(102,102,102)" d="M 7.183 2.2189 Q 7.433 1.7859 7 1.536 Q 6.567 1.2861 6.317 1.7171 L 5.817 2.5851 Q 5.567 3.0181 6 3.268 Q 6.433 3.518 6.683 3.0849 Z"/><path fill="rgb(114,114,114)" d="M 8.281 3.684 Q 8.714 3.434 8.464 3 Q 8.214 2.568 7.781 2.818 L 6.915 3.318 Q 6.482 3.568 6.732 4 Q 6.982 4.434 7.415 4.184 Z"/><path fill="rgb(126,126,126)" d="M 8.5 4.5 Q 9 4.5 9 5 Q 9 5.5 8.5 5.5 L 7.5 5.5 Q 7 5.5 7 5 Q 7 4.5 7.5 4.5 Z"/><path fill="rgb(138,138,138)" d="M 7.416 5.816 Q 6.983 5.567 6.733 6 Q 6.483 6.433 6.916 6.682 L 7.782 7.182 Q 8.215 7.432 8.464 7 Q 8.715 6.566 8.282 6.316 Z"/><path fill="rgb(150,150,150)" d="M 6.317 8.281 Q 6.567 8.714 7 8.464 Q 7.433 8.214 7.183 7.781 L 6.683 6.915 Q 6.433 6.482 6 6.732 Q 5.567 6.982 5.817 7.415 Z"/><path fill="rgb(162,162,162)" d="M 5.5 8.5 Q 5.5 9 5 9 Q 4.5 9 4.5 8.5 L 4.5 7.5 Q 4.5 7 5 7 Q 5.5 7 5.5 7.5 Z"/><path fill="rgb(174,174,174)" d="M 2.817 7.781 Q 2.567 8.214 3 8.464 Q 3.433 8.714 3.683 8.281 L 4.183 7.415 Q 4.433 6.982 4 6.732 Q 3.567 6.482 3.317 6.925 Z"/><path fill="rgb(186,186,186)" d="M 1.719 6.316 Q 1.286 6.566 1.536 7 Q 1.786 7.432 2.219 7.182 L 3.085 6.682 Q 3.518 6.432 3.268 6 Q 3.018 5.566 2.585 5.816 Z"/><path fill="rgb(198,198,198)" d="M 1.5 5.5 Q 1 5.5 1 5 Q 1 4.5 1.5 4.5 L 2.5 4.5 Q 3 4.5 3 5 Q 3 5.5 2.5 5.5 Z"/><path fill="rgb(210,210,210)" d="M 2.219 2.818 Q 1.786 2.568 1.536 3.0012 Q 1.286 3.434 1.719 3.684 L 2.585 4.184 Q 3.0183 4.434 3.286 4 Q 3.518 3.568 3.0845 3.318 Z"/><path fill="rgb(222,222,222)" d="M 3.683 1.719 Q 3.433 1.286 3 1.586 Q 2.567 1.786 2.817 2.219 L 3.317 3.085 Q 3.567 3.518 4 3.268 Q 4.433 3.0181 4.183 2.585 Z"/></svg>'
 
@@ -163,29 +159,6 @@ function cycle_sort(id){
     }
 }
 
-function page_change(inc) {
-    cur_page += inc
-    if (cur_page < 1) cur_page = max_pages
-    else if (max_pages == 0) cur_page = 1
-    else if (cur_page > max_pages) cur_page = 1
-    document.getElementById("pageTxt").innerHTML = "Page " + cur_page
-    document.getElementById("spellList").innerHTML = loading_svg
-    sort = find_sort()
-    make_filter_request(sort, var_cycle[sort], current_filter)
-}
-
-function reset_page() {
-    page_one()
-    sort = find_sort()
-    make_filter_request(sort, var_cycle[sort], current_filter)
-}
-
-function page_one() {
-    cur_page = 1
-    document.getElementById("pageTxt").innerHTML = "Page " + cur_page
-    scroll_to_top()
-}
-
 function scroll_to_top() {
     window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'})
 }
@@ -215,7 +188,6 @@ function search(query){
     if (query != "") search_query = "\"" + query + "\""
     else search_query = ""
     sort = find_sort()
-    reset_page()
     make_filter_request(sort, var_cycle[sort], current_filter)
 }
 
@@ -248,7 +220,6 @@ function sort_toggle(id, field){
         get_subs(id)
     }
 
-    page_one()
     sort = find_sort()
     make_filter_request(sort, var_cycle[sort], current_filter)
 }
@@ -513,7 +484,6 @@ function clear_filters(){
     searchBar = document.getElementById('search')
     searchBar.value = ""
     search_query = ''
-    reset_page()
     make_filter_request('nameSort', 0, current_filter)
 }
 
@@ -862,7 +832,7 @@ function select_character(num) {
 
     // load counter names + values to sidebar
     update_char_spec_tab(character.classes[num-1], `${num}`)
-    //load counter names to settings page
+    // load counter names to settings page
     update_settings_char_spec_names(num)
 }
 
@@ -974,7 +944,7 @@ function make_filter_request(fieldid, direction, filter){
     }
 
     document.getElementById("spellList").innerHTML = loading_svg
-    make_HTTP_post_request(url+'?pagenum='+cur_page+'&spellsperpage='+spells_per_page+'&field='+fieldid+'&direction='+direction+'&searchquery='+search_query+'&loc='+loc, handle_spells_response, filter);
+    make_HTTP_post_request(url+'?field='+fieldid+'&direction='+direction+'&searchquery='+search_query+'&loc='+loc, handle_spells_response, filter);
 }
 
 function toggle_filter(){
@@ -1162,12 +1132,11 @@ function populate_spells(jsonResponse) {
     var data = JSON.parse(jsonResponse.srcElement.response)
     spells = document.getElementById("spellList")
     spells.innerHTML = ''
-    spells_count = data.spellscount
-    max_pages = Math.ceil(spells_count/spells_per_page)
+    spell_string = ""
     data.spells.forEach(spell => {
         var spellBody = spell_format_body(spell)
         var spellHigher = spell_format_higher(spell.higher_level)
-        spells.innerHTML +=`
+        spell_string += `
 <div id="${spell.spellid}">
     <div class="h20"></div>
     <div class="spellContainer spellHeight" onClick="toggle_spell_view('${spell.spellid}')" id="${spell.spellid+'_top'}">
@@ -1228,6 +1197,8 @@ function populate_spells(jsonResponse) {
     </div>
 </div>`
     })
+
+    spells.innerHTML = spell_string
 }
 
 function pop_empty_spellbook(char = spell_char) {

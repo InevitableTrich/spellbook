@@ -1,28 +1,22 @@
-import acqinc_5e_importer
-import egtw_5e_importer
+from spell_importer import import_spells
 import mini_importer
-import phb_5e_importer
-import tcoe_importer
-import xgte_5e_importer
 import add_subclasses
-# import add_tags
 
 
 if __name__ == "__main__":
-    acq = acqinc_5e_importer.main()
+    import_spells('acqinc')
     print("done updating acquisitions")
-    egtw = egtw_5e_importer.main()
+    import_spells('egtw')
     print("done updating explorers")
-    mini = mini_importer.main()
+    mini_importer.import_minis()
     print("done updating mini-books")
-    phb = phb_5e_importer.main()
+    import_spells('phb')
     print("done updating phb")
-    tcoe = tcoe_importer.main()
+    import_spells('tcoe')
     print("done updating tashas")
-    xgte = xgte_5e_importer.main()
+    import_spells('xgte')
     print("done updating xanathars")
 
     print("\nadding subclasses")
     add_subclasses.main()
     print("done adding subclasses")
-    # add_tags.main()
