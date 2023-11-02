@@ -1,0 +1,40 @@
+/* main constant variables */
+:root {
+    --bg: #212121; /* background color */
+    --elm: #323232; /* element color */
+    --ol: #505050; /* outline color */
+    --text: #DEDEDE; /* text color */
+    --tsize: 24px;
+}
+/* end main constant variables */
+
+/* background */
+body {
+    background-color: var(--bg);
+    margin: 8px;
+}
+/* end background */
+
+
+/* title header */
+div.title {
+    margin: 2rem;
+    width: fit-content;
+}
+
+p.title {
+    color: var(--text);
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0;
+}
+/* end title header */
+
+
+/* universal styles */
+.button {
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}

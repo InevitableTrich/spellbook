@@ -1,0 +1,75 @@
+/* square button */
+.square_button {
+    /* self appearance */
+    background-color: var(--elm);
+    border: var(--ol) solid 3px;
+    border-radius: 1rem;
+
+    width: 4rem;
+    height: 4rem;
+
+    /* svg positioning */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hover_transparency {
+    opacity: .5;
+    transition: opacity .15s;
+}
+.hover_transparency:hover {
+    opacity: 1;
+}
+/* end square button */
+
+
+/* discord button */
+div.discord {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+svg.discord {
+    position: absolute;
+    width: 3rem;
+    fill: var(--text);
+}
+/* end discord button */
+
+
+/* spellbook button */
+.spellbook {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.book_pages {
+    position: absolute;
+    width: 3.15rem;
+    fill: var(--text);
+}
+
+.book_back {
+    position: absolute;
+    width: 3.65rem;
+    fill: var(--ol);
+}
+/* end spellbook button */
+
+
+/* scroll to top button */
+div.scroll_to_top {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+svg.scroll_to_top {
+    position: absolute;
+    height: 4rem;
+    fill: var(--text);
+}
+/* end scroll to top button */

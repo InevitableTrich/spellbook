@@ -3,587 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="keywords" content="spellbook, uaq, uaq's, xanathar's guide to everything, XGTE, Player's Handbook, PHB,
-     DND, D&D, DD, Dungeons and Dragons, spells, spell list, inevitableleftturns, inevitable left turns, inevitable left turns spellbook">
-    <meta name="description" content="A spellbook by uaq. Includes spells from Players Handbook, Xanathar's Guide to Everything, and more.">
-    <title>uaq's Spellbook</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="icon" type="image/png" href="/static/images/icon.png">
 
-    <script src="/static/js/main.js"></script>
+    <title>uaq's Spellbook</title>
+    <meta name="description" content="A spellbook by uaq. Includes spells from Players Handbook, Xanathar's Guide to Everything, and more.">
+
+    <meta name="keywords" content="spellbook, uaq, uaq's, xanathar's guide to everything, XGTE, Player's Handbook, PHB,
+     DND, D&D, DD, Dungeons and Dragons, spells, spell list, inevitableleftturns, inevitable left turns,
+     inevitable left turns spellbook, uaqapps, spells uaq, uaq, spellbook">
+
+    <link rel="icon" type="image/png" href="/static/images/icon.png">
+    <link rel="stylesheet" type="text/css" href="static/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="static/css/filter.css">
+    <link rel="stylesheet" type="text/css" href="static/css/buttons.css">
 </head>
 
-<body onload="check_mobile(); make_filter_request('nameSort', 0, JSON.stringify({'filter': {}})); read_storage()">
-<!--    title-->
-    <div class="head">
-        <h1 class="title" style="margin-bottom: 20px;">
-            uaq's Spellbook
-        </h1>
+
+<body>
+    <!-- title -->
+    <div class="title">
+        <p class="title">uaq's Spellbook</p>
     </div>
 
-<!--    discord button-->
-    <a class="menu_button discord" rel="noreferrer noopener" target="_blank" href="https://discord.gg/U9tGMhKgq8">
-        <svg class="discord_logo" viewBox="0 0 71 55">
-            <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#ffffff"/>
-        </svg>
-    </a>
-
-<!--    send to mobile button-->
-    <a class="menu_button send_mobile" rel="noreferrer noopener" href="/mobile">
-        <svg class="mobile_logo" viewBox="0 0 10 10">
-            <path d="M 3.4 0 A 1 1 0 0 0 2.4 1 L 2.4 9 A 1 1 0 0 0 3.4 10 L 6.6 10 A 1 1 0 0 0 7.6 9 L 7.6 1 A 1 1 0 0 0 6.6 0 Z M 3.5 0.4 A 0.7 0.7 0 0 0 2.8 1.1 L 2.8 8.9 A 0.7 0.7 0 0 0 3.5 9.6 L 6.5 9.6 A 0.7 0.7 0 0 0 7.2 8.9 L 7.2 1.1 A 0.7 0.7 0 0 0 6.4975 0.4 L 5.8475 0.4 A 0.1 0.1 0 0 0 5.7475 0.5 A 0.3 0.3 0 0 1 5.4475 0.8 L 4.5475 0.8 A 0.3 0.3 0 0 1 4.2475 0.5 A 0.1 0.1 0 0 0 4.1475 0.4 L 3.4975 0.4 M 4.41 0.55 A 0.15 0.15 0 0 0 4.71 0.55 A 0.15 0.15 0 0 0 4.41 0.55 M 4.935 0.55 A 0.1 0.1 0 0 0 5.135 0.55 A 0.1 0.1 0 0 0 4.935 0.55 M 5.36 0.55 A 0.1 0.1 0 0 0 5.56 0.55 A 0.1 0.1 0 0 0 5.36 0.55 M 2.35 4.75 A 0.15 0.15 0 0 1 2.2 4.6 L 2.2 3.7 A 0.15 0.15 0 0 1 2.35 3.55 Z M 2.35 3.45 A 0.15 0.15 0 0 1 2.2 3.3 L 2.2 2.4 A 0.15 0.15 0 0 1 2.35 2.25 Z M 7.65 4.25 A 0.15 0.15 0 0 0 7.8 4.1 L 7.8 2.9 A 0.15 0.15 0 0 0 7.65 2.75 Z" fill="#FFFFFF" fill-rule="evenodd"/>
-        </svg>
-    </a>
-
-<!--    search bar-->
-    <input id="search" class="searchBar" autocomplete="off" type="text" placeholder="Search Here:" list="items" value="" onchange="search(value)">
-    <datalist id="items"></datalist>
-
-<!--    expand filter buttons-->
-    <div class="smallBtn shrink" id="ef_top" onclick="toggle_filter()">
-        <p class="smallTxt">
-            Expand Filter Options
-        </p>
-    </div>
-
-<!--    filter -->
-    <div class="rowContainer ef_body" id="ef_body" style="height: 0px;" collapsed="true">
-        <div class="searchColumnL" id="searchColumnL">
-            <div class="clickObj" id="class" onclick="cycle_list(id)">
-                <p class="searchOpTxt" id="class_txt">Class:
-                    <svg id="class_arr" class="filter_arrow">
-                        <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-                    </svg>
-              </p>
-            </div>
-            <div id="class_ops" class="ef_op" style="height: 0px;" collapsed="true">
-                <div class="rowContainer">
-                    <div class="cibl"></div>
-                    <div class="searchRowCon">
-                        <div class="classItem" id="artificer" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_artificer">Artificer,</p>
-                        </div>
-                        <div class="classItem" id="bard" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_bard">Bard,</p>
-                        </div>
-                        <div class="classItem" id="cleric" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_cleric">Cleric,</p>
-                        </div>
-                        <div class="classItem" id="druid" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_druid">Druid,</p>
-                        </div>
-                        <div class="classItem" id="monk" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_monk">Monk,</p>
-                        </div>
-                        <div class="classItem" id="paladin" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_paladin">Paladin,</p>
-                        </div>
-                        <div class="classItem" id="ranger" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_ranger">Ranger,</p>
-                        </div>
-                        <div class="classItem" id="sorcerer" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_sorcerer">Sorcerer,</p>
-                        </div>
-                        <div class="classItem" id="warlock" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_warlock">Warlock,</p>
-                        </div>
-                        <div class="classItem" id="wizard" onclick="sort_toggle(id, 'classes')">
-                            <p class="ciTxt" id="_wizard">Wizard</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clickObj" id="level" onclick="cycle_list(id)">
-                <p class="searchOpTxt" id="level_txt">Level:
-                  <svg id="level_arr" class="filter_arrow">
-                      <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-                  </svg>
-                </p>
-            </div>
-            <div id="level_ops" class="ef_op" style="height: 0px;" collapsed="true">
-                <div class="rowContainer">
-                    <div class="cibl"></div>
-                    <div class="searchRowCon">
-                        <div class="classItem" id="l0" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l0">Level 0,</p>
-                        </div>
-                        <div class="classItem" id="l1" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l1">Level 1,</p>
-                        </div>
-                        <div class="classItem" id="l2" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l2">Level 2,</p>
-                        </div>
-                        <div class="classItem" id="l3" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l3">Level 3,</p>
-                        </div>
-                        <div class="classItem" id="l4" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l4">Level 4,</p>
-                        </div>
-                        <div class="classItem" id="l5" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l5">Level 5,</p>
-                        </div>
-                        <div class="classItem" id="l6" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l6">Level 6,</p>
-                        </div>
-                        <div class="classItem" id="l7" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l7">Level 7,</p>
-                        </div>
-                        <div class="classItem" id="l8" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l8">Level 8,</p>
-                        </div>
-                        <div class="classItem" id="l9" onclick="sort_toggle(id, 'level')">
-                            <p class="ciTxt" id="_l9">Level 9</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clickObj" id="school" onclick="cycle_list(id)">
-                <p class="searchOpTxt" id="school_txt">School:
-                    <svg id="school_arr" class="filter_arrow">
-                        <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-                    </svg>
-                </p>
-            </div>
-            <div id="school_ops" class="ef_op" style="height: 0px;" collapsed="true">
-                <div class="rowContainer">
-                    <div class="cibl"></div>
-                    <div class="searchRowCon">
-                        <div class="classItem" id="abjuration" onclick="sort_toggle(id, 'school')">
-                            <p class="ciTxt" id="_abjuration">Abjuration,</p>
-                        </div>
-                        <div class="classItem" id="conjuration" onclick="sort_toggle(id, 'school')">
-                            <p class="ciTxt" id="_conjuration">Conjuration,</p>
-                        </div>
-                        <div class="classItem" id="divination" onclick="sort_toggle(id, 'school')">
-                            <p class="ciTxt" id="_divination">Divination,</p>
-                        </div>
-                        <div class="classItem" id="enchantment" onclick="sort_toggle(id, 'school')">
-                            <p class="ciTxt" id="_enchantment">Enchantment,</p>
-                        </div>
-                        <div class="classItem" id="evocation" onclick="sort_toggle(id, 'school')">
-                            <p class="ciTxt" id="_evocation">Evocation,</p>
-                        </div>
-                        <div class="classItem" id="illusion" onclick="sort_toggle(id, 'school')">
-                            <p class="ciTxt" id="_illusion">Illusion,</p>
-                        </div>
-                        <div class="classItem" id="necromancy" onclick="sort_toggle(id, 'school')">
-                            <p class="ciTxt" id="_necromancy">Necromancy,</p>
-                        </div>
-                        <div class="classItem" id="transmutation" onclick="sort_toggle(id, 'school')">
-                            <p class="ciTxt" id="_transmutation">Transmutation</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clickObj" id="source" onclick="cycle_list(id)">
-                <p class="searchOpTxt" id="source_txt">Source:
-                    <svg id="source_arr" class="filter_arrow">
-                        <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-                    </svg>
-                </p>
-            </div>
-            <div id="source_ops" class="ef_op" style="height: 0px;" collapsed="true">
-                <div class="rowContainer">
-                    <div class="cibl"></div>
-                    <div class="searchRowCon">
-                        <div class="classItem" id="acqinc" onclick="sort_toggle(id, 'source')" title="Acquisitions Incorporated">
-                            <p class="ciTxt" id="_acqinc">AI,</p>
-                        </div>
-                        <div class="classItem" id="eepc" onclick="sort_toggle(id, 'source')" title="Elemental Evil Player's Companion">
-                            <p class="ciTxt" id="_eepc">EEPC,</p>
-                        </div>
-                        <div class="classItem" id="ftod" onclick="sort_toggle(id, 'source')" title="Fizban's Treasury of Dragons">
-                            <p class="ciTxt" id="_ftod">FToD,</p>
-                        </div>
-                        <div class="classItem" id="frost" onclick="sort_toggle(id, 'source')" title="Icewind Dale: Rime of the Frostmaiden">
-                            <p class="ciTxt" id="_frost">ID:RotF,</p>
-                        </div>
-                        <div class="classItem" id="kwalish" onclick="sort_toggle(id, 'source')" title="Lost Laboratory of Kwalish">
-                            <p class="ciTxt" id="_kwalish">LLoK,</p>
-                        </div>
-                        <div class="classItem" id="phb" onclick="sort_toggle(id, 'source')" title="Player's Handbook">
-                            <p class="ciTxt" id="_phb">PHB,</p>
-                        </div>
-                        <div class="classItem" id="strix" onclick="sort_toggle(id, 'source')" title="Strixhaven: a Curriculum of Chaos">
-                            <p class="ciTxt" id="_strix">S:aCoC,</p>
-                        </div>
-                        <div class="classItem" id="srd" onclick="sort_toggle(id, 'source')" title="Standard Reference Document">
-                            <p class="ciTxt" id="_srd">SRD,</p>
-                        </div>
-                        <div class="classItem" id="tcoe" onclick="sort_toggle(id, 'source')" title="Tasha's Cauldron of Everything">
-                            <p class="ciTxt" id="_tcoe">TCoE,</p>
-                        </div>
-                        <div class="classItem" id="xgte" onclick="sort_toggle(id, 'source')" title="Xanathar's Guide to Everything">
-                            <p class="ciTxt" id="_xgte">XGTE</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="height: 15px;"></div>
-        </div>
-
-
-        <div class="searchColumnTR">
-            <div class="clickObj" id="subclass" onclick="cycle_list(id)" style="margin-top: -3px;">
-                <p class="searchOpTxt" id="subclass_txt">Subclass:
-                    <svg id="subclass_arr" class="filter_arrow">
-                        <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-                    </svg>
-                </p>
-            </div>
-            <div id="subclass_ops" class="ef_op" style="height: 0px;" collapsed="true">
-                <div class="rowContainer">
-                    <div class="cibl"></div>
-                    <div id="subclasses" class="columnContainer" style="width: fit-content">
-                        <div id="subs_con" class="searchRowCon">
-                            <p id="subs" class="ciTxt" style="margin-bottom: 12px;">Select a Class for available Subclasses to appear.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clickObj" id="action" onclick="cycle_list(id)">
-                <p class="searchOpTxt" id="action_txt">Action:
-                    <svg id="action_arr" class="filter_arrow">
-                        <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-                    </svg>
-                </p>
-            </div>
-            <div id="action_ops" class="ef_op" style="height: 0px;" collapsed="true">
-                <div class="rowContainer">
-                    <div class="cibl"></div>
-                    <div class="searchRowCon">
-                        <div class="classItem" id="_action" onclick="sort_toggle(id, 'cast_time')">
-                            <p class="ciTxt" id="__action">Action,</p>
-                        </div>
-                        <div class="classItem" id="bonus_action" onclick="sort_toggle(id, 'cast_time')">
-                            <p class="ciTxt" id="_bonus_action">Bonus Action,</p>
-                        </div>
-                        <div class="classItem" id="reaction" onclick="sort_toggle(id, 'cast_time')">
-                            <p class="ciTxt" id="_reaction">Reaction,</p>
-                        </div>
-                        <div class="classItem" id="minute" onclick="sort_toggle(id, 'cast_time')">
-                            <p class="ciTxt" id="_minute">1 Minute,</p>
-                        </div>
-                        <div class="classItem" id="ten_minute" onclick="sort_toggle(id, 'cast_time')">
-                            <p class="ciTxt" id="_ten_minute">10 Minutes,</p>
-                        </div>
-                        <div class="classItem" id="hour" onclick="sort_toggle(id, 'cast_time')">
-                            <p class="ciTxt" id="_hour">1 Hour</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clickObj" id="concentration" onclick="cycle_list(id)">
-                <p class="searchOpTxt" id="concentration_txt">Concentration:
-                    <svg id="concentration_arr" class="filter_arrow">
-                        <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3" />
-                    </svg>
-                </p>
-            </div>
-            <div id="concentration_ops" class="ef_op" style="height: 0px;" collapsed="true">
-                <div class="rowContainer">
-                    <div class="cibl"></div>
-                    <div class="searchRowCon">
-                        <div class="classItem" id="_concentration" onclick="sort_toggle(id, 'concentration')">
-                            <p class="ciTxt" id="__concentration">Concentration,</p>
-                        </div>
-                        <div class="classItem" id="not_concentration" onclick="sort_toggle(id, 'concentration')">
-                            <p class="ciTxt" id="_not_concentration">Not Concentration</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clickObj" id="ritual" onclick="cycle_list(id)">
-                <p class="searchOpTxt" id="ritual_txt">Ritual:
-                    <svg id="ritual_arr" class="filter_arrow">
-                        <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3"/>
-                    </svg>
-                </p>
-            </div>
-            <div id="ritual_ops" class = "ef_op" style="height: 0px;" collapsed="true">
-                <div class="rowContainer">
-                    <div class="cibl"></div>
-                    <div class="searchRowCon">
-                        <div class="classItem" id="s_ritual" onclick="sort_toggle(id, 'ritual')">
-                            <p class="ciTxt" id="_s_ritual">Ritual,</p>
-                        </div>
-                        <div class="classItem" id="not_ritual" onclick="sort_toggle(id, 'ritual')">
-                            <p class="ciTxt" id="_not_ritual">Not Ritual</p>
-                        </div>
-                  </div>
-              </div>
-            </div>
-
-            <div style="height: 15px;"></div>
-        </div>
-    </div>
-
-<!--    clear filters button-->
-    <div class="clrESO" onclick="clear_filters()">
-        <p class="smallTxt">Clear Filters</p>
-    </div>
-
-
-
-<!--    sort buttons-->
-    <div class="rowContainer sortContainer">
-        <div class="name" onclick="cycle_sort('nameSort')">
-            <p class="levelHeadTxt vCentered"  id="nameSort">Spell Name: <svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 2 4.5 l 0 1 l 6 0 l 0 -1 z"/></svg></p>
-        </div>
-        <div class="level hCentered" onclick="cycle_sort('levelSort')">
-          <p  class="levelHeadTxt vCentered" id="levelSort">Spell Level: <svg class="sort_arrow" viewbox="0 0 10 10"><path fill="rgb(222, 222, 222)" d="M 2 4.5 l 0 1 l 6 0 l 0 -1 z"/></svg></p>
-        </div>
-        <div class="classes unclickable">
-        </div>
-        <div class="quick_add unclickable">
-        </div>
-        <div class="closeBtn unclickable"></div>
-    </div>
-
-
-<!--    main spell list-->
-    <div id="spellList">
-        <svg viewbox="0 0 10 10" class="loading_svg">
-            <path fill="rgb(90,90,90)" d="M 4.5 1.5 Q 4.5 1 5 1 Q 5.5 1 5.5 1.5 L 5.5 2.5 Q 5.5 3 5 3 Q 4.5 3 4.5 2.5 Z"/>
-            <path fill="rgb(102,102,102)" d="M 7.183 2.2189 Q 7.433 1.7859 7 1.536 Q 6.567 1.2861 6.317 1.7171 L 5.817 2.5851 Q 5.567 3.0181 6 3.268 Q 6.433 3.518 6.683 3.0849 Z"/>
-            <path fill="rgb(114,114,114)" d="M 8.281 3.684 Q 8.714 3.434 8.464 3 Q 8.214 2.568 7.781 2.818 L 6.915 3.318 Q 6.482 3.568 6.732 4 Q 6.982 4.434 7.415 4.184 Z"/>
-            <path fill="rgb(126,126,126)" d="M 8.5 4.5 Q 9 4.5 9 5 Q 9 5.5 8.5 5.5 L 7.5 5.5 Q 7 5.5 7 5 Q 7 4.5 7.5 4.5 Z"/>
-            <path fill="rgb(138,138,138)" d="M 7.416 5.816 Q 6.983 5.567 6.733 6 Q 6.483 6.433 6.916 6.682 L 7.782 7.182 Q 8.215 7.432 8.464 7 Q 8.715 6.566 8.282 6.316 Z"/>
-            <path fill="rgb(150,150,150)" d="M 6.317 8.281 Q 6.567 8.714 7 8.464 Q 7.433 8.214 7.183 7.781 L 6.683 6.915 Q 6.433 6.482 6 6.732 Q 5.567 6.982 5.817 7.415 Z"/>
-            <path fill="rgb(162,162,162)" d="M 5.5 8.5 Q 5.5 9 5 9 Q 4.5 9 4.5 8.5 L 4.5 7.5 Q 4.5 7 5 7 Q 5.5 7 5.5 7.5 Z"/>
-            <path fill="rgb(174,174,174)" d="M 2.817 7.781 Q 2.567 8.214 3 8.464 Q 3.433 8.714 3.683 8.281 L 4.183 7.415 Q 4.433 6.982 4 6.732 Q 3.567 6.482 3.317 6.925 Z"/>
-            <path fill="rgb(186,186,186)" d="M 1.719 6.316 Q 1.286 6.566 1.536 7 Q 1.786 7.432 2.219 7.182 L 3.085 6.682 Q 3.518 6.432 3.268 6 Q 3.018 5.566 2.585 5.816 Z"/>
-            <path fill="rgb(198,198,198)" d="M 1.5 5.5 Q 1 5.5 1 5 Q 1 4.5 1.5 4.5 L 2.5 4.5 Q 3 4.5 3 5 Q 3 5.5 2.5 5.5 Z"/>
-            <path fill="rgb(210,210,210)" d="M 2.219 2.818 Q 1.786 2.568 1.536 3.0012 Q 1.286 3.434 1.719 3.684 L 2.585 4.184 Q 3.0183 4.434 3.286 4 Q 3.518 3.568 3.0845 3.318 Z"/>
-            <path fill="rgb(222,222,222)" d="M 3.683 1.719 Q 3.433 1.286 3 1.586 Q 2.567 1.786 2.817 2.219 L 3.317 3.085 Q 3.567 3.518 4 3.268 Q 4.433 3.0181 4.183 2.585 Z"/>
+    <!-- discord button -->
+    <div class="square_button discord button">
+        <svg class="discord" viewBox="0 0 71 54">
+            <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"/>
         </svg>
     </div>
 
+    <!-- search bar -->
+    <input id="search_bar" class="search_bar" autocomplete="off" placeholder="Search:">
 
-<!--    page change buttons-->
-    <div class="rowContainer">
-        <div class="pagem1" onclick="page_change(-1)">
-            <p class="pageTxt">
-                <svg width="28px" height="24px" style="position: relative; top: -2px;">
-                    <polygon points="23.324,6 23.324,24 6,15" style="fill:white;stroke-width:3" />
-                </svg>
-            </p>
-        </div>
-        <div class="pagep1" onclick="page_change(1)">
-            <p class="pageTxt">
-                <svg width="28px" height="24px" style="position: relative; top: -2px;">
-                    <polygon points="6,6 6,24 23.324,15" style="fill:white;stroke-width:3" />
-                </svg>
-            </p>
-        </div>
+    <!-- filter button -->
+    <div class="filter_button button">
+        <p class="filter_title">Expand Filter Options</p>
     </div>
 
-<!--    page display-->
-    <div class="middle">
-        <p class="pageTxt" id="pageTxt">Page 1</p>
+    <!-- clear filters button -->
+    <div class="filter_button button" style="margin: 1rem;">
+        <p class="filter_title">Clear Active Filters (0)</p>
     </div>
 
-<!--    scroll to top arrow-->
-    <div class="menu_button stt" onclick="scroll_to_top()">
-        <svg class="sttarrow">
-              <polygon points="6,0 6,20 23.324,10" style="fill:white;stroke-width:3"/>
+    <!-- floating buttons -->
+    <div class="square_button scroll_to_top hover_transparency button">
+        <svg class="scroll_to_top" viewBox="0 0 10 10">
+            <path d="M 5 2 L 8 5 L 5 5 L 8 8 L 2 8 L 5 5 L 2 5 Z"/>
         </svg>
     </div>
 
-<!--    toggle spellbook button-->
-    <div class="menu_button stt" style="left: 0; right: unset;" onclick="toggle_book()">
-        <svg viewBox="0 0 10 10" class="sb_part">
-            <path fill="rgb(80,80,80)" d="M 0.6 1.6 L 0.6 8.4 L 9.4 8.4 L 9.4 1.6 z"></path>
+    <div class="square_button spellbook hover_transparency button">
+        <svg class="book_back" viewBox="0 0 10 10">
+            <path d="M 0.1 1 Q 0 1 0 1.1 L 0 8.9 Q 0 9 0.1 9 L 2.5 9 L 2.5 8.7 L 2.6 9 L 9.9 9 Q 10 9 10 8.9 L 10 3 L 9.8 2.95 L 10 2.85 L 10 1.1 Q 10 1 9.9 1 L 1.4 1 L 1.4 1.25 L 1.3 1 Z"/>
         </svg>
-        <svg viewBox="0 0 20 20" class="sb_part" height="33.6px" style="margin-top: 11.1px; margin-left: 6.16px;">
-            <path fill="white" d="M 0 0 L 0 20 L 6 20 C 10.5 20 13 20 13 17.5 L 13 2.5 C 13 0 10.5 0 6 0 Z"/>
-        </svg>
-        <svg viewBox="0 0 20 20" class="sb_part" height="33.6px" style="transform: rotate(180deg);margin-top: 11.1px;margin-left: 16.59px;">
-            <path fill="white" d="M 0 0 L 0 20 L 6 20 C 10.5 20 13 20 13 17.5 L 13 2.5 C 13 0 10.5 0 6 0 Z"></path>
+        <svg class="book_pages" viewBox="0 0 10 10">
+            <path d="M 0 1 L 0 9 L 3.45 9 Q 4.95 9 4.95 8 L 4.95 2 Q 4.95 1 3.45 1 Z M 10 1 L 10 9 L 6.55 9 Q 5.05 9 5.05 8 L 5.05 2 Q 5.05 1 6.55 1 Z"/>
         </svg>
     </div>
-
-<!--    spellbook-->
-    <div id="bookCon" class="menuBack invis" onclick="toggle_book()">
-        <div class="menuPage" onclick="event.stopPropagation()">
-            <div id="book_char_container" class="book_side_container">
-                <div id="char1" class="book_side_btn clickable" onclick="book_switch_view(id)">
-                    <p class="book_side_text overflow">Char 1</p>
-                </div>
-                <div id="char2" class="book_side_btn clickable" style="top:-3px;" onclick="book_switch_view(id)">
-                    <p class="book_side_text overflow">Char 2</p>
-                </div>
-                <div id="char3" class="book_side_btn clickable" style="top:-6px;" onclick="book_switch_view(id)">
-                    <p class="book_side_text overflow">Char 3</p>
-                </div>
-                <div id="char4" class="book_side_btn clickable" style="top:-9px;" onclick="book_switch_view(id)">
-                    <p class="book_side_text">Settings</p>
-                </div>
-            </div>
-            <div id="book_char_spec_tab" class="book_char_spec_tab">
-                <div class="rowContainer" style="height: 100%;">
-                    <div class="book_char_spec_container0 clickable" onclick="document.getElementById('book_char_spec_tab').classList.toggle('book_char_spec_tab_out')">
-                        <p id="book_char_spec_text" class="book_char_spec_text v_text_l">Open Class Counters</p>
-                    </div>
-                    <div id="class_spec_main" class="columnContainer" style="margin: auto; height: 90%; justify-content: space-evenly;">
-                        <div class="columnContainer" style="text-align: center;">
-                            <p id="count_1_text" class="char_text">count_1:</p>
-                            <input id="count_1" type="number" autocomplete="off" class="level_input" placeholder="0" value="0" onchange="update_class_values()">
-                        </div>
-                        <div class="columnContainer" style="text-align: center;">
-                            <p id="count_2_text" class="char_text">count_2:</p>
-                            <input id="count_2" type="number" autocomplete="off" class="level_input" placeholder="0" value="0" onchange="update_class_values()">
-                        </div>
-                        <div class="columnContainer" style="text-align: center;">
-                            <p id="count_3_text" class="char_text">count_3:</p>
-                            <input id="count_3" type="number" autocomplete="off" class="level_input" placeholder="0" value="0" onchange="update_class_values()">
-                        </div>
-                        <div class="columnContainer" style="text-align: center;">
-                            <p id="count_4_text" class="char_text">count_4:</p>
-                            <input id="count_4" type="number" autocomplete="off" class="level_input" placeholder="0" value="0" onchange="update_class_values()">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="rowContainer" style="height: 100%;">
-                <div id="playerContainer" class="player_container">
-                    <div id="player_options" class="player_options">
-                        <select id="classes" name="classes" class="class_list" onchange="update_spell_slots(); update_char_spec_tab(selectedIndex); update_book()">
-                            <option value="artificer" class_num="0">Artificer</option>
-                            <option value="bard" class_num="1">Bard</option>
-                            <option value="cleric" class_num="2">Cleric</option>
-                            <option value="druid" class_num="3">Druid</option>
-                            <option value="fighter" class_num="9">Fighter</option>
-                            <option value="monk" class_num="10">Monk</option>
-                            <option value="paladin" class_num="4">Paladin</option>
-                            <option value="ranger" class_num="5">Ranger</option>
-                            <option value="sorcerer" class_num="6">Sorcerer</option>
-                            <option value="warlock" class_num="7">Warlock</option>
-                            <option value="wizard" class_num="8">Wizard</option>
-                        </select>
-
-                        <input id="lvInput" type="number" autocomplete="off" class="level_input" placeholder="Lv" value="1" onchange="update_spell_slots(); update_book()">
-
-                        <p id="slots" class="char_text" style="margin-bottom: 0px;">Spell Slots:</p>
-                        <div id="slots_container">
-                            <div id="slots_1" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 1</p></div>
-                                <div class="slot_right"><p id="slot_amt_1" class="slot_text">2</p></div>
-                            </div>
-                            <div id="slots_2" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 2</p></div>
-                                <div class="slot_right"><p id="slot_amt_2" class="slot_text">0</p></div>
-                            </div>
-                            <div id="slots_3" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 3</p></div>
-                                <div class="slot_right"><p id="slot_amt_3" class="slot_text">0</p></div>
-                            </div>
-                            <div id="slots_4" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 4</p></div>
-                                <div class="slot_right"><p id="slot_amt_4" class="slot_text">0</p></div>
-                            </div>
-                            <div id="slots_5" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 5</p></div>
-                                <div class="slot_right"><p id="slot_amt_5" class="slot_text">0</p></div>
-                            </div>
-                            <div id="slots_6" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 6</p></div>
-                                <div class="slot_right"><p id="slot_amt_6" class="slot_text">0</p></div>
-                            </div>
-                            <div id="slots_7" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 7</p></div>
-                                <div class="slot_right"><p id="slot_amt_7" class="slot_text">0</p></div>
-                            </div>
-                            <div id="slots_8" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 8</p></div>
-                                <div class="slot_right"><p id="slot_amt_8" class="slot_text">0</p></div>
-                            </div>
-                            <div id="slots_9" class="rowContainer spell_container">
-                                <div class="slot_left"><p class="slot_text">Lv. 9</p></div>
-                                <div class="slot_right"><p id="slot_amt_9" class="slot_text">0</p></div>
-                            </div>
-                        </div>
-                        <p class="clr_slots_txt clickable" onclick="clear_used_slots()">Clear Used Slots</p>
-                    </div>
-
-                    <div id="spellslots"></div>
-                </div>
-
-                <div id="book_container_1" class="book_container invis">
-                    <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
-                </div>
-                <div id="book_container_2" class="book_container invis">
-                    <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
-                </div>
-                <div id="book_container_3" class="book_container invis">
-                    <p class="book_head_text" style="margin: 20px auto 0px; width: 90%;">Open a spell and click "Add to Spellbook" to start your list of spells</p>
-                </div>
-                <div id="book_container_4" class="book_container invis">
-                    <div id="bookContainer" class="book_container">
-                        <p class="char_text">Character Names:</p>
-                        <div class="columnContainer">
-                            <div class="rowContainer" style="z-index: unset;">
-                                <input id="charName1" autocomplete="off" class="character_input" placeholder="Char 1" value="Char 1" onchange="update_char_name(id)">
-                                <div class="select_button clickable" onclick="select_character(1)"><p class="select_text">Select</p></div>
-                            </div>
-                            <div class="rowContainer" style="z-index: unset;">
-                                <input id="charName2" autocomplete="off" class="character_input" placeholder="Char 2" value="Char 2" onchange="update_char_name(id)">
-                                <div class="select_button clickable" onclick="select_character(2)"><p class="select_text">Select</p></div>
-                            </div>
-                            <div class="rowContainer" style="z-index: unset;">
-                                <input id="charName3" autocomplete="off" class="character_input" placeholder="Char 3" value="Char 3" onchange="update_char_name(id)">
-                                <div class="select_button clickable" onclick="select_character(3)"><p class="select_text">Select</p></div>
-                            </div>
-                        </div>
-
-                        <p class="char_text" style="margin-top: 24px;">Class Counter Names:</p>
-                        <div class="columnContainer">
-                            <input id="counter_name_1" autocomplete="off" class="character_input" onchange="save_char_spec_names(1)">
-                            <input id="counter_name_2" autocomplete="off" class="character_input" onchange="save_char_spec_names(2)">
-                            <input id="counter_name_3" autocomplete="off" class="character_input" onchange="save_char_spec_names(3)">
-                            <input id="counter_name_4" autocomplete="off" class="character_input" onchange="save_char_spec_names(4)">
-                        </div>
-
-                        <div class="select_button delete_button clickable" onclick="delete_prompt()">
-                            <p class="select_text">Delete Selected Character</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!--    delete character prompt-->
-    <div id="delete_back" class="menuBack invis" style="z-index: 4;">
-        <div id="delete_prompt" class="delete_prompt columnContainer" onclick="event.stopPropagation()">
-            <p class="delete_text">
-                Are you sure you want to delete character "<ch id="ch">test_name</ch>"? This action cannot be undone.
-            </p>
-            <div class="select_button confirm_button clickable" style="bottom: 0px; left: 9px;" onclick="delete_prompt()">
-                <p class="select_text">Cancel</p>
-            </div>
-            <div class="select_button confirm_button clickable" style="bottom: 0px; right: 9px;" onclick="delete_character()">
-                <p class="select_text">Delete</p>
-            </div>
-        </div>
-    </div>
-
-<!--    selected settings popup-->
-    <div id="settings_popup" class="settings_popup zero_opacity">
-        <div class="rowContainer" style="z-index: unset;">
-            <p class="popup_mark">!</p>
-            <p class="popup_text">Settings is currently selected. Cannot add to spellbook.</p>
-            <p class="popup_mark">!</p>
-        </div>
-    </div>
-
 </body>
+
 
 </html>

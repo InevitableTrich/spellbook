@@ -1,0 +1,47 @@
+/* filter styles */
+.filter_button {
+    /* basic style */
+    display: flex;
+
+    background-color: var(--elm);
+    border: var(--ol) solid 3px;
+    border-radius: .6rem;
+
+    width: 20rem;
+    height: 2.5rem;
+    margin: .5rem 1rem;
+
+    /* text adjustment */
+    justify-content: center;
+}
+
+.filter_title {
+    color: var(--text);
+    font-size: var(--tsize);
+    margin: 5px 0px 0px 0px;
+}
+
+/* end filter styles */
+
+
+/* search bar */
+.search_bar {
+    /* basic style */
+    background-color: var(--elm);
+    border: var(--ol) solid 3px;
+    border-radius: .6rem;
+
+    height: 2.25rem;
+    width: 20rem;
+
+    outline: none;
+
+    /* text style */
+    color: var(--text);
+    font-size: 20px;
+
+    margin: .5rem 1rem;
+    text-indent: 5px;
+    padding: 2px 0px;
+}
+/* end search bar */
