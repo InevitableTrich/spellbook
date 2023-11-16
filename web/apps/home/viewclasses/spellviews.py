@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import SimpleTemplateResponse
 from django.views import View
 
-from apps.home.impls.spellviewimpl import FilterSpellsViewImpl, BookSpellsViewImpl
+from apps.home.impls.spellviewimpl import BookSpellsViewImpl, SpellsViewImpl
 
 
 class _BaseView(View):
@@ -36,11 +36,10 @@ class MobileView(_BaseView):
     TEMPLATE = 'mobile.html'
 
 
-class FilterSpellsView(FilterSpellsViewImpl, _BaseView):
+class BookSpellsView(BookSpellsViewImpl, _BaseView):
     pass
 
-
-class BookSpellsView(BookSpellsViewImpl, _BaseView):
+class SpellsView(SpellsViewImpl, _BaseView):
     pass
 
 

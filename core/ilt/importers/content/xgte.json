@@ -374,7 +374,7 @@
 		"level": "2",
 		"classes": ["Sorcerer", "Wizard"],
 		"school": "Transmutation",
-		"duration": "up to one minute",
+		"duration": "up to 1 minute",
 		"range": "Touch",
 		"components": ["V", "S", "M"],
 		"material": "a hot pepper",
@@ -972,11 +972,11 @@
 		"material": "",
 		"ritual": false,
 		"concentration": true,
-		"desc": ["You teleport up to 60 feet to an unoccupied space you can see. On each of your turns before the spell ends, you can use a bonus action to teleport in this way again"],
+		"desc": ["You teleport up to 60 feet to an unoccupied space you can see. On each of your turns before the spell ends, you can use a bonus action to teleport in this way again."],
 		"higher_level": [],
-		"spellid": "",
-		"cast_time": "",
-		"source": []
+		"spellid": "far-step",
+		"cast_time": "1 bonus action",
+		"source": "Xanathar's Guide to Everything"
 	}, {
 		"name": "Holy Weapon",
 		"level": "5",

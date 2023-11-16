@@ -3,8 +3,11 @@
     --bg: #212121; /* background color */
     --elm: #323232; /* element color */
     --ol: #505050; /* outline color */
+    --tog: #767676;
     --text: #DEDEDE; /* text color */
-    --tsize: 24px;
+    --tlrg: 24px;
+    --tmed: 20px;
+    --tsml: 16px;
 }
 /* end main constant variables */
 
@@ -30,6 +33,18 @@ p.title {
 }
 /* end title header */
 
+/* generic containers */
+.row_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.fit_row_container {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+/* generic containers */
 
 /* universal styles */
 .button {
@@ -37,4 +52,22 @@ p.title {
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+}
+
+.overflow {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+/* end universal styles */
+
+/* small screen styles */
+@media (max-width: 600px) { /* TEMP */
+    body {
+        background-color: white;
+    }
 }

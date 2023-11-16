@@ -69,7 +69,7 @@
 	"school": "Enchantment",
 	"duration": "1 minute",
 	"range": "60 feet",
-	"components": ["S", "M", "R (2gp)"],
+	"components": ["S", "M", "R (2 gp)"],
 	"material": "a coin",
 	"ritual": false,
 	"concentration": false,
