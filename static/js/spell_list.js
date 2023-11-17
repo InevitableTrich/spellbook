@@ -1,30 +1,20 @@
-function populate_spells() {
-
-
-    var spells = "";
-    var classes_and_subs;
-
-    // sort by name
-    var sorted_spells = spell_list.slice();
-    sorted_spells.sort((spellX, spellY) => {
-        if (spellX.name > spellY.name) return 1;
-        return -1;
-    });
-
-    sorted_spells.forEach(spell => {
-        spells += spell.create_block();
-    });
-
-    document.getElementById("spell_list").innerHTML = spells;
-}
-
 function toggle_spell(id) {
     var spell_item = document.getElementById(id);
     var spell_elements = spell_item.children;
 
+    // add description if it doesn't have it
+    if (!spell_item.hasAttribute("built")) {
+        spell_item.innerHTML += spell_list[id].create_body();
+    }
+
     // if the 'extended' header is visible, open. else close
     if (!spell_elements[0].classList.contains("hidden")) {
         open_spell(id);
+
+        // indicate that the description exists
+        if (!spell_item.hasAttribute("built")) {
+            spell_item.setAttribute("built", "");
+        }
     } else {
         close_spell(id);
     }

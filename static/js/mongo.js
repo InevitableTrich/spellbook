@@ -23,12 +23,12 @@ class Spell {
         this.index = spell_data["spell_num"];
     }
 
-    static spell_template = `
+    static head_template = `
         <div class="spell" id="{0}">
             <div class="row_container" style="height: 1.5rem;">
                 <p class="spell_title name overflow">{1}</p>
                 <p class="spell_title level">{2}</p>
-                <p class="spell_title classes overflow">{13}</p>
+                <p class="spell_title classes overflow">{3}</p>
                 <div class="quick_add button" onclick="event.stopPropagation(); alert('add');">
                     <p class="spell_title quick_add">Quick Add</p>
                 </div>
@@ -39,27 +39,36 @@ class Spell {
                 <p class="spell_title arrow"><</p>
             </div>
             <div class="toggle_button_top button" onclick="toggle_spell('{0}');"></div>
-            <p class="spell_text"><b>Level:</b> {2}</p>
-            <p class="spell_text"><b>School:</b> {3}</p>
-            <p class="spell_text"><b>Casting </b>Time: {4}</p>
-            <p class="spell_text"><b>Range:</b> {5}</p>
-            <p class="spell_text"><b>Components:</b> {6}</p>
-            <p class="spell_text"><b>Duration:</b> {7}</p>
-            {14}
-            <p class="spell_text"><b>Classes:</b> {8}</p>
-            {9}
-            <p class="spell_text">{10}</p>
-            <p class="spell_text">{11}</p>
-            <p class="spell_text"><b>Sources:</b> {12}</p>
-            <div class="row_container">
-                <p class="spell_title name" style="width: 95.5%">{1}</p>
-                <p class="spell_title arrow"><</p>
-            </div>
-            <div class="toggle_button_bottom button" onclick="toggle_spell({0});"></div>
         </div>`
     ;
 
-    create_block() {
+    static body_template = `
+        <p class="spell_text"><b>Level:</b> {0}</p>
+        <p class="spell_text"><b>School:</b> {1}</p>
+        <p class="spell_text"><b>Casting Time:</b> {2}</p>
+        <p class="spell_text"><b>Range:</b> {3}</p>
+        <p class="spell_text"><b>Components:</b> {4}</p>
+        <p class="spell_text"><b>Duration:</b> {5}</p>
+        {6}
+        <p class="spell_text"><b>Classes:</b> {7}</p>
+        {8}
+        <p class="spell_text">{9}</p>
+        <p class="spell_text">{10}</p>
+        <p class="spell_text"><b>Sources:</b> {11}</p>
+        <div class="row_container">
+            <p class="spell_title name" style="width: 95.5%">{12}</p>
+            <p class="spell_title arrow"><</p>
+        </div>
+        <div class="toggle_button_bottom button" onclick="toggle_spell({13});"></div>`
+    ;
+
+    create_head() {
+        var subs_and_classes = this.classes.slice().concat(this.subclasses).join(", ");
+
+        return format_string(Spell.head_template, this.index, this.name, this.level, subs_and_classes);
+    }
+
+    create_body() {
         var cast_time = this.cast_time;
         if (this.condition != "") {
             cast_time += ", " + this.condition;
@@ -93,7 +102,6 @@ class Spell {
         if (this.subclasses.length != 0) {
             subclasses = format_string('<p class="spell_text"><b>Subclasses:</b> {0}</p>', this.subclasses.join(", "));
         }
-        var classes_and_subs = this.classes.slice().concat(this.subclasses).join(", ");
 
         var higher_levels = "";
         if (this.higher_level.length != 0) {
@@ -103,9 +111,9 @@ class Spell {
 
         var sources = this.sources.join(", ");
 
-        return format_string(Spell.spell_template, this.index, this.name, this.level, this.school, cast_time, range,
-                             components, duration, classes, subclasses, this.make_description(), higher_levels, sources,
-                             classes_and_subs, ritual);
+        return format_string(Spell.body_template, this.level, this.school, cast_time, range, components, duration,
+                             ritual, classes, subclasses, this.make_description(), higher_levels, sources, this.name,
+                             this.index);
     }
 
     make_description() {
@@ -223,10 +231,13 @@ function collect_spells(response) {
         spell_list.push(new Spell(spell));
     });
 
+    filtered_spells = spell_list.slice();
+    sort_spells(filtered_spells);
+
     perform_spell_operations();
 }
 
 function perform_spell_operations() {
     gather_filter_options();
-    populate_spells();
+    filter_spells();
 }

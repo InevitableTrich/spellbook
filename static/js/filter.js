@@ -1,3 +1,5 @@
+var filtered_spells = [];
+
 var filter_options = {
     "level": new Set(),
     "school": new Set(),
@@ -87,4 +89,21 @@ function toggle_filter(id) {
     }
 
     document.getElementById("filter_title").innerHTML = format_string("Clear Active Filters ({0})", active_filter_count);
+}
+
+function filter_spells() {
+    var search_value = document.getElementById("search_bar").value.toLowerCase();
+    var spells = "";
+    var spell;
+    for (var i = 0, size = filtered_spells.length; i < size; i++) {
+        spell = filtered_spells[i];
+
+        if ((spell.name.toLowerCase().indexOf(search_value) != -1) ||
+            (spell.descriptions.join(" ").toLowerCase().indexOf(search_value) != -1)) {
+
+            spells += spell.create_head();
+        }
+    }
+
+    document.getElementById("spell_list").innerHTML = spells;
 }
