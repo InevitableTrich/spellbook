@@ -49,17 +49,14 @@
     <div id="filter_menu" class="screen_back hidden" onclick="close_screen(id);">
         <div class="open_screen row_container" onclick="event.stopPropagation()">
             <!-- Filter -->
-            <div class="half_box" style="border-right: var(--ol) 1.5px solid">
-                <a class="filter_title">Class</a>
-                <div id="class_filters" class="filter_section"></div>
-            </div>
+            <div id="inclusive_filters" class="half_box" style="border-right: var(--ol) 1.5px solid"></div>
             <!-- Sorting -->
             <div class="half_box" style="border-left: var(--ol) 1.5px solid"></div>
         </div>
     </div>
 
     <!-- clear filters button -->
-    <div class="filter_button button" style="margin: 1rem;">
+    <div class="filter_button button" style="margin: 1rem;" onclick="clear_filters();">
         <p id="filter_title" class="filter_title">Clear Active Filters (0)</p>
     </div>
 

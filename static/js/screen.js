@@ -25,6 +25,8 @@ function open_screen(id) {
     screen.classList.remove('hidden');
 
     open_screens.push(id);
+
+    check_scroll();
 }
 
 function close_screen(id) {
@@ -35,6 +37,8 @@ function close_screen(id) {
 
     var ndx = open_screens.indexOf(id);
     open_screens.splice(ndx, 1);
+
+    check_scroll();
 }
 
 function close_all_screens() {
@@ -46,4 +50,22 @@ function close_all_screens() {
 
         i++;
     }
+
+    check_scroll();
+}
+
+function check_scroll() {
+    var body = document.body;
+
+    if (open_screens.length == 0) {
+        if (body.hasAttribute("style")) {
+            body.removeAttribute("style");
+        }
+
+    } else {
+        if (!body.hasAttribute("style")) {
+            body.style.overflow = "hidden";
+        }
+    }
+
 }
