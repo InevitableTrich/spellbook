@@ -1,4 +1,5 @@
 var filtered_spells = [];
+var active_filters = {};
 var active_filter_count = 0;
 
 var filter_options = {
@@ -242,29 +243,91 @@ function toggle_filter(id) {
     filter_spells();
 }
 
+/*
+add filter to dict of selected filters
+when add filter, create set of correct items
+do intersect/union with current other sets into filtered_spells
+*/
 function add_filter(id) { // fix Yes/No selection later, they share IDs
     // get the header
     var option = document.getElementById(id + " text");
     var header = option.parentElement.parentElement.parentElement;
-
     var filter_key = header.id.replace("_filters", "");
 
-    // for each spell in filtered spells
-    var spell;
-    for (var i = 0; i < filtered_spells.length; i++) {
-        spell = filtered_spells[i];
+    // create empty set at own location
+    if (!active_filters.hasOwnProperty(filter_key)) {
+        active_filters[filter_key] = {};
+    }
+    active_filters[filter_key][id] = new Set();
 
-        // if the filter is not found, remove from filter list
-        if (spell[filter_key].indexOf(id) == -1) {
-            filtered_spells.splice(i, 1);
-            i--; // dont move on, otherwise skips spells
+    var spell;
+    // for each spell
+    for (var i = 0, count = spell_list.length; i < count; i++) {
+        spell = spell_list[i];
+
+        if (spell[filter_key].indexOf(id) != -1) {
+            active_filters[filter_key][id].add(spell);
         }
     }
+
+    perform_filter_operations();
 }
 
 function remove_filter(id) {
-// take all removed spells, add them to a list if they have the filter, then reapply all current filters on that list.
-// then add them back to filter_spells and sort [??]
+    // get the header
+    var option = document.getElementById(id + " text");
+    var header = option.parentElement.parentElement.parentElement;
+    var filter_key = header.id.replace("_filters", "");
+
+    // if there are multiple filters, remove just the one
+    // otherwise remove the category
+    if (Object.getOwnPropertyNames(active_filters[filter_key]).length > 1) {
+        delete active_filters[filter_key][id];
+    } else {
+        delete active_filters[filter_key];
+    }
+
+    perform_filter_operations();
+}
+
+function perform_filter_operations() {
+    // filter categories / category
+    var categories = Object.getOwnPropertyNames(active_filters);
+    var category;
+    // filters and filter
+    var filters;
+    var filter;
+    // to be unioned/intersected
+    var to_union = [];
+    var intersection;
+    for (var i = 0, count = categories.length; i < count; i++) {
+        category = categories[i];
+        filters = Object.getOwnPropertyNames(active_filters[category]);
+        to_union.push(new Set());
+
+        for (var j = 0, countA = filters.length; j < countA; j++) {
+            filter = filters[j];
+            // union operation, not a built-in
+            to_union[i] = new Set([...to_union[i], ...active_filters[category][filter]]);
+        }
+
+        // do set intersections
+        if (i == 0) {
+            intersection = to_union[i];
+        } else {
+            // intersection operation, not a built-in
+            intersection = new Set([...intersection].filter(x => to_union[i].has(x)));
+        }
+    }
+
+    // check for no active filters
+    if (intersection != null) {
+        filtered_spells = [...intersection];
+    } else {
+        filtered_spells = spell_list.slice();
+    }
+    sort_spells(filtered_spells);
+    filter_spells();
 }
 
 function clear_filters() {
@@ -277,7 +340,9 @@ function clear_filters() {
         element = active[0];
         element.classList.toggle("filter_selected");
     }
+
     active_filter_count = 0;
+    active_filters = {};
 
     document.getElementById("filter_title").innerHTML = "Clear Active Filters (0)";
 
