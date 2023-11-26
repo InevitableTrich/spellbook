@@ -163,8 +163,11 @@ function distMultiplier(str) {
 
 function create_filters() {
     var filter_header = `
-        <a class="filter_title">{0}</a>
-        <div id="{1}_filters" class="filter_section"></div>`
+        <div id="{1}_container" class="row_container button" style="width: 100%;" onclick="toggle_filter_view('{1}');">
+            <p class="filter_title" style="width: 94%;">{0}</p>
+            <p class="filter_title arrow"><</p>
+        </div>
+        <div id="{1}_filters" class="filter_section" style="height: 0;"></div>`
     ;
 
     var filter_base = `
@@ -189,7 +192,7 @@ function create_filters() {
 
     inclusive_filter_box.innerHTML = filter_sections;
 
-    document.getElementById("sources_filters").style = "grid-template-columns: unset;";
+    document.getElementById("sources_filters").style = "grid-template-columns: unset; height: 0;";
 
     var filters;
     var options;
@@ -206,7 +209,7 @@ function create_filters() {
         // for each filter value
         for (var j = 0, amount = options.length; j < amount; j++) {
             option = options[j];
-            filters += format_string(filter_base, option, option.replace("*","'"));
+            filters += format_string(filter_base, property+","+option, option.replace("*","'"));
         }
 
         document.getElementById(property + "_filters").innerHTML = filters;
@@ -221,6 +224,25 @@ function format_property(property) {
         formatted.push(section.charAt(0).toUpperCase() + section.slice(1));
     }
     return formatted.join(" ");
+}
+
+function toggle_filter_view(id) {
+    var container = document.getElementById(id + "_container");
+    var filters = document.getElementById(id + "_filters");
+    var arrow = container.children[1];
+
+    // if filter section is closed
+    if (arrow.style.transform == "") {
+        // rotate arrow
+        arrow.style = "transform: rotate(-90deg);";
+
+        // expand section
+        var sectionHeight = filters.scrollHeight;
+        filters.style.height = sectionHeight + "px";
+    } else {
+        arrow.removeAttribute("style");
+        filters.style.height = "0";
+    }
 }
 
 function toggle_filter(id) {
@@ -243,30 +265,43 @@ function toggle_filter(id) {
     filter_spells();
 }
 
-/*
-add filter to dict of selected filters
-when add filter, create set of correct items
-do intersect/union with current other sets into filtered_spells
-*/
-function add_filter(id) { // fix Yes/No selection later, they share IDs
-    // get the header
-    var option = document.getElementById(id + " text");
-    var header = option.parentElement.parentElement.parentElement;
-    var filter_key = header.id.replace("_filters", "");
+var bool_fields = ["concentration", "ritual", "higher_level"];
+function add_filter(id) { // add option for exluded components
+    var comma_index = id.indexOf(",");
+
+    var category = id.slice(0, comma_index);
+    var filter = id.slice(comma_index + 1);
 
     // create empty set at own location
-    if (!active_filters.hasOwnProperty(filter_key)) {
-        active_filters[filter_key] = {};
+    if (!active_filters.hasOwnProperty(category)) {
+        active_filters[category] = {};
     }
-    active_filters[filter_key][id] = new Set();
+    active_filters[category][filter] = new Set();
 
     var spell;
-    // for each spell
-    for (var i = 0, count = spell_list.length; i < count; i++) {
-        spell = spell_list[i];
+    // check for boolean / prescence fields
+    if (bool_fields.indexOf(category) != -1) {
+        var bool_value = filter == "Yes" ? true : false;
+        var bool_field = filter != "higher_level" ? true : false;
+        // for each spell
+        for (var i = 0, count = spell_list.length; i < count; i++) {
+            spell = spell_list[i];
 
-        if (spell[filter_key].indexOf(id) != -1) {
-            active_filters[filter_key][id].add(spell);
+            // check if it is the filter value, or if looking for higher level, or if looking for no higher level
+            if ((bool_field && (spell[category] == bool_value))
+                    || (bool_value && spell[category].length > 0)
+                    || (!bool_value && spell[category].length == 0)) {
+                active_filters[category][filter].add(spell);
+            }
+        }
+    } else {
+        // for each spell
+        for (var i = 0, count = spell_list.length; i < count; i++) {
+            spell = spell_list[i];
+
+            if (spell[category].indexOf(filter) != -1) {
+                active_filters[category][filter].add(spell);
+            }
         }
     }
 
@@ -274,17 +309,17 @@ function add_filter(id) { // fix Yes/No selection later, they share IDs
 }
 
 function remove_filter(id) {
-    // get the header
-    var option = document.getElementById(id + " text");
-    var header = option.parentElement.parentElement.parentElement;
-    var filter_key = header.id.replace("_filters", "");
+    var comma_index = id.indexOf(",");
+
+    var category = id.slice(0, comma_index);
+    var filter = id.slice(comma_index + 1);
 
     // if there are multiple filters, remove just the one
     // otherwise remove the category
-    if (Object.getOwnPropertyNames(active_filters[filter_key]).length > 1) {
-        delete active_filters[filter_key][id];
+    if (Object.getOwnPropertyNames(active_filters[category]).length > 1) {
+        delete active_filters[category][filter];
     } else {
-        delete active_filters[filter_key];
+        delete active_filters[category];
     }
 
     perform_filter_operations();

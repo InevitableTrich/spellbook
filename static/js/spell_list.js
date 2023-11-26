@@ -115,7 +115,7 @@ class Spell {
                                           this.higher_level.join("<br>&emsp;&emsp;"));
         }
 
-        var sources = this.sources.join(", ");
+        var sources = this.sources.join(", ").replaceAll("*", "'");
 
         return format_string(Spell.body_template, this.level, this.school, cast_time, range, components, duration,
                              ritual, classes, subclasses, this.make_description(), higher_levels, sources, this.name,

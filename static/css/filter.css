@@ -19,7 +19,7 @@
 .filter_title {
     color: var(--text);
     font-size: var(--tlrg);
-    margin: 5px 0px 0px 0px;
+    margin: 7px 0px 1px;
 }
 
 /* end filter button styles */
@@ -82,11 +82,10 @@
 
 .filter_section {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
-
-    margin-left: .5rem;
-    padding: .5rem;
-    padding-right: 0;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    margin: 0.5rem 0 0.5rem 1rem;
+    overflow: hidden;
+    transition: height .3s;
 }
 
 .filter_item {
