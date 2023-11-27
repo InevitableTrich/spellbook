@@ -19,7 +19,7 @@
 .filter_title {
     color: var(--text);
     font-size: var(--tlrg);
-    margin: 7px 0px 1px;
+    margin: 7px 0px 0px;
 }
 
 /* end filter button styles */
@@ -89,6 +89,7 @@
 }
 
 .filter_item {
+    height: fit-content;
     padding: .125rem .75rem;
     border-left: var(--ol) 3px solid;
 }

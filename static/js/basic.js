@@ -6,6 +6,10 @@ function format_string(str, ...params) {
     return str;
 }
 
+function scroll_to_top() {
+    window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'});
+}
+
 function sort_spells(list) {
     list.sort((spellX, spellY) => {
         if (spellX.name > spellY.name) return 1;

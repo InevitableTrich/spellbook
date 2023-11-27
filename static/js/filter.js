@@ -161,6 +161,14 @@ function distMultiplier(str) {
     return 999;
 }
 
+var filter_base = `
+    <div class="filter_item">
+        <div class="fit_row_container button" onclick="toggle_filter('{0}')">
+            <div id="{0} box" class="filter_selection"></div>
+            <p id="{0} text" class="filter_selection">{1}</p>
+        </div>
+    </div>`
+;
 function create_filters() {
     var filter_header = `
         <div id="{1}_container" class="row_container button" style="width: 100%;" onclick="toggle_filter_view('{1}');">
@@ -168,15 +176,6 @@ function create_filters() {
             <p class="filter_title arrow"><</p>
         </div>
         <div id="{1}_filters" class="filter_section" style="height: 0;"></div>`
-    ;
-
-    var filter_base = `
-        <div class="filter_item">
-            <div class="fit_row_container button" onclick="toggle_filter('{0}')">
-                <div id="{0} box" class="filter_selection"></div>
-                <p id="{0} text" class="filter_selection">{1}</p>
-            </div>
-        </div>`
     ;
 
     var inclusive_filter_box = document.getElementById("inclusive_filters");
@@ -192,6 +191,8 @@ function create_filters() {
 
     inclusive_filter_box.innerHTML = filter_sections;
 
+    // set subclasses and sources to not be grids, always 1 element wide
+    document.getElementById("subclasses_filters").style = "grid-template-columns: unset; height: 0;";
     document.getElementById("sources_filters").style = "grid-template-columns: unset; height: 0;";
 
     var filters;
@@ -199,17 +200,23 @@ function create_filters() {
     var option;
     // for each filter property
     for (var i = 0, count = properties.length; i < count; i++) {
-        if (i == 1) { // skip subclasses
-            continue;
-        }
-
         property = properties[i];
-        options = Array.from(filter_options[property]);
         filters = "";
-        // for each filter value
-        for (var j = 0, amount = options.length; j < amount; j++) {
-            option = options[j];
-            filters += format_string(filter_base, property+","+option, option.replace("*","'"));
+
+        if (i == 1) { // do subclasses own thing
+            filters = `
+                <div style="height: fit-content;">
+                    <div class="filter_item">
+                        <p class="filter_selection">Select a Class for Subclass options</p>
+                    </div>
+                </div>`;
+        } else {
+            options = Array.from(filter_options[property]);
+            // for each filter value
+            for (var j = 0, amount = options.length; j < amount; j++) {
+                option = options[j];
+                filters += format_string(filter_base, property+","+option, option.replace("*","'"));
+            }
         }
 
         document.getElementById(property + "_filters").innerHTML = filters;
@@ -262,7 +269,62 @@ function toggle_filter(id) {
     }
 
     document.getElementById("filter_title").innerHTML = format_string("Clear Active Filters ({0})", active_filter_count);
+
+    if (id.startsWith("classes")) {
+        show_subclasses();
+    }
+
     filter_spells();
+}
+
+function show_subclasses() {
+    var class_container = document.getElementById("classes_filters");
+    var subclass_container = document.getElementById("subclasses_filters");
+    var toggled_filters = document.getElementsByClassName("filter_selected");
+
+    var classes = new Set();
+
+    var element;
+    // collect all active classes
+    for (var i = 0, count = toggled_filters.length; i < count; i++) {
+        element = toggled_filters[i];
+
+        if (element.id.startsWith("classes")) {
+            classes.add(element.parentElement.children[1].innerHTML);
+        }
+    }
+
+    var subclasses = [];
+    for (var _class of classes) {
+        for (var option of filter_options["subclasses"]) {
+            if (option.startsWith(_class)) {
+                subclasses.push(option);
+            }
+        }
+    }
+
+    subclasses.sort();
+
+    var filters = `<div style="height: fit-content;">`;
+    if (subclasses.length == 0) {
+        filters += `
+            <div class="filter_item">
+                <p class="filter_selection">Select a Class for Subclass options</p>
+            </div>`
+    } else {
+        for (var subclass of subclasses) {
+            filters += format_string(filter_base, "subclasses,"+subclass, subclass);
+        }
+    }
+
+    subclass_container.innerHTML = filters + "</div>";
+
+    // if subclasses are open, adjust height
+    if (subclass_container.style.height != "0px") {
+        var subclass_subcontainer = subclass_container.children[0];
+        var section_height = subclass_subcontainer.scrollHeight;
+        subclass_container.style.height = section_height + "px";
+    }
 }
 
 var bool_fields = ["concentration", "ritual", "higher_level"];
@@ -335,10 +397,28 @@ function perform_filter_operations() {
     // to be unioned/intersected
     var to_union = [];
     var intersection;
+    // check for classes and subclasses
+    var combine_subs = (categories.indexOf("classes") != -1) && (categories.indexOf("subclasses") != -1);
+    if (combine_subs) {
+        // remove the classes and subclasses category, place them at end next to eachother
+        categories.splice(categories.indexOf("classes"), 1);
+        categories.splice(categories.indexOf("subclasses"), 1);
+        categories = categories.concat(["classes", "subclasses"]);
+    }
+
     for (var i = 0, count = categories.length; i < count; i++) {
         category = categories[i];
         filters = Object.getOwnPropertyNames(active_filters[category]);
-        to_union.push(new Set());
+
+        // if not a subclass
+        if (!(combine_subs && category == "subclasses")) {
+            to_union.push(new Set());
+        } else {
+            // remove subclasses from categories
+            categories.splice(i, 1);
+            i--;
+            count--;
+        }
 
         for (var j = 0, countA = filters.length; j < countA; j++) {
             filter = filters[j];
@@ -346,12 +426,15 @@ function perform_filter_operations() {
             to_union[i] = new Set([...to_union[i], ...active_filters[category][filter]]);
         }
 
-        // do set intersections
-        if (i == 0) {
-            intersection = to_union[i];
-        } else {
-            // intersection operation, not a built-in
-            intersection = new Set([...intersection].filter(x => to_union[i].has(x)));
+        // if not class where subclasses
+        if (!(combine_subs && category == "classes")) {
+            // do set intersections
+            if (intersection == null) {
+                intersection = to_union[i];
+            } else {
+                // intersection operation, not a built-in
+                intersection = new Set([...intersection].filter(x => to_union[i].has(x)));
+            }
         }
     }
 
@@ -380,6 +463,8 @@ function clear_filters() {
     active_filters = {};
 
     document.getElementById("filter_title").innerHTML = "Clear Active Filters (0)";
+    show_subclasses();
+    document.getElementById("subclasses_container").children[1].style = null;
 
     filtered_spells = spell_list.slice();
     sort_spells(filtered_spells);

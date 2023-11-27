@@ -234,8 +234,8 @@ function open_spell(id) {
     var spell_item = document.getElementById(id);
 
     // expand spell
-    var sectionHeight = spell_item.scrollHeight - 14;
-    spell_item.style.height = sectionHeight + "px";
+    var section_height = spell_item.scrollHeight - 14;
+    spell_item.style.height = section_height + "px";
 
     // rotate arrows
     spell_item.children[1].children[1].style = "transform: rotate(-90deg);";

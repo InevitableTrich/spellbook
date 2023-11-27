@@ -25,7 +25,7 @@
 
 
 /* discord button */
-div.discord {
+a.discord {
     position: absolute;
     top: 1rem;
     right: 1rem;
