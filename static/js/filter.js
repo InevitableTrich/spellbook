@@ -48,10 +48,7 @@ function gather_filter_options() {
     // sort the wanted sets alphabetically
     var to_sort = ["classes", "subclasses", "level", "school", "sources"];
     var sorted = [];
-    var key;
-    for (var i = 0, count = to_sort.length; i < count; i++) {
-        key = to_sort[i];
-
+    for (var key of to_sort) {
         sorted = Array.from(filter_options[key]);
         sorted.sort();
         filter_options[key].clear();
@@ -64,9 +61,7 @@ function gather_filter_options() {
         "cast_time",
         "duration"
     ]
-    for (var i = 0, count = to_sort.length; i < count; i++) {
-        key = to_sort[i];
-
+    for (var key of to_sort) {
         sorted = Array.from(filter_options[key]);
         sorted.sort((durX, durY) => {
             // get X and Y numbers
@@ -86,9 +81,7 @@ function gather_filter_options() {
 
     // sort distances
     to_sort = ["range"];
-    for (var i = 0, count = to_sort.length; i < count; i++) {
-        key = to_sort[i];
-
+    for (var key of to_sort) {
         sorted = Array.from(filter_options[key]);
         sorted.sort((distX, distY) => {
             // get X and Y numbers
@@ -183,9 +176,7 @@ function create_filters() {
 
     // gets all filter properties
     var properties = Object.getOwnPropertyNames(filter_options);
-    var property;
-    for (var i = 0, count = properties.length; i < count; i++) {
-        property = properties[i];
+    for (var property of properties) {
         filter_sections += format_string(filter_header, format_property(property), property);
     }
 
@@ -197,13 +188,11 @@ function create_filters() {
 
     var filters;
     var options;
-    var option;
     // for each filter property
-    for (var i = 0, count = properties.length; i < count; i++) {
-        property = properties[i];
+    for (var property of properties) {
         filters = "";
 
-        if (i == 1) { // do subclasses own thing
+        if (property == "subclasses") { // do subclasses own thing
             filters = `
                 <div style="height: fit-content;">
                     <div class="filter_item">
@@ -213,8 +202,7 @@ function create_filters() {
         } else {
             options = Array.from(filter_options[property]);
             // for each filter value
-            for (var j = 0, amount = options.length; j < amount; j++) {
-                option = options[j];
+            for (var option of options) {
                 filters += format_string(filter_base, property+","+option, option.replace("*","'"));
             }
         }
@@ -224,10 +212,9 @@ function create_filters() {
 }
 
 function format_property(property) {
-    var formatted = [], section = "";
+    var formatted = [];
     var sections = property.split("_");
-    for (var i = 0, count = sections.length; i < count; i++) {
-        section = sections[i];
+    for (var section of sections) {
         formatted.push(section.charAt(0).toUpperCase() + section.slice(1));
     }
     return formatted.join(" ");
@@ -286,9 +273,7 @@ function show_subclasses() {
 
     var element;
     // collect all active classes
-    for (var i = 0, count = toggled_filters.length; i < count; i++) {
-        element = toggled_filters[i];
-
+    for (var element of toggled_filters) {
         if (element.id.startsWith("classes")) {
             classes.add(element.parentElement.children[1].innerHTML);
         }
@@ -345,9 +330,7 @@ function add_filter(id) {
     if (bool_fields.indexOf(category) != -1) {
         var bool_value = filter == "No" ? false : true;
         // for each spell
-        for (var i = 0, count = spell_list.length; i < count; i++) {
-            spell = spell_list[i];
-
+        for (var spell of spell_list) {
             // check if it is the filter value
             if (spell[category] == bool_value) {
                 active_filters[category][filter].add(spell);
@@ -356,9 +339,7 @@ function add_filter(id) {
     } else if (category == "higher_level") {
         var bool_value = filter == "No" ? false : true;
 
-        for (var i = 0, count = spell_list.length; i < count; i++) {
-            spell = spell_list[i];
-
+        for (var spell of spell_list) {
             if ((bool_value && spell[category].length > 0) || (!bool_value && spell[category].length == 0)) {
                 active_filters[category][filter].add(spell);
             }
@@ -367,8 +348,7 @@ function add_filter(id) {
         var included = filter.indexOf("No") == -1;
         var component_index;
 
-        for (var i = 0, count = spell_list.length; i < count; i++) {
-            spell = spell_list[i];
+        for (var spell of spell_list) {
             component_index = spell[category].indexOf(filter[filter.length-1]);
 
             if ((included && (component_index != -1)) || (!included && (component_index == -1))) {
@@ -377,9 +357,7 @@ function add_filter(id) {
         }
     } else {
         // for each spell
-        for (var i = 0, count = spell_list.length; i < count; i++) {
-            spell = spell_list[i];
-
+        for (var spell of spell_list) {
             if (spell[category].indexOf(filter) != -1) {
                 active_filters[category][filter].add(spell);
             }
@@ -410,9 +388,8 @@ function perform_filter_operations() {
     // filter categories / category
     var categories = Object.getOwnPropertyNames(active_filters);
     var category;
-    // filters and filter
+    // filters
     var filters;
-    var filter;
     // to be unioned/intersected
     var to_union = [];
     var intersection;
@@ -425,6 +402,7 @@ function perform_filter_operations() {
         categories = categories.concat(["classes", "subclasses"]);
     }
 
+    // standard for loop for subclass trickery and later element access
     for (var i = 0, count = categories.length; i < count; i++) {
         category = categories[i];
         filters = Object.getOwnPropertyNames(active_filters[category]);
@@ -441,9 +419,7 @@ function perform_filter_operations() {
 
         // components should 'and'
         if (category == "components") {
-            for (var j = 0, countA = filters.length; j < countA; j++) {
-                filter = filters[j];
-
+            for (var filter of filters) {
                 if (intersection == null) {
                     intersection = active_filters[category][filter];
                 } else {
@@ -455,8 +431,7 @@ function perform_filter_operations() {
             continue;
         }
 
-        for (var j = 0, countA = filters.length; j < countA; j++) {
-            filter = filters[j];
+        for (var filter of filters) {
             // union operation, not a built-in
             to_union[i] = new Set([...to_union[i], ...active_filters[category][filter]]);
         }
@@ -487,10 +462,8 @@ function clear_filters() {
     var search_bar = document.getElementById("search_bar");
     search_bar.value = "";
 
-    var active = document.getElementsByClassName("filter_selected");
-    var element;
-    for (var i = 0, count = active.length; i < count; i++) {
-        element = active[0];
+    var active = [...document.getElementsByClassName("filter_selected")];
+    for (var element of active) {
         element.classList.toggle("filter_selected");
     }
 
@@ -511,9 +484,7 @@ function filter_spells() {
     var search_value = document.getElementById("search_bar").value.toLowerCase();
     var spells = "";
     var spell;
-    for (var i = 0, size = filtered_spells.length; i < size; i++) {
-        spell = filtered_spells[i];
-
+    for (var spell of filtered_spells) {
         if ((spell.name.toLowerCase().indexOf(search_value) != -1) ||
             (spell.descriptions.join(" ").toLowerCase().indexOf(search_value) != -1)) {
 
