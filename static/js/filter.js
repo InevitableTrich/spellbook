@@ -260,8 +260,6 @@ function toggle_filter(id) {
     if (id.startsWith("classes")) {
         show_subclasses();
     }
-
-    filter_spells();
 }
 
 function show_subclasses() {
@@ -367,7 +365,7 @@ function add_filter(id) {
     perform_filter_operations();
 }
 
-function remove_filter(id) {
+function remove_filter(id) { // if the class a subclass corresponds to, remove that filter too
     var comma_index = id.indexOf(",");
 
     var category = id.slice(0, comma_index);
@@ -379,6 +377,22 @@ function remove_filter(id) {
         delete active_filters[category][filter];
     } else {
         delete active_filters[category];
+    }
+
+    // remove subclasses corresponding to the class if it is one
+    if (category == "classes" && active_filters["subclasses"] != null) {
+        // remove corresponding subs
+        for (var subclass of Object.getOwnPropertyNames(active_filters["subclasses"])) {
+            if (subclass.indexOf(filter) != -1) {
+
+                delete active_filters["subclasses"][subclass];
+            }
+        }
+
+        // if there are none left, remove filter
+        if (Object.getOwnPropertyNames(active_filters["subclasses"]).length == 0) {
+            delete active_filters["subclasses"];
+        }
     }
 
     perform_filter_operations();
@@ -482,6 +496,7 @@ function clear_filters() {
 
 function filter_spells() {
     var search_value = document.getElementById("search_bar").value.toLowerCase();
+    var spell_count = 0;
     var spells = "";
     var spell;
     for (var spell of filtered_spells) {
@@ -489,8 +504,17 @@ function filter_spells() {
             (spell.descriptions.join(" ").toLowerCase().indexOf(search_value) != -1)) {
 
             spells += spell.create_head();
+            spell_count++;
         }
     }
 
-    document.getElementById("spell_list").innerHTML = spells;
+    var spell_section = document.getElementById("spell_list");
+    spell_section.innerHTML = spells;
+    document.getElementById("spell_count").innerHTML = "Spells Listed: " + spell_count;
+
+    if (spell_section.children.length == 0) {
+        spell_section.innerHTML = `
+            <p class="no_spells">There are no spells that fit the active filters.</p>
+        `
+    }
 }

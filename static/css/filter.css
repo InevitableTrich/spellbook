@@ -117,4 +117,11 @@ div.filter_selected {
 p.filter_selected {
     font-weight: 700;
 }
+
+.no_spells {
+    color: var(--text);
+    font-size: var(--tlrg);
+    width: fit-content;
+    margin: 2rem auto;
+}
 /* end filter selection */

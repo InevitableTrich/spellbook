@@ -241,7 +241,7 @@
 }, {
 	"name": "Summon Shadowspawn",
 	"level": "3",
-	"classes": ["Warlock", "Rogue"],
+	"classes": ["Warlock", "Wizard"],
 	"school": "Conjuration",
 	"duration": "up to 1 hour",
 	"range": "90 feet",
