@@ -12,7 +12,7 @@ var filter_options = {
     "cast_time": new Set(),
     "duration": new Set(),
     "range": new Set(),
-    "components": new Set(["V", "S", "M", "R"]),
+    "components": new Set(["V", "S", "M", "R", "No V", "No S", "No M", "No R"]),
     "sources": new Set(),
     "higher_level": new Set(["Yes", "No"])
 };
@@ -327,8 +327,8 @@ function show_subclasses() {
     }
 }
 
-var bool_fields = ["concentration", "ritual", "higher_level"];
-function add_filter(id) { // add option for exluded components
+var bool_fields = ["concentration", "ritual"];
+function add_filter(id) {
     var comma_index = id.indexOf(",");
 
     var category = id.slice(0, comma_index);
@@ -341,18 +341,37 @@ function add_filter(id) { // add option for exluded components
     active_filters[category][filter] = new Set();
 
     var spell;
-    // check for boolean / prescence fields
+    // check for boolean fields
     if (bool_fields.indexOf(category) != -1) {
-        var bool_value = filter == "Yes" ? true : false;
-        var bool_field = filter != "higher_level" ? true : false;
+        var bool_value = filter == "No" ? false : true;
         // for each spell
         for (var i = 0, count = spell_list.length; i < count; i++) {
             spell = spell_list[i];
 
-            // check if it is the filter value, or if looking for higher level, or if looking for no higher level
-            if ((bool_field && (spell[category] == bool_value))
-                    || (bool_value && spell[category].length > 0)
-                    || (!bool_value && spell[category].length == 0)) {
+            // check if it is the filter value
+            if (spell[category] == bool_value) {
+                active_filters[category][filter].add(spell);
+            }
+        }
+    } else if (category == "higher_level") {
+        var bool_value = filter == "No" ? false : true;
+
+        for (var i = 0, count = spell_list.length; i < count; i++) {
+            spell = spell_list[i];
+
+            if ((bool_value && spell[category].length > 0) || (!bool_value && spell[category].length == 0)) {
+                active_filters[category][filter].add(spell);
+            }
+        }
+    } else if (category == "components") {
+        var included = filter.indexOf("No") == -1;
+        var component_index;
+
+        for (var i = 0, count = spell_list.length; i < count; i++) {
+            spell = spell_list[i];
+            component_index = spell[category].indexOf(filter[filter.length-1]);
+
+            if ((included && (component_index != -1)) || (!included && (component_index == -1))) {
                 active_filters[category][filter].add(spell);
             }
         }
@@ -418,6 +437,22 @@ function perform_filter_operations() {
             categories.splice(i, 1);
             i--;
             count--;
+        }
+
+        // components should 'and'
+        if (category == "components") {
+            for (var j = 0, countA = filters.length; j < countA; j++) {
+                filter = filters[j];
+
+                if (intersection == null) {
+                    intersection = active_filters[category][filter];
+                } else {
+                    // intersection operation, not a built-in
+                    intersection = new Set([...intersection].filter(x => active_filters[category][filter].has(x)));
+                }
+            }
+
+            continue;
         }
 
         for (var j = 0, countA = filters.length; j < countA; j++) {
