@@ -237,6 +237,14 @@ function open_spell(id) {
     var section_height = spell_item.scrollHeight - 14;
     spell_item.style.height = section_height + "px";
 
+    // leave it unset to allow for screen changing width
+    timeout_id = setTimeout(() => {
+        spell_item.style.height = "unset";
+        delete active_transitions[id];
+    }, 300);
+
+    active_transitions[id] = timeout_id;
+
     // rotate arrows
     spell_item.children[1].children[1].style = "transform: rotate(-90deg);";
     spell_item.children[0].children[4].style = "transform: rotate(-90deg);";
@@ -244,11 +252,26 @@ function open_spell(id) {
 
 function close_spell(id) {
     var spell_item = document.getElementById(id);
-    spell_item.removeAttribute("style");
 
-    // rotate arrows. timeout for animation to render
+    // remove current expanding animation if present
+    if (Object.getOwnPropertyNames(active_transitions).indexOf(id) != -1) {
+        clearTimeout(active_transitions[id]);
+    }
+
+    // get and save transition for later
+    var transition = spell_item.style.transition;
+    spell_item.style.transition = "";
+    // set to current height for animation
+    var sectionHeight = spell_item.scrollHeight - 14;
+    spell_item.style.height = sectionHeight + "px";
+    // put transition back
+    spell_item.style.transition = transition;
+
+    // rotate arrows and close. timeout for animation to render
     setTimeout(() => {
         spell_item.children[1].children[1].removeAttribute("style");
         spell_item.children[0].children[4].removeAttribute("style");
-    }, 1);
+
+        spell_item.style.height = "1.5rem";
+    }, 0);
 }

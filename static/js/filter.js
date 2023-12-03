@@ -171,7 +171,7 @@ function create_filters() {
         <div id="{1}_filters" class="filter_section" style="height: 0;"></div>`
     ;
 
-    var inclusive_filter_box = document.getElementById("inclusive_filters");
+    var filter_box = document.getElementById("filters");
     var filter_sections = "";
 
     // gets all filter properties
@@ -180,7 +180,7 @@ function create_filters() {
         filter_sections += format_string(filter_header, format_property(property), property);
     }
 
-    inclusive_filter_box.innerHTML = filter_sections;
+    filter_box.innerHTML = filter_sections;
 
     // set subclasses and sources to not be grids, always 1 element wide
     document.getElementById("subclasses_filters").style = "grid-template-columns: unset; height: 0;";
@@ -226,6 +226,7 @@ function toggle_filter_view(id) {
     var arrow = container.children[1];
 
     // if filter section is closed
+    var timeout_id;
     if (arrow.style.transform == "") {
         // rotate arrow
         arrow.style = "transform: rotate(-90deg);";
@@ -233,9 +234,35 @@ function toggle_filter_view(id) {
         // expand section
         var sectionHeight = filters.scrollHeight;
         filters.style.height = sectionHeight + "px";
+
+        // leave it unset to allow for screen changing width
+        timeout_id = setTimeout(() => {
+            filters.style.height = "unset";
+            delete active_transitions[id];
+        }, 300);
+
+        active_transitions[id] = timeout_id;
     } else {
+        // remove current expanding animation if present
+        if (Object.getOwnPropertyNames(active_transitions).indexOf(id) != -1) {
+            clearTimeout(active_transitions[id]);
+        }
+
+        // get and save transition for later
+        var transition = filters.style.transition;
+        filters.style.transition = "";
+        // set to current height for animation
+        var sectionHeight = filters.scrollHeight;
+        filters.style.height = sectionHeight + "px";
+        // put transition back
+        filters.style.transition = transition;
+
+        // close, timeout 0 lets animation play
+        setTimeout(() => {
+            filters.style.height = "0";
+        }, 0);
+
         arrow.removeAttribute("style");
-        filters.style.height = "0";
     }
 }
 
@@ -384,7 +411,6 @@ function remove_filter(id) { // if the class a subclass corresponds to, remove t
         // remove corresponding subs
         for (var subclass of Object.getOwnPropertyNames(active_filters["subclasses"])) {
             if (subclass.indexOf(filter) != -1) {
-
                 delete active_filters["subclasses"][subclass];
             }
         }
@@ -392,6 +418,7 @@ function remove_filter(id) { // if the class a subclass corresponds to, remove t
         // if there are none left, remove filter
         if (Object.getOwnPropertyNames(active_filters["subclasses"]).length == 0) {
             delete active_filters["subclasses"];
+            active_filter_count--;
         }
     }
 
@@ -510,7 +537,7 @@ function filter_spells() {
 
     var spell_section = document.getElementById("spell_list");
     spell_section.innerHTML = spells;
-    document.getElementById("spell_count").innerHTML = "Spells Listed: " + spell_count;
+    document.getElementById("spell_count").innerHTML = format_string("Sorting {0} spells:", spell_count);
 
     if (spell_section.children.length == 0) {
         spell_section.innerHTML = `
