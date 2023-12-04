@@ -55,14 +55,26 @@
             <div id="filters" class="half_box" style="border-right: var(--ol) 1.5px solid"></div>
             <!-- Sorting -->
             <div class="half_box" style="border-left: var(--ol) 1.5px solid">
-                <p id="spell_count" class="filter_title">Sorting N Spells: </p>
-                <div class="spell">
-                    <div class="row_container">
-                        <p class="spell_title">Name</p>
-                        <div>
-                            <div class="sort_button"></div>
-                            <div class="sort_button"></div>
-                        </div>
+                <p id="spell_count" class="filter_title">Sorting N Spells by: </p>
+                <div id="sort_list" ondrop="sort_drop(event);" ondragover="allow_sort_drop(event);">
+                    <div id="level_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <p class="spell_title">1) Level</p>
+                    </div>
+                    <div id="name_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <p class="spell_title">2) Name</p>
+                    </div>
+                    <div id="range_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <p class="spell_title">3) Range</p>
+                    </div>
+                </div>
+                <br>
+                <p class="filter_title">Inactive Sort Methods:</p>
+                <div id="inactive_sort_list">
+                    <div id="cast_time_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
+                        <p class="spell_title">   Cast Time</p>
+                    </div>
+                    <div id="duration_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
+                        <p class="spell_title">   Duration</p>
                     </div>
                 </div>
             </div>

@@ -537,7 +537,7 @@ function filter_spells() {
 
     var spell_section = document.getElementById("spell_list");
     spell_section.innerHTML = spells;
-    document.getElementById("spell_count").innerHTML = format_string("Sorting {0} spells:", spell_count);
+    document.getElementById("spell_count").innerHTML = format_string("Sorting {0} spells by:", spell_count);
 
     if (spell_section.children.length == 0) {
         spell_section.innerHTML = `

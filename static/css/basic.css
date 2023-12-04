@@ -54,6 +54,13 @@ p.title {
     -webkit-user-select: none;
 }
 
+.draggable {
+    cursor: grab;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
 .overflow {
     text-overflow: ellipsis;
     white-space: nowrap;
