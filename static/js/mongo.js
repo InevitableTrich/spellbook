@@ -32,7 +32,7 @@ function collect_spells(response) {
     });
 
     filtered_spells = spell_list.slice();
-    sort_spells(filtered_spells);
+    sort_spells();
 
     perform_spell_operations();
 }

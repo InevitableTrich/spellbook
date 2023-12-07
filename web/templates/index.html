@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <br>
-                <p class="filter_title">Inactive Sort Methods:</p>
+                <p class="filter_title">Inactive Sort Options:</p>
                 <div id="inactive_sort_list">
                     <div id="cast_time_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
                         <p class="spell_title">   Cast Time</p>
@@ -76,6 +76,11 @@
                     <div id="duration_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
                         <p class="spell_title">   Duration</p>
                     </div>
+                </div>
+                <br>
+                <div class="row_container button" onclick="toggle_reverse_sort();">
+                    <div id="reverse_sort_box" class="filter_selection"></div>
+                    <p class="filter_selection">Reverse Sort Direction</p>
                 </div>
             </div>
         </div>

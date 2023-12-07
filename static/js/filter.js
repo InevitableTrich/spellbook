@@ -65,11 +65,11 @@ function gather_filter_options() {
         sorted = Array.from(filter_options[key]);
         sorted.sort((durX, durY) => {
             // get X and Y numbers
-            dX = numberInString(durX);
-            dY = numberInString(durY);
+            dX = number_in_string(durX);
+            dY = number_in_string(durY);
             // get time multipliers
-            mX = durMultiplier(durX);
-            mY = durMultiplier(durY);
+            mX = dur_multiplier(durX);
+            mY = dur_multiplier(durY);
 
             if ((dX*mX) > (dY*mY)) return 1;
             return -1;
@@ -85,11 +85,11 @@ function gather_filter_options() {
         sorted = Array.from(filter_options[key]);
         sorted.sort((distX, distY) => {
             // get X and Y numbers
-            dX = numberInString(distX);
-            dY = numberInString(distY);
+            dX = number_in_string(distX);
+            dY = number_in_string(distY);
             // get distance multipliers
-            mX = distMultiplier(distX);
-            mY = distMultiplier(distY);
+            mX = dist_multiplier(distX);
+            mY = dist_multiplier(distY);
 
             if ((dX*mX) > (dY*mY)) return 1;
             return -1;
@@ -101,57 +101,6 @@ function gather_filter_options() {
 
     // create the filters
     create_filters();
-}
-
-function numberInString(str) {
-    var datas, data;
-    var numberRegex = new RegExp("^(\\d+|\\d{1,3}(,\\d{3})*)(\\.\\d+)?$");
-
-    datas = str.split(" ");
-    data = datas[0].match(numberRegex);
-    if (data != null) { // if a number is found in str:
-        return parseInt(data[0].replace(",", ""));
-    }
-
-    return 9999;
-}
-
-function durMultiplier(str) {
-    if (str.indexOf("day") != -1) {
-        return 86400;
-    } else if (str.indexOf("hour") != -1) {
-        return 3600;
-    } else if (str.indexOf("minute") != -1) {
-        return 60;
-    } else if (str.indexOf("round") != -1) {
-        return 6;
-    } else if (str.indexOf("reaction") != -1) {
-        return 3;
-    } else if (str.indexOf("bonus") != -1) {
-        return 2;
-    } else if (str.indexOf("action") != -1) {
-        return 1;
-    } else if (str.indexOf("Instant") != -1){
-        return 0;
-    }
-    return 260;
-}
-
-function distMultiplier(str) {
-    if (str.indexOf("Unlimited") != -1) {
-        return 86400;
-    } else if (str.indexOf("Sight") != -1) {
-        return 23200;
-    } else if (str.indexOf("mile") != -1) {
-        return 5280;
-    } else if (str.indexOf("Touch") != -1) {
-        return 4/9999; // /9999 to counter return 9999 on number
-    } else if (str.indexOf("feet") != -1) {
-        return 1;
-    } else if (str.indexOf("Self") != -1) {
-        return 0;
-    }
-    return 999;
 }
 
 var filter_base = `
@@ -495,7 +444,7 @@ function perform_filter_operations() {
     } else {
         filtered_spells = spell_list.slice();
     }
-    sort_spells(filtered_spells);
+    sort_spells();
     filter_spells();
 }
 
@@ -516,7 +465,7 @@ function clear_filters() {
     document.getElementById("subclasses_container").children[1].style = null;
 
     filtered_spells = spell_list.slice();
-    sort_spells(filtered_spells);
+    sort_spells();
 
     filter_spells();
 }
@@ -525,7 +474,7 @@ function filter_spells() {
     var search_value = document.getElementById("search_bar").value.toLowerCase();
     var spell_count = 0;
     var spells = "";
-    var spell;
+
     for (var spell of filtered_spells) {
         if ((spell.name.toLowerCase().indexOf(search_value) != -1) ||
             (spell.descriptions.join(" ").toLowerCase().indexOf(search_value) != -1)) {
