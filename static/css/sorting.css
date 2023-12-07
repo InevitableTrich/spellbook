@@ -1,4 +1,5 @@
-/* sort order buttons */
-.sort_button {
+/* sort toggle */
+.sort_toggled {
+    background-color: var(--tog);
 }
-/* end sort order buttons */
+/* end sort toggle */

@@ -126,7 +126,7 @@ function dist_multiplier(str) {
 
 function toggle_reverse_sort() {
     sort_reversed = !sort_reversed;
-    document.getElementById("reverse_sort_box").classList.toggle("filter_selected");
+    document.getElementById("reverse_sort_box").classList.toggle("sort_toggled");
 
     sort_spells();
     filter_spells();
@@ -212,7 +212,7 @@ function external_drop(event) {
     const final_id = container.children[final_index].id;
 
     // set the final sorts info to dragged info
-    container.children[final_index].children[0].innerHTML = dragged.children[0].innerHTML;
+    container.children[final_index].children[0].innerHTML = "3) " + dragged.children[0].innerHTML.slice(3);
     container.children[final_index].id = dragged.id;
 
     // set the dragged's info
