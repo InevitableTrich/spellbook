@@ -31,16 +31,16 @@ class Spell {
 
     static head_template = `
         <div class="spell" id="{0}">
-            <div class="row_container" style="height: 1.5rem;">
+            <div class="spell_head">
                 <p class="spell_title name overflow">{1}</p>
                 <p class="spell_title level">{2}</p>
                 <p class="spell_title classes overflow">{3}</p>
                 <div class="quick_add button" onclick="event.stopPropagation(); alert('add');">
                     <p class="spell_title quick_add">Quick Add</p>
                 </div>
-                <p class="spell_title arrow"><</p>
+                <p class="spell_title spell_arrow arrow"><</p>
             </div>
-            <div class="row_container hidden" style="height: 1.5rem;">
+            <div class="spell_head hidden">
                 <p class="spell_title name" style="width: 94.5%">{1}</p>
                 <p class="spell_title arrow"><</p>
             </div>
@@ -49,6 +49,7 @@ class Spell {
     ;
 
     static body_template = `
+        <div class="spell_top_spacer"></div>
         <p class="spell_text"><b>Level:</b> {0}</p>
         <p class="spell_text"><b>School:</b> {1}</p>
         <p class="spell_text"><b>Casting Time:</b> {2}</p>
@@ -61,9 +62,10 @@ class Spell {
         <p class="spell_text">{9}</p>
         <p class="spell_text">{10}</p>
         <p class="spell_text"><b>Sources:</b> {11}</p>
+        <div class="spell_bottom_spacer"></div>
         <div class="row_container">
             <p class="spell_title name" style="width: 94.5%">{12}</p>
-            <p class="spell_title arrow" style="transform: rotate(90deg);"><</p>
+            <p class="spell_title spell_arrow arrow" style="transform: rotate(90deg);"><</p>
         </div>
         <div class="toggle_button_bottom button" onclick="toggle_spell({13});"></div>`
     ;
@@ -235,6 +237,7 @@ function open_spell(id) {
 
     // expand spell
     var section_height = spell_item.scrollHeight - 14;
+    spell_item.classList.remove("spell_closed");
     spell_item.style.height = section_height + "px";
 
     // leave it unset to allow for screen changing width
@@ -272,6 +275,7 @@ function close_spell(id) {
         spell_item.children[1].children[1].removeAttribute("style");
         spell_item.children[0].children[4].removeAttribute("style");
 
-        spell_item.style.height = "1.5rem";
+        spell_item.removeAttribute("style");
+        spell_item.classList.add("spell_closed");
     }, 0);
 }

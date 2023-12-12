@@ -47,7 +47,7 @@
 
     <!-- filter button -->
     <div class="filter_button button" onclick="open_screen('filter_menu');">
-        <p class="filter_title">Open Filter Options</p>
+        <p class="filter_button_text filter_title">Open Filter Options</p>
     </div>
     <div id="filter_menu" class="screen_back hidden" onclick="close_screen(id);">
         <div class="open_screen row_container" onclick="event.stopPropagation()">
@@ -87,8 +87,8 @@
     </div>
 
     <!-- clear filters button -->
-    <div class="filter_button button" style="margin: 1rem;" onclick="clear_filters();">
-        <p id="filter_title" class="filter_title">Clear Active Filters (0)</p>
+    <div class="filter_button clear_filters_button button" onclick="clear_filters();">
+        <p id="filter_title" class="filter_button_text filter_title">Clear Active Filters (0)</p>
     </div>
 
     <!-- spell list -->
@@ -111,7 +111,7 @@
     </div>
 
     <!-- create space at bottom -->
-    <div style="height: 4.85rem"></div>
+    <div class="bottom_spacer"></div>
 </body>
 
 

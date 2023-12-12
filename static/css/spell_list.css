@@ -1,6 +1,6 @@
 /* spell */
 .spell {
-    height: 1.5rem;
+    height: var(--sph);
     background-color: var(--elm);
     border: var(--ol) 3px solid;
     border-radius: 0.6rem;
@@ -8,6 +8,16 @@
     margin: .5rem;
     overflow: hidden;
     transition: height .3s;
+}
+
+.spell_closed {
+    height: var(--sph);
+}
+
+.spell_head {
+    display: flex;
+    flex_direction: row;
+    height: var(--sph);
 }
 
 .spell_title {
@@ -36,14 +46,15 @@
 div.quick_add {
     width: 15%;
     text-align: center;
-    height: 2.7rem;
-    margin-top: -.7rem;
+    height: 2.5rem;
+    margin-top: -.5rem;
     position: relative;
     z-index: 1;
 }
 p.quick_add {
     white-space: nowrap;
-    margin-top: .6rem;
+    overflow: hidden;
+    margin-top: .45rem;
 }
 
 .arrow {
@@ -65,6 +76,10 @@ p.quick_add {
     margin: 1rem 2rem;
     line-height: 1.6rem;
 }
+
+/* spacing between title and body */
+.spell_top_spacer {}
+.spell_bottom_spacer {}
 
 table_header {
     position: relative;
@@ -100,7 +115,7 @@ th {
 /* toggle spell button */
 .toggle_button_top {
     position: relative;
-    height: 2.5rem;
+    height: calc(var(--sph) + 1rem);
     margin: -0.5rem;
     margin-top: -2rem;
 }
@@ -113,3 +128,57 @@ th {
 /* end toggle spell button */
 
 /* end spell */
+
+/* small screen styles */
+@media (min-height: 1280px) {
+    .spell {
+        height: calc(.5rem + var(--sph));
+        border-width: 5px;
+        margin: 1rem .5rem;
+        padding: .75rem 1rem;
+    }
+
+    .spell_text {
+        line-height: 3rem;
+        margin: 2rem 2rem 0rem;
+    }
+
+    .toggle_button_top, .toggle_button_bottom {
+        height: calc(var(--sph) + 2rem);
+        margin-top: -2.75rem;
+    }
+    .toggle_button_bottom {
+        margin-top: -3.5rem;
+    }
+
+    .name {
+        width: 25%;
+    }
+
+    .level {
+        margin: 0 2%;
+    }
+
+    .classes {
+        width: 46%;
+    }
+
+    div.quick_add {
+        width: 20%;
+        margin-left: 1%;
+    }
+
+    .arrow {
+        left: -2%
+    }
+    .spell_arrow {
+        display: none;
+    }
+
+    .spell_top_spacer {
+        margin-top: -1rem;
+    }
+    .spell_bottom_spacer {
+        height: 1.5rem;
+    }
+}

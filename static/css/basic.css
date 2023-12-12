@@ -3,11 +3,13 @@
     --bg: #212121; /* background color */
     --elm: #323232; /* element color */
     --ol: #505050; /* outline color */
-    --tog: #767676;
+    --tog: #767676; /* toggled color */
+    --sph: 1.5rem; /* element height */
     --text: #DEDEDE; /* text color */
-    --tlrg: 24px;
-    --tmed: 20px;
-    --tsml: 16px;
+    /* text sizes */
+    --tlrg: 1.5rem;
+    --tmed: 1.25rem;
+    --tsml: 1rem;
 }
 /* end main constant variables */
 
@@ -27,11 +29,15 @@ div.title {
 
 p.title {
     color: var(--text);
-    font-size: 36px;
+    font-size: 2.25rem;
     font-weight: 800;
     margin: 0;
 }
 /* end title header */
+
+.bottom_spacer {
+    height: 4.85rem;
+}
 
 /* generic containers */
 .row_container {
@@ -73,8 +79,22 @@ p.title {
 /* end universal styles */
 
 /* small screen styles */
-@media (max-width: 600px) { /* TEMP */
-    body {
-        background-color: white;
+@media (min-height: 1280px) {
+    :root {
+        --tlrg: 2.5rem;
+        --tmed: 2.25rem;
+        --sph: 2rem;
+    }
+
+    div.title {
+        margin: 4rem;
+    }
+
+    p.title {
+        font-size: 4rem;
+    }
+
+    .bottom_spacer {
+        9.85rem;
     }
 }

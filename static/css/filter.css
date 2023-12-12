@@ -16,6 +16,10 @@
     justify-content: center;
 }
 
+.clear_filters_button {
+    margin: 1rem;
+}
+
 .filter_title {
     color: var(--text);
     font-size: var(--tlrg);
@@ -39,7 +43,7 @@
 
     /* text style */
     color: var(--text);
-    font-size: 20px;
+    font-size: 1.25rem;
 
     margin: .5rem 1rem;
     text-indent: 5px;
@@ -125,3 +129,50 @@ p.filter_selected {
     margin: 2rem auto;
 }
 /* end filter selection */
+
+/* small screen styles */
+@media (min-height: 1280px) {
+    .filter_button {
+        border-width: 5px;
+        border-radius: .9rem;
+        height: 4.5rem;
+        width: 45rem;
+
+        margin: .5rem 2rem;
+    }
+
+    .clear_filters_button {
+        margin: 1.5rem 2rem;
+    }
+
+    .filter_title {
+        font-size: 2.75rem;
+    }
+
+    .filter_button_text {
+        font-size: 3rem;
+    }
+
+    .search_bar {
+        border-width: 5px;
+        border-radius: .9rem;
+        height: 4.5rem;
+        width: 45rem;
+
+        font-size: 3rem;
+
+        margin: 1rem 2rem;
+    }
+
+    .open_screen {
+        height: 60rem;
+    }
+
+    .filter_section {
+        grid-template-columns: unset;
+    }
+
+    div.filter_selection {
+        margin: auto 0;
+    }
+}

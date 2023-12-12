@@ -8,6 +8,8 @@
     width: 4rem;
     height: 4rem;
 
+    z-index: 1;
+
     /* svg positioning */
     display: flex;
     justify-content: center;
@@ -73,3 +75,40 @@ svg.scroll_to_top {
     fill: var(--text);
 }
 /* end scroll to top button */
+
+/* small screen styles */
+@media (min-height: 1280px) {
+    .square_button {
+        border-width: 5px;
+        border-radius: 1.5rem;
+
+        width: 8rem;
+        height: 8rem;
+    }
+
+    a.discord {
+        top: 2rem;
+        right: 2rem;
+    }
+
+    svg.discord {
+        width: 6rem;
+    }
+
+    .spellbook {
+        left: 2rem;
+        bottom: 2rem;
+    }
+
+    .book_back {
+        width: 6.95rem;
+    }
+
+    .book_pages {
+        width: 6rem;
+    }
+
+    svg.scroll_to_top {
+        height: 8rem;
+    }
+}
