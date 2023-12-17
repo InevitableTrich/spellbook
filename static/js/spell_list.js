@@ -39,7 +39,7 @@ class Spell {
                 <p class="spell_title name overflow">{1}</p>
                 <p class="spell_title level">{2}</p>
                 <p class="spell_title classes overflow">{3}</p>
-                <div class="quick_add button" onclick="event.stopPropagation(); alert('add');">
+                <div id="{0}_add" class="quick_add button" onclick="event.stopPropagation(); toggle_spell_in_book({0});">
                     <p class="spell_title quick_add">Quick Add</p>
                 </div>
                 <p class="spell_title spell_arrow arrow"><</p>

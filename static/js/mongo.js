@@ -51,4 +51,6 @@ function perform_spell_operations() {
     // sort then populate visual spells
     sort_spells();
     filter_spells();
+    // update spell add buttons based off of current spellbook character
+    update_spell_buttons();
 }
