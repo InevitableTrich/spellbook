@@ -1,3 +1,4 @@
+// db query
 function gather_spells() {
     if (window.location.href.startsWith('http://127.0.0.1:8000/')) {
         url = 'http://127.0.0.1:8000/spells';
@@ -10,6 +11,7 @@ function gather_spells() {
     make_HTTP_post_request(url, handle_spells_response);
 }
 
+// make an http req
 function make_HTTP_post_request(url, callback) {
     objXMLHttp = new XMLHttpRequest();
     objXMLHttp.onreadystatechange = callback;
@@ -18,26 +20,35 @@ function make_HTTP_post_request(url, callback) {
     objXMLHttp.send();
 }
 
+// on http response, collect spells
 function handle_spells_response(data) {
     if (this.readyState == 4 && this.status == 200){
         collect_spells(data);
     }
 }
 
+// process spells from db query
 function collect_spells(response) {
+    // db spell data
     const spells = JSON.parse(response.srcElement.response)["spells"];
 
-    spells.forEach(spell => {
+    // for each spell, create spell object and add to spell list
+    for (var spell of spells){
         spell_list.push(new Spell(spell));
-    });
+    }
 
+    // copy the spells to filtered_spells
     filtered_spells = spell_list.slice();
-    sort_spells();
 
+    // do anything spell related
     perform_spell_operations();
 }
 
+// do anything spell related
 function perform_spell_operations() {
+    // create filters from data
     gather_filter_options();
+    // sort then populate visual spells
+    sort_spells();
     filter_spells();
 }

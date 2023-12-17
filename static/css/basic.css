@@ -35,9 +35,11 @@ p.title {
 }
 /* end title header */
 
+/* bottom spacing */
 .bottom_spacer {
     height: 4.85rem;
 }
+/* end bottom spacing */
 
 /* generic containers */
 .row_container {
@@ -80,12 +82,15 @@ p.title {
 
 /* small screen styles */
 @media (min-height: 1280px) {
+    /* main constant variables */
     :root {
         --tlrg: 2.5rem;
         --tmed: 2.25rem;
         --sph: 2rem;
     }
+    /* end main constant variables */
 
+    /* title header */
     div.title {
         margin: 4rem;
     }
@@ -93,8 +98,11 @@ p.title {
     p.title {
         font-size: 4rem;
     }
+    /* end title header */
 
+    /* bottom spacing */
     .bottom_spacer {
-        9.85rem;
+        height: 10.85rem;
     }
+    /* end bottom spacing */
 }

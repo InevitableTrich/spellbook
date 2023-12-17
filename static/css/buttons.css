@@ -78,6 +78,7 @@ svg.scroll_to_top {
 
 /* small screen styles */
 @media (min-height: 1280px) {
+    /* square button */
     .square_button {
         border-width: 5px;
         border-radius: 1.5rem;
@@ -85,7 +86,9 @@ svg.scroll_to_top {
         width: 8rem;
         height: 8rem;
     }
+    /* end square button */
 
+    /* discord button */
     a.discord {
         top: 2rem;
         right: 2rem;
@@ -94,7 +97,9 @@ svg.scroll_to_top {
     svg.discord {
         width: 6rem;
     }
+    /* end discord button */
 
+    /* spellbook button */
     .spellbook {
         left: 2rem;
         bottom: 2rem;
@@ -107,8 +112,16 @@ svg.scroll_to_top {
     .book_pages {
         width: 6rem;
     }
+    /* end spellbook button */
+
+    /* scroll to top button */
+    div.scroll_to_top {
+        bottom: 2rem;
+        right: 2rem;
+    }
 
     svg.scroll_to_top {
         height: 8rem;
     }
+    /* end scroll to top button */
 }

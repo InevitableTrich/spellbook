@@ -131,6 +131,7 @@ th {
 
 /* small screen styles */
 @media (min-height: 1280px) {
+    /* spell styles */
     .spell {
         height: calc(.5rem + var(--sph));
         border-width: 5px;
@@ -143,6 +144,7 @@ th {
         margin: 2rem 2rem 0rem;
     }
 
+    /* spell buttons */
     .toggle_button_top, .toggle_button_bottom {
         height: calc(var(--sph) + 2rem);
         margin-top: -2.75rem;
@@ -150,7 +152,9 @@ th {
     .toggle_button_bottom {
         margin-top: -3.5rem;
     }
+    /* end spell buttons */
 
+    /* spell header */
     .name {
         width: 25%;
     }
@@ -174,11 +178,15 @@ th {
     .spell_arrow {
         display: none;
     }
+    /* spell header */
 
+    /* spell spacers */
     .spell_top_spacer {
         margin-top: -1rem;
     }
     .spell_bottom_spacer {
         height: 1.5rem;
     }
+    /* spell spacers */
+    /* end spell styles */
 }

@@ -1,6 +1,9 @@
+// list of all spells, sorted by internal id
 var spell_list = [];
 
+// spell class, contains spell data and helper functions for visual assembly of spells
 class Spell {
+    // takes a json element of the spell produced by the database, copies the data to a spell object
     constructor(spell_data) {
         this.name = spell_data["name"];
         this.level = spell_data["level"];
@@ -29,6 +32,7 @@ class Spell {
         }
     }
 
+    // top of a spell
     static head_template = `
         <div class="spell" id="{0}">
             <div class="spell_head">
@@ -48,6 +52,7 @@ class Spell {
         </div>`
     ;
 
+    // contents of a spell, only visible once opened
     static body_template = `
         <div class="spell_top_spacer"></div>
         <p class="spell_text"><b>Level:</b> {0}</p>
@@ -57,7 +62,7 @@ class Spell {
         <p class="spell_text"><b>Components:</b> {4}</p>
         <p class="spell_text"><b>Duration:</b> {5}</p>
         {6}
-        <p class="spell_text"><b>Classes:</b> {7}</p>
+        {7}
         {8}
         <p class="spell_text">{9}</p>
         <p class="spell_text">{10}</p>
@@ -70,23 +75,28 @@ class Spell {
         <div class="toggle_button_bottom button" onclick="toggle_spell({13});"></div>`
     ;
 
+    // creates the head of the spell
     create_head() {
         var subs_and_classes = this.classes.slice().concat(this.subclasses).join(", ");
 
         return format_string(Spell.head_template, this.index, this.name, this.level, subs_and_classes);
     }
 
+    // creates the body of the spell
     create_body() {
+        // if there is a condition, add it to the cast_time
         var cast_time = this.cast_time;
         if (this.condition != "") {
             cast_time += ", " + this.condition;
         }
 
+        // if there is a direction, add it to the range
         var range = this.range;
         if (this.direction != "") {
             range += " (" + this.direction + ")";
         }
 
+        // if there is a royalty and/or material, add it to the end of the components
         var components = this.components.join(", ");
         if (this.royalty != "") {
             components += " (" + this.royalty + ")";
@@ -95,36 +105,49 @@ class Spell {
             components += " (" + this.material + ")"
         }
 
+        // if concentration, prepend concentration indicator
         var duration = this.duration;
         if (this.concentration) {
             duration = "Concentration, up to " + duration;
         }
 
+        // add ritual only if ritual, else leave blank
         var ritual = "";
         if (this.ritual) {
             ritual = '<p class="spell_text"><b>Ritual:</b> Yes</p>';
         }
 
-        var classes = this.classes.join(", ");
+        // if classes are present, add them (not present on certain chronurgy/graviturgy spells)
+        var classes = "";
+        if (this.classes.length != 0) {
+            classes = format_string('<p class="spell_text"><b>Classes:</b> {0}</p>', this.classes.join(", "));
+        }
+
+        // if subclasses are present, add them
         var subclasses = "";
         if (this.subclasses.length != 0) {
             subclasses = format_string('<p class="spell_text"><b>Subclasses:</b> {0}</p>', this.subclasses.join(", "));
         }
 
+        // if there are higher_level parts, add them
         var higher_levels = "";
         if (this.higher_level.length != 0) {
             higher_levels = format_string('<p class="spell_text"><b><i>At Higher Levels.</i></b> {0}</p>',
                                           this.higher_level.join("<br>&emsp;&emsp;"));
         }
 
+        // add all sources. apostrophes were replaced with asterisks for sake of errors with quotes, put them back
         var sources = this.sources.join(", ").replaceAll("*", "'");
 
+        // return the formatted body string
         return format_string(Spell.body_template, this.level, this.school, cast_time, range, components, duration,
                              ritual, classes, subclasses, this.make_description(), higher_levels, sources, this.name,
                              this.index);
     }
 
+    // formats the description of the spell body
     make_description() {
+        // collect each paragraph
         var description = this.descriptions.slice();
         var body;
 
@@ -154,7 +177,9 @@ class Spell {
         return body;
     }
 
+    // creates a body with tables
     create_table(description) {
+        // finds the final index of the table (starts search at end)
         var last_index;
         for (var i = description.length-1; i >= 0; i--) {
             if (description[i].indexOf("|") != -1) {
@@ -164,49 +189,65 @@ class Spell {
         }
 
         var paragraph;
-        var top = [];
-        var tables = [];
-        var bottom = [];
-        var found_first = false;
+        var top = [];  // paragraphs before table
+        var tables = [];  // table "paragraphs"
+        var bottom = [];  // paragraphs after table
+        var found_first = false; // false until first table "paragraph" found
+        // for each paragraph,
         for (var i = 0; i < description.length; i++) {
             paragraph = description[i];
 
             // if there are no graph bars
             if (paragraph.indexOf("|") == -1) {
+                // if the table hasn't started, place it in the top section
                 if (!found_first) {
                     top.push(paragraph);
                 } else {
+                // else place in the bottom section
                     bottom.push(paragraph);
                 }
 
+                // no table, so move on
                 continue;
             }
 
+            // if this is the table header
             if (!found_first) {
+                // uses <th> elements (table header). surrounds table data with table header elements
                 paragraph = "<tr><th>" + paragraph.substr(1, paragraph.length-2) + "</th></tr>";
                 paragraph = paragraph.replaceAll("|", "</th><th>");
             } else {
+                // uses <td> elements (table data). surrounds table data with table data elements
                 paragraph = "<tr><td>" + paragraph.substr(1, paragraph.length-2) + "</td></tr>";
                 paragraph = paragraph.replaceAll("|", "</td><td>");
             }
 
+            // if this is the first table "paragraph"
             if (!found_first) {
+                // close previous text, add the table
                 paragraph = '</p><table class="spell_table"><tbody>' + paragraph;
                 found_first = true;
             } else if (i == last_index) {
+            // if this is the final table "paragraph"
+                // close the table, open new text
                 paragraph += '</tbody></table><p class="spell_text">'
             }
 
+            // add paragraph to tables
             tables.push(paragraph);
         }
 
+        // place newlines and indentations between each paragraph before the table, add the table, then
+        // place newlines and indentations between each paragraph after the table
         var body = top.join("<br>&emsp;&emsp;") + tables.join("") + bottom.join("<br>&emsp;&emsp;");
 
         return body;
     }
 }
 
+// toggles open/close given spell
 function toggle_spell(id) {
+    // get the spell element and children
     var spell_item = document.getElementById(id);
     var spell_elements = spell_item.children;
 
@@ -232,7 +273,9 @@ function toggle_spell(id) {
     }
 }
 
+// opens a given spell
 function open_spell(id) {
+    // get the spell element
     var spell_item = document.getElementById(id);
 
     // expand spell
@@ -240,12 +283,13 @@ function open_spell(id) {
     spell_item.classList.remove("spell_closed");
     spell_item.style.height = section_height + "px";
 
-    // leave it unset to allow for screen changing width
+    // leave it unset to allow for screen changing width. waits 300ms which is transition time
     timeout_id = setTimeout(() => {
         spell_item.style.height = "unset";
         delete active_transitions[id];
     }, 300);
 
+    // add the transition wait timer to a tracker. used for cancelling if closed before open completes
     active_transitions[id] = timeout_id;
 
     // rotate arrows
@@ -254,6 +298,7 @@ function open_spell(id) {
 }
 
 function close_spell(id) {
+    // get the spell element
     var spell_item = document.getElementById(id);
 
     // remove current expanding animation if present

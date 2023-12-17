@@ -46,10 +46,10 @@
     <input id="search_bar" class="search_bar" autocomplete="off" placeholder="Search:" oninput="filter_spells();">
 
     <!-- filter button -->
-    <div class="filter_button button" onclick="open_screen('filter_menu');">
+    <div class="filter_button button" onclick="open_filters();">
         <p class="filter_button_text filter_title">Open Filter Options</p>
     </div>
-    <div id="filter_menu" class="screen_back hidden" onclick="close_screen(id);">
+    <div id="filter_menu" class="screen_back hidden" onclick="close_filters();">
         <div class="open_screen row_container" onclick="event.stopPropagation()">
             <!-- Filter -->
             <div id="filters" class="half_box" style="border-right: var(--ol) 1.5px solid"></div>

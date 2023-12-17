@@ -69,11 +69,12 @@
     justify-content: center;
 }
 .open_screen {
-    width: 80%;
-    height: 40rem;
     background-color: var(--bg);
     border: var(--ol) solid 3px;
     border-radius: 2rem;
+
+    width: 80%;
+    height: 40rem;
 }
 /* end separate screen */
 
@@ -87,6 +88,7 @@
 .filter_section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+
     margin: 0.5rem 0 0.5rem 1rem;
     overflow: hidden;
     transition: height .3s;
@@ -101,17 +103,19 @@
 
 /* filter selection */
 div.filter_selection {
+    border: var(--ol) 3px solid;
+
     width: 1rem;
     min-width: 1rem;
     height: 1rem;
-    border: var(--ol) 3px solid;
 }
 
 p.filter_selection {
-    color: var(--text);
-    font-size: var(--tmed);
     margin: 0rem;
     margin-left: 1rem;
+
+    color: var(--text);
+    font-size: var(--tmed);
 }
 
 div.filter_selected {
@@ -123,15 +127,17 @@ p.filter_selected {
 }
 
 .no_spells {
-    color: var(--text);
-    font-size: var(--tlrg);
     width: fit-content;
     margin: 2rem auto;
+
+    color: var(--text);
+    font-size: var(--tlrg);
 }
 /* end filter selection */
 
 /* small screen styles */
 @media (min-height: 1280px) {
+    /* filter button */
     .filter_button {
         border-width: 5px;
         border-radius: .9rem;
@@ -144,7 +150,9 @@ p.filter_selected {
     .clear_filters_button {
         margin: 1.5rem 2rem;
     }
+    /* end filter button */
 
+    /* filter text */
     .filter_title {
         font-size: 2.75rem;
     }
@@ -152,7 +160,9 @@ p.filter_selected {
     .filter_button_text {
         font-size: 3rem;
     }
+    /* end filter text */
 
+    /* search bar */
     .search_bar {
         border-width: 5px;
         border-radius: .9rem;
@@ -163,7 +173,9 @@ p.filter_selected {
 
         margin: 1rem 2rem;
     }
+    /* end search bar */
 
+    /* filter screen */
     .open_screen {
         height: 60rem;
     }
@@ -175,4 +187,5 @@ p.filter_selected {
     div.filter_selection {
         margin: auto 0;
     }
+    /* end filter screen */
 }

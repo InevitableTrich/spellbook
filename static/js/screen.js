@@ -1,71 +1,55 @@
-var open_screens = []
-
-document.addEventListener('keydown', function(event) {
-    if (document.activeElement.nodeName == 'INPUT') {
+// called when any key is pressed
+document.addEventListener("keydown", function(event) {
+    // ignore input if typing in an input field, or if control/command is held
+    if (document.activeElement.nodeName == "INPUT" || event.ctrlKey || event.metaKey) {
         return;
     }
 
+    // switch to functions based on key pressed
     switch (event.key) {
-        case 'Escape':
-            close_all_screens();
+        case "Escape":  // on esc, close filters if its open
+            close_filters();
+            break;
+        case "f":  // on (unmodified) 'f', toggle filters
+            toggle_filters();
             break;
     }
 });
 
-function toggle_screen(id) {
-    if (document.getElementById(id).classList.contains('hidden')) {
-        open_screen(id);
+// toggle open/close filter menu
+function toggle_filters() {
+    const screen = document.getElementById("filter_menu")
+    if (screen.classList.contains("hidden")) {
+        open_filters();
     } else {
-        close_screen(id);
+        close_filters();
     }
 }
 
-function open_screen(id) {
-    var screen = document.getElementById(id);
-    screen.classList.remove('hidden');
+// opens filter menu
+function open_filters() {
+    // unhide screen
+    var screen = document.getElementById("filter_menu");
+    screen.classList.remove("hidden");
 
-    open_screens.push(id);
-
-    check_scroll();
-}
-
-function close_screen(id) {
-    var screen = document.getElementById(id);
-    if (!screen.classList.contains('hidden')) {
-        screen.classList.add('hidden');
-    }
-
-    var ndx = open_screens.indexOf(id);
-    open_screens.splice(ndx, 1);
-
-    check_scroll();
-}
-
-function close_all_screens() {
-    var open_screens_count = open_screens.length;
-    var i = 0;
-
-    while (i < open_screens_count) {
-        close_screen(open_screens[i]);
-
-        i++;
-    }
-
-    check_scroll();
-}
-
-function check_scroll() {
+    // prevent body from scrolling if it currently can
     var body = document.body;
+    if (!body.hasAttribute("style")) {
+        body.style.overflow = "hidden";
+    }
+}
 
-    if (open_screens.length == 0) {
-        if (body.hasAttribute("style")) {
-            body.removeAttribute("style");
-        }
-
-    } else {
-        if (!body.hasAttribute("style")) {
-            body.style.overflow = "hidden";
-        }
+// closes filter menu
+function close_filters() {
+    // hide the filter menu if it is visible
+    var screen = document.getElementById("filter_menu");
+    if (!screen.classList.contains("hidden")) {
+        screen.classList.add("hidden");
     }
 
+    // allow body to scroll again if it couldn't
+    var body = document.body;
+    if (body.hasAttribute("style")) {
+        body.removeAttribute("style");
+    }
 }
