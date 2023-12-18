@@ -1,6 +1,6 @@
 from spell_importer import import_spells
 import mini_importer
-import add_subclasses
+from add_subclasses import add_subclasses
 
 
 if __name__ == "__main__":
@@ -18,5 +18,5 @@ if __name__ == "__main__":
     print("done updating xanathars")
 
     print("\nadding subclasses")
-    add_subclasses.main()
+    add_subclasses()
     print("done adding subclasses")
