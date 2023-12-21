@@ -46,9 +46,10 @@
             <svg class="selector_arrow" viewBox="0 0 4 2.25" style="padding-top: 0.6rem; margin-left: 0.5rem;">
                 <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
             </svg>
-            <select id="class_selector" class="class_selector class_level" onchange="set_class(value)"></select>
+            <select id="class_selector" class="class_selector class_level" onchange="set_class(value);"></select>
             <p class="class_level">, Level</p>
-            <input id="level" class="class_level level_input" value="0">
+            <input id="level" class="class_level level_input" type="number" placeholder="1" value="0"
+                   min="1" max="20" onchange="set_level(value);">
         </div>
     </div>
 

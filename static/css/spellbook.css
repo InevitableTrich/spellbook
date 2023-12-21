@@ -67,8 +67,18 @@
 .level_input {
     background: transparent;
     border: none;
-    width: 1.6rem;
+    border-bottom: 3px solid var(--tog);
     height: 1.6rem;
     font-weight: normal;
     font-family: unset;
+}
+
+/* removes arrows on numeric inputs */
+/* https://stackoverflow.com/a/22559163/16393749 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
 }

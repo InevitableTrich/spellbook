@@ -162,6 +162,9 @@ function build_book_page() {
 }
 
 function set_character(index) {
+// set active character
+    active_character = index;
+
 // character selector
     // set the new character in storage
     localStorage.active_character = index;
@@ -187,8 +190,16 @@ function set_character(index) {
     character_selector.style.width = `calc(${width}px + 1.35rem)`;
 
 // class and level
-    // set class and level
+    // set class
     set_class(character.class);
+    // set level width
+    const level_input = document.getElementById("level");
+    if (character.level > 9) {
+        level_input.style.width = "1.6rem";
+    } else {
+        level_input.style.width = ".8rem";
+    }
+    // set level
     document.getElementById("level").value = character.level;
 }
 
@@ -226,4 +237,22 @@ function set_class(class_name) {
 
     // set the width to measured size, plus constant offset for down arrow and spacing
     class_selector.style.width = `calc(${width}px + 1.25rem)`;
+
+    // change class in character, save character
+    character_list[active_character].class = class_name;
+    save_characters();
+}
+
+function set_level(level) {
+    // adjust width for numbers > 9
+    const level_input = document.getElementById("level");
+    if (level > 9) {
+        level_input.style.width = "1.6rem";
+    } else {
+        level_input.style.width = ".8rem";
+    }
+
+    // set and save level
+    character_list[active_character].level = level;
+    save_characters();
 }
