@@ -48,9 +48,13 @@ function collect_spells(response) {
 function perform_spell_operations() {
     // create filters from data
     gather_filter_options();
-    // sort then populate visual spells
-    sort_spells();
-    filter_spells();
-    // update spell add buttons based off of current spellbook character
-    update_spell_buttons();
+
+    // if on list page, sort then filter spells and populate the filter menu
+    if (page == "list") {
+        sort_spells();
+        filter_spells();
+        create_filters();
+    } else {
+        create_class_list();
+    }
 }

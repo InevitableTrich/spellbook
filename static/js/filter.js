@@ -86,9 +86,6 @@ function gather_filter_options() {
         filter_options[key].clear();
         filter_options[key] = new Set(sorted);
     }
-
-    // create the filters
-    create_filters();
 }
 
 // filter item template
@@ -505,6 +502,8 @@ function filter_spells() {
     // place spells
     var spell_section = document.getElementById("spell_list");
     spell_section.innerHTML = spells;
+    // update quick add/remove buttons to reflect active spellbook character
+    update_spell_buttons();
 
     // set spell count in the sort menu
     document.getElementById("spell_count").innerHTML = format_string("Sorting {0} spells by:", spell_count);

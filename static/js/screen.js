@@ -1,7 +1,8 @@
 // called when any key is pressed
 document.addEventListener("keydown", function(event) {
     // ignore input if typing in an input field, or if control/command is held
-    if (document.activeElement.nodeName == "INPUT" || event.ctrlKey || event.metaKey) {
+    // if on not on list page, ignore as well
+    if (document.activeElement.nodeName == "INPUT" || event.ctrlKey || event.metaKey || page != "list") {
         return;
     }
 

@@ -8,6 +8,7 @@ class Character {
     static new_character() {
         return new Character({
             "name": "Unnamed",
+            "class": "Wizard",
             "level": "1",
             "spell_list": [],
             "slots_used": {},
@@ -18,6 +19,7 @@ class Character {
     // used for loading a character from LocalStorage
     constructor(data) {
             this.name = data.name;
+            this.class = data.class;
             this.level = data.level;
             this.spell_list = data.spell_list;
             this.slots_used = data.slots_used;
@@ -48,7 +50,10 @@ function load_characters() {
 // change spells in current character's spellbook to reflect presence
 function update_spell_buttons() {
     for (var spell_id of character_list[active_character].spell_list) {
-        document.getElementById(spell_id + "_add").children[0].innerHTML = "Quick Remove";
+        // must be in a try block incase the spell is not present due to filters
+        try {
+            document.getElementById(spell_id + "_add").children[0].innerHTML = "Quick Remove";
+        } catch(e) {}  // no error case
     }
 }
 
