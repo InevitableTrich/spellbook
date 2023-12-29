@@ -14,7 +14,9 @@
     margin-top: -10rem;
     z-index: 1;
 }
+/* end character header */
 
+/* character name */
 .spellbook_name {
     color: var(--text);
     font-size: 2.25rem;
@@ -22,7 +24,9 @@
     margin: auto 0;
     width: 12rem;
 }
+/* end character name */
 
+/* character selector */
 .spellbook_selector {
     font-family: unset;
     margin-right: -.1rem;
@@ -36,12 +40,17 @@
     -moz-appearance: none;
     -webkit-appearance: none;
 }
+/* end character selector */
+
+/* selector arrow */
 .selector_arrow {
     margin: auto -2rem auto 1rem;
     width: 1rem;
     fill: var(--text);
 }
+/* end selector arrow */
 
+/* class and level text */
 .class_level {
     color: var(--text);
     font-size: var(--tlrg);
@@ -50,7 +59,9 @@
     margin-left: .35rem;
     width: fit-content;
 }
+/* end class and level text */
 
+/* class selector */
 .class_selector {
     font-family: unset;
     padding-left: 1.25rem;
@@ -63,15 +74,20 @@
     -moz-appearance: none;
     -webkit-appearance: none;
 }
+/* end class selector */
 
+/* level input */
 .level_input {
+    display: flex;
     background: transparent;
     border: none;
     border-bottom: 3px solid var(--tog);
     height: 1.6rem;
     font-weight: normal;
     font-family: unset;
+    text-align: center;
 }
+/* end level input */
 
 /* removes arrows on numeric inputs */
 /* https://stackoverflow.com/a/22559163/16393749 */
@@ -82,3 +98,50 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
     -moz-appearance:textfield;
 }
+/* end arrows*/
+
+/* slot table item */
+.slot_info {
+    font-size: var(--tmed);
+    color: var(--text);
+    width: fit-content;
+    min-width: unset;
+    height: fit-content;
+}
+/* end slot table item */
+
+/* slot table */
+.slot_table {
+    margin: auto;
+    margin-top: 0.25rem;
+
+    border: 3px solid var(--ol);
+    border-left-width: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 1rem;
+}
+
+/* table border rounding */
+.slot_table td {
+    border: 3px solid var(--ol);
+    border-right: 0;
+    border-bottom: 0;
+}
+.slot_table tbody:first-child tr:first-child td {
+    border-top-width: 0;
+}
+.slot_table tbody:first-child tr:first-child td:first-child {
+    border-top-left-radius: 1rem;
+}
+.slot_table tbody:first-child tr:first-child td:last-child {
+    border-top-right-radius: 1rem;
+}
+.slot_table tbody:last-child tr:last-child td:first-child {
+    border-bottom-left-radius: 1rem;
+}
+.slot_table tbody:last-child tr:last-child td:last-child {
+    border-bottom-right-radius: 1rem;
+}
+/* end table border rounding */
+/* end slot table */

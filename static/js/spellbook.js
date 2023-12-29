@@ -99,3 +99,61 @@ function remove_from_spellbook(num) {
     // update the spells quick add button
     document.getElementById(num + "_add").children[0].innerHTML = "Quick Add";
 }
+
+// set the spell slot display's slot counts
+function get_spell_slots() {
+    // class caster classification
+    const class_caster_type = {
+        "Artificer": "sub",
+        "Bard": "main",
+        "Cleric": "main",
+        "Druid": "main",
+        "Fighter": "fighter",
+        "Monk": "none",
+        "Paladin": "sub",
+        "Ranger": "sub",
+        "Sorcerer": "main",
+        "Warlock": "warlock",
+        "Wizard": "main"
+    }
+
+    // slot table for caster types
+    const caster_slot_table = {
+        "main": [[2], [3], [4, 2], [4, 3], [4, 3, 2], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 2], [4, 3, 3, 3, 1],
+                 [4, 3, 3, 3, 2], [4, 3, 3, 3, 2, 1], [4, 3, 3, 3, 2, 1], [4, 3, 3, 3, 2, 1, 1], [4, 3, 3, 3, 2, 1, 1],
+                 [4, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 2, 1, 1, 1, 1],
+                 [4, 3, 3, 3, 3, 1, 1, 1, 1], [4, 3, 3, 3, 3, 2, 1, 1, 1], [4, 3, 3, 3, 3, 2, 2, 1, 1]],
+
+        "sub": [[2], [2],  [3], [3], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3, 2], [4, 3, 2], [4, 3, 3], [4, 3, 3],
+                [4, 3, 3, 1], [4, 3, 3, 1], [4, 3, 3, 2], [4, 3, 3, 2], [4, 3, 3, 3, 1], [4, 3, 3, 3, 1],
+                [4, 3, 3, 3, 2], [4, 3, 3, 3, 2]],
+
+        "warlock": [[1], [2], [0, 2], [0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 2], [0, 0, 0, 0, 2],
+                    [0, 0, 0, 0, 2], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 3],
+                    [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4],
+                    [0, 0, 0, 0, 4]],
+
+        "fighter": [[], [], [2], [3], [3], [3], [4, 2], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3], [4, 3, 2], [4, 3, 2],
+                    [4, 3, 2], [4, 3, 3], [4, 3, 3], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 1]],
+
+        "none": [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+    }
+
+    // get the class and level
+    const character_class = document.getElementById("class_selector").value;
+    const character_level = document.getElementById("level").value;
+
+    // get the corresponding list
+    var slot_list = caster_slot_table[class_caster_type[character_class]][character_level-1];
+    const slot_level_count = slot_list.length;
+
+    // set the slots given
+    for (var i = 0, count = slot_level_count; i < count; i++) {
+        document.getElementById("slot_" + (i+1)).innerHTML = slot_list[i];
+    }
+
+    // fill the rest with 0s
+    for (var i = slot_level_count, count = 9; i < count; i++) {
+        document.getElementById("slot_" + (i+1)).innerHTML = 0;
+    }
+}

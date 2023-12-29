@@ -12,6 +12,11 @@ function format_string(str, ...params) {
     return str;
 }
 
+// clamps an integer to minimum given and maximum given
+function clamp(int, min, max) {
+    return Math.max(Math.min(int, max), min);
+}
+
 // scrolls to top with smoothing
 function scroll_to_top() {
     window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'});

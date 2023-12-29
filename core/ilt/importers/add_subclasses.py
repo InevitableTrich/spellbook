@@ -763,7 +763,7 @@ def add_subclasses():
     col = getspellscollection()
     spells = [x for x in col.find(projection={'_id': False})]
     for spell in spells:
-        spell["subclasses"] = []
+        spell["subclasses"] = spell.get("subclasses", [])
 
         for subclass, sub_spells in subclasses.items():
             if spell["name"] in sub_spells:

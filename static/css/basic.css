@@ -75,6 +75,11 @@ p.title {
     overflow: hidden;
 }
 
+.space_evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .hidden {
     display: none;
 }

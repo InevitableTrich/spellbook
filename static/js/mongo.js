@@ -56,5 +56,6 @@ function perform_spell_operations() {
         create_filters();
     } else {
         create_class_list();
+        set_character(active_character);
     }
 }

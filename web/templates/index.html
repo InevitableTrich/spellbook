@@ -33,8 +33,8 @@
 
 <body onload="gather_spells(); load_characters(); get_page();">
 
-    <div class="header row_container">
-        <div class="row_container" style="max-width: 60%;">
+    <div class="header row_container space_evenly">
+        <div class="row_container" style="max-width: calc(100% - max(calc(40% - 13.5rem), 20.75rem) - 13.5rem);">
             <svg class="selector_arrow" viewBox="0 0 4 2.25">
                 <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
             </svg>
@@ -42,14 +42,43 @@
                     onchange="set_character(value);"></select>
             <p class="spellbook_name">'s Spellbook</p>
         </div>
-        <div class="row_container">
+        <div class="row_container space_evenly" style="width: 13.5rem;">
             <svg class="selector_arrow" viewBox="0 0 4 2.25" style="padding-top: 0.6rem; margin-left: 0.5rem;">
                 <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
             </svg>
             <select id="class_selector" class="class_selector class_level" onchange="set_class(value);"></select>
             <p class="class_level">, Level</p>
             <input id="level" class="class_level level_input" type="number" placeholder="1" value="0"
-                   min="1" max="20" onchange="set_level(value);">
+                   min="1" max="20" oninput="set_level(value);">
+        </div>
+        <div class="space_evenly" style="width: max(calc(40% - 13.5rem), 20.75rem);">
+            <table class="slot_table">
+                <tbody>
+                    <tr>
+                        <td class="slot_info">Slot</td>
+                        <td class="slot_info">1</td>
+                        <td class="slot_info">2</td>
+                        <td class="slot_info">3</td>
+                        <td class="slot_info">4</td>
+                        <td class="slot_info">5</td>
+                        <td class="slot_info">6</td>
+                        <td class="slot_info">7</td>
+                        <td class="slot_info">8</td>
+                        <td class="slot_info">9</td>
+                    </tr><tr>
+                        <td class="slot_info">Count</td>
+                        <td class="slot_info" id="slot_1">0</td>
+                        <td class="slot_info" id="slot_2">0</td>
+                        <td class="slot_info" id="slot_3">0</td>
+                        <td class="slot_info" id="slot_4">0</td>
+                        <td class="slot_info" id="slot_5">0</td>
+                        <td class="slot_info" id="slot_6">0</td>
+                        <td class="slot_info" id="slot_7">0</td>
+                        <td class="slot_info" id="slot_8">0</td>
+                        <td class="slot_info" id="slot_9">0</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
