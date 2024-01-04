@@ -52,6 +52,27 @@ class Spell {
         </div>`
     ;
 
+    // top of a spellbook spell
+    static book_head_template = `
+        <div class="spell" id="{0}">
+            <div class="spell_head">
+                <p class="spell_title book_name overflow">{1}</p>
+                <p class="spell_title concentration">{2}</p>
+                <p class="spell_title ritual">{3}</p>
+                <p class="spell_title cast_time">{4}</p>
+                <div id="{0}_add" class="quick_add button" onclick="event.stopPropagation(); delete_from_spellbook({0});">
+                    <p class="spell_title quick_add">Remove</p>
+                </div>
+                <p class="spell_title spell_arrow arrow"><</p>
+            </div>
+            <div class="spell_head hidden">
+                <p class="spell_title name" style="width: 94.5%">{1}</p>
+                <p class="spell_title arrow"><</p>
+            </div>
+            <div class="toggle_button_top button" onclick="toggle_spell('{0}');"></div>
+        </div>`
+    ;
+
     // contents of a spell, only visible once opened
     static body_template = `
         <div class="spell_top_spacer"></div>
@@ -77,9 +98,17 @@ class Spell {
 
     // creates the head of the spell
     create_head() {
-        var subs_and_classes = this.classes.slice().concat(this.subclasses).join(", ");
+        const subs_and_classes = this.classes.slice().concat(this.subclasses).join(", ");
 
         return format_string(Spell.head_template, this.index, this.name, this.level, subs_and_classes);
+    }
+
+    // creates the head of a spellbook spell
+    create_book_head() {
+        const concentration = this.concentration ? "Concentration" : "Not Concentration";
+        const ritual = this.ritual ? "Ritual" : "Not Ritual";
+
+        return format_string(Spell.book_head_template, this.index, this.name, concentration, ritual, this.cast_time);
     }
 
     // creates the body of the spell

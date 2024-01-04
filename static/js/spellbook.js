@@ -101,6 +101,28 @@ function remove_from_spellbook(num) {
     document.getElementById(num + "_add").children[0].innerHTML = "Quick Add";
 }
 
+// removes a spell from the active spellbook and deletes it from the screen
+function delete_from_spellbook(num) {
+    // remove from the list
+    remove_from_spellbook(num);
+
+    // delete the visual element
+    document.getElementById(num).remove();
+
+    // get the header
+    const spell_level = spell_list[num].level;
+    const spell_holder = document.getElementById("level_" + spell_level + "_spells");
+
+    // check for empty, and if empty, delete holder and header
+    if (spell_holder.children.length == 0) {
+        spell_holder.remove();
+        document.getElementById("level_" + spell_level + "_header").remove();
+    }
+
+    // save character
+    save_characters();
+}
+
 // set the spell slot display's slot counts
 function get_spell_slots() {
     // class caster classification
@@ -173,7 +195,7 @@ function set_character(index) {
 // character selector
     // set the new character in storage
     localStorage.active_character = index;
-    character = character_list[index];
+    const character = character_list[index];
 
     // resize the character selector
     resize_character_selector();
@@ -326,7 +348,7 @@ function create_spellbook() {
         }
 
         // add the spell to the sections
-        spell_sections[level] += spell.create_head();
+        spell_sections[level] += spell.create_book_head();
     }
 
     var body = "";
@@ -350,7 +372,7 @@ function create_spellbook() {
 function create_level_header(level) {
     // header template
     const header_template = `
-        <div class="level_header row_container">
+        <div id="level_${level}_header" class="level_header row_container">
             <p class="level_header">{0}</p>
             {1}
         </div>

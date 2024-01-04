@@ -176,3 +176,25 @@ p.level_header {
 /* end spell slot */
 /* end level header */
 
+/* spellbook spell head */
+.book_name {
+    width: 30%;
+    padding-left: 1%;
+}
+
+.concentration {
+    width: 19%;
+    padding-left: 1%;
+    text-align: center;
+}
+
+.ritual {
+    width: 15%;
+    text-align: center;
+}
+
+.cast_time {
+    width: 15%;
+    text-align: center;
+}
+/* end spellbook spell head */
