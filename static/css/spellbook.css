@@ -8,11 +8,9 @@
     height: 5rem;
 
     position: sticky;
-    display: flex;
+    margin-top: -.5rem;
     top: 0;
-    margin: auto;
-    margin-top: -10rem;
-    z-index: 1;
+    z-index: 2;
 }
 /* end character header */
 
@@ -145,3 +143,36 @@ input[type='number'] {
 }
 /* end table border rounding */
 /* end slot table */
+
+/* level header */
+div.level_header {
+    background-color: var(--elm);
+    height: calc(var(--sph) + 1.5rem);
+    border: 3px solid var(--ol);
+    border-radius: .6rem;
+    display: flex;
+    justify-content: center;
+}
+
+p.level_header {
+    font-size: var(--tlrg);
+    color: var(--text);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* spell slot */
+.spell_slot {
+    height: 1.5rem;
+    width: 1.5rem;
+    border: 3px solid var(--ol);
+    border-radius: 1rem;
+    margin: auto .3rem;
+}
+
+.toggled {
+    background-color: var(--tog);
+}
+/* end spell slot */
+/* end level header */
+

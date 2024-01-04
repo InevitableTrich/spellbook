@@ -120,23 +120,78 @@ function build_main_page() {
 
 // build the spellbook page
 function build_book_page() {
-//    add_page_constants();
-//
-//    const header = `
-//        <div class="header">
-//            <p class="spellbook_name">Unnamed's spellbook</p>
-//        </div>`
-//    ;
-//
-//    const big_thing = `
-//        <div style="height: 100rem;"></div>`
-//    ;
-//
-//    // combine elements together
-//    const spell_body = header + big_thing;
-//
-//    // set the HTML body
-//    document.body.innerHTML += spell_body;
+    add_page_constants();
+
+    const start_header = `<div class="header row_container space_evenly">`;
+
+    const spellbook_name = `
+        <div class="row_container" style="max-width: calc(100% - max(calc(40% - 13.5rem), 20.75rem) - 13.5rem);">
+            <svg class="selector_arrow" viewBox="0 0 4 2.25">
+                <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
+            </svg>
+            <select id="spellbook_selector" class="spellbook_selector spellbook_name overflow"
+                    onchange="set_character(value);"></select>
+            <p class="spellbook_name">'s Spellbook</p>
+        </div>`
+    ;
+
+    const class_and_level = `
+        <div class="row_container space_evenly" style="width: 13.5rem;">
+            <svg class="selector_arrow" viewBox="0 0 4 2.25" style="padding-top: 0.6rem; margin-left: 0.5rem;">
+                <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
+            </svg>
+            <select id="class_selector" class="class_selector class_level" onchange="set_class(value);"></select>
+            <p class="class_level">, Level</p>
+            <input id="level" class="class_level level_input" type="number" placeholder="1" value="0"
+                   min="1" max="20" oninput="set_level(value);">
+        </div>`
+    ;
+
+    const spell_slot_table = `
+        <div class="space_evenly" style="width: max(calc(40% - 13.5rem), 20.75rem);">
+            <table class="slot_table">
+                <tbody>
+                    <tr>
+                        <td class="slot_info">Slot</td>
+                        <td class="slot_info">1</td>
+                        <td class="slot_info">2</td>
+                        <td class="slot_info">3</td>
+                        <td class="slot_info">4</td>
+                        <td class="slot_info">5</td>
+                        <td class="slot_info">6</td>
+                        <td class="slot_info">7</td>
+                        <td class="slot_info">8</td>
+                        <td class="slot_info">9</td>
+                    </tr><tr>
+                        <td class="slot_info">Count</td>
+                        <td class="slot_info" id="slot_1">0</td>
+                        <td class="slot_info" id="slot_2">0</td>
+                        <td class="slot_info" id="slot_3">0</td>
+                        <td class="slot_info" id="slot_4">0</td>
+                        <td class="slot_info" id="slot_5">0</td>
+                        <td class="slot_info" id="slot_6">0</td>
+                        <td class="slot_info" id="slot_7">0</td>
+                        <td class="slot_info" id="slot_8">0</td>
+                        <td class="slot_info" id="slot_9">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>`
+    ;
+
+    // will impl character options later
+    const character_options = `<div style="height: 5rem;"></div>`
+
+    const book_list = `<div id="book_list"></div>`
+
+    const spell_body = start_header + spellbook_name + class_and_level + spell_slot_table + "</div>" + character_options
+                       + book_list;
+
+    // set the HTML body
+    document.body.innerHTML += spell_body;
+
+    // create list of classes
+    create_class_list();
 
 // grab all character options
     // get the character selector
@@ -159,144 +214,4 @@ function build_book_page() {
     // set the active character
     character_selector.value = active_character;
     set_character(active_character);
-}
-
-// check for resizing of window, recalculate sizes
-addEventListener("resize", (event) => {
-    if (page == "book") {
-        resize_character_selector();
-    }
-});
-
-// set the displayed and stored character to the chosen index
-function set_character(index) {
-// set active character
-    active_character = index;
-
-// character selector
-    // set the new character in storage
-    localStorage.active_character = index;
-    character = character_list[index];
-
-    // resize the character selector
-    resize_character_selector();
-
-// class and level
-    // set level
-    document.getElementById("level").value = character.level;
-
-    // if data hasn't loaded, don't set class or spell slots
-    if (spell_list.length == 0) {
-        return;
-    }
-
-    // set class
-    set_class(character.class, false);
-    // set level width
-    const level_input = document.getElementById("level");
-    if (character.level > 9) {
-        level_input.style.width = "1.6rem";
-    } else {
-        level_input.style.width = ".8rem";
-    }
-
-    // get spell slot amounts
-    get_spell_slots();
-}
-
-function resize_character_selector() {
-    const character_selector = document.getElementById("spellbook_selector");
-
-    // create a temp element to get the width wanted to change the selector to
-    var x = document.createElement("p"); // create new p element
-    x.classList.add("spellbook_name"); // with same class for sizing
-    x.classList.add("overflow"); // with overflow for width clipping
-    character_selector.parentElement.style.width = "60%"; // set to occupy as large as it can for measurement
-    // set a max-width for overflow clipping, set width to fit for correct size
-    x.style = `max-width: calc(${character_selector.parentElement.clientWidth}px - 13rem); width: fit-content;`;
-    character_selector.parentElement.style.width = ""; // remove fixed size
-    x.innerHTML = character_selector.children[active_character].innerHTML; // set its text to the option
-    document.body.appendChild(x); // add to the body (otherwise width == 0)
-    const width = x.clientWidth; // get the width
-    document.body.removeChild(x); // remove the new element
-
-    // set the width to measured size, plus constant offset for down arrow and spacing
-    character_selector.style.width = `calc(${width}px + 1.35rem)`;
-}
-
-// takes filter_options classes and forms the class selector
-function create_class_list() {
-    const class_selector = document.getElementById("class_selector");
-    // get classes from filter_options
-    const class_list = [...filter_options["classes"]];
-    // template for class options
-    const class_template = `<option value="{0}">{0}</option>`
-
-    var classes = "";
-    // for all classes, create an option to select it
-    for (var _class of class_list) {
-        classes += format_string(class_template, _class);
-    }
-
-    // set the HTML
-    class_selector.innerHTML = classes;
-    // set the active class
-    class_selector.value = character_list[active_character].class;
-}
-
-// set class to given class name. saves by default
-function set_class(class_name, save=true) {
-    // get class_selector and set the class to the new class
-    const class_selector = document.getElementById("class_selector");
-    class_selector.value = class_name;
-
-    // create a temp element to get the width wanted to change the selector to
-    var x = document.createElement("p"); // create new p element
-    x.classList.add("class_level"); // with same class for sizing
-    x.innerHTML = class_name; // set its text to the option
-    document.body.appendChild(x); // add to the body (otherwise width == 0)
-    const width = x.clientWidth; // get the width
-    document.body.removeChild(x); // remove the new element
-
-    // set the width to measured size, plus constant offset for down arrow and spacing
-    class_selector.style.width = `calc(${width}px + 1.25rem)`;
-
-    // change class in character, save character
-    if (save) {
-        character_list[active_character].class = class_name;
-        save_characters();
-
-        // set new spell slot values
-        get_spell_slots();
-    }
-}
-
-// sets stores level to storage, and changes width of input based on number
-function set_level(level) {
-    // on blank level, ignore
-    if (level == "") {
-        return;
-    }
-
-    // ensure integer
-    level = parseInt(level);
-
-    // adjust width for numbers > 9
-    const level_input = document.getElementById("level");
-    if (level > 9) {
-        level_input.style.width = "1.6rem";
-    } else {
-        level_input.style.width = ".8rem";
-    }
-
-    // clamp the level to valid levels
-    level = clamp(level, 1, 20);
-
-    // set and save level
-    document.getElementById("level").value = level;  // needed incase clamp is used from typing
-    character_list[active_character].level = level;
-    save_characters();
-
-    // set new spell slot values
-    get_spell_slots();
 }

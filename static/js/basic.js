@@ -39,6 +39,7 @@ function change_page() {
         localStorage.active_page = "list";
         build_main_page();
 
+        sort_spells();
         filter_spells();
         create_filters();
     } else {

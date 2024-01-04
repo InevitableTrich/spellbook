@@ -2,6 +2,7 @@
 const STORAGE_VERSION = 2;
 var character_list = [];  // list of characters
 var active_character = 0;  // index of active character
+var spellbook_list = [];  // spells for the active spellbook
 
 // character class, stores relavent class info
 class Character {
@@ -156,4 +157,322 @@ function get_spell_slots() {
     for (var i = slot_level_count, count = 9; i < count; i++) {
         document.getElementById("slot_" + (i+1)).innerHTML = 0;
     }
+}
+// check for resizing of window, recalculate sizes
+addEventListener("resize", (event) => {
+    if (page == "book") {
+        resize_character_selector();
+    }
+});
+
+// set the displayed and stored character to the chosen index
+function set_character(index) {
+// set active character
+    active_character = index;
+
+// character selector
+    // set the new character in storage
+    localStorage.active_character = index;
+    character = character_list[index];
+
+    // resize the character selector
+    resize_character_selector();
+
+// class and level
+    // set level
+    document.getElementById("level").value = character.level;
+
+    // if data hasn't loaded, don't set data that needs loaded
+    if (spell_list.length == 0) {
+        return;
+    }
+
+    // set class
+    set_class(character.class, false);
+    // set level width
+    const level_input = document.getElementById("level");
+    if (character.level > 9) {
+        level_input.style.width = "1.6rem";
+    } else {
+        level_input.style.width = ".8rem";
+    }
+
+    // get spell slot amounts
+    get_spell_slots();
+
+    // create spellbook
+    create_spellbook();
+}
+
+// resize the character selector
+function resize_character_selector() {
+    const character_selector = document.getElementById("spellbook_selector");
+
+    // create a temp element to get the width wanted to change the selector to
+    var x = document.createElement("p"); // create new p element
+    x.classList.add("spellbook_name"); // with same class for sizing
+    x.classList.add("overflow"); // with overflow for width clipping
+    character_selector.parentElement.style.width = "60%"; // set to occupy as large as it can for measurement
+    // set a max-width for overflow clipping, set width to fit for correct size
+    x.style = `max-width: calc(${character_selector.parentElement.clientWidth}px - 13rem); width: fit-content;`;
+    character_selector.parentElement.style.width = ""; // remove fixed size
+    x.innerHTML = character_selector.children[active_character].innerHTML; // set its text to the option
+    document.body.appendChild(x); // add to the body (otherwise width == 0)
+    const width = x.clientWidth; // get the width
+    document.body.removeChild(x); // remove the new element
+
+    // set the width to measured size, plus constant offset for down arrow and spacing
+    character_selector.style.width = `calc(${width}px + 1.35rem)`;
+}
+
+// takes filter_options classes and forms the class selector
+function create_class_list() {
+    const class_selector = document.getElementById("class_selector");
+    // get classes from filter_options
+    const class_list = [...filter_options["classes"]];
+    // template for class options
+    const class_template = `<option value="{0}">{0}</option>`
+
+    var classes = "";
+    // for all classes, create an option to select it
+    for (var _class of class_list) {
+        classes += format_string(class_template, _class);
+    }
+
+    // set the HTML
+    class_selector.innerHTML = classes;
+    // set the active class
+    class_selector.value = character_list[active_character].class;
+}
+
+// set class to given class name. saves by default
+function set_class(class_name, save=true) {
+    // get class_selector and set the class to the new class
+    const class_selector = document.getElementById("class_selector");
+    class_selector.value = class_name;
+
+    // create a temp element to get the width wanted to change the selector to
+    var x = document.createElement("p"); // create new p element
+    x.classList.add("class_level"); // with same class for sizing
+    x.innerHTML = class_name; // set its text to the option
+    document.body.appendChild(x); // add to the body (otherwise width == 0)
+    const width = x.clientWidth; // get the width
+    document.body.removeChild(x); // remove the new element
+
+    // set the width to measured size, plus constant offset for down arrow and spacing
+    class_selector.style.width = `calc(${width}px + 1.25rem)`;
+
+    // change class in character, save character
+    if (save) {
+        character_list[active_character].class = class_name;
+        save_characters();
+
+        // set new spell slot values
+        get_spell_slots();
+    }
+}
+
+// sets stores level to storage, and changes width of input based on number
+function set_level(level) {
+    // on blank level, ignore
+    if (level == "") {
+        return;
+    }
+
+    // ensure integer
+    level = parseInt(level);
+
+    // adjust width for numbers > 9
+    const level_input = document.getElementById("level");
+    if (level > 9) {
+        level_input.style.width = "1.6rem";
+    } else {
+        level_input.style.width = ".8rem";
+    }
+
+    // clamp the level to valid levels
+    level = clamp(level, 1, 20);
+
+    // set and save level
+    document.getElementById("level").value = level;  // needed incase clamp is used from typing
+    character_list[active_character].level = level;
+    save_characters();
+
+    // set new spell slot values
+    get_spell_slots();
+}
+
+// adds spells and headers to characters spellbook
+function create_spellbook() {
+    // collect spells and place into list
+    spellbook_list = character_list[active_character].spell_list.slice();
+
+    // holds each body section for spells based on level
+    var spell_sections = {
+        0: "", 1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: ""
+    };
+
+    var spell;
+    var level;
+    // for each spell in the spell list,
+    for (var spell_id of spellbook_list) {
+        // get the spell and its level
+        spell = spell_list[spell_id];
+        level = parseInt(spell.level);
+
+        // if that level's header doesn't exist, add it
+        if (spell_sections[level] == "") {
+            spell_sections[level] = create_level_header(level);
+        }
+
+        // add the spell to the sections
+        spell_sections[level] += spell.create_head();
+    }
+
+    var body = "";
+    var section;
+    // for each level of spell
+    for (var i = 0; i <= 9; i++) {
+        section = spell_sections[i];
+        // if the section has content, add it and close it's container
+        if (section != "") {
+            body += section + "</div>";
+        }
+    }
+
+    // set the spellbook list to the content
+    document.getElementById("book_list").innerHTML = body;
+    // add the correct spell slot buttons
+    add_spell_slots();
+}
+
+// return html for level headers
+function create_level_header(level) {
+    // header template
+    const header_template = `
+        <div class="level_header row_container">
+            <p class="level_header">{0}</p>
+            {1}
+        </div>
+        <div id="level_${level}_spells">
+    `;
+    // container for holding interactable slots
+    const level_row_container = `
+        <div id="level_{0}_slots"  class="row_container"></div>
+    `;
+
+    var text;
+    var container;
+    // format changing checks
+    if (level == 0) {
+        text = "Cantrips";
+        container = "";
+    } else if (parseInt(document.getElementById("slot_" + level).innerHTML) > 0) {
+        text = `Level ${level}: &nbsp;`; // Level X:
+        container = format_string(level_row_container, level);
+    } else {
+        text = `Level ${level}`; // Level X
+        container = format_string(level_row_container, level);
+    }
+
+    return format_string(header_template, text, container);
+}
+
+// add spell slots to spell headers
+function add_spell_slots() {
+    // spell slot template
+    const spell_slot = `
+        <div class="spell_slot button" onclick="toggle_slot({0}, {1})"></div>
+    `;
+
+    var slot_container;
+    var slot_count;
+    var slot_hold;
+    // for all levels 1-9,
+    for (var i = 1; i <= 9; i ++) {
+        // get the slot count
+        slot_count = parseInt(document.getElementById("slot_" + i).innerHTML);
+
+        // if it's zero, don't worry about this and following levels
+        if (slot_count == 0) {
+            break;
+        }
+
+        // find the container
+        slot_container = document.getElementById("level_" + i + "_slots");
+        // if it exists,
+        if (slot_container != null) {
+            // clear the slot variable
+            slot_hold = "";
+
+            // then for each slot needed, add a spell slot
+            for (var j = 0; j < slot_count; j++) {
+                slot_hold += format_string(spell_slot, i, j);
+            }
+            // then set the HTML
+            slot_container.innerHTML = slot_hold;
+        }
+    }
+
+    // levels that have any amount of used slots
+    const used_slot_levels = Object.getOwnPropertyNames(character_list[active_character].slots_used);
+
+    var slot_container;
+    var slots;
+    // for each of the used slot levels
+    for (var level of used_slot_levels) {
+        // get the corresponding slot container
+        slot_container = document.getElementById("level_" + level + "_slots");
+
+        // if the slot container exists,
+        if (slot_container != null) {
+            // get the slots
+            slots = slot_container.children;
+
+            // toggle the amount used to be used
+            for (var i = 0, count = character_list[active_character].slots_used[level]; i < count; i++) {
+                slots[i].classList.toggle("toggled");
+            }
+        }
+    }
+}
+
+// toggles a spell slot, given spell level and slot number
+function toggle_slot(level, number) {
+    // grab slots, and whether or not to clear the slot (will fill the slot otherwise)
+    const slots = document.getElementById("level_" + level + "_slots").children;
+    const clearing = slots[number].classList.contains("toggled");
+
+    var active_slot;
+    var new_used_count;
+    // if clearing a spell slot's consumed status,
+    if (clearing) {
+        // starting at the back, check for a consumed slot
+        for (var i = parseInt(document.getElementById("slot_" + level).innerHTML)-1; i >= 0; i--) {
+            active_slot = slots[i];
+            // if the slot is consumed, unconsume it and leave
+            if (active_slot.classList.contains("toggled")) {
+                active_slot.classList.toggle("toggled");
+                new_used_count = i;
+                break;
+            }
+            // else go to next
+        }
+    } else {
+    // if consuming a spell slot, check for non-consumed at the front (limit of `number` as that is what was clicked)
+        for (var i = 0; i <= number; i++) {
+            active_slot = slots[i];
+            // if the slot is not consumed, consume it and leave
+            if (!active_slot.classList.contains("toggled")) {
+                active_slot.classList.toggle("toggled");
+                new_used_count = i + 1;
+                break;
+            }
+            // else go to next
+        }
+    }
+
+    // save slots used to character, save character
+    character_list[active_character].slots_used[level] = new_used_count;
+    save_characters();
 }
