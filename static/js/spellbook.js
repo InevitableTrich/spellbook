@@ -97,6 +97,13 @@ function remove_from_spellbook(num) {
     // remove it from the list
     list.splice(id_index, 1);
 
+    // find the numer in the prepare list
+    const prep_ndx = character_list[active_character].prepared_list.indexOf(num);
+    // if it is found, remove it
+    if (prep_ndx != -1) {
+        character_list[active_character].prepared_list.splice(prep_ndx, 1);
+    }
+
     // update the spells quick add button
     document.getElementById(num + "_add").children[0].innerHTML = "Quick Add";
 }
@@ -107,7 +114,7 @@ function delete_from_spellbook(num) {
     remove_from_spellbook(num);
 
     // delete the visual element
-    document.getElementById(num).remove();
+    document.getElementById(num).parentElement.remove();
 
     // get the header
     const spell_level = spell_list[num].level;
@@ -131,10 +138,11 @@ function get_spell_slots() {
         "Bard": "main",
         "Cleric": "main",
         "Druid": "main",
-        "Fighter": "fighter",
+        "Fighter": "subclass",
         "Monk": "none",
         "Paladin": "sub",
         "Ranger": "sub",
+        "Rogue": "subclass",
         "Sorcerer": "main",
         "Warlock": "warlock",
         "Wizard": "main"
@@ -156,7 +164,7 @@ function get_spell_slots() {
                     [0, 0, 0, 0, 3], [0, 0, 0, 0, 3], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4], [0, 0, 0, 0, 4],
                     [0, 0, 0, 0, 4]],
 
-        "fighter": [[], [], [2], [3], [3], [3], [4, 2], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3], [4, 3, 2], [4, 3, 2],
+        "subclass": [[], [], [2], [3], [3], [3], [4, 2], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3], [4, 3, 2], [4, 3, 2],
                     [4, 3, 2], [4, 3, 3], [4, 3, 3], [4, 3, 3], [4, 3, 3, 1], [4, 3, 3, 1]],
 
         "none": [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
@@ -334,6 +342,8 @@ function create_spellbook() {
         0: "", 1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: ""
     };
 
+    const prep_template = `<div class="book_spell_container">
+                               <div id="prep_{0}" class="prepare button" onclick="prep_spell(event, {0})"></div>`;
     var spell;
     var level;
     // for each spell in the spell list,
@@ -348,7 +358,11 @@ function create_spellbook() {
         }
 
         // add the spell to the sections
-        spell_sections[level] += spell.create_book_head();
+        if (spell.level == 0) {
+            spell_sections[level] += spell.create_book_head(false);
+        } else {
+            spell_sections[level] += format_string(prep_template, spell.index) + spell.create_book_head(true) + "</div>";
+        }
     }
 
     var body = "";
@@ -366,6 +380,7 @@ function create_spellbook() {
     document.getElementById("book_list").innerHTML = body;
     // add the correct spell slot buttons
     add_spell_slots();
+    prep_saved_spells();
 }
 
 // return html for level headers
@@ -497,4 +512,104 @@ function toggle_slot(level, number) {
     // save slots used to character, save character
     character_list[active_character].slots_used[level] = new_used_count;
     save_characters();
+}
+
+// marks a spell as prepared
+function prep_spell(event, id) {
+    if (event.shiftKey) {
+        special_prepare(id);
+        return;
+    }
+
+    // get the prep part
+    const prep = document.getElementById("prep_" + id);
+
+    // if the prep is special prep, dont fill it
+    if (prep.nodeName == "svg") {
+        return;
+    }
+
+    // set the visual preparation
+    prep.classList.toggle("prepared");
+    // true if prepping, false if unprepping
+    const prepping = prep.classList.contains("prepared");
+
+    // save in character
+    var prep_list = character_list[active_character].prepared_list;
+    if (prepping) {
+        // add to prep list
+        prep_list.push(id);
+    } else {
+        // remove from prep list
+        const ndx = prep_list.indexOf(id);
+        prep_list.splice(ndx, 1);
+    }
+
+    // save characters
+    save_characters();
+}
+
+// change between special prepare and normal prepare (i.e. for non-counting spells)
+function special_prepare(id) {
+    // get the list of special prepared ids
+    var special_list = character_list[active_character].specialized_list;
+
+    // get the old icon and the container
+    var prep_icon = document.getElementById("prep_" + id);
+    const spell_container = prep_icon.parentElement;
+
+    // remove old element
+    prep_icon.remove();
+
+    const ndx = special_list.indexOf(id)
+    // if it is turned into special
+    if (ndx == -1) {
+        // add to list
+        special_list.push(id);
+
+        // if was prepared, remove from list
+        const ndx = character_list[active_character].prepared_list.indexOf(id);
+        if (ndx != -1) {
+            character_list[active_character].prepared_list.splice(ndx, 1);
+        }
+
+        // add the star icon
+        spell_container.innerHTML = `
+            <svg id="prep_${id}" class="prepare button" onclick="prep_spell(event, ${id})" viewbox="-1 -1 12 12">
+                <path class="prepare_star" d="M 5 0 L 6.122 3.455 L 9.755 3.455 L 6.817 5.591 L 7.939 9.045 L 5 6.912 L 2.061 9.045 L 3.183 5.591 L 0.245 3.455 L 3.878 3.455 Z"></path>
+            </svg>` + spell_container.innerHTML;
+    } else {
+    // if it is turned away from special
+        // remove from list
+        special_list.splice(ndx, 1);
+
+        // add the circle icon
+        spell_container.innerHTML = `
+            <div id="prep_${id}" class="prepare button" onclick="prep_spell(event, ${id})"></div>
+        ` + spell_container.innerHTML;
+    }
+
+    save_characters();
+}
+
+// prepares all spells saved in the active character
+function prep_saved_spells() {
+    // load normal preps
+    for (var id of character_list[active_character].prepared_list) {
+        document.getElementById("prep_" + id).classList.toggle("prepared");
+    }
+
+    // load special preps
+    var spell_container;
+    for (var id of character_list[active_character].specialized_list) {
+        // get the spell container, remove the old prep icon
+        spell_container = document.getElementById("prep_" + id).parentElement;
+        spell_container.children[0].remove();
+
+        // add the star icon
+        spell_container.innerHTML = `
+            <svg id="prep_${id}" class="prepare button" onclick="prep_spell(event, ${id})" viewbox="-1 -1 12 12">
+                <path class="prepare_star" d="M 5 0 L 6.122 3.455 L 9.755 3.455 L 6.817 5.591 L 7.939 9.045 L 5 6.912 L 2.061 9.045 L 3.183 5.591 L 0.245 3.455 L 3.878 3.455 Z"></path>
+            </svg>` + spell_container.innerHTML;
+    }
 }

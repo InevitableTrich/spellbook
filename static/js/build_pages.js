@@ -136,7 +136,7 @@ function build_book_page() {
     ;
 
     const class_and_level = `
-        <div class="row_container space_evenly" style="width: 13.5rem;">
+        <div class="row_container" style="width: 13.5rem;">
             <svg class="selector_arrow" viewBox="0 0 4 2.25" style="padding-top: 0.6rem; margin-left: 0.5rem;">
                 <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
             </svg>
@@ -182,10 +182,16 @@ function build_book_page() {
     // will impl character options later
     const character_options = `<div style="height: 5rem;"></div>`
 
+    // list of book spells
     const book_list = `<div id="book_list"></div>`
 
+    // bottom spacer
+    const spacer = `
+        <div class="bottom_spacer"></div>`
+    ;
+
     const spell_body = start_header + spellbook_name + class_and_level + spell_slot_table + "</div>" + character_options
-                       + book_list;
+                       + book_list + spacer;
 
     // set the HTML body
     document.body.innerHTML += spell_body;

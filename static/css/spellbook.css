@@ -54,7 +54,7 @@
     font-size: var(--tlrg);
     height: fit-content;
     margin-top: 1.9rem;
-    margin-left: .35rem;
+    margin-left: .3rem;
     width: fit-content;
 }
 /* end class and level text */
@@ -178,12 +178,12 @@ p.level_header {
 
 /* spellbook spell head */
 .book_name {
-    width: 30%;
+    width: 25%;
     padding-left: 1%;
 }
 
 .concentration {
-    width: 19%;
+    width: 22%;
     padding-left: 1%;
     text-align: center;
 }
@@ -194,7 +194,48 @@ p.level_header {
 }
 
 .cast_time {
-    width: 15%;
+    width: 17%;
     text-align: center;
 }
 /* end spellbook spell head */
+
+/* book spell */
+.book_spell_container {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem;
+    align-items: center;
+}
+
+.book_spell {
+    width: 100%;
+    margin: 0;
+}
+/* end book spell */
+
+/* spell prep circle */
+.prepare {
+    width: 1rem;
+    height: 1rem;
+    border: 3px solid var(--text);
+    border-radius: 1rem;
+    margin-right: 0.5rem;
+}
+
+.prepared {
+    background-color: #B8B8B8;
+}
+
+svg.prepare {
+    border: 0px;
+    width: calc(1.5rem + 6.33px);
+    height: 100%;
+    margin-right: 0.25rem;
+    margin-left: -0.25rem;
+}
+
+.prepare_star {
+    stroke: var(--text);
+    fill: #B8B8B8;
+}
+/* end spell prep circle */

@@ -54,7 +54,7 @@ class Spell {
 
     // top of a spellbook spell
     static book_head_template = `
-        <div class="spell" id="{0}">
+        <div class="spell{5}" id="{0}">
             <div class="spell_head">
                 <p class="spell_title book_name overflow">{1}</p>
                 <p class="spell_title concentration">{2}</p>
@@ -104,11 +104,17 @@ class Spell {
     }
 
     // creates the head of a spellbook spell
-    create_book_head() {
+    create_book_head(adjust_head) {
         const concentration = this.concentration ? "Concentration" : "Not Concentration";
         const ritual = this.ritual ? "Ritual" : "Not Ritual";
 
-        return format_string(Spell.book_head_template, this.index, this.name, concentration, ritual, this.cast_time);
+        if (adjust_head) {
+            return format_string(Spell.book_head_template, this.index, this.name, concentration, ritual, this.cast_time,
+            " book_spell");
+        } else {
+            return format_string(Spell.book_head_template, this.index, this.name, concentration, ritual, this.cast_time,
+            "");
+        }
     }
 
     // creates the body of the spell
