@@ -62,6 +62,25 @@ svg.discord {
 /* end spellbook button */
 
 
+/* edit characters button */
+.edit_characters {
+    position: fixed;
+    bottom: 1rem;
+    left: 6rem;
+}
+
+svg.edit_icon {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+path.edit_icon {
+    fill: var(--text);
+    stroke: transparent;
+}
+/* end edit characters button */
+
+
 /* scroll to top button */
 div.scroll_to_top {
     position: fixed;

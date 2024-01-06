@@ -1,0 +1,86 @@
+/* menu button */
+div.menu_button {
+    display: grid;
+    background-color: var(--elm);
+    border: var(--ol) solid 3px;
+    border-radius: .6rem;
+
+    width: 20rem;
+    margin: auto 1rem;
+
+    overflow: hidden;
+    transition: height .3s;
+}
+
+.character_button {
+    position: relative;
+    height: 2.5rem;
+    margin-bottom: -2.5rem;
+    z-index: 1;
+}
+
+p.menu_button {
+    color: var(--text);
+    font-size: var(--tlrg);
+
+    height: 2.5rem;
+    width: fit-content;
+    padding-top: .35rem;
+    margin: auto;
+}
+/* end menu button */
+
+/* character input */
+.input_container {
+    display: flex;
+    flex-direction: row;
+    margin: 0px auto;
+}
+
+/* character text input */
+.name_character {
+    width: 15rem;
+    height: 2rem;
+    font-size: var(--tmed);
+    color: var(--text);
+    background-color: var(--elm);
+    border: 3px solid var(--ol);
+    border-radius: .5rem 0 0 .5rem;
+    border-right: 0;
+    padding: 0;
+    padding-left: .5rem;
+    margin-bottom: .5rem;
+}
+/* end character text input */
+
+/* confirm button */
+svg.checkbox {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid var(--ol);
+    border-radius: 0 .5rem .5rem 0;
+}
+
+path.checkbox {
+    fill: transparent;
+    stroke: var(--text);
+}
+/* end confirm button */
+/* end character input */
+
+/* delete button */
+svg.delete_button {
+    border-radius: .5rem;
+    margin: .3rem;
+    margin-left: auto;
+}
+/* end delete button */
+
+/* delete text */
+.delete_text {
+    color: var(--text);
+    font-size: var(--tmed);
+    margin: 0px auto;
+    padding: 0 .5rem;
+}
+/* end delete text */

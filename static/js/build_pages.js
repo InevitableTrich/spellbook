@@ -48,7 +48,7 @@ function build_main_page() {
 
     // filter button
     const filter_button = `
-        <div class="filter_button button" onclick="open_filters();">
+        <div class="filter_button button" onclick="open_screen('filter_menu');">
             <p class="filter_button_text filter_title">Open Filter Options</p>
         </div>`
     ;
@@ -62,8 +62,8 @@ function build_main_page() {
 
     // filter menu
     const filter_menu = `
-        <div id="filter_menu" class="screen_back hidden" onclick="close_filters();">
-            <div class="open_screen row_container" onclick="event.stopPropagation()">
+        <div id="filter_menu" class="screen_back hidden" onclick="close_screen('filter_menu');">
+            <div class="open_screen row_container" onclick="event.stopPropagation();">
                 <!-- Filter -->
                 <div id="filters" class="half_box" style="border-right: var(--ol) 1.5px solid"></div>
                 <!-- Sorting -->
@@ -102,6 +102,7 @@ function build_main_page() {
 
     // spell container
     const spell_container = `
+        <br>
         <div id="spell_list"></div>`
     ;
 
@@ -179,19 +180,65 @@ function build_book_page() {
         </div>`
     ;
 
-    // will impl character options later
-    const character_options = `<div style="height: 5rem;"></div>`
-
     // list of book spells
-    const book_list = `<div id="book_list"></div>`
+    const book_list = `<div id="book_list"></div>`;
 
     // bottom spacer
     const spacer = `
         <div class="bottom_spacer"></div>`
     ;
 
-    const spell_body = start_header + spellbook_name + class_and_level + spell_slot_table + "</div>" + character_options
-                       + book_list + spacer;
+    const edit_button = `
+        <div class="square_button edit_characters hover_transparency button" onclick="toggle_screen('edit_menu');">
+            <svg class="edit_icon" viewBox="0 0 6 6">
+                <path class="edit_icon" d="M 0 6 L 0.5 5.167 L 0.66 5.22 L 0.78 5.34 L 0.833 5.5 Z M 0.8425 5.2875 L 0.7125 5.1575 L 0.54 5.1 L 1 4.334 L 1 4.556 L 1.222 4.556 L 1.222 4.778 L 1.444 4.778 L 1.444 5 L 1.666 5 L 0.9 5.46 Z M 1.728 4.942 L 1.51 4.942 L 1.517 4.764 L 4.522 1.755 A 0.75 1 270 0 1 4.45 2.216 Z M 1.4797 4.7203 L 1.2797 4.7203 L 1.2797 4.5203 L 4.295 1.499 A 0.4 0.4 270 0 1 4.495 1.699 Z m -0.2537 -0.2323 L 1.0577 4.49 L 1.0577 4.2763 L 3.786 1.55 A 2 1 270 0 1 4.239 1.472 Z M 4.535 2.142 A 0.49 0.49 270 0 0 3.869 1.476 L 4.374 0.971 A 0.5 0.5 270 0 1 5.04 1.637 Z M 5.119 1.558 A 0.55 0.55 270 0 0 4.453 0.892 L 4.957 0.388 A 0.55 0.55 270 0 1 5.623 1.054 Z"/>
+            </svg>
+        </div>`
+    ;
+
+    const edit_screen = `
+        <div id="edit_menu" class="screen_back hidden" onclick="close_screen('edit_menu');">
+            <div class="row_container space_evenly" onclick="event.stopPropagation();" style="width: 100%;">
+                <div id="rename" class="menu_button" style="height: 2.5rem;">
+                    <div class="character_button button" onclick="toggle_character_button('rename');"></div>
+                    <p class="menu_button filter_title">Rename Character</p>
+                    <div class="input_container">
+                        <input id="rename_character" class="name_character" placeholder="New Name">
+                        <svg class="checkbox button" viewBox="-1 -1 9 7.5" onclick="rename_character();">
+                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="add_new" class="menu_button" style="height: 2.5rem;">
+                    <div class="character_button button" onclick="toggle_character_button('add_new');"></div>
+                    <p class="menu_button filter_title">Add New Character</p>
+                    <div class="input_container">
+                        <input id="add_new_character" class="name_character" placeholder="New Name">
+                        <svg class="checkbox button" viewBox="-1 -1 9 7.5" onclick="add_new_character();">
+                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="delete" class="menu_button" style="height: 2.5rem;">
+                    <div class="character_button button" onclick="toggle_character_button('delete');"></div>
+                    <p class="menu_button filter_title">Delete Active Character</p>
+                    <p class="delete_text">Are you sure? This action cannot be undone.</p>
+                    <br>
+                    <div class="input_container">
+                        <p class="delete_text" style="max-width: calc(100% - 3.3rem - 6px);">
+                            Press the check twice to confirm.</p>
+                        <svg class="checkbox button delete_button" viewBox="-1 -1 9 7.5" onclick="delete_active_character();">
+                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+    ;
+
+    const spell_body = start_header + spellbook_name + class_and_level + spell_slot_table + "</div>" + spacer
+                       + book_list + spacer + edit_button + edit_screen;
 
     // set the HTML body
     document.body.innerHTML += spell_body;
@@ -220,4 +267,18 @@ function build_book_page() {
     // set the active character
     character_selector.value = active_character;
     set_character(active_character);
+
+// character menu
+    // add Enter key detection in rename character text box
+    document.getElementById("rename_character").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            rename_character();
+        }
+    });
+    // add Enter key detection in add new character text box
+    document.getElementById("add_new_character").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            add_new_character();
+        }
+    });
 }
