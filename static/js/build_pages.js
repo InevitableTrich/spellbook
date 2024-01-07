@@ -70,24 +70,43 @@ function build_main_page() {
                 <div class="half_box" style="border-left: var(--ol) 1.5px solid">
                     <p id="spell_count" class="filter_title">Sorting N Spells by: </p>
                     <div id="sort_list" ondrop="sort_drop(event);" ondragover="allow_sort_drop(event);">
-                        <div id="level_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <div id="level_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
                             <p class="spell_title">1) Level</p>
+                            <svg class="filter_arrow" viewBox="0 0 7 7">
+                                <path fill="var(--tog)" d="M 3.5 0 L 7 3 L 0 3 Z"/>
+                                <path fill="var(--text)" d="M 3.5 7 L 7 4 L 0 4 Z"/>
+                            </svg>
                         </div>
-                        <div id="name_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <div id="name_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
                             <p class="spell_title">2) Name</p>
+                            <svg class="filter_arrow" viewBox="0 0 7 7">
+                                <path fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z M 3.5 7 L 7 4 L 0 4 Z"/>
+                            </svg>
                         </div>
-                        <div id="range_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <div id="range_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
                             <p class="spell_title">3) Range</p>
+                            <svg class="filter_arrow" viewBox="0 0 7 7">
+                                <path fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"/>
+                                <path fill="var(--tog)" d="M 3.5 7 L 7 4 L 0 4 Z"/>
+                            </svg>
                         </div>
                     </div>
                     <br>
                     <p class="filter_title">Inactive Sort Options:</p>
                     <div id="inactive_sort_list">
-                        <div id="cast_time_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
+                        <div id="cast_time_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
                             <p class="spell_title">   Cast Time</p>
+                            <svg class="filter_arrow" viewBox="0 0 7 7">
+                                <path fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"/>
+                                <path fill="var(--tog)" d="M 3.5 7 L 7 4 L 0 4 Z"/>
+                            </svg>
                         </div>
-                        <div id="duration_sort" class="spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
+                        <div id="duration_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
                             <p class="spell_title">   Duration</p>
+                            <svg class="filter_arrow" viewBox="0 0 7 7">
+                                <path fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"/>
+                                <path fill="var(--tog)" d="M 3.5 7 L 7 4 L 0 4 Z"/>
+                            </svg>
                         </div>
                     </div>
                     <br>
@@ -191,7 +210,7 @@ function build_book_page() {
     const edit_button = `
         <div class="square_button edit_characters hover_transparency button" onclick="toggle_screen('edit_menu');">
             <svg class="edit_icon" viewBox="0 0 6 6">
-                <path class="edit_icon" d="M 0 6 L 0.5 5.167 L 0.66 5.22 L 0.78 5.34 L 0.833 5.5 Z M 0.8425 5.2875 L 0.7125 5.1575 L 0.54 5.1 L 1 4.334 L 1 4.556 L 1.222 4.556 L 1.222 4.778 L 1.444 4.778 L 1.444 5 L 1.666 5 L 0.9 5.46 Z M 1.728 4.942 L 1.51 4.942 L 1.517 4.764 L 4.522 1.755 A 0.75 1 270 0 1 4.45 2.216 Z M 1.4797 4.7203 L 1.2797 4.7203 L 1.2797 4.5203 L 4.295 1.499 A 0.4 0.4 270 0 1 4.495 1.699 Z m -0.2537 -0.2323 L 1.0577 4.49 L 1.0577 4.2763 L 3.786 1.55 A 2 1 270 0 1 4.239 1.472 Z M 4.535 2.142 A 0.49 0.49 270 0 0 3.869 1.476 L 4.374 0.971 A 0.5 0.5 270 0 1 5.04 1.637 Z M 5.119 1.558 A 0.55 0.55 270 0 0 4.453 0.892 L 4.957 0.388 A 0.55 0.55 270 0 1 5.623 1.054 Z"/>
+                <path class="edit_icon" d="M 0 6 L 0.5 5.167 L 0.66 5.22 L 0.78 5.34 L 0.833 5.5 Z M 0.8425 5.2875 L 0.7125 5.1575 L 0.54 5.1 L 1 4.334 L 1 4.556 L 1.222 4.556 L 1.222 4.778 L 1.444 4.778 L 1.444 5 L 1.666 5 L 0.9 5.46 Z M 1.728 4.942 L 1.51 4.942 L 1.51 4.778 L 4.522 1.755 A 0.75 1 270 0 1 4.45 2.222 Z M 1.4797 4.7203 L 1.2797 4.7203 L 1.2797 4.5203 L 4.295 1.499 A 0.4 0.4 270 0 1 4.495 1.699 Z M 1.222 4.49 L 1.0577 4.49 L 1.0577 4.2763 L 3.778 1.55 A 2 1 270 0 1 4.245 1.478 Z M 4.535 2.142 A 0.5 0.5 270 0 0 3.858 1.465 L 4.363 0.97 A 0.5 0.5 270 0 1 5.03 1.637 Z M 5.119 1.556 A 0.55 0.55 270 0 0 4.444 0.881 L 4.949 0.376 A 0.55 0.55 270 0 1 5.624 1.051 Z"/>
             </svg>
         </div>`
     ;

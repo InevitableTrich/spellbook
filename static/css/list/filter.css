@@ -128,12 +128,22 @@ p.filter_selected {
 
 .no_spells {
     width: fit-content;
+    max-width: 60%;
     margin: 2rem auto;
 
     color: var(--text);
     font-size: var(--tlrg);
+    text-align: center;
 }
 /* end filter selection */
+
+/* filter up/down arrows */
+.filter_arrow {
+    width: 1.5rem;
+    margin: auto;
+    margin-right: unset;
+}
+/* end filter up/down arrows */
 
 /* small screen styles */
 @media (min-height: 1280px) {

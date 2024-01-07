@@ -39,13 +39,17 @@ class Spell {
                 <p class="spell_title name overflow">{1}</p>
                 <p class="spell_title level">{2}</p>
                 <p class="spell_title classes overflow">{3}</p>
-                <div id="{0}_add" class="quick_add button" onclick="event.stopPropagation(); toggle_spell_in_book({0});">
+                <div id="{0}_quick_add" class="quick add button" onclick="event.stopPropagation(); toggle_spell_in_book({0});">
                     <p class="spell_title quick_add">Quick Add</p>
                 </div>
+                <div class="hidden"></div>
                 <p class="spell_title spell_arrow arrow"><</p>
             </div>
             <div class="spell_head hidden">
-                <p class="spell_title name" style="width: 94.5%">{1}</p>
+                <p class="spell_title name" style="width: 64.5%">{1}</p>
+                <div id="{0}_add" class="full add button" onclick="event.stopPropagation(); toggle_spell_in_book({0});">
+                    <p class="spell_title add">Add To Spellbook</p>
+                </div>
                 <p class="spell_title arrow"><</p>
             </div>
             <div class="toggle_button_top button" onclick="toggle_spell('{0}');"></div>
@@ -60,13 +64,16 @@ class Spell {
                 <p class="spell_title concentration">{2}</p>
                 <p class="spell_title ritual">{3}</p>
                 <p class="spell_title cast_time">{4}</p>
-                <div id="{0}_add" class="quick_add button" onclick="event.stopPropagation(); delete_from_spellbook({0});">
+                <div id="{0}_quick_add" class="quick add button" onclick="event.stopPropagation(); delete_from_spellbook({0});">
                     <p class="spell_title quick_add">Remove</p>
                 </div>
                 <p class="spell_title spell_arrow arrow"><</p>
             </div>
             <div class="spell_head hidden">
-                <p class="spell_title name" style="width: 94.5%">{1}</p>
+                <p class="spell_title name" style="width: 64.5%">{1}</p>
+                <div id="{0}_add" class="full add button" onclick="event.stopPropagation(); delete_from_spellbook({0});">
+                    <p class="spell_title add">Remove From Spellbook</p>
+                </div>
                 <p class="spell_title arrow"><</p>
             </div>
             <div class="toggle_button_top button" onclick="toggle_spell('{0}');"></div>
@@ -328,8 +335,8 @@ function open_spell(id) {
     active_transitions[id] = timeout_id;
 
     // rotate arrows
-    spell_item.children[1].children[1].style = "transform: rotate(-90deg);";
-    spell_item.children[0].children[4].style = "transform: rotate(-90deg);";
+    spell_item.children[1].children[2].style = "transform: rotate(-90deg);";
+    spell_item.children[0].children[5].style = "transform: rotate(-90deg);";
 }
 
 function close_spell(id) {
@@ -352,8 +359,8 @@ function close_spell(id) {
 
     // rotate arrows and close. timeout for animation to render
     setTimeout(() => {
-        spell_item.children[1].children[1].removeAttribute("style");
-        spell_item.children[0].children[4].removeAttribute("style");
+        spell_item.children[1].children[2].removeAttribute("style");
+        spell_item.children[0].children[5].removeAttribute("style");
 
         spell_item.removeAttribute("style");
         spell_item.classList.add("spell_closed");

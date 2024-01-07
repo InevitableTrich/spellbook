@@ -16,8 +16,9 @@ function add_to_spellbook(num) {
     // add to current spellbook
     character_list[active_character].spell_list.push(num);
 
-    // update the spells quick add button
-    document.getElementById(num + "_add").children[0].innerHTML = "Quick Remove";
+    // update the spells quick add and add button
+    document.getElementById(num + "_quick_add").children[0].innerHTML = "Quick Remove";
+    document.getElementById(num + "_add").children[0].innerHTML = "Remove From Spellbook";
 }
 
 // remove a spell from the active spellbook
@@ -36,8 +37,9 @@ function remove_from_spellbook(num) {
         character_list[active_character].prepared_list.splice(prep_ndx, 1);
     }
 
-    // update the spells quick add button
-    document.getElementById(num + "_add").children[0].innerHTML = "Quick Add";
+    // update the spells quick add and add button
+    document.getElementById(num + "_quick_add").children[0].innerHTML = "Quick Add";
+    document.getElementById(num + "_add").children[0].innerHTML = "Add To Spellbook";
 }
 
 // removes a spell from the active spellbook and deletes it from the screen
@@ -45,8 +47,12 @@ function delete_from_spellbook(num) {
     // remove from the list
     remove_from_spellbook(num);
 
-    // delete the visual element
-    document.getElementById(num).parentElement.remove();
+    // delete the visual element. cantrips have no prep, so just delete self, leveled spells need container removed
+    if (spell_list[num].level == 0) {
+        document.getElementById(num).remove();
+    } else {
+        document.getElementById(num).parentElement.remove();
+    }
 
     // get the header
     const spell_level = spell_list[num].level;
@@ -104,6 +110,12 @@ function create_spellbook() {
         if (section != "") {
             body += section + "</div>";
         }
+    }
+
+    // check for no spells, add text
+    if (body == "") {
+        body = `<p class="no_spells">There are no spells in your spellbook. To add some, click the Quick Add or Add
+                                     button on spells in the spell list.</p>`
     }
 
     // set the spellbook list to the content

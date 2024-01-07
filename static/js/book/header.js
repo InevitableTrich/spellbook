@@ -109,6 +109,7 @@ function set_class(class_name, save=true) {
 
         // set new spell slot values
         get_spell_slots();
+        add_spell_slots();
     }
 }
 
@@ -140,4 +141,5 @@ function set_level(level) {
 
     // set new spell slot values
     get_spell_slots();
+    add_spell_slots();
 }

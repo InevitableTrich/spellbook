@@ -67,29 +67,36 @@ function add_spell_slots() {
     var slot_container;
     var slot_count;
     var slot_hold;
+    var header;
     // for all levels 1-9,
     for (var i = 1; i <= 9; i ++) {
         // get the slot count
         slot_count = parseInt(document.getElementById("slot_" + i).innerHTML);
-
-        // if it's zero, don't worry about this and following levels
-        if (slot_count == 0) {
-            break;
-        }
-
         // find the container
         slot_container = document.getElementById("level_" + i + "_slots");
+
         // if it exists,
         if (slot_container != null) {
-            // clear the slot variable
-            slot_hold = "";
+            // get the level header
+            var level_header = document.getElementById("level_" + i + "_header");
 
-            // then for each slot needed, add a spell slot
-            for (var j = 0; j < slot_count; j++) {
-                slot_hold += format_string(spell_slot, i, j);
+            // if there are zero slots, remove slots and text-colon
+            if (slot_count == 0) {
+                slot_container.innerHTML = "";
+                level_header.children[0].innerHTML = "Level " + i;
+            } else {
+                // clear the slot variable
+                slot_hold = "";
+
+                // then for each slot needed, add a spell slot
+                for (var j = 0; j < slot_count; j++) {
+                    slot_hold += format_string(spell_slot, i, j);
+                }
+
+                // then set the HTML
+                level_header.children[0].innerHTML = "Level " + i + ":&nbsp;";
+                slot_container.innerHTML = slot_hold;
             }
-            // then set the HTML
-            slot_container.innerHTML = slot_hold;
         }
     }
 

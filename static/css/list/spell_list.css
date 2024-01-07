@@ -43,13 +43,24 @@
     width: 54.5%;
 }
 
-div.quick_add {
+div.quick {
     width: 15%;
+}
+div.full {
+    width: 30%;
+}
+div.add {
     text-align: center;
     height: 2.5rem;
     margin-top: -.5rem;
     position: relative;
     z-index: 1;
+}
+p.add {
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: .45rem;
+    border-bottom: 3px solid var(--ol);
 }
 p.quick_add {
     white-space: nowrap;

@@ -521,7 +521,8 @@ function update_spell_buttons() {
     for (var spell_id of character_list[active_character].spell_list) {
         // must be in a try block incase the spell is not present due to filters
         try {
-            document.getElementById(spell_id + "_add").children[0].innerHTML = "Quick Remove";
+            document.getElementById(spell_id + "_quick_add").children[0].innerHTML = "Quick Remove";
+            document.getElementById(spell_id + "_add").children[0].innerHTML = "Remove From Spellbook";
         } catch(e) {}  // no error case
     }
 }
