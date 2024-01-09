@@ -14,7 +14,8 @@ class Character {
             "spell_list": [],
             "slots_used": {},
             "prepared_list": [],
-            "specialized_list": []
+            "specialized_list": [],
+            "counters": []
         })
     }
     // used for loading a character from LocalStorage
@@ -26,6 +27,7 @@ class Character {
             this.slots_used = data.slots_used;
             this.prepared_list = data.prepared_list;
             this.specialized_list = data.specialized_list;
+            this.counters = data.counters;
     }
 }
 

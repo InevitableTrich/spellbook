@@ -24,10 +24,22 @@ function open_character_button(id) {
         delete active_transitions[id];
 
         // also after transition finishes, if rename, enter text box
-        if (id == "rename") {
-            document.getElementById("rename_character").focus();
-        } else if (id == "add_new") {
-            document.getElementById("add_new_character").focus();
+        var focus_id;
+        switch (id) {
+            case "rename":
+                focus_id = "rename_character";
+                break;
+            case "add_new":
+                focus_id = "add_new_character";
+                break;
+            case "new_counter":
+                focus_id = "add_counter_name";
+                break;
+            default:
+                focus_id = "";
+        }
+        if (focus_id != "") {
+            document.getElementById(focus_id).focus();
         }
     }, 300);
 

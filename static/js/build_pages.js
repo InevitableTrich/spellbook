@@ -199,6 +199,10 @@ function build_book_page() {
         </div>`
     ;
 
+    // counter section
+    const counters = `
+        <div id="counter_list" class="counter_list"></div>`;
+
     // list of book spells
     const book_list = `<div id="book_list"></div>`;
 
@@ -207,6 +211,7 @@ function build_book_page() {
         <div class="bottom_spacer"></div>`
     ;
 
+    // edit button
     const edit_button = `
         <div class="square_button edit_characters hover_transparency button" onclick="toggle_screen('edit_menu');">
             <svg class="edit_icon" viewBox="0 0 6 6">
@@ -215,9 +220,10 @@ function build_book_page() {
         </div>`
     ;
 
+    // edit options screen
     const edit_screen = `
         <div id="edit_menu" class="screen_back hidden" onclick="close_screen('edit_menu');">
-            <div class="row_container space_evenly" onclick="event.stopPropagation();" style="width: 100%;">
+            <div class="menu_container" onclick="event.stopPropagation();" style="width: 100%;">
                 <div id="rename" class="menu_button" style="height: 2.5rem;">
                     <div class="character_button button" onclick="toggle_character_button('rename');"></div>
                     <p class="menu_button filter_title">Rename Character</p>
@@ -228,6 +234,7 @@ function build_book_page() {
                         </svg>
                     </div>
                 </div>
+
                 <div id="add_new" class="menu_button" style="height: 2.5rem;">
                     <div class="character_button button" onclick="toggle_character_button('add_new');"></div>
                     <p class="menu_button filter_title">Add New Character</p>
@@ -238,11 +245,11 @@ function build_book_page() {
                         </svg>
                     </div>
                 </div>
+
                 <div id="delete" class="menu_button" style="height: 2.5rem;">
                     <div class="character_button button" onclick="toggle_character_button('delete');"></div>
                     <p class="menu_button filter_title">Delete Active Character</p>
                     <p class="delete_text">Are you sure? This action cannot be undone.</p>
-                    <br>
                     <div class="input_container">
                         <p class="delete_text" style="max-width: calc(100% - 3.3rem - 6px);">
                             Press the check twice to confirm.</p>
@@ -252,11 +259,62 @@ function build_book_page() {
                     </div>
                 </div>
             </div>
+
+            <div style="height: 3rem;"></div>
+
+            <div class="menu_container" onclick="event.stopPropagation();" style="width: 100%;">
+                <div id="edit_counter" class="menu_button" style="height: 2.5rem;">
+                    <div class="character_button button" onclick="toggle_character_button('edit_counter');"></div>
+                    <p class="menu_button filter_title">Edit Counter</p>
+                    <select id="edit_counter_select" class="counter_select"></select>
+                    <input id="edit_counter_name" class="counter_name_input" placeholder="Counter Name">
+                    <div class="row_container" style="margin: 0 auto 0.5rem;">
+                        <p class="counter_num_text">Max Value: </p>
+                        <input id="edit_counter_max" class="counter_num_input" placeholder="5" type="number" min="0"
+                            max="99" oninput="clamp_counter_max('edit_counter_max');">
+                        <svg class="checkbox button" viewBox="-1 -1 9 7.5" onkeypress=
+                            "if (event.key == ' ' || event.key == 'Enter') edit_counter();" onclick="edit_counter();"
+                            tabindex="0">
+                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="new_counter" class="menu_button" style="height: 2.5rem;">
+                    <div class="character_button button" onclick="toggle_character_button('new_counter');"></div>
+                    <p class="menu_button filter_title">Add New Counter</p>
+                    <input id="add_counter_name" class="counter_name_input" placeholder="Counter Name">
+                    <div class="row_container" style="margin: 0 auto 0.5rem;">
+                        <p class="counter_num_text">Max Value: </p>
+                        <input id="add_counter_max" class="counter_num_input" placeholder="5" type="number" min="0"
+                            max="99" oninput="clamp_counter_max('add_counter_max');">
+                        <svg class="checkbox button" viewBox="-1 -1 9 7.5" onkeypress=
+                            "if (event.key == ' ' || event.key == 'Enter') add_counter();" onclick="add_counter();"
+                            tabindex="0">
+                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="delete_counter" class="menu_button" style="height: 2.5rem;">
+                    <div class="character_button button" onclick="toggle_character_button('delete_counter');"></div>
+                    <p class="menu_button filter_title">Delete Counter</p>
+                    <select id="delete_counter_select" class="counter_select"></select>
+                    <p class="delete_text">Are you sure? This action cannot be undone.</p>
+                    <div class="input_container">
+                        <p class="delete_text" style="max-width: calc(100% - 3.3rem - 6px);">
+                            Press the check twice to confirm.</p>
+                        <svg class="checkbox button delete_button" viewBox="-1 -1 9 7.5" onclick="delete_counter();">
+                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </div>
     `
     ;
 
-    const spell_body = start_header + spellbook_name + class_and_level + spell_slot_table + "</div>" + spacer
+    const spell_body = start_header + spellbook_name + class_and_level + spell_slot_table + "</div>" + counters
                        + book_list + spacer + edit_button + edit_screen;
 
     // set the HTML body
@@ -294,10 +352,35 @@ function build_book_page() {
             rename_character();
         }
     });
+
     // add Enter key detection in add new character text box
     document.getElementById("add_new_character").addEventListener("keyup", function(event) {
         if (event.key === "Enter") {
             add_new_character();
+        }
+    });
+
+    // add Enter key detection in add new counter text boxes
+    document.getElementById("add_counter_name").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            add_counter();
+        }
+    });
+    document.getElementById("add_counter_max").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            add_counter();
+        }
+    });
+
+    // add Enter key detection in edit counter text boxes
+    document.getElementById("edit_counter_name").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            edit_counter();
+        }
+    });
+    document.getElementById("edit_counter_max").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            edit_counter();
         }
     });
 }

@@ -1,3 +1,11 @@
+/* menu container */
+.menu_container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+/* end menu container */
+
 /* menu button */
 div.menu_button {
     display: grid;
@@ -6,7 +14,6 @@ div.menu_button {
     border-radius: .6rem;
 
     width: 20rem;
-    margin: auto 1rem;
 
     overflow: hidden;
     transition: height .3s;
@@ -47,8 +54,7 @@ p.menu_button {
     border: 3px solid var(--ol);
     border-radius: .5rem 0 0 .5rem;
     border-right: 0;
-    padding: 0;
-    padding-left: .5rem;
+    padding: 0 .5rem;
     margin-bottom: .5rem;
 }
 /* end character text input */
@@ -81,6 +87,6 @@ svg.delete_button {
     color: var(--text);
     font-size: var(--tmed);
     margin: 0px auto;
-    padding: 0 .5rem;
+    padding: 0 .5rem 0.5rem;
 }
 /* end delete text */

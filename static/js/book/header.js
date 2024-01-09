@@ -11,6 +11,10 @@ function set_character(index) {
     // resize the character selector
     resize_character_selector();
 
+// counters
+    // load counters
+    load_counters();
+
 // class and level
     // set level
     document.getElementById("level").value = character.level;

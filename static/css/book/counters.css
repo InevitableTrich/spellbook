@@ -1,0 +1,117 @@
+/* counter list */
+.counter_list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0.5rem;
+}
+/* end counter list */
+
+/* counter name input */
+.counter_name_input {
+    width: 15rem;
+    height: 2rem;
+    margin: 0 auto 0.5rem;
+
+    background-color: var(--elm);
+    border: 3px solid var(--ol);
+    border-radius: 0.5rem;
+
+    font-size: var(--tmed);
+    padding: 0 0.5rem;
+    color: var(--text);
+}
+/* end counter name imput */
+
+/* counter num input */
+.counter_num_text {
+    color: var(--text);
+    font-size: var(--tmed);
+    margin: auto 0.5rem auto 0;
+}
+.counter_num_input {
+    width: 1.4rem;
+    height: 2rem;
+    margin: auto 0;
+    background-color: var(--elm);
+    border: 3px solid var(--ol);
+    border-right: 0;
+    border-radius: 0.5rem 0 0 0.5rem;
+    font-size: var(--tmed);
+    padding: 0 0.5rem;
+    color: var(--text);
+    text-align: center;
+}
+/* end counter num imput */
+
+/* counter styles */
+.counter {
+    width: 8rem;
+    height: 5rem;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--elm);
+    border: 3px solid var(--ol);
+    border-radius: 0.7rem;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+.counter_arrow {
+    width: 2rem;
+    height: fit-content;
+    fill: var(--text);
+    margin: auto;
+}
+
+.counter_input {
+    height: 2rem;
+    background-color: var(--elm);
+    border: none;
+    border-bottom: 3px solid var(--ol);
+    font-size: var(--tlrg);
+    color: var(--text);
+    padding: 0.2rem 0.4rem 0;
+    width: 1.6rem;
+    font-family: unset;
+    text-align: center;
+}
+
+.counter_text {
+    font-size: var(--tlrg);
+    color: var(--text);
+    margin: auto;
+}
+
+.counter_name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-align: center;
+
+    color: var(--text);
+    font-size: var(--tmed);
+    margin: auto;
+    width: fit-content;
+    max-width: 7rem;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+/* end counter styles */
+
+/* counter select */
+.counter_select {
+    width: 16.5rem;
+    margin: 0 auto 0.5rem;
+    height: 2.5rem;
+    background-color: var(--elm);
+    border: 3px solid var(--ol);
+    border-radius: 0.5rem;
+    padding: 0 0.5rem;
+    font-size: var(--tmed);
+    color: var(--text);
+}
+/* end counter select */
