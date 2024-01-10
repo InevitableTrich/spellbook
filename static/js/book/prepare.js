@@ -1,14 +1,15 @@
 // marks a spell as prepared
 function prep_spell(event, id) {
+    // if user was holding shift, toggle special prepare status and leave
     if (event.shiftKey) {
         special_prepare(id);
         return;
     }
 
-    // get the prep part
+    // get the prep circle
     const prep = document.getElementById("prep_" + id);
 
-    // if the prep is special prep, dont fill it
+    // if the prep is special prep, dont do anything
     if (prep.nodeName == "svg") {
         return;
     }
@@ -39,7 +40,7 @@ function special_prepare(id) {
     var special_list = character_list[active_character].specialized_list;
 
     // get the old icon and the container
-    var prep_icon = document.getElementById("prep_" + id);
+    const prep_icon = document.getElementById("prep_" + id);
     const spell_container = prep_icon.parentElement;
 
     // remove old element

@@ -27,24 +27,30 @@ function load_counters() {
     const edit_counter_select = document.getElementById("edit_counter_select");
     const delete_counter_select = document.getElementById("delete_counter_select");
 
-    var counters = "";
-    var counter_options = "";
-    var counter;
-    // for each stored counter, place it in a template
-    for (var i = 0, count = counter_list.length; i < count; i++) {
-        counter = counter_list[i];
-        counters += format_string(counter_template, i, counter.max, counter.name);
-        counter_options += format_string(counter_option_template, i, counter.name);
-    }
+    // if there are no counters, add some indicator text
+    if (counter_list.length == 0) {
+        counter_container.innerHTML = `
+            <p class="no_spells">You have no counters. Use the edit icon in the bottom left to add them.</p>`;
+    } else {
+        var counters = "";
+        var counter_options = "";
+        var counter;
+        // for each stored counter, place it in a template
+        for (var i = 0, count = counter_list.length; i < count; i++) {
+            counter = counter_list[i];
+            counters += format_string(counter_template, i, counter.max, counter.name);
+            counter_options += format_string(counter_option_template, i, counter.name);
+        }
 
-    // set the html
-    counter_container.innerHTML = counters;
-    edit_counter_select.innerHTML = counter_options;
-    delete_counter_select.innerHTML = counter_options;
+        // set the html
+        counter_container.innerHTML = counters;
+        edit_counter_select.innerHTML = counter_options;
+        delete_counter_select.innerHTML = counter_options;
 
-    // set the counters values
-    for (var i = 0, count = counter_list.length; i < count; i++) {
-        set_counter(i, counter_list[i].value, false);
+        // set the counters values
+        for (var i = 0, count = counter_list.length; i < count; i++) {
+            set_counter(i, counter_list[i].value, false);
+        }
     }
 }
 
@@ -61,9 +67,10 @@ function edit_counter() {
 
     // get the edit index, counter variable, counter html, and counter selector
     const edit_index = parseInt(document.getElementById("edit_counter_select").value);
-    var counter_data = character_list[active_character].counters[edit_index];
+    const counter_data = character_list[active_character].counters[edit_index];
     const counter = document.getElementById("counter_" + edit_index);
     const counter_selector = document.getElementById("edit_counter_select");
+    const counter_number = document.getElementById("counter_" + edit_index + "_value");
 
     // edit the name if changed
     var new_name = edit_name.value;
@@ -78,14 +85,25 @@ function edit_counter() {
     }
 
     // update the current value if it's larger than the new max
-    if (counter_data.value > new_max) {
+    // also update increment arrow based on value
+    const inc_button = counter_number.previousElementSibling.children[0];
+    if (counter_data.value >= new_max) {
         counter_data.value = new_max;
         counter.children[0].children[1].value = new_max;
+
+        // arrow styling
+        inc_button.style = "fill: var(--tog);";
+        inc_button.classList.remove("button");
+    } else {
+        // arrow styling
+        inc_button.style = "fill: var(--text);";
+        inc_button.classList.add("button");
     }
 
     // set the counter's new data
     counter_data.name = new_name;
     counter_data.max = new_max;
+    counter_number.max = new_max;
     counter.children[0].children[2].innerHTML = "/ " + new_max;
     counter.children[1].innerHTML = new_name;
     counter_selector[edit_index].innerHTML = new_name;
@@ -122,7 +140,7 @@ function add_counter() {
     }
 
     // create the new counter
-    const new_counter = {"name": name, "max": max, "value": 0};
+    const new_counter = {"name": name, "max": max, "value": max};
 
     // add it to the character
     character_list[active_character].counters.push(new_counter);
@@ -137,8 +155,8 @@ function add_counter() {
                     <path d="M 3.5 7 L 7 4 L 0 4 Z" class="button" onclick="set_counter({0}, -1, true)"
                         style="fill: var(--text);"/>
                 </svg>
-                <input id="counter_{0}_value" class="counter_input" placeholder="0" type="number" min="0" value = "{3}"
-                    max="{1}" oninput="set_counter({0}, value, false);">
+                <input id="counter_{0}_value" class="counter_input" placeholder="0" type="number" min="0" max="{1}"
+                    oninput="set_counter({0}, value, false);">
                 <p class="counter_text">/ {1}</p>
             </div>
             <p class="counter_name">{2}</p>
@@ -148,6 +166,12 @@ function add_counter() {
 
     // get the counter container
     const counter_container = document.getElementById("counter_list");
+
+    // if there were previously no counters, remove the text
+    if (counter_container.children[0].tagName == "P") {
+        counter_container.innerHTML = "";
+    }
+
     // add the counter to the counter container and selections
     const index = counter_container.childElementCount;
     counter_container.insertAdjacentHTML("beforeend", format_string(counter_template, index, max, name));
@@ -161,26 +185,19 @@ function add_counter() {
     max_input.value = "";
     toggle_character_button("new_counter");
 
+    // set the value to its max
+    set_counter(index, max, false);
+
     // save character
     save_characters();
 }
 
 // deletes a selected counter. uses same delete click tracker as character deletor
 function delete_counter() {
-    // if there are no previous clicks, add a new one that expires in 500ms
-    if (delete_click_tracker < 1) {
-        var click_id = setTimeout(() => {
-            delete_click_tracker = 0;
-        }, 500)
-
-        // add the click to the tracker
-        delete_click_tracker = 1;
-
+    // check for a double click
+    if (!detect_double_click()) {
         return;
     }
-
-    // disallow further second clicks until the clear
-    delete_click_tracker = -99;
 
     // get counter index, select elements, and counter container
     const index = document.getElementById("delete_counter_select").value;
@@ -205,6 +222,12 @@ function delete_counter() {
 
     // close the button
     toggle_character_button("delete_counter");
+
+    // if there are no counters left, add some indicator text
+    if (counter_list.childElementCount == 0) {
+        counter_list.innerHTML = `
+            <p class="no_spells">You have no counters. Use the edit icon in the bottom left to add them.</p>`;
+    }
 
     // save the character
     save_characters();
@@ -273,4 +296,22 @@ function set_counter(num, value, modify) {
 
     // save characters
     save_characters();
+}
+
+// toggles open / close the counter list
+function toggle_counter_list() {
+    // get the list
+    const counter_list = document.getElementById("counter_list");
+
+    if (counter_list.hasAttribute("open")) {
+        close_collapsable("counter_list", "0");
+
+        // rotate the arrow
+        counter_list.previousElementSibling.style.removeProperty("transform");
+    } else {
+        open_collapsable("counter_list", 0);
+
+        // rotate the arrow
+        counter_list.previousElementSibling.style.transform = "rotate(90deg)";
+    }
 }

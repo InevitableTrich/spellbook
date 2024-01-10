@@ -2,27 +2,16 @@
 function toggle_character_button(id) {
     // if the menu has unset height (is open), close. else open
     if (document.getElementById(id).hasAttribute("open")) {
-        close_character_button(id);
+        close_collapsable(id, "2.5rem");
     } else {
-        open_character_button(id);
+        open_collapsable(id, 0);
+        delayed_focus(id);
     }
 }
 
-// open character menu button
-function open_character_button(id) {
-    // get the menu, set it open
-    const menu = document.getElementById(id);
-    menu.setAttribute("open", "");
-
-    // expand menu
-    var section_height = menu.scrollHeight;
-    menu.style.height = section_height + "px";
-
-    // leave it unset. waits 300ms which is transition time
-    timeout_id = setTimeout(() => {
-        menu.style.height = "unset";
-        delete active_transitions[id];
-
+// focuses inputs based on opened id
+function delayed_focus(id) {
+    setTimeout(() => {
         // also after transition finishes, if rename, enter text box
         var focus_id;
         switch (id) {
@@ -41,31 +30,7 @@ function open_character_button(id) {
         if (focus_id != "") {
             document.getElementById(focus_id).focus();
         }
-    }, 300);
-
-    // add the transition wait timer to a tracker. used for cancelling if closed before open completes
-    active_transitions[id] = timeout_id;
-}
-
-// close character menu button
-function close_character_button(id) {
-    // get the menu, set not as open
-    var menu = document.getElementById(id);
-    menu.removeAttribute("open");
-
-    // remove current expanding animation if present
-    if (Object.getOwnPropertyNames(active_transitions).indexOf(id) != -1) {
-        clearTimeout(active_transitions[id]);
-    }
-
-    // set to current height for animation
-    var section_height = menu.scrollHeight;
-    menu.style.height = section_height + "px";
-
-    // delay of 0 for animation
-    setTimeout(() => {
-        menu.style.height = "2.5rem";
-    }, 0);
+    }, 175);
 }
 
 // renames the active character to what is in the textbox
@@ -140,22 +105,12 @@ function add_new_character() {
 
 // deletes the active character. sets previous character as active
 // if no characters exist, new one is forced.
-var delete_click_tracker = 0;
 function delete_active_character() {
-    // if there are no previous clicks, add a new one that expires in 500ms
-    if (delete_click_tracker < 1) {
-        var click_id = setTimeout(() => {
-            delete_click_tracker = 0;
-        }, 500)
-
-        // add the click to the tracker
-        delete_click_tracker = 1;
-
+    // check for a double click
+    if (!detect_double_click()) {
         return;
     }
 
-    // disallow further second clicks until the clear
-    delete_click_tracker = -99;
 
     // delete the character select option
     const character_selector = document.getElementById("spellbook_selector");

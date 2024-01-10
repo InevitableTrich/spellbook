@@ -1,7 +1,6 @@
 // called when any key is pressed
 document.addEventListener("keydown", function(event) {
     // ignore input if typing in an input field, or if control/command is held
-    // if on not on list page, ignore as well
     if (document.activeElement.nodeName == "INPUT" || event.ctrlKey || event.metaKey) {
         return;
     }
@@ -15,12 +14,12 @@ document.addEventListener("keydown", function(event) {
                 close_screen('edit_menu');
             }
             break;
-        case "f":  // on (unmodified) 'f', toggle filters on list page
+        case "f":  // on 'f', toggle filters on list page
             if (page == "list") {
                 toggle_screen('filter_menu');
             }
             break;
-        case "e":  // on (unmodified) 'e', toggle filters on book page
+        case "e":  // on 'e', toggle filters on book page
             if (page == "book") {
                 toggle_screen('edit_menu');
             }
@@ -31,6 +30,8 @@ document.addEventListener("keydown", function(event) {
 // toggle open/close screens
 function toggle_screen(id) {
     const screen = document.getElementById(id);
+
+    // if the screen is hidden, open
     if (screen.classList.contains("hidden")) {
         open_screen(id);
     } else {

@@ -115,6 +115,7 @@ class Spell {
         const concentration = this.concentration ? "Concentration" : "Not Concentration";
         const ritual = this.ritual ? "Ritual" : "Not Ritual";
 
+        // adjust head for cantrips
         if (adjust_head) {
             return format_string(Spell.book_head_template, this.index, this.name, concentration, ritual, this.cast_time,
             " book_spell");
@@ -179,7 +180,7 @@ class Spell {
         }
 
         // add all sources. apostrophes were replaced with asterisks for sake of errors with quotes, put them back
-        var sources = this.sources.join(", ").replaceAll("*", "'");
+        const sources = this.sources.join(", ").replaceAll("*", "'");
 
         // return the formatted body string
         return format_string(Spell.body_template, this.level, this.school, cast_time, range, components, duration,
@@ -190,7 +191,7 @@ class Spell {
     // formats the description of the spell body
     make_description() {
         // collect each paragraph
-        var description = this.descriptions.slice();
+        const description = this.descriptions.slice();
         var body;
 
         // check for tables
@@ -258,19 +259,18 @@ class Spell {
                 // uses <th> elements (table header). surrounds table data with table header elements
                 paragraph = "<tr><th>" + paragraph.substr(1, paragraph.length-2) + "</th></tr>";
                 paragraph = paragraph.replaceAll("|", "</th><th>");
+
+                // close previous text, add the table
+                paragraph = '</p><table class="spell_table"><tbody>' + paragraph;
+                found_first = true;
             } else {
                 // uses <td> elements (table data). surrounds table data with table data elements
                 paragraph = "<tr><td>" + paragraph.substr(1, paragraph.length-2) + "</td></tr>";
                 paragraph = paragraph.replaceAll("|", "</td><td>");
             }
 
-            // if this is the first table "paragraph"
-            if (!found_first) {
-                // close previous text, add the table
-                paragraph = '</p><table class="spell_table"><tbody>' + paragraph;
-                found_first = true;
-            } else if (i == last_index) {
             // if this is the final table "paragraph"
+            if (i == last_index) {
                 // close the table, open new text
                 paragraph += '</tbody></table><p class="spell_text">'
             }
@@ -296,73 +296,29 @@ function toggle_spell(id) {
     // add description if it doesn't have it
     if (!spell_item.hasAttribute("built")) {
         spell_item.innerHTML += spell_list[id].create_body();
+        spell_item.setAttribute("built", "");
     }
 
     // swap active headers
     spell_elements[0].classList.toggle("hidden");
     spell_elements[1].classList.toggle("hidden");
 
-    // if the 'extended' header is visible, open. else close
-    if (spell_elements[0].classList.contains("hidden")) {
-        open_spell(id);
+    // close if it is open, else open
+    if (spell_item.hasAttribute("open")) {
+        close_collapsable(id, "2.5rem");
 
-        // indicate that the description exists
-        if (!spell_item.hasAttribute("built")) {
-            spell_item.setAttribute("built", "");
-        }
+        // rotate arrows and close. timeout for animation to render
+        setTimeout(() => {
+            spell_elements[1].children[2].removeAttribute("style");
+            spell_elements[0].children[5].removeAttribute("style");
+
+            spell_item.removeAttribute("style");
+        }, 0);
     } else {
-        close_spell(id);
+        open_collapsable(id, 16);
+
+        // rotate arrows
+        spell_elements[1].children[2].style = "transform: rotate(-90deg);";
+        spell_elements[0].children[5].style = "transform: rotate(-90deg);";
     }
-}
-
-// opens a given spell
-function open_spell(id) {
-    // get the spell element
-    var spell_item = document.getElementById(id);
-
-    // expand spell
-    var section_height = spell_item.scrollHeight - 14;
-    spell_item.classList.remove("spell_closed");
-    spell_item.style.height = section_height + "px";
-
-    // leave it unset to allow for screen changing width. waits 300ms which is transition time
-    timeout_id = setTimeout(() => {
-        spell_item.style.height = "unset";
-        delete active_transitions[id];
-    }, 300);
-
-    // add the transition wait timer to a tracker. used for cancelling if closed before open completes
-    active_transitions[id] = timeout_id;
-
-    // rotate arrows
-    spell_item.children[1].children[2].style = "transform: rotate(-90deg);";
-    spell_item.children[0].children[5].style = "transform: rotate(-90deg);";
-}
-
-function close_spell(id) {
-    // get the spell element
-    var spell_item = document.getElementById(id);
-
-    // remove current expanding animation if present
-    if (Object.getOwnPropertyNames(active_transitions).indexOf(id) != -1) {
-        clearTimeout(active_transitions[id]);
-    }
-
-    // get and save transition for later
-    var transition = spell_item.style.transition;
-    spell_item.style.transition = "";
-    // set to current height for animation
-    var sectionHeight = spell_item.scrollHeight - 14;
-    spell_item.style.height = sectionHeight + "px";
-    // put transition back
-    spell_item.style.transition = transition;
-
-    // rotate arrows and close. timeout for animation to render
-    setTimeout(() => {
-        spell_item.children[1].children[2].removeAttribute("style");
-        spell_item.children[0].children[5].removeAttribute("style");
-
-        spell_item.removeAttribute("style");
-        spell_item.classList.add("spell_closed");
-    }, 0);
 }

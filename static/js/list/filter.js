@@ -58,7 +58,6 @@ function gather_filter_options() {
     }
 
     // sort durations
-    var dX, dY, mX, mY;
     to_sort = [
         "cast_time",
         "duration"
@@ -89,7 +88,7 @@ function gather_filter_options() {
 }
 
 // filter item template
-var filter_base = `
+const filter_base = `
     <div class="filter_item">
         <div class="fit_row_container button" onclick="toggle_filter('{0}')">
             <div id="{0} box" class="filter_selection"></div>
@@ -99,7 +98,7 @@ var filter_base = `
 ;
 function create_filters() {
     // filter header template
-    var filter_header = `
+    const filter_header = `
         <div id="{1}_container" class="row_container button" style="width: 100%;" onclick="toggle_filter_view('{1}');">
             <p class="filter_title" style="width: 94%;">{0}</p>
             <p class="filter_title arrow"><</p>
@@ -107,11 +106,11 @@ function create_filters() {
         <div id="{1}_filters" class="filter_section" style="height: 0;"></div>`
     ;
 
-    var filter_box = document.getElementById("filters");
+    const filter_box = document.getElementById("filters");
     var filter_sections = "";
 
     // gets all filter properties
-    var properties = Object.getOwnPropertyNames(filter_options);
+    const properties = Object.getOwnPropertyNames(filter_options);
     for (var property of properties) {
         filter_sections += format_string(filter_header, format_property(property), property);
     }
@@ -152,18 +151,21 @@ function create_filters() {
 // letter of each word, replace underscores with spaces
 function format_property(property) {
     var formatted = [];
-    var sections = property.split("_");
+    // split the property into words (at '_'s)
+    const sections = property.split("_");
+
+    // take each word and capitalize it
     for (var section of sections) {
         formatted.push(section.charAt(0).toUpperCase() + section.slice(1));
     }
+
+    // join it back together and return
     return formatted.join(" ");
 }
 
 // toggle open/close of filter sections
 function toggle_filter_view(id) {
-    var container = document.getElementById(id + "_container");
-    var filters = document.getElementById(id + "_filters");
-    var arrow = container.children[1];
+    const arrow = document.getElementById(id + "_container").children[1];
 
     // if filter section is closed
     var timeout_id;
@@ -172,45 +174,20 @@ function toggle_filter_view(id) {
         arrow.style = "transform: rotate(-90deg);";
 
         // expand section
-        var sectionHeight = filters.scrollHeight;
-        filters.style.height = sectionHeight + "px";
-
-        // leave it unset to allow for screen changing width
-        timeout_id = setTimeout(() => {
-            filters.style.height = "unset";
-            delete active_transitions[id];
-        }, 300);
-
-        active_transitions[id] = timeout_id;
+        open_collapsable(id + "_filters", 0);
     } else {
-        // remove current expanding animation if present
-        if (Object.getOwnPropertyNames(active_transitions).indexOf(id) != -1) {
-            clearTimeout(active_transitions[id]);
-        }
-
-        // get and save transition for later
-        var transition = filters.style.transition;
-        filters.style.transition = "";
-        // set to current height for animation
-        var sectionHeight = filters.scrollHeight;
-        filters.style.height = sectionHeight + "px";
-        // put transition back
-        filters.style.transition = transition;
-
-        // close, timeout 0 lets animation play
-        setTimeout(() => {
-            filters.style.height = "0";
-        }, 0);
-
         // unrotate arrow
         arrow.removeAttribute("style");
+
+        // close section
+        close_collapsable(id + "_filters", 0);
     }
 }
 
 // toggle individual filters
 function toggle_filter(id) {
-    var box = document.getElementById(id + " box");
-    var text = document.getElementById(id + " text");
+    const box = document.getElementById(id + " box");
+    const text = document.getElementById(id + " text");
 
     box.classList.toggle("filter_selected");
     text.classList.toggle("filter_selected");
@@ -236,9 +213,9 @@ function toggle_filter(id) {
 
 // enable all correct subclasses' visibilities
 function show_subclasses() {
-    var class_container = document.getElementById("classes_filters");
-    var subclass_container = document.getElementById("subclasses_filters");
-    var toggled_filters = document.getElementsByClassName("filter_selected");
+    const class_container = document.getElementById("classes_filters");
+    const subclass_container = document.getElementById("subclasses_filters");
+    const toggled_filters = document.getElementsByClassName("filter_selected");
 
     var classes = new Set();
 
@@ -262,14 +239,15 @@ function show_subclasses() {
     // sort the subclasses by name
     subclasses.sort();
 
-    // if there are no subclasses,
     var filters = `<div style="height: fit-content;">`;
-    if (subclasses.length == 0) {  // add empty indicator
+    // if there are no subclasses, add empty indicator
+    if (subclasses.length == 0) {
         filters += `
             <div class="filter_item">
                 <p class="filter_selection">Select a Class for Subclass options</p>
             </div>`
-    } else {  // otherwise, add each subclass
+    } else {
+    // otherwise, add each subclass
         for (var subclass of subclasses) {
             filters += format_string(filter_base, "subclasses,"+subclass, subclass);
         }
@@ -279,8 +257,8 @@ function show_subclasses() {
 
     // if subclasses are open, adjust height
     if (subclass_container.style.height != "0px") {
-        var subclass_subcontainer = subclass_container.children[0];
-        var section_height = subclass_subcontainer.scrollHeight;
+        const subclass_subcontainer = subclass_container.children[0];
+        const section_height = subclass_subcontainer.scrollHeight;
         subclass_container.style.height = section_height + "px";
     }
 }
@@ -288,30 +266,34 @@ function show_subclasses() {
 var bool_fields = ["concentration", "ritual"];
 // when filters are added, create a set containing the spells it follows
 function add_filter(id) {
-    var comma_index = id.indexOf(",");
+    const comma_index = id.indexOf(",");
 
-    var category = id.slice(0, comma_index);
-    var filter = id.slice(comma_index + 1);
+    const category = id.slice(0, comma_index);
+    const filter = id.slice(comma_index + 1);
 
-    // create empty set at own location
+    // if the filter category has no active filters, declare it
     if (!active_filters.hasOwnProperty(category)) {
         active_filters[category] = {};
     }
+    // add a filter (to populate) to active_filters
     active_filters[category][filter] = new Set();
 
     var spell;
     // if category is a boolean field,
     if (bool_fields.indexOf(category) != -1) {
+        // get the boolean
         var bool_value = filter == "No" ? false : true;
+
         // for each spell
         for (var spell of spell_list) {
-            // check if it is the filter value
+            // if it is the correct boolean, add to the filter
             if (spell[category] == bool_value) {
                 active_filters[category][filter].add(spell);
             }
         }
     } else if (category == "higher_level") {  // otherwise if it is higher_level
-        // true if yes higher_level, else false
+        // get the boolean value
+        //     -> true if yes to higher_level, else false
         var bool_value = filter == "No" ? false : true;
 
         // for each spell, if higher level is matched, add it
@@ -323,12 +305,14 @@ function add_filter(id) {
     } else if (category == "components") {  // otherwise if components
         // true for inclusion, false for exclusion
         var included = filter.indexOf("No") == -1;
-        var component_index;
 
-        // for each spell, look for the component. if it matches in/exclusion, add it
+        var component_index;
+        // for each spell, look for the component. if it matches the in/exclusion, add it
         for (var spell of spell_list) {
+            // get index of the component
             component_index = spell[category].indexOf(filter[filter.length-1]);
 
+            // if included and the component was found, or if excluded and component wasn't found
             if ((included && (component_index != -1)) || (!included && (component_index == -1))) {
                 active_filters[category][filter].add(spell);
             }
@@ -336,21 +320,23 @@ function add_filter(id) {
     } else {  // otherwise for each spell, if it matches, add it
         // for each spell
         for (var spell of spell_list) {
+            // if the filter is found, add it
             if (spell[category].indexOf(filter) != -1) {
                 active_filters[category][filter].add(spell);
             }
         }
     }
 
+    // perform 'or'-ing within each category, and 'and'-ing across them
     perform_filter_operations();
 }
 
 // when filters are removed, delete the set
 function remove_filter(id) {
-    var comma_index = id.indexOf(",");
+    const comma_index = id.indexOf(",");
 
-    var category = id.slice(0, comma_index);
-    var filter = id.slice(comma_index + 1);
+    const category = id.slice(0, comma_index);
+    const filter = id.slice(comma_index + 1);
 
     // if there are multiple filters in a category, remove just the one
     // otherwise remove the category
@@ -376,6 +362,7 @@ function remove_filter(id) {
         }
     }
 
+    // perform 'or'-ing within each category, and 'and'-ing across them
     perform_filter_operations();
 }
 
@@ -389,26 +376,28 @@ function perform_filter_operations() {
     // to be unioned/intersected
     var to_union = [];
     var intersection;
-    // check for classes and subclasses
-    var combine_subs = (categories.indexOf("classes") != -1) && (categories.indexOf("subclasses") != -1);
+
+    // check for classes and subclasses both present
+    const combine_subs = (categories.indexOf("classes") != -1) && (categories.indexOf("subclasses") != -1);
     if (combine_subs) {
-        // remove the classes and subclasses category, place them at end next to eachother
+        // remove the classes and subclasses category, place them at end next to each other
         categories.splice(categories.indexOf("classes"), 1);
         categories.splice(categories.indexOf("subclasses"), 1);
         categories = categories.concat(["classes", "subclasses"]);
     }
 
-    // standard for loop for subclass trickery and later element access
+    // for each category
     for (var i = 0, count = categories.length; i < count; i++) {
+        // get the filters
         category = categories[i];
         filters = Object.getOwnPropertyNames(active_filters[category]);
 
         // if not a subclass
         if (!(combine_subs && category == "subclasses")) {
+            // add a new set to unions
             to_union.push(new Set());
         } else {
-            // remove subclasses from categories
-            categories.splice(i, 1);
+            // use the classes section
             i--;
             count--;
         }
@@ -420,7 +409,7 @@ function perform_filter_operations() {
                     intersection = active_filters[category][filter];
                 } else {
                     // intersection operation, not a built-in
-                    intersection = new Set([...intersection].filter(x => active_filters[category][filter].has(x)));
+                    intersection = set_intersection(intersection, active_filters[category][filter]);
                 }
             }
 
@@ -429,7 +418,7 @@ function perform_filter_operations() {
 
         for (var filter of filters) {
             // union operation, not a built-in
-            to_union[i] = new Set([...to_union[i], ...active_filters[category][filter]]);
+            to_union[i] = set_union(to_union[i], active_filters[category][filter]);
         }
 
         // if not class where subclasses
@@ -438,8 +427,7 @@ function perform_filter_operations() {
             if (intersection == null) {
                 intersection = to_union[i];
             } else {
-                // intersection operation, not a built-in
-                intersection = new Set([...intersection].filter(x => to_union[i].has(x)));
+                intersection = set_intersection(intersection, to_union[i]);
             }
         }
     }
@@ -456,14 +444,24 @@ function perform_filter_operations() {
     filter_spells();
 }
 
+// performs a set intersection
+function set_intersection(setA, setB) {
+    return new Set([...setA].filter(x => setB.has(x)));
+}
+
+// performs a set union
+function set_union(setA, setB) {
+    return new Set([...setA, ...setB]);
+}
+
 // clear all active filters
 function clear_filters() {
     // clear search bar
-    var search_bar = document.getElementById("search_bar");
+    const search_bar = document.getElementById("search_bar");
     search_bar.value = "";
 
     // deactivate visuals of filters
-    var active = [...document.getElementsByClassName("filter_selected")];
+    const active = [...document.getElementsByClassName("filter_selected")];
     for (var element of active) {
         element.classList.toggle("filter_selected");
     }
@@ -472,7 +470,10 @@ function clear_filters() {
     active_filter_count = 0;
     active_filters = {};
 
+    // reset the clear filters button
     document.getElementById("filter_title").innerHTML = "Clear Active Filters (0)";
+
+    // reset subclasses and close it if it wasn't already
     show_subclasses();
     document.getElementById("subclasses_container").children[1].style = null;
 
@@ -484,10 +485,10 @@ function clear_filters() {
 
 // populate visual spell list, following active filters
 function filter_spells() {
-    var search_value = document.getElementById("search_bar").value.toLowerCase();
+    const search_value = document.getElementById("search_bar").value.toLowerCase();
+
     var spell_count = 0;
     var spells = "";
-
     // for each spell in the filtered list
     for (var spell of filtered_spells) {
         // if the search value is within the name or body, add to visual spell list
@@ -499,30 +500,29 @@ function filter_spells() {
         }
     }
 
+    // if there are no spells, add an indicator
+    if (spell_count == 0) {
+        spells = `<p class="no_spells">There are no spells that fit the active filters.</p>`;
+    }
+
     // place spells
-    var spell_section = document.getElementById("spell_list");
-    spell_section.innerHTML = spells;
+    document.getElementById("spell_list").innerHTML = spells;
+
     // update quick add/remove buttons to reflect active spellbook character
     update_spell_buttons();
 
     // set spell count in the sort menu
     document.getElementById("spell_count").innerHTML = format_string("Sorting {0} spells by:", spell_count);
-
-    // if there are no spells, add an indicator
-    if (spell_section.children.length == 0) {
-        spell_section.innerHTML = `
-            <p class="no_spells">There are no spells that fit the active filters.</p>
-        `
-    }
 }
 
-// change spells in current character's spellbook to reflect presence
+// change spell buttons to reflect spell active spellbook presence
 function update_spell_buttons() {
+    // for each spell, if it's in the active spellbook, set the add button to remove instead
     for (var spell_id of character_list[active_character].spell_list) {
         // must be in a try block incase the spell is not present due to filters
         try {
             document.getElementById(spell_id + "_quick_add").children[0].innerHTML = "Quick Remove";
             document.getElementById(spell_id + "_add").children[0].innerHTML = "Remove From Spellbook";
-        } catch(e) {}  // no error case
+        } catch(e) {}  // ignore errors
     }
 }

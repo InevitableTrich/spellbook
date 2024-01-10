@@ -200,8 +200,7 @@ function build_book_page() {
     ;
 
     // counter section
-    const counters = `
-        <div id="counter_list" class="counter_list"></div>`;
+    const counters = `<div id="counter_list" class="counter_list" open></div>`;
 
     // list of book spells
     const book_list = `<div id="book_list"></div>`;

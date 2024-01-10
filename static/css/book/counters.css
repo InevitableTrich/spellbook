@@ -4,6 +4,9 @@
     justify-content: center;
     flex-wrap: wrap;
     margin: 0.5rem;
+
+    overflow: hidden;
+    transition: height .3s;
 }
 /* end counter list */
 

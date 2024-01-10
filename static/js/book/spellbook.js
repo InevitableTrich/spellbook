@@ -48,14 +48,14 @@ function delete_from_spellbook(num) {
     remove_from_spellbook(num);
 
     // delete the visual element. cantrips have no prep, so just delete self, leveled spells need container removed
-    if (spell_list[num].level == 0) {
+    const spell_level = spell_list[num].level
+    if (spell_level == 0) {
         document.getElementById(num).remove();
     } else {
         document.getElementById(num).parentElement.remove();
     }
 
     // get the header
-    const spell_level = spell_list[num].level;
     const spell_holder = document.getElementById("level_" + spell_level + "_spells");
 
     // check for empty, and if empty, delete holder and header
@@ -97,7 +97,8 @@ function create_spellbook() {
         if (spell.level == 0) {
             spell_sections[level] += spell.create_book_head(false);
         } else {
-            spell_sections[level] += format_string(prep_template, spell.index) + spell.create_book_head(true) + "</div>";
+            spell_sections[level] += format_string(prep_template, spell.index)
+                                     + spell.create_book_head(true) + "</div>";
         }
     }
 
@@ -137,19 +138,22 @@ function create_level_header(level) {
     `;
     // container for holding interactable slots
     const level_row_container = `
-        <div id="level_{0}_slots"  class="row_container"></div>
+        <div id="level_{0}_slots" class="row_container"></div>
     `;
 
     var text;
     var container;
     // format changing checks
+    // if cantrip, set to Cantrips and no slot
     if (level == 0) {
         text = "Cantrips";
         container = "";
     } else if (parseInt(document.getElementById("slot_" + level).innerHTML) > 0) {
+    // else if there are spell slots wanted, add them
         text = `Level ${level}: &nbsp;`; // Level X:
         container = format_string(level_row_container, level);
     } else {
+    // else, there are no spells wanted
         text = `Level ${level}`; // Level X
         container = format_string(level_row_container, level);
     }

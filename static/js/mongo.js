@@ -1,11 +1,11 @@
 // db query
 function gather_spells() {
+    var url;
+
     if (window.location.href.startsWith('http://127.0.0.1:8000/')) {
         url = 'http://127.0.0.1:8000/spells';
-        loc = 'l';
     } else {
         url = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells';
-        loc = 's';
     }
 
     make_HTTP_post_request(url, handle_spells_response);
@@ -55,6 +55,7 @@ function perform_spell_operations() {
         filter_spells();
         create_filters();
     } else {
+    // if on book page, create class options and set character
         create_class_list();
         set_character(active_character);
     }

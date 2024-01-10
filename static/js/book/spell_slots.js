@@ -43,7 +43,7 @@ function get_spell_slots() {
     const character_level = document.getElementById("level").value;
 
     // get the corresponding list
-    var slot_list = caster_slot_table[class_caster_type[character_class]][character_level-1];
+    const slot_list = caster_slot_table[class_caster_type[character_class]][character_level-1];
     const slot_level_count = slot_list.length;
 
     // set the slots given
@@ -52,8 +52,8 @@ function get_spell_slots() {
     }
 
     // fill the rest with 0s
-    for (var i = slot_level_count, count = 9; i < count; i++) {
-        document.getElementById("slot_" + (i+1)).innerHTML = 0;
+    for (var i = slot_level_count + 1, count = 9; i <= count; i++) {
+        document.getElementById("slot_" + i).innerHTML = 0;
     }
 }
 
@@ -68,6 +68,7 @@ function add_spell_slots() {
     var slot_count;
     var slot_hold;
     var header;
+    var level_header;
     // for all levels 1-9,
     for (var i = 1; i <= 9; i ++) {
         // get the slot count
@@ -78,13 +79,14 @@ function add_spell_slots() {
         // if it exists,
         if (slot_container != null) {
             // get the level header
-            var level_header = document.getElementById("level_" + i + "_header");
+            level_header = document.getElementById("level_" + i + "_header");
 
             // if there are zero slots, remove slots and text-colon
             if (slot_count == 0) {
                 slot_container.innerHTML = "";
                 level_header.children[0].innerHTML = "Level " + i;
             } else {
+            // there are some slots,
                 // clear the slot variable
                 slot_hold = "";
 
@@ -103,7 +105,6 @@ function add_spell_slots() {
     // levels that have any amount of used slots
     const used_slot_levels = Object.getOwnPropertyNames(character_list[active_character].slots_used);
 
-    var slot_container;
     var slots;
     // for each of the used slot levels
     for (var level of used_slot_levels) {
@@ -145,7 +146,7 @@ function toggle_slot(level, number) {
             // else go to next
         }
     } else {
-    // if consuming a spell slot, check for non-consumed at the front (limit of `number` as that is what was clicked)
+    // if consuming a spell slot, check for non-consumed from the front (limit of `number` as that is what was clicked)
         for (var i = 0; i <= number; i++) {
             active_slot = slots[i];
             // if the slot is not consumed, consume it and leave
