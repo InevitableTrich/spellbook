@@ -93,3 +93,33 @@ svg.prepare {
     fill: #B8B8B8;
 }
 /* end spell prep circle */
+
+/* small screen styles */
+@media (min-height: 1280px) {
+    .book_name {
+        width: 26%;
+    }
+
+    .concentration {
+        width: 34%;
+    }
+
+    .ritual {
+        width: 21%;
+        padding-left: 1%;
+    }
+
+    .cast_time {
+        display: none;
+    }
+
+    .short_add {
+        width: 14%;
+    }
+
+    .prepare {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 1rem;
+    }
+}

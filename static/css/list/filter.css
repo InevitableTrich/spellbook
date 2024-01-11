@@ -195,4 +195,8 @@ p.filter_selected {
         margin: auto 0;
     }
     /* end filter screen */
+
+    .no_spells {
+        display: flex;
+    }
 }

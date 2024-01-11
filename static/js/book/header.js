@@ -29,9 +29,11 @@ function set_character(index) {
     // set level width
     const level_input = document.getElementById("level");
     if (character.level > 9) {
-        level_input.style.width = "1.6rem";
+        level_input.classList.remove("short_level");
+        level_input.classList.add("long_level");
     } else {
-        level_input.style.width = ".8rem";
+        level_input.classList.remove("long_level");
+        level_input.classList.add("short_level");
     }
 
     // get spell slot amounts
@@ -49,7 +51,7 @@ function resize_character_selector() {
     var x = document.createElement("p"); // create new p element
     x.classList.add("spellbook_name"); // with same class for sizing
     x.classList.add("overflow"); // with overflow for width clipping
-    character_selector.parentElement.style.width = "60%"; // set to occupy as large as it can for measurement
+    character_selector.parentElement.style.width = "100%"; // set to occupy as large as it can for measurement
     // set a max-width for overflow clipping, set width to fit for correct size
     x.style = `max-width: calc(${character_selector.parentElement.clientWidth}px - 13rem); width: fit-content;`;
     character_selector.parentElement.style.width = ""; // remove fixed size
@@ -130,9 +132,11 @@ function set_level(level) {
     // adjust width for numbers > 9
     const level_input = document.getElementById("level");
     if (level > 9) {
-        level_input.style.width = "1.6rem";
+        level_input.classList.remove("short_level");
+        level_input.classList.add("long_level");
     } else {
-        level_input.style.width = ".8rem";
+        level_input.classList.remove("long_level");
+        level_input.classList.add("short_level");
     }
 
     // clamp the level to valid levels

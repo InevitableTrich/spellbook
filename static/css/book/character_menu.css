@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    width: 100%;
 }
 /* end menu container */
 
@@ -86,7 +87,57 @@ svg.delete_button {
 .delete_text {
     color: var(--text);
     font-size: var(--tmed);
-    margin: 0px auto;
+    margin: 0;
     padding: 0 .5rem 0.5rem;
 }
 /* end delete text */
+
+/* small screen styles */
+@media (min-height: 1280px) {
+    .mobile_menu_container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .menu_container {
+        display: unset;
+        width: unset;
+    }
+
+    div.menu_button {
+        width: 24rem;
+        margin: 2rem 0;
+    }
+    p.menu_button {
+        margin: 0 auto 1rem;
+    }
+
+    .name_character {
+        width: 17rem;
+        height: 2.6rem;
+        margin-bottom: 1rem;
+    }
+
+    .counter_select {
+        width: 20rem;
+        height: 3rem;
+        margin: 0 auto 1rem;
+    }
+
+    .counter_name_input {
+        width: 18.5rem;
+        height: 2.6rem;
+        margin: 0 auto 1rem;
+    }
+
+    .counter_num_input {
+        width: 2.4rem;
+        height: 2.6rem;
+    }
+
+    svg.checkbox {
+        width: 2.6rem;
+        height: 2.6rem;
+    }
+}

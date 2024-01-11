@@ -142,10 +142,10 @@ function build_main_page() {
 function build_book_page() {
     add_page_constants();
 
-    const start_header = `<div class="header row_container space_evenly">`;
+    const start_header = `<div class="header space_evenly">`;
 
     const spellbook_name = `
-        <div class="row_container" style="max-width: calc(100% - max(calc(40% - 13.5rem), 20.75rem) - 13.5rem);">
+        <div class="row_container character_container">
             <svg class="selector_arrow" viewBox="0 0 4 2.25">
                 <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
             </svg>
@@ -156,46 +156,48 @@ function build_book_page() {
     ;
 
     const class_and_level = `
-        <div class="row_container" style="width: 13.5rem;">
-            <svg class="selector_arrow" viewBox="0 0 4 2.25" style="padding-top: 0.6rem; margin-left: 0.5rem;">
-                <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
-            </svg>
-            <select id="class_selector" class="class_selector class_level" onchange="set_class(value);"></select>
-            <p class="class_level">, Level</p>
-            <input id="level" class="class_level level_input" type="number" placeholder="1" value="0"
-                   min="1" max="20" oninput="set_level(value);">
-        </div>`
+        <div class="mobile_level_slot_container">
+            <div class="row_container class_level_container">
+                <svg class="selector_arrow" viewBox="0 0 4 2.25" style="padding-top: 0.6rem; margin-left: 0.5rem;">
+                    <path d="M 0 0 L 2 1.5 L 4 0 L 4 0.75 L 2 2.25 L 0 0.75 Z"/>
+                </svg>
+                <select id="class_selector" class="class_selector class_level" onchange="set_class(value);"></select>
+                <p class="class_level">, Level</p>
+                <input id="level" class="class_level level_input" type="number" placeholder="1" value="0"
+                       min="1" max="20" oninput="set_level(value);">
+            </div>`
     ;
 
     const spell_slot_table = `
-        <div class="space_evenly" style="width: max(calc(40% - 13.5rem), 20.75rem);">
-            <table class="slot_table">
-                <tbody>
-                    <tr>
-                        <td class="slot_info">Slot</td>
-                        <td class="slot_info">1</td>
-                        <td class="slot_info">2</td>
-                        <td class="slot_info">3</td>
-                        <td class="slot_info">4</td>
-                        <td class="slot_info">5</td>
-                        <td class="slot_info">6</td>
-                        <td class="slot_info">7</td>
-                        <td class="slot_info">8</td>
-                        <td class="slot_info">9</td>
-                    </tr><tr>
-                        <td class="slot_info">Count</td>
-                        <td class="slot_info" id="slot_1">0</td>
-                        <td class="slot_info" id="slot_2">0</td>
-                        <td class="slot_info" id="slot_3">0</td>
-                        <td class="slot_info" id="slot_4">0</td>
-                        <td class="slot_info" id="slot_5">0</td>
-                        <td class="slot_info" id="slot_6">0</td>
-                        <td class="slot_info" id="slot_7">0</td>
-                        <td class="slot_info" id="slot_8">0</td>
-                        <td class="slot_info" id="slot_9">0</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="slot_table_container">
+                <table class="slot_table">
+                    <tbody>
+                        <tr>
+                            <td class="slot_info">Slot</td>
+                            <td class="slot_info">1</td>
+                            <td class="slot_info">2</td>
+                            <td class="slot_info">3</td>
+                            <td class="slot_info">4</td>
+                            <td class="slot_info">5</td>
+                            <td class="slot_info">6</td>
+                            <td class="slot_info">7</td>
+                            <td class="slot_info">8</td>
+                            <td class="slot_info">9</td>
+                        </tr><tr>
+                            <td class="slot_info">Count</td>
+                            <td class="slot_info" id="slot_1">0</td>
+                            <td class="slot_info" id="slot_2">0</td>
+                            <td class="slot_info" id="slot_3">0</td>
+                            <td class="slot_info" id="slot_4">0</td>
+                            <td class="slot_info" id="slot_5">0</td>
+                            <td class="slot_info" id="slot_6">0</td>
+                            <td class="slot_info" id="slot_7">0</td>
+                            <td class="slot_info" id="slot_8">0</td>
+                            <td class="slot_info" id="slot_9">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>`
     ;
 
@@ -221,9 +223,9 @@ function build_book_page() {
 
     // edit options screen
     const edit_screen = `
-        <div id="edit_menu" class="screen_back hidden" onclick="close_screen('edit_menu');">
-            <div class="menu_container" onclick="event.stopPropagation();" style="width: 100%;">
-                <div id="rename" class="menu_button" style="height: 2.5rem;">
+        <div id="edit_menu" class="screen_back mobile_menu_container hidden" onclick="close_screen('edit_menu');">
+            <div class="menu_container" onclick="event.stopPropagation();">
+                <div id="rename" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
                     <div class="character_button button" onclick="toggle_character_button('rename');"></div>
                     <p class="menu_button filter_title">Rename Character</p>
                     <div class="input_container">
@@ -234,7 +236,7 @@ function build_book_page() {
                     </div>
                 </div>
 
-                <div id="add_new" class="menu_button" style="height: 2.5rem;">
+                <div id="add_new" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
                     <div class="character_button button" onclick="toggle_character_button('add_new');"></div>
                     <p class="menu_button filter_title">Add New Character</p>
                     <div class="input_container">
@@ -245,12 +247,12 @@ function build_book_page() {
                     </div>
                 </div>
 
-                <div id="delete" class="menu_button" style="height: 2.5rem;">
+                <div id="delete" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
                     <div class="character_button button" onclick="toggle_character_button('delete');"></div>
                     <p class="menu_button filter_title">Delete Active Character</p>
                     <p class="delete_text">Are you sure? This action cannot be undone.</p>
                     <div class="input_container">
-                        <p class="delete_text" style="max-width: calc(100% - 3.3rem - 6px);">
+                        <p class="delete_text" style="max-width: calc(100% - 4.3rem - 6px);">
                             Press the check twice to confirm.</p>
                         <svg class="checkbox button delete_button" viewBox="-1 -1 9 7.5" onclick="delete_active_character();">
                             <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
@@ -261,8 +263,8 @@ function build_book_page() {
 
             <div style="height: 3rem;"></div>
 
-            <div class="menu_container" onclick="event.stopPropagation();" style="width: 100%;">
-                <div id="edit_counter" class="menu_button" style="height: 2.5rem;">
+            <div class="menu_container" onclick="event.stopPropagation();">
+                <div id="edit_counter" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
                     <div class="character_button button" onclick="toggle_character_button('edit_counter');"></div>
                     <p class="menu_button filter_title">Edit Counter</p>
                     <select id="edit_counter_select" class="counter_select"></select>
@@ -279,7 +281,7 @@ function build_book_page() {
                     </div>
                 </div>
 
-                <div id="new_counter" class="menu_button" style="height: 2.5rem;">
+                <div id="new_counter" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
                     <div class="character_button button" onclick="toggle_character_button('new_counter');"></div>
                     <p class="menu_button filter_title">Add New Counter</p>
                     <input id="add_counter_name" class="counter_name_input" placeholder="Counter Name">
@@ -295,13 +297,13 @@ function build_book_page() {
                     </div>
                 </div>
 
-                <div id="delete_counter" class="menu_button" style="height: 2.5rem;">
+                <div id="delete_counter" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
                     <div class="character_button button" onclick="toggle_character_button('delete_counter');"></div>
                     <p class="menu_button filter_title">Delete Counter</p>
                     <select id="delete_counter_select" class="counter_select"></select>
                     <p class="delete_text">Are you sure? This action cannot be undone.</p>
                     <div class="input_container">
-                        <p class="delete_text" style="max-width: calc(100% - 3.3rem - 6px);">
+                        <p class="delete_text" style="max-width: calc(100% - 4.3rem - 6px);">
                             Press the check twice to confirm.</p>
                         <svg class="checkbox button delete_button" viewBox="-1 -1 9 7.5" onclick="delete_counter();">
                             <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>

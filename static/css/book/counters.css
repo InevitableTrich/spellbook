@@ -118,3 +118,25 @@
     color: var(--text);
 }
 /* end counter select */
+
+/* small screen styles */
+@media (min-height: 1280px) {
+    .counter {
+        width: 11rem;
+        height: 8rem;
+    }
+
+    .counter_arrow {
+        width: 3rem;
+    }
+
+    .counter_input {
+        font-size: 2.5rem;
+        width: 2.4rem;
+        padding-top: .5rem;
+    }
+
+    .counter_text {
+        font-size: 2.5rem;
+    }
+}

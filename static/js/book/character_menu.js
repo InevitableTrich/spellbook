@@ -2,7 +2,7 @@
 function toggle_character_button(id) {
     // if the menu has unset height (is open), close. else open
     if (document.getElementById(id).hasAttribute("open")) {
-        close_collapsable(id, "2.5rem");
+        close_collapsable(id, "calc(var(--tlrg) + 1rem)");
     } else {
         open_collapsable(id, 0);
         delayed_focus(id);

@@ -64,7 +64,8 @@ class Spell {
                 <p class="spell_title concentration">{2}</p>
                 <p class="spell_title ritual">{3}</p>
                 <p class="spell_title cast_time">{4}</p>
-                <div id="{0}_quick_add" class="quick add button" onclick="event.stopPropagation(); delete_from_spellbook({0});">
+                <div id="{0}_quick_add" class="quick add button short_add"
+                    onclick="event.stopPropagation(); delete_from_spellbook({0});">
                     <p class="spell_title quick_add">Remove</p>
                 </div>
                 <p class="spell_title spell_arrow arrow"><</p>
