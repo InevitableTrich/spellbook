@@ -70,23 +70,31 @@ function build_main_page() {
                 <div class="half_box" style="border-left: var(--ol) 1.5px solid">
                     <p id="spell_count" class="filter_title">Sorting N Spells by: </p>
                     <div id="sort_list" ondrop="sort_drop(event);" ondragover="allow_sort_drop(event);">
-                        <div id="level_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <div id="level_sort" class="row_container spell draggable" draggable="true"
+                                ondragstart="sort_drag(event);" sorting="active">
                             <p class="spell_title">1) Level</p>
                             <svg class="filter_arrow" viewBox="0 0 7 7">
                                 <path fill="var(--tog)" d="M 3.5 0 L 7 3 L 0 3 Z"/>
-                                <path fill="var(--text)" d="M 3.5 7 L 7 4 L 0 4 Z"/>
+                                <path class="button" fill="var(--text)" d="M 3.5 7 L 7 4 L 0 4 Z"
+                                    onclick="internal_sort_move(0, 1);"/>
                             </svg>
                         </div>
-                        <div id="name_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <div id="name_sort" class="row_container spell draggable" draggable="true"
+                                ondragstart="sort_drag(event);" sorting="active">
                             <p class="spell_title">2) Name</p>
                             <svg class="filter_arrow" viewBox="0 0 7 7">
-                                <path fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z M 3.5 7 L 7 4 L 0 4 Z"/>
+                                <path class="button" fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"
+                                    onclick="internal_sort_move(1, -1);"/>
+                                <path class="button" fill="var(--text)" d="M 3.5 7 L 7 4 L 0 4 Z"
+                                    onclick="internal_sort_move(1, 1);"/>
                             </svg>
                         </div>
-                        <div id="range_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="active">
+                        <div id="range_sort" class="row_container spell draggable" draggable="true"
+                                ondragstart="sort_drag(event);" sorting="active">
                             <p class="spell_title">3) Range</p>
                             <svg class="filter_arrow" viewBox="0 0 7 7">
-                                <path fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"/>
+                                <path class="button" fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"
+                                    onclick="internal_sort_move(2, -1);"/>
                                 <path fill="var(--tog)" d="M 3.5 7 L 7 4 L 0 4 Z"/>
                             </svg>
                         </div>
@@ -94,17 +102,21 @@ function build_main_page() {
                     <br>
                     <p class="filter_title">Inactive Sort Options:</p>
                     <div id="inactive_sort_list">
-                        <div id="cast_time_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
+                        <div id="cast_time_sort" class="row_container spell draggable" draggable="true"
+                                ondragstart="sort_drag(event);" sorting="inactive">
                             <p class="spell_title">   Cast Time</p>
                             <svg class="filter_arrow" viewBox="0 0 7 7">
-                                <path fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"/>
+                                <path class="button" fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"
+                                    onclick="external_sort_move(0);"/>
                                 <path fill="var(--tog)" d="M 3.5 7 L 7 4 L 0 4 Z"/>
                             </svg>
                         </div>
-                        <div id="duration_sort" class="row_container spell draggable" draggable="true" ondragstart="sort_drag(event);" sorting="inactive">
+                        <div id="duration_sort" class="row_container spell draggable" draggable="true"
+                                ondragstart="sort_drag(event);" sorting="inactive">
                             <p class="spell_title">   Duration</p>
                             <svg class="filter_arrow" viewBox="0 0 7 7">
-                                <path fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"/>
+                                <path class="button" fill="var(--text)" d="M 3.5 0 L 7 3 L 0 3 Z"
+                                    onclick="external_sort_move(1);"/>
                                 <path fill="var(--tog)" d="M 3.5 7 L 7 4 L 0 4 Z"/>
                             </svg>
                         </div>

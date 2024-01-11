@@ -155,7 +155,6 @@ function toggle_reverse_sort() {
     filter_spells();
 }
 
-// dragging will not work on mobile, deal with at some point
 // used in HTML to allow sort drops
 function allow_sort_drop(event) {
     event.preventDefault();
@@ -275,4 +274,46 @@ function external_drop(event) {
 // used by HTML to drag elements, stores id for use on swapping
 function sort_drag(event) {
   event.dataTransfer.setData("id", event.target.id);
+}
+
+// moves a sort up or down from a start pos. +1 change -> down
+function internal_sort_move(start, change) {
+    // get the relevant sort items
+    const sort_items = document.getElementById("sort_list").children;
+    const start_sort = sort_items[start];
+    const end_sort = sort_items[start + change];
+
+    // perform the swap
+    sort_swap(start_sort, end_sort);
+}
+
+// swaps a sort from the inactive sorts to active sorts' bottom
+function external_sort_move(start) {
+    // get the relevant sort items
+    const start_sort = document.getElementById("inactive_sort_list").children[start];
+    const end_sort = document.getElementById("sort_list").children[2];
+
+    // perform the swap
+    sort_swap(start_sort, end_sort);
+}
+
+// swaps two sorts with eachother
+function sort_swap(sortA, sortB) {
+    // store the id and name of both for ease of use
+    const start_id = sortA.id;
+    const start_name = sortA.children[0].innerHTML;
+    const end_id = sortB.id;
+    const end_name = sortB.children[0].innerHTML;
+
+    // set the ends data to the starts data
+    sortB.id = start_id;
+    sortB.children[0].innerHTML = end_name.slice(0, 3) + start_name.slice(3);
+
+    // set the starts data to the ends data
+    sortA.id = end_id;
+    sortA.children[0].innerHTML = start_name.slice(0, 3) + end_name.slice(3);
+
+    // sort and filter spells
+    sort_spells();
+    filter_spells();
 }
