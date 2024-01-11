@@ -46,7 +46,7 @@ class Spell {
                 <p class="spell_title spell_arrow arrow"><</p>
             </div>
             <div class="spell_head hidden">
-                <p class="spell_title name" style="width: 64.5%">{1}</p>
+                <p class="spell_title open_name">{1}</p>
                 <div id="{0}_add" class="full add button" onclick="event.stopPropagation(); toggle_spell_in_book({0});">
                     <p class="spell_title add">Add To Spellbook</p>
                 </div>

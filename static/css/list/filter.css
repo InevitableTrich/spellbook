@@ -152,7 +152,7 @@ p.filter_selected {
     .filter_button {
         border-width: 5px;
         border-radius: .9rem;
-        height: 4.5rem;
+        height: 4rem;
         width: 45rem;
 
         margin: .5rem 2rem;
@@ -167,20 +167,16 @@ p.filter_selected {
     .filter_title {
         font-size: 2.75rem;
     }
-
-    .filter_button_text {
-        font-size: 3rem;
-    }
     /* end filter text */
 
     /* search bar */
     .search_bar {
         border-width: 5px;
         border-radius: .9rem;
-        height: 4.5rem;
+        height: 4rem;
         width: 45rem;
 
-        font-size: 3rem;
+        font-size: 2.5rem;
 
         margin: 1rem 2rem;
     }

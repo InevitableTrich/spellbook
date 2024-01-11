@@ -133,6 +133,18 @@ svg.scroll_to_top {
     }
     /* end spellbook button */
 
+    /* edit button */
+    .edit_characters {
+        bottom: 2rem;
+        left: 12rem;
+    }
+
+    svg.edit_icon {
+        width: 7rem;
+        height: 7rem;
+    }
+    /* end edit button */
+
     /* scroll to top button */
     div.scroll_to_top {
         bottom: 2rem;

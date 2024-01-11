@@ -89,9 +89,9 @@ p.title {
 @media (min-height: 1280px) {
     /* main constant variables */
     :root {
-        --tlrg: 2.5rem;
-        --tmed: 2.25rem;
-        --sph: 2rem;
+        --tlrg: 2.25rem;
+        --tmed: 2rem;
+        --sph: 1.75rem;
     }
     /* end main constant variables */
 

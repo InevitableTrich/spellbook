@@ -33,6 +33,9 @@
     width: 20%;
     margin-left: 1%;
 }
+.open_name {
+    width: 64.5%;
+}
 
 .level {
     width: 4%;
@@ -148,6 +151,7 @@ th {
         border-width: 5px;
         margin: 1rem .5rem;
         padding: .75rem 1rem;
+        border-radius 1rem;
     }
 
     .spell_text {
@@ -169,22 +173,28 @@ th {
     .name {
         width: 25%;
     }
+    .open_name {
+        width: 50%;
+    }
 
     .level {
         margin: 0 2%;
     }
 
     .classes {
-        width: 46%;
+        width: 41%;
     }
 
-    div.quick_add {
-        width: 20%;
+    div.quick {
+        width: 24%;
         margin-left: 1%;
+    }
+    div.full {
+        width: 45%;
     }
 
     .arrow {
-        left: -2%
+        left: 0%;
     }
     .spell_arrow {
         display: none;
