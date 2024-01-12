@@ -32,10 +32,29 @@ class Character {
 }
 
 // loads characters from localStorage
+var load_characters_needed = false;
 function load_characters() {
-    // check the current storage version [CREATE A TRANSLATION FUNCTION TO GO FROM V1 TO V2]
-    if (localStorage.getItem("version") != STORAGE_VERSION) {
-        return;
+    // check the current storage version
+    const storage_version = localStorage.getItem("version");
+    if (storage_version != STORAGE_VERSION) {
+        var success;
+
+        switch (storage_version) {
+            case null:
+                // if they have no local storage, create a template
+                if (localStorage.length == 0) {
+                    // todo: impl
+                } else {
+                // if they have local storage, convert from v1 to v2
+                    success = convert_1_to_2();
+                    if (!success) {
+                        return;
+                    }
+                }
+                break;
+            default:
+                return;
+        }
     }
 
     // load characters from localStorage as JSON

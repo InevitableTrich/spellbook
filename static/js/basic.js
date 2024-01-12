@@ -24,7 +24,7 @@ function scroll_to_top() {
 
 // adds content to page depending on last used screen (spell-list vs spell-book)
 function get_page() {
-    // get the apge variable
+    // get the page variable
     page = localStorage.active_page;
 
     // build the appropriate page
