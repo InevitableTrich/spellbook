@@ -1,10 +1,6 @@
 import certifi
-import pymongo
 from pymongo import MongoClient
 from ilt.config import env
-
-DB_CLIENT = None
-DB_NAME = None
 
 
 def connect():

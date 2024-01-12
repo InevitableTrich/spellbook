@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import SimpleTemplateResponse
 from django.views import View
 
-from apps.home.impls.spellviewimpl import SpellsViewImpl
+from ilt.managers import spellmgr
 
 
 class _BaseView(View):
@@ -31,8 +31,9 @@ class _BaseView(View):
 class HomeView(_BaseView):
     TEMPLATE = 'index.html'
 
-class SpellsView(SpellsViewImpl, _BaseView):
-    pass
+class SpellsView(_BaseView):
+    def do_post(self, data, *args, **kwargs):
+        return {"spells": spellmgr.get_spells()}
 
 
 class ReDir(View):
