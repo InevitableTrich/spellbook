@@ -52,7 +52,6 @@ function perform_spell_operations() {
     // check character loading. if data needed converting, characters may not be loaded
     if (load_characters_needed) {
         load_characters();
-        get_page();
     }
 
     // if on list page, sort then filter spells and populate the filter menu

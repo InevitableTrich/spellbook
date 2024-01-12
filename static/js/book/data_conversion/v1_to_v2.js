@@ -136,6 +136,7 @@ function convert_1_to_2() {
 // add non-character data
     // set the page, active character, and version
     new_storage.active_page = "list";
+    page = "list";
     new_storage.active_character = parseInt(localStorage.main) - 1;
     new_storage.version = "2";
 

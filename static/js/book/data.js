@@ -43,7 +43,7 @@ function load_characters() {
             case null:
                 // if they have no local storage, create a template
                 if (localStorage.length == 0) {
-                    // todo: impl
+                    create_base_data();
                 } else {
                 // if they have local storage, convert from v1 to v2
                     success = convert_1_to_2();
@@ -75,4 +75,12 @@ function save_characters() {
     const character_string = JSON.stringify(character_list);
     // put it in localStorage
     localStorage.characters = character_string;
+}
+
+// if no storage is found, create base data
+function create_base_data() {
+    localStorage.characters = JSON.stringify([Character.new_character()]);
+    localStorage.active_character = "0";
+    localStorage.active_page = "list";
+    localStorage.version = "2";
 }
