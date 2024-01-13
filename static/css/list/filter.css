@@ -158,16 +158,14 @@ p.filter_selected {
         margin: .5rem 2rem;
     }
 
+    .filter_button_text {
+        font-size: 2.75rem;
+    }
+
     .clear_filters_button {
         margin: 1.5rem 2rem;
     }
     /* end filter button */
-
-    /* filter text */
-    .filter_title {
-        font-size: 2.75rem;
-    }
-    /* end filter text */
 
     /* search bar */
     .search_bar {
@@ -193,6 +191,11 @@ p.filter_selected {
 
     div.filter_selection {
         margin: auto 0;
+    }
+
+    .filter_arrow {
+        width: 2.5rem;
+        margin: 0 0 0 auto;
     }
     /* end filter screen */
 

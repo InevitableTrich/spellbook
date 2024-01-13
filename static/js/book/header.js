@@ -48,6 +48,12 @@ function resize_character_selector() {
     const character_selector = document.getElementById("spellbook_selector");
 
     // create a temp element to get the width wanted to change the selector to
+    // if on mobile, add some width offset
+    var width_offset = 0;
+    if (window.innerHeight >= 1280) {
+        width_offset = 16;
+    }
+
     var x = document.createElement("p"); // create new p element
     x.classList.add("spellbook_name"); // with same class for sizing
     x.classList.add("overflow"); // with overflow for width clipping
@@ -57,7 +63,7 @@ function resize_character_selector() {
     character_selector.parentElement.style.width = ""; // remove fixed size
     x.innerHTML = character_selector.children[active_character].innerHTML; // set its text to the option
     document.body.appendChild(x); // add to the body (otherwise width == 0)
-    const width = x.clientWidth; // get the width
+    const width = x.clientWidth + width_offset; // get the width
     document.body.removeChild(x); // remove the new element
 
     // set the width to measured size, plus constant offset for down arrow and spacing
@@ -98,11 +104,17 @@ function set_class(class_name, save=true) {
     class_selector.value = class_name;
 
     // create a temp element to get the width wanted to change the selector to
+    // if on mobile, add some width offset
+    var width_offset = 0;
+    if (window.innerHeight >= 1280) {
+        width_offset = 16;
+    }
+
     var x = document.createElement("p"); // create new p element
     x.classList.add("class_level"); // with same class for sizing
     x.innerHTML = class_name; // set its text to the option
     document.body.appendChild(x); // add to the body (otherwise width == 0)
-    const width = x.clientWidth; // get the width
+    const width = x.clientWidth + width_offset; // get the width
     document.body.removeChild(x); // remove the new element
 
     // set the width to measured size, plus constant offset for down arrow and spacing

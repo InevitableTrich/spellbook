@@ -92,6 +92,7 @@
     display: flex;
     background: transparent;
     border: none;
+    border-radius: 0;
     border-bottom: 3px solid var(--tog);
     height: 1.6rem;
     font-weight: normal;
@@ -178,6 +179,10 @@ input[type='number'] {
         height: 14rem;
     }
 
+    .spellbook_selector {
+        margin-right: -1.1rem;
+    }
+
     .character_container {
         max-width: 95%;
         width: 100%;
@@ -194,8 +199,12 @@ input[type='number'] {
         width: unset;
     }
 
+    .class_selector {
+        margin-right: -1.35rem;
+    }
+
     .level_input {
-        margin-top: 2.3rem;
+        margin-top: 2.1rem;
     }
     .short_level {
         width: 1.4rem;
