@@ -1,20 +1,15 @@
 import json
 
-from apps.home.impls.spellviewimpl import FilterSpellsViewImpl
+from apps.home.viewclasses.spellview_impls import SpellsViewImpl
 
-
-def filter_spells_handler(event, context):
+def get_spells_handler(event, context):
     responseobject = initalize_response()
-    if event['httpMethod'] == 'OPTIONS':
+    if event.get("httpMethod", "") == "OPTIONS":
         return responseobject
 
-    querystringparams = event['queryStringParameters']
-    body = event.get('body', {})
+    body = event.get("body", "{}")
 
-    data = {key: val for key, val in querystringparams.items()}
-    data.update(json.loads(body))
-
-    responseobject['body'] = json.dumps(FilterSpellsViewImpl().do_post(data))
+    responseobject["body"] = json.dumps(SpellsViewImpl().do_post(json.loads(body)))
 
     return responseobject
 

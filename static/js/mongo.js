@@ -2,10 +2,10 @@
 function gather_spells() {
     var url;
 
-    if (window.location.href.startsWith('http://127.0.0.1:8000/')) {
-        url = 'http://127.0.0.1:8000/spells';
+    if (window.location.href.startsWith("http://127.0.0.1:8000/")) {
+        url = "http://127.0.0.1:8000/spells";
     } else {
-        url = 'https://qf5278sx80.execute-api.us-east-1.amazonaws.com/default/filter-spells';
+        url = "https://qkb8erhv2e.execute-api.us-east-1.amazonaws.com/main/get-spells";
     }
 
     make_HTTP_post_request(url, handle_spells_response);
