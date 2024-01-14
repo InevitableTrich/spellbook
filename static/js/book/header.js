@@ -39,8 +39,8 @@ function set_character(index) {
     // get spell slot amounts
     get_spell_slots();
 
-    // create spellbook
-    create_spellbook();
+    // set subclass (creates spellbook)
+    set_subclass(character.subclass);
 }
 
 // resize the character selector
@@ -103,6 +103,27 @@ function set_class(class_name, save=true) {
     const class_selector = document.getElementById("class_selector");
     class_selector.value = class_name;
 
+    // get the subclass selector
+    const subclass_selector = document.getElementById("subclass_selector");
+
+    // get all of the corresponding subclasses
+    var subclass_options = [];
+    for (var subclass of filter_options["subclasses"]) {
+        if (subclass.startsWith(class_name)) {
+            subclass_options.push(subclass.substring(subclass.indexOf("(") + 1, subclass.length - 1));
+        }
+    }
+
+    // add subclasses (and None) to subclass options
+    subclass_options.unshift("None");
+    var selector_options = "";
+    for (var subclass_option of subclass_options) {
+        selector_options += `<option value="${subclass_option}">(${subclass_option})</option>`;
+    }
+
+    // set the html
+    subclass_selector.innerHTML = selector_options;
+
     // create a temp element to get the width wanted to change the selector to
     // if on mobile, add some width offset
     var width_offset = 0;
@@ -111,7 +132,7 @@ function set_class(class_name, save=true) {
     }
 
     var x = document.createElement("p"); // create new p element
-    x.classList.add("class_level"); // with same class for sizing
+    x.classList.add("class_level_text"); // with same class for sizing
     x.innerHTML = class_name; // set its text to the option
     document.body.appendChild(x); // add to the body (otherwise width == 0)
     const width = x.clientWidth + width_offset; // get the width
@@ -119,6 +140,7 @@ function set_class(class_name, save=true) {
 
     // set the width to measured size, plus constant offset for down arrow and spacing
     class_selector.style.width = `calc(${width}px + 1.25rem)`;
+
 
     // change class in character, save character
     if (save) {
@@ -128,7 +150,45 @@ function set_class(class_name, save=true) {
         // set new spell slot values
         get_spell_slots();
         add_spell_slots();
+
+        // set subclass
+        set_subclass("None");
     }
+}
+
+// sets the characters subclass
+function set_subclass(subclass) {
+    // get the subclass selector, set its value
+    const subclass_selector = document.getElementById("subclass_selector");
+    subclass_selector.value = subclass;
+
+    // create a temp element to get the width wanted to change the selector to
+    // if on mobile, add some width offset
+    var width_offset = 0;
+    if (window.innerHeight >= 1280) {
+        width_offset = 16;
+    }
+
+    var x = document.createElement("p"); // create new p element
+    x.classList.add("class_level_text"); // with same class for sizing
+    x.innerHTML = subclass; // set its text to the option
+    document.body.appendChild(x); // add to the body (otherwise width == 0)
+    const width = x.clientWidth + width_offset; // get the width
+    document.body.removeChild(x); // remove the new element
+
+    // set the width to measured size, plus constant offset for down arrow and spacing
+    subclass_selector.style.width = `calc(${width}px + 2.25rem)`;
+
+    // if there is no subclass, set to None
+    if (subclass == null) {
+        subclass = "None";
+    }
+
+    // re-create the spellbook to include subclass spells
+    create_spellbook();
+
+    character_list[active_character].subclass = subclass;
+    save_characters();
 }
 
 // sets stores level to storage, and changes width of input based on number

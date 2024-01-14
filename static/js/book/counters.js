@@ -21,6 +21,13 @@ const counter_template = `
         <input class="counter_name" placeholder="Counter" value="{2}" onblur="set_counter_name({0}, value)"/>
     </div>`
 ;
+const no_counters = `
+    <p class="no_spells" style="margin: 2rem 0;">You have no counters. Click the
+        <svg class="counter_sign" viewbox="0 0 6 6" style="margin-bottom: -.2rem;">
+            <path d="M 2.33 2.33 L 2.33 0 L 3.66 0 L 3.66 2.33 L 6 2.33 L 6 3.66 L 3.66 3.66 L 3.66 6 L 2.33 6 L 2.33 3.66 L 0 3.66 L 0 2.33 Z"/>
+        </svg>
+    icon to the right to add one.</p>`
+;
 
 
 // loads all counters
@@ -33,8 +40,7 @@ function load_counters() {
 
     // if there are no counters, add some indicator text
     if (counter_list.length == 0) {
-        counter_container.innerHTML = `
-            <p class="no_spells">You have no counters. Use the edit icon in the bottom left to add them.</p>`;
+        counter_container.innerHTML = no_counters;
     } else {
         var counters = "";
         var counter_options = "";
@@ -59,6 +65,11 @@ function load_counters() {
 function add_counter() {
     // get the counter container
     const counter_container = document.getElementById("counter_list");
+
+    // if 'no counter text' is present, remove it
+    if (counter_container.children[0].tagName == "P") {
+        counter_container.innerHTML = "";
+    }
 
     // get the index and add the counter
     const index = counter_container.childElementCount;
@@ -93,6 +104,13 @@ function toggle_counter_delete() {
 function delete_counter(num) {
     // remove the element
     document.getElementById("counter_" + num).remove();
+
+    // if there are no counters, set the no counter text, toggle counter delete
+    const counter_container = document.getElementById("counter_list");
+    if (counter_container.childElementCount == 0) {
+        counter_container.innerHTML = no_counters;
+        toggle_counter_delete();
+    }
 
     // remove from character and save
     character_list[active_character].counters.splice(num, 1);

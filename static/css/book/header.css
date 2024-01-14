@@ -57,18 +57,23 @@
     display: flex;
 }
 
-.class_level {
+.class_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: .5rem;
+}
+
+.class_level_text {
     color: var(--text);
     font-size: var(--tlrg);
     height: fit-content;
-    margin-top: 1.9rem;
     margin-left: .3rem;
     width: fit-content;
 }
 
-.class_level_container {
-    width: 13.5rem;
-    justify-content: center;
+.level_text {
+    margin-left: .3rem;
 }
 /* end class and level */
 
@@ -76,7 +81,6 @@
 .class_selector {
     font-family: unset;
     padding-left: 1.25rem;
-    margin-right: -.35rem;
     margin-left: 1rem;
 
     background-color: transparent;
@@ -98,6 +102,7 @@
     font-weight: normal;
     font-family: unset;
     text-align: center;
+    margin-right: 1rem;
 }
 .short_level {
     width: .8rem;
@@ -193,10 +198,6 @@ input[type='number'] {
         display: flex;
         justify-content: space-evenly;
         width: 100%;
-    }
-
-    .class_level_container {
-        width: unset;
     }
 
     .class_selector {

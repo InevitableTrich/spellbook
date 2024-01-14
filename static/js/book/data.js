@@ -2,7 +2,6 @@
 const STORAGE_VERSION = 2;
 var character_list = [];  // list of characters
 var active_character = 0;  // index of active character
-var spellbook_list = [];  // spells for the active spellbook
 
 // character class, stores relavent class info
 class Character {
@@ -10,6 +9,7 @@ class Character {
         return new Character({
             "name": "Unnamed",
             "class": "Wizard",
+            "subclass": "None",
             "level": "1",
             "spell_list": [],
             "slots_used": {},
@@ -22,6 +22,7 @@ class Character {
     constructor(data) {
             this.name = data.name;
             this.class = data.class;
+            this.subclass = data.subclass;
             this.level = data.level;
             this.spell_list = data.spell_list;
             this.slots_used = data.slots_used;

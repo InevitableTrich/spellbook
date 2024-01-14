@@ -71,7 +71,25 @@ function delete_from_spellbook(num) {
 // adds spells and level headers to characters spellbook
 function create_spellbook() {
     // collect spells and place into list
-    spellbook_list = character_list[active_character].spell_list.slice();
+    var spellbook_list = character_list[active_character].spell_list.slice();
+
+    // collect subclass spells
+    const subclass = document.getElementById("class_selector").value + " ("
+                     + document.getElementById("subclass_selector").value + ")";
+    var subclass_spells = []
+    // there won't be any spells of subclass none
+    if (subclass.indexOf("None") == -1) {
+        for (var spell of spell_list) {
+            if (spell.subclasses.indexOf(subclass) != -1) {
+                // if it is not in the spellbook list, add it
+                if (spellbook_list.indexOf(spell.index) == -1) {
+                    spellbook_list.push(spell.index);
+                }
+                // add to subclass spells regardless
+                subclass_spells.push(spell.index);
+            }
+        }
+    }
 
     // holds each body section for spells based on level
     var spell_sections = {
@@ -124,6 +142,13 @@ function create_spellbook() {
     // add the correct spell slot buttons
     add_spell_slots();
     prep_saved_spells();
+
+    // special prepare all subclass spells
+    for (var id of subclass_spells) {
+        if (spell_list[id].level != 0) {
+            special_prepare(id);
+        }
+    }
 }
 
 // return html for level headers

@@ -113,6 +113,11 @@ function add_spell_slots() {
 
         // if the slot container exists,
         if (slot_container != null) {
+            // if there are no slots, go next
+            if (slot_container.childElementCount == 0) {
+                continue;
+            }
+
             // get the slots
             slots = slot_container.children;
 

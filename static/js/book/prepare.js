@@ -2,7 +2,7 @@
 function prep_spell(event, id) {
     // if user was holding shift, toggle special prepare status and leave
     if (event.shiftKey) {
-        special_prepare(id);
+        toggle_special_prepare(id);
         return;
     }
 
@@ -35,16 +35,9 @@ function prep_spell(event, id) {
 }
 
 // change between special prepare and normal prepare (i.e. for non-counting spells)
-function special_prepare(id) {
+function toggle_special_prepare(id) {
     // get the list of special prepared ids
     var special_list = character_list[active_character].specialized_list;
-
-    // get the old icon and the container
-    const prep_icon = document.getElementById("prep_" + id);
-    const spell_container = prep_icon.parentElement;
-
-    // remove old element
-    prep_icon.remove();
 
     const ndx = special_list.indexOf(id)
     // if it is turned into special
@@ -52,29 +45,52 @@ function special_prepare(id) {
         // add to list
         special_list.push(id);
 
-        // if was prepared, remove from list
-        const ndx = character_list[active_character].prepared_list.indexOf(id);
-        if (ndx != -1) {
-            character_list[active_character].prepared_list.splice(ndx, 1);
-        }
-
-        // add the star icon
-        spell_container.innerHTML = `
-            <svg id="prep_${id}" class="prepare button" onclick="prep_spell(event, ${id})" viewbox="-1 -1 12 12">
-                <path class="prepare_star" d="M 5 0 L 6.122 3.455 L 9.755 3.455 L 6.817 5.591 L 7.939 9.045 L 5 6.912 L 2.061 9.045 L 3.183 5.591 L 0.245 3.455 L 3.878 3.455 Z"></path>
-            </svg>` + spell_container.innerHTML;
+        special_prepare(id);
     } else {
     // if it is turned away from special
         // remove from list
         special_list.splice(ndx, 1);
 
-        // add the circle icon
-        spell_container.innerHTML = `
-            <div id="prep_${id}" class="prepare button" onclick="prep_spell(event, ${id})"></div>
-        ` + spell_container.innerHTML;
+        special_unprepare(id);
     }
 
     save_characters();
+}
+
+function special_prepare(id) {
+    // get the old icon and the container
+    const prep_icon = document.getElementById("prep_" + id);
+    const spell_container = prep_icon.parentElement;
+
+    // if was prepared, remove from list
+    const ndx = character_list[active_character].prepared_list.indexOf(id);
+    if (ndx != -1) {
+        character_list[active_character].prepared_list.splice(ndx, 1);
+    }
+
+    // remove old element
+    prep_icon.remove();
+
+    // add the star icon
+    spell_container.insertAdjacentHTML("afterbegin", `
+        <svg id="prep_${id}" class="prepare button" onclick="prep_spell(event, ${id})" viewbox="-1 -1 12 12">
+            <path class="prepare_star" d="M 5 0 L 6.122 3.455 L 9.755 3.455 L 6.817 5.591 L 7.939 9.045 L 5 6.912 L 2.061 9.045 L 3.183 5.591 L 0.245 3.455 L 3.878 3.455 Z"></path>
+        </svg>`
+    );
+}
+
+function special_unprepare(id) {
+    // get the old icon and the container
+    const prep_icon = document.getElementById("prep_" + id);
+    const spell_container = prep_icon.parentElement;
+
+    // remove old element
+    prep_icon.remove();
+
+    // add the circle icon
+    spell_container.insertAdjacentHTML("afterbegin", `
+        <div id="prep_${id}" class="prepare button" onclick="prep_spell(event, ${id})"></div>`
+    );
 }
 
 // prepares all spells saved in the active character
