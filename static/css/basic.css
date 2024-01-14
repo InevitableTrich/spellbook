@@ -6,6 +6,7 @@
     --tog: #767676; /* toggled color */
     --sph: 1.5rem; /* element height */
     --text: #DEDEDE; /* text color */
+    --del: #B0170C; /* delete color */
     /* text sizes */
     --tlrg: 1.5rem;
     --tmed: 1.25rem;
@@ -56,26 +57,15 @@ p.title {
 
 /* loading styles */
 .loading_svg {
-    height: 4rem;
-    animation: loading_spin 1s infinite;
-    margin-left: calc((100% - 4rem) / 2);
+    height: 5rem;
+    margin-left: calc((100% - 5rem) / 2);
+    animation: loading_spin 0.6s steps(12, end) infinite;
 }
 
 @keyframes loading_spin {
-  0%     {transform: rotate(0deg)  }
-  8.33%  {transform: rotate(30deg) }
-  16.66% {transform: rotate(60deg) }
-  25%    {transform: rotate(90deg) }
-  33.33% {transform: rotate(120deg)}
-  41.66% {transform: rotate(150deg)}
-  50%    {transform: rotate(180deg)}
-  58.33% {transform: rotate(210deg)}
-  66.66% {transform: rotate(240deg)}
-  75%    {transform: rotate(270deg)}
-  83.33% {transform: rotate(300deg)}
-  91.66% {transform: rotate(330deg)}
-  100%   {transform: rotate(360deg)}
-
+    to {
+        transform: rotate(360deg);
+    }
 }
 /* end loading styles */
 

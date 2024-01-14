@@ -135,7 +135,20 @@ function build_main_page() {
     const spell_container = `
         <br>
         <div id="spell_list">
-            <svg viewbox="0 0 10 10" class="loading_svg"><path fill="rgb(90,90,90)" d="M 4.5 1.5 Q 4.5 1 5 1 Q 5.5 1 5.5 1.5 L 5.5 2.5 Q 5.5 3 5 3 Q 4.5 3 4.5 2.5 Z"/><path fill="rgb(102,102,102)" d="M 7.183 2.2189 Q 7.433 1.7859 7 1.536 Q 6.567 1.2861 6.317 1.7171 L 5.817 2.5851 Q 5.567 3.0181 6 3.268 Q 6.433 3.518 6.683 3.0849 Z"/><path fill="rgb(114,114,114)" d="M 8.281 3.684 Q 8.714 3.434 8.464 3 Q 8.214 2.568 7.781 2.818 L 6.915 3.318 Q 6.482 3.568 6.732 4 Q 6.982 4.434 7.415 4.184 Z"/><path fill="rgb(126,126,126)" d="M 8.5 4.5 Q 9 4.5 9 5 Q 9 5.5 8.5 5.5 L 7.5 5.5 Q 7 5.5 7 5 Q 7 4.5 7.5 4.5 Z"/><path fill="rgb(138,138,138)" d="M 7.416 5.816 Q 6.983 5.567 6.733 6 Q 6.483 6.433 6.916 6.682 L 7.782 7.182 Q 8.215 7.432 8.464 7 Q 8.715 6.566 8.282 6.316 Z"/><path fill="rgb(150,150,150)" d="M 6.317 8.281 Q 6.567 8.714 7 8.464 Q 7.433 8.214 7.183 7.781 L 6.683 6.915 Q 6.433 6.482 6 6.732 Q 5.567 6.982 5.817 7.415 Z"/><path fill="rgb(162,162,162)" d="M 5.5 8.5 Q 5.5 9 5 9 Q 4.5 9 4.5 8.5 L 4.5 7.5 Q 4.5 7 5 7 Q 5.5 7 5.5 7.5 Z"/><path fill="rgb(174,174,174)" d="M 2.817 7.781 Q 2.567 8.214 3 8.464 Q 3.433 8.714 3.683 8.281 L 4.183 7.415 Q 4.433 6.982 4 6.732 Q 3.567 6.482 3.317 6.925 Z"/><path fill="rgb(186,186,186)" d="M 1.719 6.316 Q 1.286 6.566 1.536 7 Q 1.786 7.432 2.219 7.182 L 3.085 6.682 Q 3.518 6.432 3.268 6 Q 3.018 5.566 2.585 5.816 Z"/><path fill="rgb(198,198,198)" d="M 1.5 5.5 Q 1 5.5 1 5 Q 1 4.5 1.5 4.5 L 2.5 4.5 Q 3 4.5 3 5 Q 3 5.5 2.5 5.5 Z"/><path fill="rgb(210,210,210)" d="M 2.219 2.818 Q 1.786 2.568 1.536 3.0012 Q 1.286 3.434 1.719 3.684 L 2.585 4.184 Q 3.0183 4.434 3.286 4 Q 3.518 3.568 3.0845 3.318 Z"/><path fill="rgb(222,222,222)" d="M 3.683 1.719 Q 3.433 1.286 3 1.586 Q 2.567 1.786 2.817 2.219 L 3.317 3.085 Q 3.567 3.518 4 3.268 Q 4.433 3.0181 4.183 2.585 Z"/></svg>
+            <svg viewbox="0 0 10 10" class="loading_svg">
+                <path fill="#DEDEDE" d="M 4.5 1.5 C 4.5 1.25 4.75 1 5 1 C 5.25 1 5.5 1.25 5.5 1.5 L 5.5 2.5 C 5.5 2.75 5.25 3 5 3 C 4.75 3 4.5 2.75 4.5 2.5 Z"/>
+                <path fill="#D2D2D2" d="M 2.817 2.2189 C 2.692 2.0024 2.7835 1.6609 3 1.5359 C 3.2165 1.4109 3.558 1.5024 3.683 1.7189 L 4.183 2.5849 C 4.308 2.8014 4.2165 3.1429 4 3.2679 C 3.7835 3.3929 3.442 3.3014 3.317 3.0849 Z"/>
+                <path fill="#C6C6C6" d="M 1.7189 3.683 C 1.5024 3.558 1.4109 3.2165 1.5359 3 C 1.6609 2.7835 2.0024 2.692 2.2189 2.817 L 3.0849 3.317 C 3.3014 3.442 3.3929 3.7835 3.2679 4 C 3.1429 4.2165 2.8014 4.308 2.5849 4.183 Z"/>
+                <path fill="#BABABA" d="M 1.5 5.5 C 1.25 5.5 1 5.25 1 5 C 1 4.75 1.25 4.5 1.5 4.5 L 2.5 4.5 C 2.75 4.5 3 4.75 3 5 C 3 5.25 2.75 5.5 2.5 5.5 Z"/>
+                <path fill="#AEAEAE" d="M 2.2189 7.183 C 2.0024 7.308 1.6609 7.2165 1.5359 7 C 1.4109 6.7835 1.5024 6.442 1.7189 6.317 L 2.5849 5.817 C 2.8014 5.692 3.1429 5.7835 3.2679 6 C 3.3929 6.2165 3.3014 6.558 3.0849 6.683 Z"/>
+                <path fill="#A2A2A2" d="M 3.683 8.2811 C 3.558 8.4976 3.2165 8.5891 3 8.4641 C 2.7835 8.3391 2.692 7.9976 2.817 7.7811 L 3.317 6.9151 C 3.442 6.6986 3.7835 6.6071 4 6.7321 C 4.2165 6.8571 4.308 7.1986 4.183 7.4151 Z"/>
+                <path fill="#969696" d="M 5.5 8.5 C 5.5 8.75 5.25 9 5 9 C 4.75 9 4.5 8.75 4.5 8.5 L 4.5 7.5 C 4.5 7.25 4.75 7 5 7 C 5.25 7 5.5 7.25 5.5 7.5 Z"/>
+                <path fill="#8A8A8A" d="M 7.183 7.7811 C 7.308 7.9976 7.2165 8.3391 7 8.4641 C 6.7835 8.5891 6.442 8.4976 6.317 8.2811 L 5.817 7.4151 C 5.692 7.1986 5.7835 6.8571 6 6.7321 C 6.2165 6.6071 6.558 6.6986 6.683 6.9151 Z"/>
+                <path fill="#7E7E7E" d="M 8.2811 6.317 C 8.4976 6.442 8.5891 6.7835 8.4641 7 C 8.3391 7.2165 7.9976 7.308 7.7811 7.183 L 6.9151 6.683 C 6.6986 6.558 6.6071 6.2165 6.7321 6 C 6.8571 5.7835 7.1986 5.692 7.4151 5.817 Z"/>
+                <path fill="#727272" d="M 8.5 4.5 C 8.75 4.5 9 4.75 9 5 C 9 5.25 8.75 5.5 8.5 5.5 L 7.5 5.5 C 7.25 5.5 7 5.25 7 5 C 7 4.75 7.25 4.5 7.5 4.5 Z"/>
+                <path fill="#666666" d="M 7.7811 2.817 C 7.9976 2.692 8.3391 2.7835 8.4641 3 C 8.5891 3.2165 8.4976 3.558 8.2811 3.683 L 7.4151 4.183 C 7.1986 4.308 6.8571 4.2165 6.7321 4 C 6.6071 3.7835 6.6986 3.442 6.9151 3.317 Z"/>
+                <path fill="#5A5A5A" d="M 6.317 1.7189 C 6.442 1.5024 6.7835 1.4109 7 1.5359 C 7.2165 1.6609 7.308 2.0024 7.183 2.2189 L 6.683 3.0849 C 6.558 3.3014 6.2165 3.3929 6 3.2679 C 5.7835 3.1429 5.692 2.8014 5.817 2.5849 Z"/>
+            </svg>
         </div>`
     ;
 
@@ -216,11 +229,40 @@ function build_book_page() {
     ;
 
     // counter section
-    const counters = `<div id="counter_list" class="counter_list" open></div>`;
+    const counters = `
+        <div class="counter_container">
+            <div id="counter_list" class="counter_list" open></div>
+            <div class="edit_counter_container">
+                <div class="add_del_counter_button add_counter button" onclick="add_counter();">
+                    <svg class="counter_sign" viewbox="0 0 6 6">
+                        <path d="M 2.33 2.33 L 2.33 0 L 3.66 0 L 3.66 2.33 L 6 2.33 L 6 3.66 L 3.66 3.66 L 3.66 6 L 2.33 6 L 2.33 3.66 L 0 3.66 L 0 2.33 Z"/>
+                    </svg>
+                </div>
+                <div class="add_del_counter_button delete_counter button" onclick="toggle_counter_delete();">
+                    <svg id="delete_sign" class="counter_sign" viewbox="0 0 6 6">
+                        <path d="M 0 2.33 L 6 2.33 L 6 3.66 L 0 3.66 Z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>`
+    ;
 
     // list of book spells
     const book_list = `<div id="book_list">
-        <svg viewbox="0 0 10 10" class="loading_svg"><path fill="rgb(90,90,90)" d="M 4.5 1.5 Q 4.5 1 5 1 Q 5.5 1 5.5 1.5 L 5.5 2.5 Q 5.5 3 5 3 Q 4.5 3 4.5 2.5 Z"/><path fill="rgb(102,102,102)" d="M 7.183 2.2189 Q 7.433 1.7859 7 1.536 Q 6.567 1.2861 6.317 1.7171 L 5.817 2.5851 Q 5.567 3.0181 6 3.268 Q 6.433 3.518 6.683 3.0849 Z"/><path fill="rgb(114,114,114)" d="M 8.281 3.684 Q 8.714 3.434 8.464 3 Q 8.214 2.568 7.781 2.818 L 6.915 3.318 Q 6.482 3.568 6.732 4 Q 6.982 4.434 7.415 4.184 Z"/><path fill="rgb(126,126,126)" d="M 8.5 4.5 Q 9 4.5 9 5 Q 9 5.5 8.5 5.5 L 7.5 5.5 Q 7 5.5 7 5 Q 7 4.5 7.5 4.5 Z"/><path fill="rgb(138,138,138)" d="M 7.416 5.816 Q 6.983 5.567 6.733 6 Q 6.483 6.433 6.916 6.682 L 7.782 7.182 Q 8.215 7.432 8.464 7 Q 8.715 6.566 8.282 6.316 Z"/><path fill="rgb(150,150,150)" d="M 6.317 8.281 Q 6.567 8.714 7 8.464 Q 7.433 8.214 7.183 7.781 L 6.683 6.915 Q 6.433 6.482 6 6.732 Q 5.567 6.982 5.817 7.415 Z"/><path fill="rgb(162,162,162)" d="M 5.5 8.5 Q 5.5 9 5 9 Q 4.5 9 4.5 8.5 L 4.5 7.5 Q 4.5 7 5 7 Q 5.5 7 5.5 7.5 Z"/><path fill="rgb(174,174,174)" d="M 2.817 7.781 Q 2.567 8.214 3 8.464 Q 3.433 8.714 3.683 8.281 L 4.183 7.415 Q 4.433 6.982 4 6.732 Q 3.567 6.482 3.317 6.925 Z"/><path fill="rgb(186,186,186)" d="M 1.719 6.316 Q 1.286 6.566 1.536 7 Q 1.786 7.432 2.219 7.182 L 3.085 6.682 Q 3.518 6.432 3.268 6 Q 3.018 5.566 2.585 5.816 Z"/><path fill="rgb(198,198,198)" d="M 1.5 5.5 Q 1 5.5 1 5 Q 1 4.5 1.5 4.5 L 2.5 4.5 Q 3 4.5 3 5 Q 3 5.5 2.5 5.5 Z"/><path fill="rgb(210,210,210)" d="M 2.219 2.818 Q 1.786 2.568 1.536 3.0012 Q 1.286 3.434 1.719 3.684 L 2.585 4.184 Q 3.0183 4.434 3.286 4 Q 3.518 3.568 3.0845 3.318 Z"/><path fill="rgb(222,222,222)" d="M 3.683 1.719 Q 3.433 1.286 3 1.586 Q 2.567 1.786 2.817 2.219 L 3.317 3.085 Q 3.567 3.518 4 3.268 Q 4.433 3.0181 4.183 2.585 Z"/></svg>
+        <svg viewbox="0 0 10 10" class="loading_svg">
+            <path fill="#DEDEDE" d="M 4.5 1.5 C 4.5 1.25 4.75 1 5 1 C 5.25 1 5.5 1.25 5.5 1.5 L 5.5 2.5 C 5.5 2.75 5.25 3 5 3 C 4.75 3 4.5 2.75 4.5 2.5 Z"/>
+            <path fill="#D2D2D2" d="M 2.817 2.2189 C 2.692 2.0024 2.7835 1.6609 3 1.5359 C 3.2165 1.4109 3.558 1.5024 3.683 1.7189 L 4.183 2.5849 C 4.308 2.8014 4.2165 3.1429 4 3.2679 C 3.7835 3.3929 3.442 3.3014 3.317 3.0849 Z"/>
+            <path fill="#C6C6C6" d="M 1.7189 3.683 C 1.5024 3.558 1.4109 3.2165 1.5359 3 C 1.6609 2.7835 2.0024 2.692 2.2189 2.817 L 3.0849 3.317 C 3.3014 3.442 3.3929 3.7835 3.2679 4 C 3.1429 4.2165 2.8014 4.308 2.5849 4.183 Z"/>
+            <path fill="#BABABA" d="M 1.5 5.5 C 1.25 5.5 1 5.25 1 5 C 1 4.75 1.25 4.5 1.5 4.5 L 2.5 4.5 C 2.75 4.5 3 4.75 3 5 C 3 5.25 2.75 5.5 2.5 5.5 Z"/>
+            <path fill="#AEAEAE" d="M 2.2189 7.183 C 2.0024 7.308 1.6609 7.2165 1.5359 7 C 1.4109 6.7835 1.5024 6.442 1.7189 6.317 L 2.5849 5.817 C 2.8014 5.692 3.1429 5.7835 3.2679 6 C 3.3929 6.2165 3.3014 6.558 3.0849 6.683 Z"/>
+            <path fill="#A2A2A2" d="M 3.683 8.2811 C 3.558 8.4976 3.2165 8.5891 3 8.4641 C 2.7835 8.3391 2.692 7.9976 2.817 7.7811 L 3.317 6.9151 C 3.442 6.6986 3.7835 6.6071 4 6.7321 C 4.2165 6.8571 4.308 7.1986 4.183 7.4151 Z"/>
+            <path fill="#969696" d="M 5.5 8.5 C 5.5 8.75 5.25 9 5 9 C 4.75 9 4.5 8.75 4.5 8.5 L 4.5 7.5 C 4.5 7.25 4.75 7 5 7 C 5.25 7 5.5 7.25 5.5 7.5 Z"/>
+            <path fill="#8A8A8A" d="M 7.183 7.7811 C 7.308 7.9976 7.2165 8.3391 7 8.4641 C 6.7835 8.5891 6.442 8.4976 6.317 8.2811 L 5.817 7.4151 C 5.692 7.1986 5.7835 6.8571 6 6.7321 C 6.2165 6.6071 6.558 6.6986 6.683 6.9151 Z"/>
+            <path fill="#7E7E7E" d="M 8.2811 6.317 C 8.4976 6.442 8.5891 6.7835 8.4641 7 C 8.3391 7.2165 7.9976 7.308 7.7811 7.183 L 6.9151 6.683 C 6.6986 6.558 6.6071 6.2165 6.7321 6 C 6.8571 5.7835 7.1986 5.692 7.4151 5.817 Z"/>
+            <path fill="#727272" d="M 8.5 4.5 C 8.75 4.5 9 4.75 9 5 C 9 5.25 8.75 5.5 8.5 5.5 L 7.5 5.5 C 7.25 5.5 7 5.25 7 5 C 7 4.75 7.25 4.5 7.5 4.5 Z"/>
+            <path fill="#666666" d="M 7.7811 2.817 C 7.9976 2.692 8.3391 2.7835 8.4641 3 C 8.5891 3.2165 8.4976 3.558 8.2811 3.683 L 7.4151 4.183 C 7.1986 4.308 6.8571 4.2165 6.7321 4 C 6.6071 3.7835 6.6986 3.442 6.9151 3.317 Z"/>
+            <path fill="#5A5A5A" d="M 6.317 1.7189 C 6.442 1.5024 6.7835 1.4109 7 1.5359 C 7.2165 1.6609 7.308 2.0024 7.183 2.2189 L 6.683 3.0849 C 6.558 3.3014 6.2165 3.3929 6 3.2679 C 5.7835 3.1429 5.692 2.8014 5.817 2.5849 Z"/>
+        </svg>
     </div>`;
 
     // bottom spacer
@@ -276,59 +318,7 @@ function build_book_page() {
                     </div>
                 </div>
             </div>
-
-            <div style="height: 3rem;"></div>
-
-            <div class="menu_container" onclick="event.stopPropagation();">
-                <div id="edit_counter" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
-                    <div class="character_button button" onclick="toggle_character_button('edit_counter');"></div>
-                    <p class="menu_button filter_title">Edit Counter</p>
-                    <select id="edit_counter_select" class="counter_select"></select>
-                    <input id="edit_counter_name" class="counter_name_input" placeholder="Counter Name">
-                    <div class="row_container" style="margin: 0 auto 0.5rem;">
-                        <p class="counter_num_text">Max Value: </p>
-                        <input id="edit_counter_max" class="counter_num_input" placeholder="5" type="number" min="0"
-                            max="99" oninput="clamp_counter_max('edit_counter_max');">
-                        <svg class="checkbox button" viewBox="-1 -1 9 7.5" onkeypress=
-                            "if (event.key == ' ' || event.key == 'Enter') edit_counter();" onclick="edit_counter();"
-                            tabindex="0">
-                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div id="new_counter" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
-                    <div class="character_button button" onclick="toggle_character_button('new_counter');"></div>
-                    <p class="menu_button filter_title">Add New Counter</p>
-                    <input id="add_counter_name" class="counter_name_input" placeholder="Counter Name">
-                    <div class="row_container" style="margin: 0 auto 0.5rem;">
-                        <p class="counter_num_text">Max Value: </p>
-                        <input id="add_counter_max" class="counter_num_input" placeholder="5" type="number" min="0"
-                            max="99" oninput="clamp_counter_max('add_counter_max');">
-                        <svg class="checkbox button" viewBox="-1 -1 9 7.5" onkeypress=
-                            "if (event.key == ' ' || event.key == 'Enter') add_counter();" onclick="add_counter();"
-                            tabindex="0">
-                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div id="delete_counter" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
-                    <div class="character_button button" onclick="toggle_character_button('delete_counter');"></div>
-                    <p class="menu_button filter_title">Delete Counter</p>
-                    <select id="delete_counter_select" class="counter_select"></select>
-                    <p class="delete_text">Are you sure? This action cannot be undone.</p>
-                    <div class="input_container">
-                        <p class="delete_text" style="max-width: calc(100% - 4.3rem - 6px);">
-                            Press the check twice to confirm.</p>
-                        <svg class="checkbox button delete_button" viewBox="-1 -1 9 7.5" onclick="delete_counter();">
-                            <path class="checkbox" d="m 0 4 l 3 2 l 4 -6"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `
+        </div>`
     ;
 
     const spell_body = start_header + spellbook_name + class_and_level + spell_slot_table + "</div>" + counters
@@ -374,30 +364,6 @@ function build_book_page() {
     document.getElementById("add_new_character").addEventListener("keyup", function(event) {
         if (event.key === "Enter") {
             add_new_character();
-        }
-    });
-
-    // add Enter key detection in add new counter text boxes
-    document.getElementById("add_counter_name").addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            add_counter();
-        }
-    });
-    document.getElementById("add_counter_max").addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            add_counter();
-        }
-    });
-
-    // add Enter key detection in edit counter text boxes
-    document.getElementById("edit_counter_name").addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            edit_counter();
-        }
-    });
-    document.getElementById("edit_counter_max").addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            edit_counter();
         }
     });
 }

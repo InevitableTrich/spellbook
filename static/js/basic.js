@@ -126,3 +126,15 @@ function detect_double_click() {
     // double click detected
     return true;
 }
+
+// detect 'escape' and 'enter' presses in inputs to exit the input
+document.addEventListener("keydown", function(event) {
+    // ignore input if not in an input field, or if control/command is held
+    if (document.activeElement.nodeName != "INPUT" || event.ctrlKey || event.metaKey) {
+        return;
+    }
+
+    if (event.key == "Escape" || event.key == "Enter") {
+        document.activeElement.blur();
+    }
+});

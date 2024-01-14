@@ -1,31 +1,35 @@
+const counter_template = `
+    <div id="counter_{0}" class="counter">
+        <div class="counter_delete_button hidden">
+            <svg class="delete_x button" viewbox="0 0 5 5" onclick="delete_counter({0});">
+                <path d="M 0 1 L 1.5 2.5 L 0 4 L 1 5 L 2.5 3.5 L 4 5 L 5 4 L 3.5 2.5 L 5 1 L 4 0 L 2.5 1.5 L 1 0 Z"/>
+            </svg>
+        </div>
+        <div class="row_container" style="height: fit-content;">
+            <svg class="counter_arrow" viewBox="0 0 7 7">
+                <path d="M 3.5 0 L 7 3 L 0 3 Z" class="button" onclick="set_counter({0}, 1, true)"
+                    style="fill: var(--text);"/>
+                <path d="M 3.5 7 L 7 4 L 0 4 Z" class="button" onclick="set_counter({0}, -1, true)"
+                    style="fill: var(--text);"/>
+            </svg>
+            <input id="counter_{0}_value" class="counter_input" placeholder="0" type="number" min="0" max="{1}"
+                oninput="set_counter({0}, value, false);">
+            <p class="counter_text">/</p>
+            <input id="counter_{0}_max" class="counter_input" placeholder="0" type="number" min="1" max="99" value="{1}"
+                oninput="set_counter_max({0}, value);" onblur="set_counter({0}, 0, true);">
+        </div>
+        <input class="counter_name" placeholder="Counter" value="{2}" onblur="set_counter_name({0}, value)"/>
+    </div>`
+;
+
+
 // loads all counters
 function load_counters() {
     // get counter container
     const counter_container = document.getElementById("counter_list");
 
-    // counter templates
-    const counter_template = `
-        <div id="counter_{0}" class="counter">
-            <div class="row_container" style="height: fit-content;">
-                <svg class="counter_arrow" viewBox="0 0 7 7">
-                    <path d="M 3.5 0 L 7 3 L 0 3 Z" class="button" onclick="set_counter({0}, 1, true)"
-                        style="fill: var(--text);"/>
-                    <path d="M 3.5 7 L 7 4 L 0 4 Z" class="button" onclick="set_counter({0}, -1, true)"
-                        style="fill: var(--text);"/>
-                </svg>
-                <input id="counter_{0}_value" class="counter_input" placeholder="0" type="number" min="0" max="{1}"
-                    oninput="set_counter({0}, value, false);">
-                <p class="counter_text">/ {1}</p>
-            </div>
-            <p class="counter_name">{2}</p>
-        </div>`
-    ;
-    const counter_option_template = `<option value="{0}">{1}</option>`;
-
     // get the list of counters and counter selects
     const counter_list = character_list[active_character].counters;
-    const edit_counter_select = document.getElementById("edit_counter_select");
-    const delete_counter_select = document.getElementById("delete_counter_select");
 
     // if there are no counters, add some indicator text
     if (counter_list.length == 0) {
@@ -39,13 +43,10 @@ function load_counters() {
         for (var i = 0, count = counter_list.length; i < count; i++) {
             counter = counter_list[i];
             counters += format_string(counter_template, i, counter.max, counter.name);
-            counter_options += format_string(counter_option_template, i, counter.name);
         }
 
         // set the html
         counter_container.innerHTML = counters;
-        edit_counter_select.innerHTML = counter_options;
-        delete_counter_select.innerHTML = counter_options;
 
         // set the counters values
         for (var i = 0, count = counter_list.length; i < count; i++) {
@@ -54,198 +55,48 @@ function load_counters() {
     }
 }
 
-// edits the selected counter
-function edit_counter() {
-    // get inputs
-    const edit_name = document.getElementById("edit_counter_name");
-    const edit_max = document.getElementById("edit_counter_max");
-
-    // if both new name and max is empty, ignore
-    if (edit_name.value == "" && edit_max.value == "") {
-        return;
-    }
-
-    // get the edit index, counter variable, counter html, and counter selector
-    const edit_index = parseInt(document.getElementById("edit_counter_select").value);
-    const counter_data = character_list[active_character].counters[edit_index];
-    const counter = document.getElementById("counter_" + edit_index);
-    const counter_selector = document.getElementById("edit_counter_select");
-    const counter_number = document.getElementById("counter_" + edit_index + "_value");
-
-    // edit the name if changed
-    var new_name = edit_name.value;
-    if (new_name == "") {
-        new_name = counter_data.name;
-    }
-
-    // edit the max if changed
-    var new_max = edit_max.value;
-    if (new_max == "") {
-        new_max = counter_data.max;
-    }
-
-    // update the current value if it's larger than the new max
-    // also update increment arrow based on value
-    const inc_button = counter_number.previousElementSibling.children[0];
-    if (counter_data.value >= new_max) {
-        counter_data.value = new_max;
-        counter.children[0].children[1].value = new_max;
-
-        // arrow styling
-        inc_button.style = "fill: var(--tog);";
-        inc_button.classList.remove("button");
-    } else {
-        // arrow styling
-        inc_button.style = "fill: var(--text);";
-        inc_button.classList.add("button");
-    }
-
-    // set the counter's new data
-    counter_data.name = new_name;
-    counter_data.max = new_max;
-    counter_number.max = new_max;
-    counter.children[0].children[2].innerHTML = "/ " + new_max;
-    counter.children[1].innerHTML = new_name;
-    counter_selector[edit_index].innerHTML = new_name;
-
-    // clear the inputs, close the button
-    edit_name.value = "";
-    edit_max.value = "";
-    toggle_character_button("edit_counter");
-
-    // save the edit
-    save_characters();
-}
-
-// add a new counter
+// adds a new counter
 function add_counter() {
-    // get name and max inputs
-    const name_input = document.getElementById("add_counter_name");
-    const max_input = document.getElementById("add_counter_max");
-
-    // ignore confirm if both name or max is empty
-    if (name_input.value == "" && max_input.value == "") {
-        return;
-    }
-
-    // get values if they exist, else keep current
-    var name = name_input.value;
-    if (name == "") {
-        name = "Counter Name";
-    }
-
-    var max = max_input.value;
-    if (max == "") {
-        max = 5;
-    }
-
-    // create the new counter
-    const new_counter = {"name": name, "max": max, "value": max};
-
-    // add it to the character
-    character_list[active_character].counters.push(new_counter);
-
-    // counter template
-    const counter_template = `
-        <div id="counter_{0}" class="counter">
-            <div class="row_container" style="height: fit-content;">
-                <svg class="counter_arrow" viewBox="0 0 7 7">
-                    <path d="M 3.5 0 L 7 3 L 0 3 Z" class="button" onclick="set_counter({0}, 1, true)"
-                        style="fill: var(--text);"/>
-                    <path d="M 3.5 7 L 7 4 L 0 4 Z" class="button" onclick="set_counter({0}, -1, true)"
-                        style="fill: var(--text);"/>
-                </svg>
-                <input id="counter_{0}_value" class="counter_input" placeholder="0" type="number" min="0" max="{1}"
-                    oninput="set_counter({0}, value, false);">
-                <p class="counter_text">/ {1}</p>
-            </div>
-            <p class="counter_name">{2}</p>
-        </div>`
-    ;
-    const counter_option_template = `<option value="{0}">{1}</option>`;
-
     // get the counter container
     const counter_container = document.getElementById("counter_list");
 
-    // if there were previously no counters, remove the text
-    if (counter_container.children[0].tagName == "P") {
-        counter_container.innerHTML = "";
-    }
-
-    // add the counter to the counter container and selections
+    // get the index and add the counter
     const index = counter_container.childElementCount;
-    counter_container.insertAdjacentHTML("beforeend", format_string(counter_template, index, max, name));
-    document.getElementById("edit_counter_select").insertAdjacentHTML("beforeend",
-        format_string(counter_option_template, index, name));
-    document.getElementById("delete_counter_select").insertAdjacentHTML("beforeend",
-        format_string(counter_option_template, index, name));
-
-    // clear the inputs and close the button
-    name_input.value = "";
-    max_input.value = "";
-    toggle_character_button("new_counter");
+    counter_container.insertAdjacentHTML("beforeend", format_string(counter_template, index, 5,"Counter"));
+    character_list[active_character].counters.push({"name": "Counter", "value": 5, "max": 5})
 
     // set the value to its max
-    set_counter(index, max, false);
+    set_counter(index, 5, false);
 
     // save character
     save_characters();
 }
 
-// deletes a selected counter. uses same delete click tracker as character deletor
-function delete_counter() {
-    // check for a double click
-    if (!detect_double_click()) {
-        return;
+// toggles the counter deletion buttons
+function toggle_counter_delete() {
+    // get the delete minus sign
+    const delete_sign = document.getElementById("delete_sign");
+
+    // get all counter delete buttons
+    const counter_deletes = document.getElementsByClassName("counter_delete_button");
+
+    // toggle hidden them
+    for (var counter of counter_deletes) {
+        counter.classList.toggle("hidden");
     }
 
-    // get counter index, select elements, and counter container
-    const index = document.getElementById("delete_counter_select").value;
-    const delete_select = document.getElementById("delete_counter_select");
-    const edit_select = document.getElementById("edit_counter_select");
-    const counter_container = document.getElementById("counter_list");
-
-    // remove from character list
-    character_list[active_character].counters.splice(index, 1);
-
-    // delete the counter html and select options
-    document.getElementById("counter_" + index).remove();
-    delete_select[index].remove();
-    edit_select[index].remove();
-
-    // re-number selects and counters
-    for (var i = 0, count = delete_select.childElementCount; i < count; i++) {
-        delete_select.children[i].value = i;
-        edit_select.children[i].value = i;
-        counter_list.children[i].id = "counter_" + i;
-    }
-
-    // close the button
-    toggle_character_button("delete_counter");
-
-    // if there are no counters left, add some indicator text
-    if (counter_list.childElementCount == 0) {
-        counter_list.innerHTML = `
-            <p class="no_spells">You have no counters. Use the edit icon in the bottom left to add them.</p>`;
-    }
-
-    // save the character
-    save_characters();
+    // toggle red minus sign
+    delete_sign.classList.toggle("deleting");
 }
 
-// clamps counter from 1 to 99
-function clamp_counter_max(id) {
-    // get the input
-    const max_input = document.getElementById(id);
+// deletes the counter
+function delete_counter(num) {
+    // remove the element
+    document.getElementById("counter_" + num).remove();
 
-    // if the value is empty, ignore input, else clamp
-    if (max_input.value == "") {
-        return;
-    }
-    const new_value = clamp(parseInt(max_input.value), 1, 99);
-
-    // set the new value
-    max_input.value = new_value;
+    // remove from character and save
+    character_list[active_character].counters.splice(num, 1);
+    save_characters();
 }
 
 // set the counter to the given value
@@ -259,7 +110,7 @@ function set_counter(num, value, modify) {
     const counter = document.getElementById("counter_" + num + "_value");
 
     // if counter is empty when inc/decrementing, assume 0
-    if (value == "") {
+    if (value === "") {
         counter.value = 0;
     }
 
@@ -278,40 +129,59 @@ function set_counter(num, value, modify) {
     character_list[active_character].counters[num].value = new_value;
 
     // change top arrow color according to bounds
+    const top_arrow = counter.previousElementSibling.children[0];
+    const bottom_arrow = counter.previousElementSibling.children[1];
     if (new_value == parseInt(counter.max)) {  // if max, gray out arrow, unbutton
-        counter.previousElementSibling.children[0].style = "fill: var(--tog);";
-        counter.previousElementSibling.children[0].classList.remove("button");
+        top_arrow.style = "fill: var(--tog);";
+        top_arrow.classList.remove("button");
     } else {  // else is white button
-        counter.previousElementSibling.children[0].style = "fill: var(--text);";
-        counter.previousElementSibling.children[0].classList.add("button");
+        top_arrow.style = "fill: var(--text);";
+        top_arrow.classList.add("button");
     }
     // change bottom arrow color according to bounds
     if (new_value == 0) {  // if 0, gray out arrow, unbutton
-        counter.previousElementSibling.children[1].style = "fill: var(--tog);";
-        counter.previousElementSibling.children[1].classList.remove("button");
+        bottom_arrow.style = "fill: var(--tog);";
+        bottom_arrow.classList.remove("button");
     } else {  // else is white button
-        counter.previousElementSibling.children[1].style = "fill: var(--text);";
-        counter.previousElementSibling.children[1].classList.add("button");
+        bottom_arrow.style = "fill: var(--text);";
+        bottom_arrow.classList.add("button");
     }
 
     // save characters
     save_characters();
 }
 
-// toggles open / close the counter list
-function toggle_counter_list() {
-    // get the list
-    const counter_list = document.getElementById("counter_list");
-
-    if (counter_list.hasAttribute("open")) {
-        close_collapsable("counter_list", "0");
-
-        // rotate the arrow
-        counter_list.previousElementSibling.style.removeProperty("transform");
-    } else {
-        open_collapsable("counter_list", 0);
-
-        // rotate the arrow
-        counter_list.previousElementSibling.style.transform = "rotate(90deg)";
+// sets a counters max value
+function set_counter_max(num, value) {
+    // ignore if it's blank
+    if (value == "") {
+        return;
     }
+
+    // get the counters
+    const value_counter = document.getElementById("counter_" + num + "_value");
+    const max_counter = document.getElementById("counter_" + num + "_max");
+
+    // clamp the new value
+    const new_max = clamp(value, 1, 99);
+
+    // set the new value
+    max_counter.value = new_max;
+    value_counter.max = new_max;
+    character_list[active_character].counters[num].max = new_max;
+
+    // save characters
+    save_characters();
+}
+
+// stores a counters name
+function set_counter_name(num, value) {
+    // if left blank, set value to Counter
+    if (value == "") {
+        value = "Counter";
+    }
+
+    // set the name and save
+    character_list[active_character].counters[num].name = value;
+    save_characters();
 }
