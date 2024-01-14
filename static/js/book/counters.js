@@ -23,7 +23,7 @@ const counter_template = `
 ;
 const no_counters = `
     <p class="no_spells" style="margin: 2rem 0;">You have no counters. Click the
-        <svg class="counter_sign" viewbox="0 0 6 6" style="margin-bottom: -.2rem;">
+        <svg class="counter_sign counter_sign_text" viewbox="0 0 6 6">
             <path d="M 2.33 2.33 L 2.33 0 L 3.66 0 L 3.66 2.33 L 6 2.33 L 6 3.66 L 3.66 3.66 L 3.66 6 L 2.33 6 L 2.33 3.66 L 0 3.66 L 0 2.33 Z"/>
         </svg>
     icon to the right to add one.</p>`

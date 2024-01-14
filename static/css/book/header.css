@@ -205,7 +205,8 @@ input[type='number'] {
     }
 
     .level_input {
-        margin-top: 2.1rem;
+        margin-top: .2rem;
+        margin-left: .8rem;
     }
     .short_level {
         width: 1.4rem;

@@ -30,11 +30,17 @@ function remove_from_spellbook(num) {
     // remove it from the list
     list.splice(id_index, 1);
 
-    // find the numer in the prepare list
+    // find the nubmer in the prepare list
     const prep_ndx = character_list[active_character].prepared_list.indexOf(num);
     // if it is found, remove it
     if (prep_ndx != -1) {
         character_list[active_character].prepared_list.splice(prep_ndx, 1);
+    }
+
+    // remove from specialized prep list if it was in it
+    const index = character_list[active_character].specialized_list.indexOf(num);
+    if (index != -1) {
+        character_list[active_character].specialized_list.splice(index, 1);
     }
 
     // update the spells quick add and add button
@@ -62,6 +68,13 @@ function delete_from_spellbook(num) {
     if (spell_holder.children.length == 0) {
         spell_holder.remove();
         document.getElementById("level_" + spell_level + "_header").remove();
+    }
+
+    // if there is nothing left, add the empty spellbook text
+    const spell_container = document.getElementById("book_list");
+    if (spell_container.childElementCount == 0) {
+        spell_container.innerHTML = `<p class="no_spells" style="display: flex">There are no spells in your spellbook.
+                                        To add some, click theQuick Add or Add button on spells in the spell list.</p>`;
     }
 
     // save character
@@ -133,8 +146,8 @@ function create_spellbook() {
 
     // check for no spells, add text
     if (body == "") {
-        body = `<p class="no_spells">There are no spells in your spellbook. To add some, click the Quick Add or Add
-                                     button on spells in the spell list.</p>`
+        body = `<p class="no_spells" style="display: flex">There are no spells in your spellbook. To add some, click the
+                                     Quick Add or Add button on spells in the spell list.</p>`
     }
 
     // set the spellbook list to the content

@@ -134,6 +134,7 @@ p.filter_selected {
 
     color: var(--text);
     font-size: var(--tlrg);
+    line-height: calc(var(--tlrg) + 1rem);
     text-align: center;
 }
 /* end filter selection */
@@ -200,6 +201,5 @@ p.filter_selected {
     /* end filter screen */
 
     .no_spells {
-        display: flex;
     }
 }
