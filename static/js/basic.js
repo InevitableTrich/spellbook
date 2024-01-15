@@ -17,6 +17,10 @@ function clamp(int, min, max) {
     return Math.max(Math.min(int, max), min);
 }
 
+function assert(condition, message) {
+    if (!condition) throw new Error(message || "Assertion Invalid");
+}
+
 // scrolls to top with smoothing
 function scroll_to_top() {
     window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'});

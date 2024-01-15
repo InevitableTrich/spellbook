@@ -83,7 +83,7 @@ function add_new_character() {
     character_list.push(new_char);
     const character_selector = document.getElementById("spellbook_selector");
     const character_index = character_list.length - 1;
-    character_selector.innerHTML += `<option value="${character_index}">${value}</option>`
+    character_selector.innerHTML += `<option value="${character_index}">${value}</option>`;
 
     // set the active character
     document.getElementById("spellbook_selector").value = character_index;

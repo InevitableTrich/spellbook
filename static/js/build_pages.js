@@ -327,6 +327,38 @@ function build_book_page() {
                     </div>
                 </div>
             </div>
+
+            <div style="height: 3rem"></div>
+
+            <div class="menu_container" onclick="event.stopPropagation();">
+                <div id="import" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
+                    <div class="character_button button" onclick="toggle_character_button('import');"></div>
+                    <p class="menu_button filter_title">Import New Character</p>
+                    <div class="space_evenly">
+                        <label class="imexport_button imexport_text import_upload button" for="upload_character">
+                            Upload File
+                        </label>
+                        <input id="upload_character" class="hidden" type="file" accept=".json"
+                            onchange="import_character('file')">
+                        <div class="imexport_button button" onclick="import_character('clip');">
+                            <p class="imexport_text">From Clipboard</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="export" class="menu_button" style="height: calc(var(--tlrg) + 1rem);">
+                    <div class="character_button button" onclick="toggle_character_button('export');"></div>
+                    <p class="menu_button filter_title">Export Active Character</p>
+                    <div class="space_evenly">
+                        <div class="imexport_button button" onclick="export_character('file');">
+                            <p class="imexport_text">Download File</p>
+                        </div>
+                        <div class="imexport_button button" onclick="export_character('clip');">
+                            <p class="imexport_text">To Clipboard</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>`
     ;
 

@@ -1,7 +1,7 @@
 /* menu container */
 .menu_container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     width: 100%;
 }
@@ -15,6 +15,7 @@ div.menu_button {
     border-radius: .6rem;
 
     width: 20rem;
+    margin: 0 1rem;
 
     overflow: hidden;
     transition: height .3s;
@@ -91,6 +92,29 @@ svg.delete_button {
     padding: 0 .5rem 0.5rem;
 }
 /* end delete text */
+
+/* import/export styles */
+.imexport_button {
+    background-color: var(--elm);
+    border: 3px solid var(--ol);
+    border-radius: .4rem;
+
+    height: fit-content;
+    margin-bottom: .5rem;
+    padding: .5rem;
+}
+
+.imexport_text {
+    color: var(--text);
+    font-size: var(--tmed);
+    margin: 0;
+}
+
+.import_upload {
+    font-family: unset;
+    width: 6rem;
+}
+/* import/export styles */
 
 /* small screen styles */
 @media (min-height: 1280px) {

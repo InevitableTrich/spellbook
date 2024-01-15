@@ -158,6 +158,11 @@ function set_class(class_name, save=true) {
 
 // sets the characters subclass
 function set_subclass(subclass) {
+    // if there is no subclass, set to None
+    if (subclass == null) {
+        subclass = "None";
+    }
+
     // get the subclass selector, set its value
     const subclass_selector = document.getElementById("subclass_selector");
     subclass_selector.value = subclass;
@@ -178,11 +183,6 @@ function set_subclass(subclass) {
 
     // set the width to measured size, plus constant offset for down arrow and spacing
     subclass_selector.style.width = `calc(${width}px + 2.25rem)`;
-
-    // if there is no subclass, set to None
-    if (subclass == null) {
-        subclass = "None";
-    }
 
     // re-create the spellbook to include subclass spells
     create_spellbook();

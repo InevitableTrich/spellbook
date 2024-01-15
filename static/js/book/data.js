@@ -25,10 +25,43 @@ class Character {
             this.subclass = data.subclass;
             this.level = data.level;
             this.spell_list = data.spell_list;
-            this.slots_used = data.slots_used;
             this.prepared_list = data.prepared_list;
             this.specialized_list = data.specialized_list;
+            this.slots_used = data.slots_used;
             this.counters = data.counters;
+    }
+
+    // returns true if the character is a valid character
+    is_valid() {
+        try {
+            // assert some types
+            assert(typeof(this.name) === "string");
+            assert(typeof(this.class) === "string");
+            assert(typeof(this.subclass) === "string");
+            assert(typeof(this.level) === "number");
+            assert(Array.isArray(this.spell_list));
+            assert(Array.isArray(this.prepared_list));
+            assert(Array.isArray(this.specialized_list));
+            assert(Array.isArray(this.counters));
+            assert(typeof(this.slots_used) === "object" && !Array.isArray(this.slots_used) && this.slots_used != null);
+
+            // assert the data in the arrays
+            const joined_arrays = this.spell_list.concat(this.prepared_list).concat(this.specialized_list);
+            // assert all stored ids are numbers
+            for (var id of joined_arrays) {
+                assert(typeof(id) == "number");
+            }
+
+            // assert the data in counters are counters
+            for (var counter of this.counters) {
+                assert(typeof(counter.name) === "string");
+                assert(typeof(counter.value) === "number");
+                assert(typeof(counter.max) === "number");
+            }
+        } catch(e) {
+            return false;
+        }
+        return true;
     }
 }
 
@@ -84,4 +117,141 @@ function create_base_data() {
     localStorage.active_character = "0";
     localStorage.active_page = "list";
     localStorage.version = "2";
+}
+
+// exports the active character to a file or the clipboard
+async function export_character(method) {
+    // get the active character and get its name
+    const character = character_list[active_character];
+    const to_export = JSON.stringify(character);
+    const name = character.name;
+
+    // if method is clipboard
+    if (method == "clip") {
+        // write data to clipboard
+        await navigator.clipboard.writeText(to_export);
+
+        // confirm written alert
+        alert("Character '" + name + "' copied to clipboard.");
+    } else if (method == "file") {
+    // if method is file
+        // create the data from the json string
+        const data = "data:text/json;charset=utf-8," + encodeURIComponent(to_export);
+
+        // set the download data to an <a> element
+        const link = document.createElement("a");
+        link.setAttribute("href", data);
+        link.setAttribute("download", name + ".json");
+
+        // add the element, click it, and remove it
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    // ignore any other methods
+
+    // toggle the button closed
+    toggle_character_button("export");
+}
+
+// imports a character from a file or the clipboard
+async function import_character(method) {
+    // if method is clipboard
+    if (method == "clip") {
+        // read data from clipboard
+        const clipboard = await navigator.clipboard.read();
+
+        // try to read the data and turn it into a character
+        var new_character;
+        var type_data;
+        var data;
+        try {
+            // for each clipboard item and its type
+            for (const item of clipboard) {
+                for (const type of item.types) {
+                    // if it's text, take it
+                    if (type === "text/plain") {
+                        type_data = await item.getType("text/plain");
+                        data = await type_data.text();
+                        break;
+                    }
+                }
+            }
+
+            // turn the text into a character and add it
+            new_character = new Character(JSON.parse(data));
+            import_add_character(new_character);
+        } catch (e) {
+            // if an error occurs, the character was not made. alert and exit
+            if (e.message.indexOf("JSON") != -1) {
+                alert("The file uploaded contains invalid JSON. "
+                      + "Try exporting the character again before importing.");
+            } else {
+                alert("Your clipboard contents could not be turned into a character.");
+            }
+            return;
+        }
+    } else if (method == "file") {
+        // get the file from the input and create a filereader
+        const upload_button = document.getElementById("upload_character");
+        const file = upload_button.files[0];
+        upload_button.value = "";
+        const reader = new FileReader();
+
+        // code for when the reader loads a file
+        var data;
+        var new_character;
+        reader.addEventListener("load", () => {
+            // get the data
+            data = reader.result;
+
+            // try to make it into a character
+            try {
+                new_character = new Character(JSON.parse(data));
+            } catch (e) {
+                // if an error occurs, the character was not made. alert and exit
+                if (e.message.indexOf("JSON") != -1) {
+                    alert("The file uploaded contains invalid JSON. "
+                          + "Try exporting the character again before importing.");
+                } else {
+                    alert("The file uploaded could not be turned into a character.");
+                }
+                return;
+            }
+
+            // if it was successful, add the character
+            import_add_character(new_character);
+        }, false);
+
+        // read the file as text if the file exists
+        if (file) {
+            reader.readAsText(file);
+        }
+    }
+    // ignore any other methods
+
+    // toggle the button closed
+    toggle_character_button("import");
+}
+
+// adds an imported character to the character list and switches to it
+function import_add_character(character) {
+    // ensure the character is a valid character
+    if (!character.is_valid()) {
+        alert("The character you provided has invalid data. Try exporting the character again before importing.");
+        return;
+    }
+
+    // add it to the character list
+    character_list.push(character);
+    save_characters();
+
+    // add the character to the selector
+    const character_selector = document.getElementById("spellbook_selector");
+    const character_index = character_list.length - 1;
+    character_selector.innerHTML += `<option value="${character_index}">${character.name}</option>`;
+    document.getElementById("spellbook_selector").value = character_index;
+
+    // set the active character
+    set_character(character_index);
 }
