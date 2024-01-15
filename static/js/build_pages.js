@@ -395,16 +395,20 @@ function build_book_page() {
 
 // character menu
     // add Enter key detection in rename character text box
-    document.getElementById("rename_character").addEventListener("keyup", function(event) {
+    const rename = document.getElementById("rename_character");
+    rename.addEventListener("keyup", function(event) {
         if (event.key === "Enter") {
             rename_character();
         }
     });
+    rename.setAttribute("enter_key", "");
 
     // add Enter key detection in add new character text box
-    document.getElementById("add_new_character").addEventListener("keyup", function(event) {
+    const add_new = document.getElementById("add_new_character");
+    add_new.addEventListener("keyup", function(event) {
         if (event.key === "Enter") {
             add_new_character();
         }
     });
+    add_new.setAttribute("enter_key", "");
 }

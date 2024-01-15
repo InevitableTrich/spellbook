@@ -171,7 +171,7 @@ function set_subclass(subclass) {
     // if on mobile, add some width offset
     var width_offset = 0;
     if (window.innerHeight >= 1280) {
-        width_offset = 16;
+        width_offset = 24;
     }
 
     var x = document.createElement("p"); // create new p element

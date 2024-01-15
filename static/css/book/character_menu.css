@@ -102,6 +102,7 @@ svg.delete_button {
     height: fit-content;
     margin-bottom: .5rem;
     padding: .5rem;
+    text-align: center;
 }
 
 .imexport_text {
@@ -163,5 +164,9 @@ svg.delete_button {
     svg.checkbox {
         width: 2.6rem;
         height: 2.6rem;
+    }
+
+    .imexport_button {
+        width: 8rem;
     }
 }
