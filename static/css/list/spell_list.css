@@ -16,7 +16,6 @@
 
 .spell_head {
     display: flex;
-    flex_direction: row;
     height: var(--sph);
 }
 
@@ -35,6 +34,7 @@
 }
 .open_name {
     width: 64.5%;
+    margin-left: 1%;
 }
 
 .level {
