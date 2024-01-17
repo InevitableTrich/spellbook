@@ -32,24 +32,30 @@ p.level_header {
 
 /* spellbook spell head */
 .book_name {
-    width: 25%;
-    padding-left: 1%;
+    width: calc(100% - 35rem - 37%);
+    padding-left: .5rem;
 }
 
 .concentration {
-    width: 22%;
-    padding-left: 1%;
+    width: 12rem;
     text-align: center;
 }
 
 .ritual {
-    width: 15%;
+    width: 7rem;
     text-align: center;
+    margin-left: 12%;
 }
 
 .cast_time {
-    width: 16.5%;
+    width: 9rem;
     text-align: center;
+    margin-left: 12%;
+}
+
+div.short_add {
+    width: 5rem;
+    margin-left: 12%;
 }
 /* end spellbook spell head */
 
@@ -97,24 +103,26 @@ svg.prepare {
 /* small screen styles */
 @media (min-height: 1280px) {
     .book_name {
-        width: 26%;
+        width: calc(100% - 36rem - 6%);
     }
 
     .concentration {
-        width: 34%;
+        width: 17rem;
+        margin-left: 2%
     }
 
     .ritual {
-        width: 21%;
-        padding-left: 1%;
+        width: 10rem;
+        margin-left: 2%
     }
 
     .cast_time {
         display: none;
     }
 
-    .short_add {
-        width: 14%;
+    div.short_add {
+        width: 8rem;
+        margin-left: 2%;
     }
 
     .prepare {

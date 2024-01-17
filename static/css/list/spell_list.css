@@ -29,28 +29,31 @@
 
 /* spell divisions */
 .name {
-    width: 20%;
-    margin-left: 1%;
+    width: calc(30% - 6rem - 4.5%);
+    margin-left: .5rem;
 }
 .open_name {
-    width: 64.5%;
-    margin-left: 1%;
+    width: calc(100% - 18rem - 1%);
+    margin-left: .5rem;
 }
 
 .level {
-    width: 4%;
-    margin-left: 1%;
+    width: 1rem;
+    text-align: center;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 .classes {
-    width: 54.5%;
+    width: calc(70% - 6rem - 4.5%);
 }
 
 div.quick {
-    width: 15%;
+    width: 9rem;
+    margin-left: 2%;
 }
 div.full {
-    width: 30%;
+    width: 16rem;
 }
 div.add {
     text-align: center;
@@ -77,6 +80,12 @@ p.quick_add {
     margin-right: 1.5%;
     text-align: right;
     transition: transform .2s;
+}
+.spell_arrow {
+    position: unset;
+    width: 1rem;
+    margin-right: 0;
+    margin-left: 1%;
 }
 .arrow.open {
     transform: deg(-90);
@@ -150,7 +159,7 @@ th {
         height: calc(.5rem + var(--sph));
         border-width: 5px;
         padding: .75rem 1rem;
-        border-radius 1rem;
+        border-radius: 1rem;
     }
 
     .spell_text {
@@ -161,35 +170,44 @@ th {
     /* spell buttons */
     .toggle_button_top, .toggle_button_bottom {
         height: calc(var(--sph) + 2rem);
-        margin-top: -2.75rem;
+        margin-top: -2.5rem;
     }
     .toggle_button_bottom {
-        margin-top: -3.5rem;
+        margin-top: -3.2rem;
+        margin-bottom: -0.75rem;
     }
     /* end spell buttons */
 
     /* spell header */
     .name {
-        width: 25%;
+        width: calc(42% - 7rem - 3%);
     }
     .open_name {
-        width: 50%;
+        width: calc(100% - 24rem);
     }
 
     .level {
+        width: 2rem;
         margin: 0 2%;
     }
 
     .classes {
-        width: 41%;
+        width: calc(58% - 9rem - 3%);
     }
 
     div.quick {
-        width: 24%;
-        margin-left: 1%;
+        width: 14rem;
+        margin-left: 2%;
     }
     div.full {
-        width: 45%;
+        width: 24rem;
+    }
+    div.add {
+        margin-top: -.8rem;
+        height: 3.8rem;
+    }
+    p.quick_add {
+        margin-top: .6rem;
     }
 
     .arrow {

@@ -42,7 +42,7 @@ class Spell {
                 <div id="{0}_quick_add" class="quick add button" onclick="event.stopPropagation(); toggle_spell_in_book({0});">
                     <p class="spell_title quick_add">Quick Add</p>
                 </div>
-                <div class="hidden"></div>
+                <div></div>
                 <p class="spell_title spell_arrow arrow"><</p>
             </div>
             <div class="spell_head hidden">
@@ -71,7 +71,7 @@ class Spell {
                 <p class="spell_title spell_arrow arrow"><</p>
             </div>
             <div class="spell_head hidden">
-                <p class="spell_title name" style="width: 64.5%">{1}</p>
+                <p class="spell_title open_name">{1}</p>
                 <div id="{0}_add" class="full add button" onclick="event.stopPropagation(); delete_from_spellbook({0});">
                     <p class="spell_title add">Remove From Spellbook</p>
                 </div>
@@ -98,7 +98,7 @@ class Spell {
         <p class="spell_text"><b>Sources:</b> {11}</p>
         <div class="spell_bottom_spacer"></div>
         <div class="row_container">
-            <p class="spell_title name" style="width: 94.5%">{12}</p>
+            <p class="spell_title name" style="width: calc(100% - 2rem - .5%">{12}</p>
             <p class="spell_title spell_arrow arrow" style="transform: rotate(90deg);"><</p>
         </div>
         <div class="toggle_button_bottom button" onclick="toggle_spell({13});"></div>`
@@ -316,7 +316,11 @@ function toggle_spell(id) {
             spell_item.removeAttribute("style");
         }, 0);
     } else {
-        open_collapsable(id, 16);
+        var offset = 16;
+        if (is_mobile()) {
+            offset = 32;
+        }
+        open_collapsable(id, offset);
 
         // rotate arrows
         spell_elements[1].children[2].style = "transform: rotate(-90deg);";

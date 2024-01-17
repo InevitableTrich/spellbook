@@ -50,7 +50,7 @@ function resize_character_selector() {
     // create a temp element to get the width wanted to change the selector to
     // if on mobile, add some width offset
     var width_offset = 0;
-    if (window.innerHeight >= 1280) {
+    if (is_mobile()) {
         width_offset = 16;
     }
 
@@ -127,7 +127,7 @@ function set_class(class_name, save=true) {
     // create a temp element to get the width wanted to change the selector to
     // if on mobile, add some width offset
     var width_offset = 0;
-    if (window.innerHeight >= 1280) {
+    if (is_mobile()) {
         width_offset = 16;
     }
 
@@ -170,7 +170,7 @@ function set_subclass(subclass) {
     // create a temp element to get the width wanted to change the selector to
     // if on mobile, add some width offset
     var width_offset = 0;
-    if (window.innerHeight >= 1280) {
+    if (is_mobile()) {
         width_offset = 24;
     }
 

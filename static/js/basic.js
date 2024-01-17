@@ -1,5 +1,7 @@
 // keeps track of any active transitions that may need cancelling
 var active_transitions = {};
+// function to check if on mobile
+var is_mobile = () => window.innerHeight >= 1280;
 // current page (list or book)
 var page;
 
