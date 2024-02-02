@@ -71,6 +71,11 @@ function add_counter() {
         counter_container.innerHTML = "";
     }
 
+    // if deleting counters, stop deleting them
+    if (document.getElementById("delete_sign").classList.contains("deleting")) {
+        toggle_counter_delete();
+    }
+
     // get the index and add the counter
     const index = counter_container.childElementCount;
     counter_container.insertAdjacentHTML("beforeend", format_string(counter_template, index, 5,"Counter"));
