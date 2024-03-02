@@ -119,6 +119,22 @@ function create_base_data() {
     localStorage.version = "2";
 }
 
+// resets saved data. usually in the case of very old or incorrectly saved localStorage
+function reset_data() {
+    localStorage.clear();
+    create_base_data();
+    load_characters();
+}
+
+// alerts about data loss, potentially saves lost data to clipboard, then resets data
+function handle_data_error() {
+    prompt("Error loading or processing saved data, so it will be erased. To recover, copy the old data below and " +
+           "send to a developer (found on the discord) for manual recovery and bug fixing.",
+           JSON.stringify(localStorage));
+
+    reset_data();
+}
+
 // exports the active character to a file or the clipboard
 async function export_character(method) {
     // get the active character and get its name

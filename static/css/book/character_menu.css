@@ -48,7 +48,7 @@ p.menu_button {
 
 /* character text input */
 .name_character {
-    width: 15rem;
+    width: 12rem;
     height: 2rem;
     font-size: var(--tmed);
     color: var(--text);

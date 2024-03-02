@@ -23,6 +23,19 @@ function assert(condition, message) {
     if (!condition) throw new Error(message || "Assertion Invalid");
 }
 
+// init's a page. called on page load
+function init_page() {
+    gather_spells();
+
+    try {
+        load_characters();
+    } catch (e) {
+        handle_data_error();
+    }
+
+    get_page();
+}
+
 // scrolls to top with smoothing
 function scroll_to_top() {
     window.scrollBy({top: -(window.scrollY), left: 0, behavior: 'smooth'});

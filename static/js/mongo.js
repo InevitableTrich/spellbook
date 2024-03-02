@@ -50,8 +50,12 @@ function perform_spell_operations() {
     gather_filter_options();
 
     // check character loading. if data needed converting, characters may not be loaded
-    if (load_characters_needed) {
-        load_characters();
+    try {
+        if (load_characters_needed) {
+            load_characters();
+        }
+    } catch (e) {
+        handle_data_error();
     }
 
     // if on list page, sort then filter spells and populate the filter menu
