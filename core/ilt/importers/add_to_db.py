@@ -16,6 +16,8 @@ if __name__ == "__main__":
     print("done updating tashas")
     import_spells('xgte')
     print("done updating xanathars")
+    import_spells('aag')
+    import_spells('bomt')
 
     print("\nadding subclasses")
     add_subclasses()
