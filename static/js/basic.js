@@ -70,6 +70,9 @@ function change_page() {
         sort_spells();
         filter_spells();
         create_filters();
+
+        // exclude PHB14 on load. option to remove in menu
+        toggle_filter('-sources,Player*s Handbook 2014');
     } else {
     // if the page is list
         // clear any active filters

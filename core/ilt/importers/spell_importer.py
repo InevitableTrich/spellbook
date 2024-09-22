@@ -47,12 +47,13 @@ def import_spells(filename):
 
             if ("Wizard" in spell["classes"]) and (int(spell["level"]) < 5):
                 school = spell["school"]
-                if school == "Enchantment" or school == "Illusion":
+                if "Player's Handbook 2024" in spell['source']:
+                    spell['classes'].append("Fighter")
+                    spell['classes'].append("Rogue")
+                elif school == "Enchantment" or school == "Illusion":
                     spell["classes"].append("Rogue")
                 elif school == "Abjuration" or school == "Evocation":
                     spell["classes"].append("Fighter")
 
-
             mongodb.getcollection('spells').replace_one({'spell_num': spell['spell_num']}, spell, upsert=True)
-
             spell_count += 1

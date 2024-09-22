@@ -23,7 +23,7 @@
   "higher_level": [],
   "spellid": "blink",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Antimagic Field",
   "level": "8",
@@ -57,7 +57,7 @@
   "higher_level": [],
   "spellid": "antimagic-field",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Continual Flame",
   "level": "2",
@@ -83,7 +83,7 @@
   "higher_level": [],
   "spellid": "continual-flame",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Dimension Door",
   "level": "4",
@@ -110,7 +110,7 @@
   "higher_level": [],
   "spellid": "dimension-door",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Fear",
   "level": "3",
@@ -138,7 +138,7 @@
   "higher_level": [],
   "spellid": "fear",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Find Traps",
   "level": "2",
@@ -165,7 +165,7 @@
   "spellid": "find-traps",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook", "Standard Reference Document"
+    "Player's Handbook 2014", "Standard Reference Document"
   ]
 },{
   "name": "Glibness",
@@ -189,7 +189,7 @@
   "higher_level": [],
   "spellid": "glibness",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Hellish Rebuke",
   "level": "1",
@@ -212,7 +212,7 @@
   "higher_level": [],
   "spellid": "hellish-rebuke",
   "cast_time": ["1 reaction", "which you take in response to being damaged by a creature within 60 feet of you that you can see"],
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Hold Monster",
   "level": "5",
@@ -241,7 +241,7 @@
   ],
   "spellid": "hold-monster",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Astral Projection",
   "level": "9",
@@ -272,7 +272,7 @@
   "higher_level": [],
   "spellid": "astral-projection",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Awaken",
   "level": "5",
@@ -298,7 +298,7 @@
   "higher_level": [],
   "spellid": "awaken",
   "cast_time": "8 hours",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Find Steed",
   "level": "2",
@@ -325,7 +325,7 @@
   "higher_level": [],
   "spellid": "find-steed",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Fog Cloud",
   "level": "1",
@@ -353,7 +353,7 @@
   ],
   "spellid": "fog-cloud",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Heroism",
   "level": "1",
@@ -377,7 +377,7 @@
   "higher_level": [],
   "spellid": "heroism",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Tasha's Hideous Laughter",
   "level": "1",
@@ -403,7 +403,7 @@
   "higher_level": [],
   "spellid": "hideous-laughter",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Hold Person",
   "level": "2",
@@ -434,7 +434,7 @@
   ],
   "spellid": "hold-person",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Bless",
   "level": "1",
@@ -461,7 +461,7 @@
   ],
   "spellid": "bless",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Create or Destroy Water",
   "level": "1",
@@ -490,7 +490,7 @@
   ],
   "spellid": "create-or-destroy-water",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Dominate Monster",
   "level": "8",
@@ -521,7 +521,7 @@
   ],
   "spellid": "dominate-monster",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Flaming Sphere",
   "level": "2",
@@ -550,7 +550,7 @@
   ],
   "spellid": "flaming-sphere",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Freedom of Movement",
   "level": "4",
@@ -579,7 +579,7 @@
   "higher_level": [],
   "spellid": "freedom-of-movement",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Gaseous Form",
   "level": "3",
@@ -607,7 +607,7 @@
   "higher_level": [],
   "spellid": "gaseous-form",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Bane",
   "level": "1",
@@ -634,7 +634,7 @@
   ],
   "spellid": "bane",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Animal Friendship",
   "level": "1",
@@ -661,7 +661,7 @@
   "higher_level": [],
   "spellid": "animal-friendship",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Banishment",
   "level": "4",
@@ -693,7 +693,7 @@
   ],
   "spellid": "banishment",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Confusion",
   "level": "4",
@@ -730,7 +730,7 @@
   ],
   "spellid": "confusion",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Enthrall",
   "level": "2",
@@ -754,7 +754,7 @@
   "higher_level": [],
   "spellid": "enthrall",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Find Familiar",
   "level": "1",
@@ -784,7 +784,7 @@
   "higher_level": [],
   "spellid": "find-familiar",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Forbiddance",
   "level": "6",
@@ -811,7 +811,7 @@
   "higher_level": [],
   "spellid": "forbiddance",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Foresight",
   "level": "9",
@@ -839,7 +839,7 @@
   "higher_level": [],
   "spellid": "foresight",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Guards and Wards",
   "level": "6",
@@ -877,7 +877,7 @@
   "higher_level": [],
   "spellid": "guards-and-wards",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Guiding Bolt",
   "level": "1",
@@ -902,7 +902,7 @@
   ],
   "spellid": "guiding-bolt",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Heroes' Feast",
   "level": "6",
@@ -928,7 +928,7 @@
   "higher_level": [],
   "spellid": "heroes-feast",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Animate Dead",
   "level": "3",
@@ -957,7 +957,7 @@
   ],
   "spellid": "animate-dead",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Animate Objects",
   "level": "5",
@@ -996,7 +996,7 @@
   ],
   "spellid": "animate-objects",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Antipathy/Sympathy",
   "level": "8",
@@ -1026,7 +1026,7 @@
   "higher_level": [],
   "spellid": "antipathy-sympathy",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Beacon of Hope",
   "level": "3",
@@ -1049,7 +1049,7 @@
   "higher_level": [],
   "spellid": "beacon-of-hope",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Chain Lightning",
   "level": "6",
@@ -1078,7 +1078,7 @@
   ],
   "spellid": "chain-lightning",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Conjure Animals",
   "level": "3",
@@ -1111,7 +1111,7 @@
   ],
   "spellid": "conjure-animals",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Divine Word",
   "level": "7",
@@ -1138,7 +1138,7 @@
   "higher_level": [],
   "spellid": "divine-word",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Eyebite",
   "level": "6",
@@ -1167,7 +1167,7 @@
   "higher_level": [],
   "spellid": "eyebite",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Command",
   "level": "1",
@@ -1198,7 +1198,7 @@
   ],
   "spellid": "command",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Alter Self",
   "level": "2",
@@ -1226,7 +1226,7 @@
   "higher_level": [],
   "spellid": "alter-self",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Compulsion",
   "level": "4",
@@ -1250,7 +1250,7 @@
   "higher_level": [],
   "spellid": "compulsion",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Conjure Elemental",
   "level": "5",
@@ -1280,7 +1280,7 @@
   ],
   "spellid": "conjure-elemental",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Create Food and Water",
   "level": "3",
@@ -1306,7 +1306,7 @@
   "higher_level": [],
   "spellid": "create-food-and-water",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Dream",
   "level": "5",
@@ -1336,7 +1336,7 @@
   "higher_level": [],
   "spellid": "dream",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Faerie Fire",
   "level": "1",
@@ -1361,7 +1361,7 @@
   "higher_level": [],
   "spellid": "faerie-fire",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Healing Word",
   "level": "1",
@@ -1387,7 +1387,7 @@
   ],
   "spellid": "healing-word",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Animal Messenger",
   "level": "2",
@@ -1416,7 +1416,7 @@
   ],
   "spellid": "animal-messenger",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Blur",
   "level": "2",
@@ -1440,7 +1440,7 @@
   "higher_level": [],
   "spellid": "blur",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Calm Emotions",
   "level": "2",
@@ -1465,7 +1465,7 @@
   "higher_level": [],
   "spellid": "calm-emotions",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Clone",
   "level": "8",
@@ -1490,7 +1490,7 @@
   "higher_level": [],
   "spellid": "clone",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Control Weather",
   "level": "8",
@@ -1543,7 +1543,7 @@
   "higher_level": [],
   "spellid": "control-weather",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Etherealness",
   "level": "7",
@@ -1576,7 +1576,7 @@
   ],
   "spellid": "etherealness",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Expeditious Retreat",
   "level": "1",
@@ -1601,7 +1601,7 @@
   "higher_level": [],
   "spellid": "expeditious-retreat",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Fireball",
   "level": "3",
@@ -1629,7 +1629,7 @@
   ],
   "spellid": "fireball",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Geas",
   "level": "5",
@@ -1659,7 +1659,7 @@
   ],
   "spellid": "geas",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Giant Insect",
   "level": "4",
@@ -1685,7 +1685,7 @@
   "higher_level": [],
   "spellid": "giant-insect",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Harm",
   "level": "6",
@@ -1708,7 +1708,7 @@
   "higher_level": [],
   "spellid": "harm",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Antilife Shell",
   "level": "5",
@@ -1733,7 +1733,7 @@
   "higher_level": [],
   "spellid": "antilife-shell",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Barkskin",
   "level": "2",
@@ -1758,7 +1758,7 @@
   "higher_level": [],
   "spellid": "barkskin",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Cone of Cold",
   "level": "5",
@@ -1786,7 +1786,7 @@
   ],
   "spellid": "cone-of-cold",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Counterspell",
   "level": "3",
@@ -1812,7 +1812,7 @@
   ],
   "spellid": "counterspell",
   "cast_time": ["1 reaction", "which you take when you see a creature within 60 feet of you casting a spell"],
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Daylight",
   "level": "3",
@@ -1841,7 +1841,7 @@
   "higher_level": [],
   "spellid": "daylight",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Dispel Magic",
   "level": "3",
@@ -1873,7 +1873,7 @@
   ],
   "spellid": "dispel-magic",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Dominate Person",
   "level": "5",
@@ -1903,7 +1903,7 @@
   ],
   "spellid": "dominate-person",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Druidcraft",
   "level": "0",
@@ -1930,7 +1930,7 @@
   "higher_level": [],
   "spellid": "druidcraft",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Eldritch Blast",
   "level": "0",
@@ -1953,7 +1953,7 @@
   "higher_level": [],
   "spellid": "eldritch-blast",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Enhance Ability",
   "level": "2",
@@ -1989,7 +1989,7 @@
   ],
   "spellid": "enhance-ability",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Flesh to Stone",
   "level": "6",
@@ -2017,7 +2017,7 @@
   "higher_level": [],
   "spellid": "flesh-to-stone",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Otiluke's Freezing Sphere",
   "level": "6",
@@ -2045,7 +2045,7 @@
   ],
   "spellid": "freezing-sphere",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Glyph of Warding",
   "level": "3",
@@ -2080,7 +2080,7 @@
   ],
   "spellid": "glyph-of-warding",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Melf's Acid Arrow",
   "level": "2",
@@ -2106,7 +2106,7 @@
   ],
   "spellid": "acid-arrow",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Blindness/Deafness",
   "level": "2",
@@ -2133,7 +2133,7 @@
   ],
   "spellid": "blindness-deafness",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Burning Hands",
   "level": "1",
@@ -2160,7 +2160,7 @@
   ],
   "spellid": "burning-hands",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Conjure Minor Elementals",
   "level": "4",
@@ -2193,7 +2193,7 @@
   ],
   "spellid": "conjure-minor-elementals",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Enlarge/Reduce",
   "level": "2",
@@ -2222,7 +2222,7 @@
   "higher_level": [],
   "spellid": "enlarge-reduce",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Fire Bolt",
   "level": "0",
@@ -2248,7 +2248,7 @@
   "higher_level": [],
   "spellid": "fire-bolt",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Flame Strike",
   "level": "5",
@@ -2274,7 +2274,7 @@
   ],
   "spellid": "flame-strike",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Greater Restoration",
   "level": "5",
@@ -2305,7 +2305,7 @@
   "higher_level": [],
   "spellid": "greater-restoration",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Haste",
   "level": "3",
@@ -2332,7 +2332,7 @@
   "higher_level": [],
   "spellid": "haste",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Branding Smite",
   "level": "2",
@@ -2356,7 +2356,7 @@
   ],
   "spellid": "branding-smite",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Nystul's Magic Aura",
   "level": "2",
@@ -2383,7 +2383,7 @@
   "higher_level": [],
   "spellid": "arcanists-magic-aura",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Charm Person",
   "level": "1",
@@ -2412,7 +2412,7 @@
   ],
   "spellid": "charm-person",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Color Spray",
   "level": "1",
@@ -2440,7 +2440,7 @@
   ],
   "spellid": "color-spray",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Contingency",
   "level": "6",
@@ -2466,7 +2466,7 @@
   "higher_level": [],
   "spellid": "contingency",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Create Undead",
   "level": "6",
@@ -2496,7 +2496,7 @@
   ],
   "spellid": "create-undead",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Death Ward",
   "level": "4",
@@ -2522,7 +2522,7 @@
   "higher_level": [],
   "spellid": "death-ward",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Demiplane",
   "level": "8",
@@ -2546,7 +2546,7 @@
   "higher_level": [],
   "spellid": "demiplane",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Detect Poison and Disease",
   "level": "1",
@@ -2574,7 +2574,7 @@
   "higher_level": [],
   "spellid": "detect-poison-and-disease",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Dominate Beast",
   "level": "4",
@@ -2602,7 +2602,7 @@
   ],
   "spellid": "dominate-beast",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mordenkainen's Faithful Hound",
   "level": "4",
@@ -2629,7 +2629,7 @@
   "higher_level": [],
   "spellid": "faithful-hound",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "False Life",
   "level": "1",
@@ -2657,7 +2657,7 @@
   ],
   "spellid": "false-life",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Feeblemind",
   "level": "8",
@@ -2687,7 +2687,7 @@
   "higher_level": [],
   "spellid": "feeblemind",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Globe of Invulnerability",
   "level": "6",
@@ -2715,7 +2715,7 @@
   ],
   "spellid": "globe-of-invulnerability",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Guardian of Faith",
   "level": "4",
@@ -2739,7 +2739,7 @@
   "higher_level": [],
   "spellid": "guardian-of-faith",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Gust of Wind",
   "level": "2",
@@ -2768,7 +2768,7 @@
   "higher_level": [],
   "spellid": "gust-of-wind",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Guidance",
   "level": "0",
@@ -2793,7 +2793,7 @@
   "higher_level": [],
   "spellid": "guidance",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Blight",
   "level": "4",
@@ -2823,7 +2823,7 @@
   ],
   "spellid": "blight",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Chill Touch",
   "level": "0",
@@ -2850,7 +2850,7 @@
   "higher_level": [],
   "spellid": "chill-touch",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Circle of Death",
   "level": "6",
@@ -2878,7 +2878,7 @@
   ],
   "spellid": "circle-of-death",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Darkness",
   "level": "2",
@@ -2905,7 +2905,7 @@
   "higher_level": [],
   "spellid": "darkness",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Dispel Evil and Good",
   "level": "5",
@@ -2933,7 +2933,7 @@
   "higher_level": [],
   "spellid": "dispel-evil-and-good",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Gate",
   "level": "9",
@@ -2962,7 +2962,7 @@
   "higher_level": [],
   "spellid": "gate",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Heal",
   "level": "6",
@@ -2988,7 +2988,7 @@
   ],
   "spellid": "heal",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Acid Splash",
   "level": "0",
@@ -3014,7 +3014,7 @@
   "higher_level": [],
   "spellid": "acid-splash",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Animal Shapes",
   "level": "8",
@@ -3039,7 +3039,7 @@
   "higher_level": [],
   "spellid": "animal-shapes",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Augury",
   "level": "2",
@@ -3069,7 +3069,7 @@
   "higher_level": [],
   "spellid": "augury",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Commune with Nature",
   "level": "5",
@@ -3100,7 +3100,7 @@
   "higher_level": [],
   "spellid": "commune-with-nature",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Conjure Fey",
   "level": "6",
@@ -3129,7 +3129,7 @@
   ],
   "spellid": "conjure-fey",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Cure Wounds",
   "level": "1",
@@ -3159,7 +3159,7 @@
   ],
   "spellid": "cure-wounds",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Delayed Blast Fireball",
   "level": "7",
@@ -3189,7 +3189,7 @@
   ],
   "spellid": "delayed-blast-fireball",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Detect Thoughts",
   "level": "2",
@@ -3219,7 +3219,7 @@
   "higher_level": [],
   "spellid": "detect-thoughts",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Disguise Self",
   "level": "1",
@@ -3247,7 +3247,7 @@
   "higher_level": [],
   "spellid": "disguise-self",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Divination",
   "level": "4",
@@ -3273,7 +3273,7 @@
   "higher_level": [],
   "spellid": "divination",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Conjure Celestial",
   "level": "7",
@@ -3300,7 +3300,7 @@
   ],
   "spellid": "conjure-celestial",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Feather Fall",
   "level": "1",
@@ -3325,7 +3325,7 @@
   "higher_level": [],
   "spellid": "feather-fall",
   "cast_time": ["1 reaction", "which you take when you or a creature within 60 feet of you falls"],
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Forcecage",
   "level": "7",
@@ -3356,7 +3356,7 @@
   "higher_level": [],
   "spellid": "forcecage",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Hallucinatory Terrain",
   "level": "4",
@@ -3384,7 +3384,7 @@
   "higher_level": [],
   "spellid": "hallucinatory-terrain",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Holy Aura",
   "level": "8",
@@ -3408,7 +3408,7 @@
   "higher_level": [],
   "spellid": "holy-aura",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Hunter's Mark",
   "level": "1",
@@ -3433,7 +3433,7 @@
   ],
   "spellid": "hunters-mark",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Alarm",
   "level": "1",
@@ -3461,7 +3461,7 @@
   "higher_level": [],
   "spellid": "alarm",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mordenkainen's Sword",
   "level": "7",
@@ -3487,7 +3487,7 @@
   "higher_level": [],
   "spellid": "arcane-sword",
   "cast_time": "1 action",
-  "source": "Players Handbook"
+  "source": "Player's Handbook 2014"
 },{
   "name": "Clairvoyance",
   "level": "3",
@@ -3516,7 +3516,7 @@
   "higher_level": [],
   "spellid": "clairvoyance",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Darkvision",
   "level": "2",
@@ -3544,7 +3544,7 @@
   "higher_level": [],
   "spellid": "darkvision",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Detect Evil and Good",
   "level": "1",
@@ -3569,7 +3569,7 @@
   "higher_level": [],
   "spellid": "detect-evil-and-good",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Find the Path",
   "level": "6",
@@ -3595,7 +3595,7 @@
   "higher_level": [],
   "spellid": "find-the-path",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Finger of Death",
   "level": "7",
@@ -3621,7 +3621,7 @@
   "higher_level": [],
   "spellid": "finger-of-death",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Fire Storm",
   "level": "7",
@@ -3647,7 +3647,7 @@
   "higher_level": [],
   "spellid": "fire-storm",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Flame Blade",
   "level": "2",
@@ -3675,7 +3675,7 @@
   ],
   "spellid": "flame-blade",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Fly",
   "level": "3",
@@ -3704,7 +3704,7 @@
   ],
   "spellid": "fly",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Gentle Repose",
   "level": "2",
@@ -3730,7 +3730,7 @@
   "higher_level": [],
   "spellid": "gentle-repose",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Aid",
   "level": "2",
@@ -3758,7 +3758,7 @@
   ],
   "spellid": "aid",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Evard's Black Tentacles",
   "level": "4",
@@ -3784,7 +3784,7 @@
   "higher_level": [],
   "spellid": "black-tentacles",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Cloudkill",
   "level": "5",
@@ -3812,7 +3812,7 @@
   ],
   "spellid": "cloudkill",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Conjure Woodland Beings",
   "level": "4",
@@ -3846,7 +3846,7 @@
   ],
   "spellid": "conjure-woodland-beings",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Contact Other Plane",
   "level": "5",
@@ -3870,7 +3870,7 @@
   "higher_level": [],
   "spellid": "contact-other-plane",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Goodberry",
   "level": "1",
@@ -3896,7 +3896,7 @@
   "higher_level": [],
   "spellid": "goodberry",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Grease",
   "level": "1",
@@ -3922,7 +3922,7 @@
   "higher_level": [],
   "spellid": "grease",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Hallow",
   "level": "5",
@@ -3958,7 +3958,7 @@
   "higher_level": [],
   "spellid": "hallow",
   "cast_time": "24 hours",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Arcane Eye",
   "level": "4",
@@ -3986,7 +3986,7 @@
   "higher_level": [],
   "spellid": "arcane-eye",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Arcane Lock",
   "level": "2",
@@ -4012,7 +4012,7 @@
   "higher_level": [],
   "spellid": "arcane-lock",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Blade Barrier",
   "level": "6",
@@ -4036,7 +4036,7 @@
   "higher_level": [],
   "spellid": "blade-barrier",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Commune",
   "level": "5",
@@ -4062,7 +4062,7 @@
   "higher_level": [],
   "spellid": "commune",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Comprehend Languages",
   "level": "1",
@@ -4090,7 +4090,7 @@
   "higher_level": [],
   "spellid": "comprehend-languages",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Contagion",
   "level": "5",
@@ -4122,7 +4122,7 @@
   "higher_level": [],
   "spellid": "contagion",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Creation",
   "level": "5",
@@ -4159,7 +4159,7 @@
   ],
   "spellid": "creation",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Dancing Lights",
   "level": "0",
@@ -4187,7 +4187,7 @@
   "higher_level": [],
   "spellid": "dancing-lights",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Disintegrate",
   "level": "6",
@@ -4217,7 +4217,7 @@
   ],
   "spellid": "disintegrate",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Divine Favor",
   "level": "1",
@@ -4240,7 +4240,7 @@
   "higher_level": [],
   "spellid": "divine-favor",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Earthquake",
   "level": "8",
@@ -4272,7 +4272,7 @@
   "higher_level": [],
   "spellid": "earthquake",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Fabricate",
   "level": "4",
@@ -4298,7 +4298,7 @@
   "higher_level": [],
   "spellid": "fabricate",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Fire Shield",
   "level": "4",
@@ -4324,7 +4324,7 @@
   "higher_level": [],
   "spellid": "fire-shield",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Tenser's Floating Disk",
   "level": "1",
@@ -4350,7 +4350,7 @@
   "higher_level": [],
   "spellid": "floating-disk",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Bestow Curse",
   "level": "3",
@@ -4382,7 +4382,7 @@
   ],
   "spellid": "bestow-curse",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Call Lightning",
   "level": "3",
@@ -4410,7 +4410,7 @@
   ],
   "spellid": "call-lightning",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Control Water",
   "level": "4",
@@ -4444,7 +4444,7 @@
   "higher_level": [],
   "spellid": "control-water",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Detect Magic",
   "level": "1",
@@ -4475,7 +4475,7 @@
   "higher_level": [],
   "spellid": "detect-magic",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Entangle",
   "level": "1",
@@ -4500,7 +4500,7 @@
   "higher_level": [],
   "spellid": "entangle",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Greater Invisibility",
   "level": "4",
@@ -4526,7 +4526,7 @@
   "higher_level": [],
   "spellid": "greater-invisibility",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Planar Binding",
   "level": "5",
@@ -4556,7 +4556,7 @@
   ],
   "spellid": "planar-binding",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Plant Growth",
   "level": "3",
@@ -4584,7 +4584,7 @@
   "higher_level": [],
   "spellid": "plant-growth",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Protection from Poison",
   "level": "2",
@@ -4612,7 +4612,7 @@
   "higher_level": [],
   "spellid": "protection-from-poison",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Sequester",
   "level": "7",
@@ -4638,7 +4638,7 @@
   "higher_level": [],
   "spellid": "sequester",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Spare the Dying",
   "level": "0",
@@ -4662,7 +4662,7 @@
   "higher_level": [],
   "spellid": "spare-the-dying",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Sunburst",
   "level": "8",
@@ -4690,7 +4690,7 @@
   "higher_level": [],
   "spellid": "sunburst",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Tongues",
   "level": "3",
@@ -4717,7 +4717,7 @@
   "higher_level": [],
   "spellid": "tongues",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Wall of Ice",
   "level": "6",
@@ -4745,7 +4745,7 @@
   ],
   "spellid": "wall-of-ice",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Wall of Stone",
   "level": "5",
@@ -4777,7 +4777,7 @@
   "higher_level": [],
   "spellid": "wall-of-stone",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Zone of Truth",
   "level": "2",
@@ -4803,7 +4803,7 @@
   "higher_level": [],
   "spellid": "zone-of-truth",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Magic Circle",
   "level": "3",
@@ -4837,7 +4837,7 @@
   ],
   "spellid": "magic-circle",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Hypnotic Pattern",
   "level": "3",
@@ -4864,7 +4864,7 @@
   "higher_level": [],
   "spellid": "hypnotic-pattern",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Magic Missile",
   "level": "1",
@@ -4890,7 +4890,7 @@
   ],
   "spellid": "magic-missile",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Poison Spray",
   "level": "0",
@@ -4918,7 +4918,7 @@
   "higher_level": [],
   "spellid": "poison-spray",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Prismatic Wall",
   "level": "9",
@@ -4952,7 +4952,7 @@
   "higher_level": [],
   "spellid": "prismatic-wall",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Revivify",
   "level": "3",
@@ -4978,7 +4978,7 @@
   "higher_level": [],
   "spellid": "revivify",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Silence",
   "level": "2",
@@ -5004,7 +5004,7 @@
   "higher_level": [],
   "spellid": "silence",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Water Walk",
   "level": "3",
@@ -5033,7 +5033,7 @@
   "higher_level": [],
   "spellid": "water-walk",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Wish",
   "level": "9",
@@ -5065,7 +5065,7 @@
   "higher_level": [],
   "spellid": "wish",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Drawmij's Instant Summons",
   "level": "6",
@@ -5092,7 +5092,7 @@
   "higher_level": [],
   "spellid": "instant-summons",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Invisibility",
   "level": "2",
@@ -5122,7 +5122,7 @@
   ],
   "spellid": "invisibility",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Lesser Restoration",
   "level": "2",
@@ -5150,7 +5150,7 @@
   "higher_level": [],
   "spellid": "lesser-restoration",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Pass Without Trace",
   "level": "2",
@@ -5175,7 +5175,7 @@
   "higher_level": [],
   "spellid": "pass-without-trace",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Produce Flame",
   "level": "0",
@@ -5200,7 +5200,7 @@
   "higher_level": [],
   "spellid": "produce-flame",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Ray of Frost",
   "level": "0",
@@ -5226,7 +5226,7 @@
   "higher_level": [],
   "spellid": "ray-of-frost",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Resurrection",
   "level": "7",
@@ -5255,7 +5255,7 @@
   "higher_level": [],
   "spellid": "resurrection",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Shatter",
   "level": "2",
@@ -5285,7 +5285,7 @@
   ],
   "spellid": "shatter",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Stinking Cloud",
   "level": "3",
@@ -5313,7 +5313,7 @@
   "higher_level": [],
   "spellid": "stinking-cloud",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "True Polymorph",
   "level": "9",
@@ -5347,7 +5347,7 @@
   "higher_level": [],
   "spellid": "true-polymorph",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Wall of Force",
   "level": "5",
@@ -5372,7 +5372,7 @@
   "higher_level": [],
   "spellid": "wall-of-force",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Inflict Wounds",
   "level": "1",
@@ -5397,7 +5397,7 @@
   ],
   "spellid": "inflict-wounds",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Otto's Irresistible Dance",
   "level": "6",
@@ -5421,7 +5421,7 @@
   "higher_level": [],
   "spellid": "irresistible-dance",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Locate Creature",
   "level": "4",
@@ -5452,7 +5452,7 @@
   "higher_level": [],
   "spellid": "locate-creature",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Move Earth",
   "level": "6",
@@ -5482,7 +5482,7 @@
   "higher_level": [],
   "spellid": "move-earth",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Rope Trick",
   "level": "2",
@@ -5510,7 +5510,7 @@
   "higher_level": [],
   "spellid": "rope-trick",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Silent Image",
   "level": "1",
@@ -5538,7 +5538,7 @@
   "higher_level": [],
   "spellid": "silent-image",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Speak with Dead",
   "level": "3",
@@ -5564,7 +5564,7 @@
   "higher_level": [],
   "spellid": "speak-with-dead",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Stone Shape",
   "level": "4",
@@ -5591,7 +5591,7 @@
   "higher_level": [],
   "spellid": "stone-shape",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "True Strike",
   "level": "0",
@@ -5616,7 +5616,7 @@
   "higher_level": [],
   "spellid": "true-strike",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Wind Wall",
   "level": "3",
@@ -5643,7 +5643,7 @@
   "higher_level": [],
   "spellid": "wind-wall",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Locate Object",
   "level": "2",
@@ -5674,7 +5674,7 @@
   "higher_level": [],
   "spellid": "locate-object",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mage Hand",
   "level": "0",
@@ -5703,7 +5703,7 @@
   "higher_level": [],
   "spellid": "mage-hand",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Major Image",
   "level": "3",
@@ -5734,7 +5734,7 @@
   ],
   "spellid": "major-image",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mass Healing Word",
   "level": "3",
@@ -5758,7 +5758,7 @@
   ],
   "spellid": "mass-healing-word",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Meld Into Stone",
   "level": "3",
@@ -5783,7 +5783,7 @@
   "higher_level": [],
   "spellid": "meld-into-stone",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Sacred Flame",
   "level": "0",
@@ -5807,7 +5807,7 @@
   "higher_level": [],
   "spellid": "sacred-flame",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Shield",
   "level": "1",
@@ -5831,7 +5831,7 @@
   "higher_level": [],
   "spellid": "shield",
   "cast_time": ["1 reaction", "which you take when you are hit by an attack or targeted by the magic missile spell"],
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Shillelagh",
   "level": "0",
@@ -5855,7 +5855,7 @@
   "higher_level": [],
   "spellid": "shillelagh",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Sleep",
   "level": "1",
@@ -5885,7 +5885,7 @@
   ],
   "spellid": "sleep",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Sleet Storm",
   "level": "3",
@@ -5913,7 +5913,7 @@
   "higher_level": [],
   "spellid": "sleet-storm",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Spiritual Weapon",
   "level": "2",
@@ -5940,7 +5940,7 @@
   ],
   "spellid": "spiritual-weapon",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Time Stop",
   "level": "9",
@@ -5964,7 +5964,7 @@
   "higher_level": [],
   "spellid": "time-stop",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Tree Stride",
   "level": "5",
@@ -5989,7 +5989,7 @@
   "higher_level": [],
   "spellid": "tree-stride",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Unseen Servant",
   "level": "1",
@@ -6017,7 +6017,7 @@
   "higher_level": [],
   "spellid": "unseen-servant",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Jump",
   "level": "1",
@@ -6045,7 +6045,7 @@
   "higher_level": [],
   "spellid": "jump",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Levitate",
   "level": "2",
@@ -6073,7 +6073,7 @@
   "higher_level": [],
   "spellid": "levitate",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mass Suggestion",
   "level": "6",
@@ -6104,7 +6104,7 @@
   ],
   "spellid": "mass-suggestion",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Message",
   "level": "0",
@@ -6132,7 +6132,7 @@
   "higher_level": [],
   "spellid": "message",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mislead",
   "level": "5",
@@ -6157,7 +6157,7 @@
   "higher_level": [],
   "spellid": "mislead",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Passwall",
   "level": "5",
@@ -6182,7 +6182,7 @@
   "higher_level": [],
   "spellid": "passwall",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Phantom Steed",
   "level": "3",
@@ -6206,7 +6206,7 @@
   "higher_level": [],
   "spellid": "phantom-steed",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Raise Dead",
   "level": "5",
@@ -6235,7 +6235,7 @@
   "higher_level": [],
   "spellid": "raise-dead",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Leomunds Secret Chest",
   "level": "4",
@@ -6261,7 +6261,7 @@
   "higher_level": [],
   "spellid": "secret-chest",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Shocking Grasp",
   "level": "0",
@@ -6287,7 +6287,7 @@
   "higher_level": [],
   "spellid": "shocking-grasp",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Rary's Telepathic Bond",
   "level": "5",
@@ -6312,7 +6312,7 @@
   "higher_level": [],
   "spellid": "telepathic-bond",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Vicious Mockery",
   "level": "0",
@@ -6335,7 +6335,7 @@
   "higher_level": [],
   "spellid": "vicious-mockery",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Weird",
   "level": "9",
@@ -6358,7 +6358,7 @@
   "higher_level": [],
   "spellid": "weird",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Illusory Script",
   "level": "1",
@@ -6386,7 +6386,7 @@
   "higher_level": [],
   "spellid": "illusory-script",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Misty Step",
   "level": "2",
@@ -6410,7 +6410,7 @@
   "higher_level": [],
   "spellid": "misty-step",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Prestidigitation",
   "level": "0",
@@ -6444,7 +6444,7 @@
   "higher_level": [],
   "spellid": "prestidigitation",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Scorching Ray",
   "level": "2",
@@ -6471,7 +6471,7 @@
   ],
   "spellid": "scorching-ray",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Teleport",
   "level": "7",
@@ -6516,7 +6516,7 @@
   "higher_level": [],
   "spellid": "teleport",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mass Cure Wounds",
   "level": "5",
@@ -6544,7 +6544,7 @@
   ],
   "spellid": "mass-cure-wounds",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Locate Animals or Plants",
   "level": "2",
@@ -6570,7 +6570,7 @@
   "higher_level": [],
   "spellid": "locate-animals-or-plants",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Modify Memory",
   "level": "5",
@@ -6600,7 +6600,7 @@
   ],
   "spellid": "modify-memory",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Purify Food and Drink",
   "level": "1",
@@ -6626,7 +6626,7 @@
   "higher_level": [],
   "spellid": "purify-food-and-drink",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Sending",
   "level": "3",
@@ -6653,7 +6653,7 @@
   "higher_level": [],
   "spellid": "sending",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Speak with Animals",
   "level": "1",
@@ -6678,7 +6678,7 @@
   "higher_level": [],
   "spellid": "speak-with-animals",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Wind Walk",
   "level": "6",
@@ -6703,7 +6703,7 @@
   "higher_level": [],
   "spellid": "wind-walk",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mordenkainen's  Magnificent Mansion",
   "level": "7",
@@ -6730,7 +6730,7 @@
   "higher_level": [],
   "spellid": "magnificent-mansion",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mind Blank",
   "level": "8",
@@ -6754,7 +6754,7 @@
   "higher_level": [],
   "spellid": "mind-blank",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Minor Illusion",
   "level": "0",
@@ -6783,7 +6783,7 @@
   "higher_level": [],
   "spellid": "minor-illusion",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mirage Arcane",
   "level": "7",
@@ -6811,7 +6811,7 @@
   "higher_level": [],
   "spellid": "mirage-arcane",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Spirit Guardians",
   "level": "3",
@@ -6838,7 +6838,7 @@
   ],
   "spellid": "spirit-guardians",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Sunbeam",
   "level": "6",
@@ -6866,7 +6866,7 @@
   "higher_level": [],
   "spellid": "sunbeam",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Thaumaturgy",
   "level": "0",
@@ -6895,7 +6895,7 @@
   "higher_level": [],
   "spellid": "thaumaturgy",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "True Seeing",
   "level": "6",
@@ -6923,7 +6923,7 @@
   "higher_level": [],
   "spellid": "true-seeing",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Identify",
   "level": "1",
@@ -6950,7 +6950,7 @@
   "higher_level": [],
   "spellid": "identify",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Light",
   "level": "0",
@@ -6978,7 +6978,7 @@
   "higher_level": [],
   "spellid": "light",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mage Armor",
   "level": "1",
@@ -7003,7 +7003,7 @@
   "higher_level": [],
   "spellid": "mage-armor",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Shield of Faith",
   "level": "1",
@@ -7028,7 +7028,7 @@
   "higher_level": [],
   "spellid": "shield-of-faith",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Spike Growth",
   "level": "2",
@@ -7054,7 +7054,7 @@
   "higher_level": [],
   "spellid": "spike-growth",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Suggestion",
   "level": "2",
@@ -7083,7 +7083,7 @@
   "higher_level": [],
   "spellid": "suggestion",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Storm of Vengeance",
   "level": "9",
@@ -7111,7 +7111,7 @@
   "higher_level": [],
   "spellid": "storm-of-vengeance",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Leomunds Tiny Hut",
   "level": "3",
@@ -7138,7 +7138,7 @@
   "higher_level": [],
   "spellid": "tiny-hut",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Wall of Thorns",
   "level": "6",
@@ -7166,7 +7166,7 @@
   ],
   "spellid": "wall-of-thorns",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Ice Storm",
   "level": "4",
@@ -7195,7 +7195,7 @@
   ],
   "spellid": "ice-storm",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Nondetection",
   "level": "3",
@@ -7221,7 +7221,7 @@
   "higher_level": [],
   "spellid": "nondetection",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Regenerate",
   "level": "7",
@@ -7248,7 +7248,7 @@
   "higher_level": [],
   "spellid": "regenerate",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Sanctuary",
   "level": "1",
@@ -7274,7 +7274,7 @@
   "higher_level": [],
   "spellid": "sanctuary",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Shapechange",
   "level": "9",
@@ -7304,7 +7304,7 @@
   "higher_level": [],
   "spellid": "shapechange",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Symbol",
   "level": "7",
@@ -7342,7 +7342,7 @@
   "higher_level": [],
   "spellid": "symbol",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "True Resurrection",
   "level": "9",
@@ -7369,7 +7369,7 @@
   "higher_level": [],
   "spellid": "true-resurrection",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Wall of Fire",
   "level": "4",
@@ -7400,7 +7400,7 @@
   ],
   "spellid": "wall-of-fire",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Warding Bond",
   "level": "2",
@@ -7426,7 +7426,7 @@
   "higher_level": [],
   "spellid": "warding-bond",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mending",
   "level": "0",
@@ -7456,7 +7456,7 @@
   "higher_level": [],
   "spellid": "mending",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Power Word Kill",
   "level": "9",
@@ -7481,7 +7481,7 @@
   "higher_level": [],
   "spellid": "power-word-kill",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Power Word Stun",
   "level": "8",
@@ -7507,7 +7507,7 @@
   "higher_level": [],
   "spellid": "power-word-stun",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Prismatic Spray",
   "level": "7",
@@ -7539,7 +7539,7 @@
   "higher_level": [],
   "spellid": "prismatic-spray",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Remove Curse",
   "level": "3",
@@ -7565,7 +7565,7 @@
   "higher_level": [],
   "spellid": "remove-curse",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Reincarnate",
   "level": "5",
@@ -7607,7 +7607,7 @@
   "higher_level": [],
   "spellid": "reincarnate",
   "cast_time": "1 hour",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Otiluke's Resilient Sphere",
   "level": "4",
@@ -7635,7 +7635,7 @@
   "higher_level": [],
   "spellid": "resilient-sphere",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Water Breathing",
   "level": "3",
@@ -7663,7 +7663,7 @@
   "higher_level": [],
   "spellid": "water-breathing",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Heat Metal",
   "level": "2",
@@ -7692,7 +7692,7 @@
   ],
   "spellid": "heat-metal",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Longstrider",
   "level": "1",
@@ -7722,7 +7722,7 @@
   ],
   "spellid": "longstrider",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Meteor Swarm",
   "level": "9",
@@ -7747,7 +7747,7 @@
   "higher_level": [],
   "spellid": "meteor-swarm",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Moonbeam",
   "level": "2",
@@ -7776,7 +7776,7 @@
   ],
   "spellid": "moonbeam",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Plane Shift",
   "level": "7",
@@ -7806,7 +7806,7 @@
   "higher_level": [],
   "spellid": "plane-shift",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Programmed Illusion",
   "level": "6",
@@ -7834,7 +7834,7 @@
   "higher_level": [],
   "spellid": "programmed-illusion",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Ray of Enfeeblement",
   "level": "2",
@@ -7859,7 +7859,7 @@
   "higher_level": [],
   "spellid": "ray-of-enfeeblement",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "See Invisibility",
   "level": "2",
@@ -7886,7 +7886,7 @@
   "higher_level": [],
   "spellid": "see-invisibility",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Thunderwave",
   "level": "1",
@@ -7915,7 +7915,7 @@
   ],
   "spellid": "thunderwave",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Vampiric Touch",
   "level": "3",
@@ -7941,7 +7941,7 @@
   ],
   "spellid": "vampiric-touch",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Word of Recall",
   "level": "6",
@@ -7964,7 +7964,7 @@
   "higher_level": [],
   "spellid": "word-of-recall",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Magic Mouth",
   "level": "2",
@@ -7993,7 +7993,7 @@
   "higher_level": [],
   "spellid": "magic-mouth",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mass Heal",
   "level": "9",
@@ -8016,7 +8016,7 @@
   "higher_level": [],
   "spellid": "mass-heal",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Maze",
   "level": "8",
@@ -8041,7 +8041,7 @@
   "higher_level": [],
   "spellid": "maze",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mirror Image",
   "level": "2",
@@ -8070,7 +8070,7 @@
   "higher_level": [],
   "spellid": "mirror-image",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Phantasmal Killer",
   "level": "4",
@@ -8095,7 +8095,7 @@
   ],
   "spellid": "phantasmal-killer",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Planar Ally",
   "level": "6",
@@ -8123,7 +8123,7 @@
   "higher_level": [],
   "spellid": "planar-ally",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Prayer of Healing",
   "level": "2",
@@ -8147,7 +8147,7 @@
   ],
   "spellid": "prayer-of-healing",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Reverse Gravity",
   "level": "7",
@@ -8175,7 +8175,7 @@
   "higher_level": [],
   "spellid": "reverse-gravity",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Simulacrum",
   "level": "7",
@@ -8202,7 +8202,7 @@
   "higher_level": [],
   "spellid": "simulacrum",
   "cast_time": "12 hours",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Stoneskin",
   "level": "4",
@@ -8230,7 +8230,7 @@
   "higher_level": [],
   "spellid": "stoneskin",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Telekinesis",
   "level": "5",
@@ -8259,7 +8259,7 @@
   "higher_level": [],
   "spellid": "telekinesis",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Teleportation Circle",
   "level": "5",
@@ -8286,7 +8286,7 @@
   "higher_level": [],
   "spellid": "teleportation-circle",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Transport via Plants",
   "level": "6",
@@ -8309,7 +8309,7 @@
   "higher_level": [],
   "spellid": "transport-via-plants",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Web",
   "level": "2",
@@ -8339,7 +8339,7 @@
   "higher_level": [],
   "spellid": "web",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Imprisonment",
   "level": "9",
@@ -8378,7 +8378,7 @@
   "higher_level": [],
   "spellid": "imprisonment",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Incendiary Cloud",
   "level": "8",
@@ -8404,7 +8404,7 @@
   "higher_level": [],
   "spellid": "incendiary-cloud",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Legend Lore",
   "level": "5",
@@ -8431,7 +8431,7 @@
   "higher_level": [],
   "spellid": "legend-lore",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Mordenkainen's Private Sanctum",
   "level": "4",
@@ -8466,7 +8466,7 @@
   ],
   "spellid": "private-sanctum",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Project Image",
   "level": "7",
@@ -8494,7 +8494,7 @@
   "higher_level": [],
   "spellid": "project-image",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Protection From Energy",
   "level": "3",
@@ -8521,7 +8521,7 @@
   "higher_level": [],
   "spellid": "protection-from-energy",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Scrying",
   "level": "5",
@@ -8563,7 +8563,7 @@
   "higher_level": [],
   "spellid": "scrying",
   "cast_time": "10 minutes",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Slow",
   "level": "3",
@@ -8591,7 +8591,7 @@
   "higher_level": [],
   "spellid": "slow",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Spider Climb",
   "level": "2",
@@ -8618,7 +8618,7 @@
   "higher_level": [],
   "spellid": "spider-climb",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Speak with Plants",
   "level": "3",
@@ -8647,7 +8647,7 @@
   "higher_level": [],
   "spellid": "speak-with-plants",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Insect Plague",
   "level": "5",
@@ -8676,7 +8676,7 @@
   ],
   "spellid": "insect-plague",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Knock",
   "level": "2",
@@ -8703,7 +8703,7 @@
   "higher_level": [],
   "spellid": "knock",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Lightning Bolt",
   "level": "3",
@@ -8732,7 +8732,7 @@
   ],
   "spellid": "lightning-bolt",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Magic Jar",
   "level": "6",
@@ -8762,7 +8762,7 @@
   "higher_level": [],
   "spellid": "magic-jar",
   "cast_time": "1 minute",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Magic Weapon",
   "level": "2",
@@ -8789,7 +8789,7 @@
   ],
   "spellid": "magic-weapon",
   "cast_time": "1 bonus action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Polymorph",
   "level": "4",
@@ -8820,7 +8820,7 @@
   "higher_level": [],
   "spellid": "polymorph",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Protection from Evil and Good",
   "level": "1",
@@ -8848,7 +8848,7 @@
   "higher_level": [],
   "spellid": "protection-from-evil-and-good",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Resistance",
   "level": "0",
@@ -8874,7 +8874,7 @@
   "higher_level": [],
   "spellid": "resistance",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Seeming",
   "level": "5",
@@ -8902,7 +8902,7 @@
   "higher_level": [],
   "spellid": "seeming",
   "cast_time": "1 action",
-  "source": ["Players Handbook", "Standard Reference Document"]
+  "source": ["Player's Handbook 2014", "Standard Reference Document"]
 },{
   "name": "Arcane Gate",
   "level": "6",
@@ -8930,7 +8930,7 @@
   "spellid": "arcane-gate",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Armor of Agathys",
@@ -8958,7 +8958,7 @@
   "spellid": "armor-of-agathys",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Arms of Hadar",
@@ -8985,7 +8985,7 @@
   "spellid": "arms-of-hadar",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Aura of Life",
@@ -9009,7 +9009,7 @@
   "spellid": "aura-of-life",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Aura of Purity",
@@ -9033,7 +9033,7 @@
   "spellid": "aura-of-purity",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Aura of Vitality",
@@ -9057,7 +9057,7 @@
   "spellid": "aura-of-vitality",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Banishing Smite",
@@ -9081,7 +9081,7 @@
   "spellid": "brandishing-smite",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Beast Sense",
@@ -9106,7 +9106,7 @@
   "spellid": "beast-sense",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Bigby's Hand",
@@ -9141,7 +9141,7 @@
   "spellid": "bigbys-hand",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Blinding Smite",
@@ -9166,7 +9166,7 @@
   "spellid": "blinding-smite",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Chromatic Orb",
@@ -9195,7 +9195,7 @@
   "spellid": "chromatic-orb",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Circle of Power",
@@ -9219,7 +9219,7 @@
   "spellid": "circle-of-power",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Cloud of Daggers",
@@ -9250,7 +9250,7 @@
   "spellid": "cloud-of-daggers",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Compelled Duel",
@@ -9275,7 +9275,7 @@
   "spellid": "compelled-duel",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Conjure Barrage",
@@ -9301,7 +9301,7 @@
   "spellid": "conjure-barrage",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Conjure Volley",
@@ -9327,7 +9327,7 @@
   "spellid": "conjure-volley",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Cordon of Arrows",
@@ -9356,7 +9356,7 @@
   "spellid": "cordon-of-arrows",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Crown of Madness",
@@ -9386,7 +9386,7 @@
   "spellid": "crown-of-madness",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Crusaders Mantle",
@@ -9410,7 +9410,7 @@
   "spellid": "crusaders-mantle",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Destructive Wave",
@@ -9434,7 +9434,7 @@
   "spellid": "destructive-wave",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Dissonant Whispers",
@@ -9460,7 +9460,7 @@
   "spellid": "dissonant-whispers",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Elemental Weapon",
@@ -9488,7 +9488,7 @@
   "spellid": "elemental-weapon",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Ensnaring Strike",
@@ -9515,7 +9515,7 @@
   "spellid": "ensnaring-strike",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Feign Death",
@@ -9545,7 +9545,7 @@
   "spellid": "feign-death",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Friends",
@@ -9573,7 +9573,7 @@
   "spellid": "friends",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Grasping Vine",
@@ -9599,7 +9599,7 @@
   "spellid": "grasping-vine",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Hail of Thorns",
@@ -9625,7 +9625,7 @@
   "spellid": "hail-of-thorns",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Hex",
@@ -9655,7 +9655,7 @@
   "spellid": "hex",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Hunger of Hadar",
@@ -9682,7 +9682,7 @@
   "spellid": "hunger-of-hadar",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Lightning Arrow",
@@ -9711,7 +9711,7 @@
   "spellid": "lightning-arrow",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Phantasmal Force",
@@ -9743,7 +9743,7 @@
   "spellid": "phantasmal-force",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Power Word Heal",
@@ -9768,7 +9768,7 @@
   "spellid": "power-word-heal",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Ray of Sickness",
@@ -9796,7 +9796,7 @@
   "spellid": "ray-of-sickness",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Searing Smite",
@@ -9822,7 +9822,7 @@
   "spellid": "searing-smite",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Staggering Smite",
@@ -9846,7 +9846,7 @@
   "spellid": "staggering-smite",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Swift Quiver",
@@ -9873,7 +9873,7 @@
   "spellid": "swift-quiver",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Telepathy",
@@ -9900,7 +9900,7 @@
   "spellid": "telepathy",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Thorn Whip",
@@ -9929,7 +9929,7 @@
   "spellid": "thorn-whip",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Thunderous Smite",
@@ -9953,7 +9953,7 @@
   "spellid": "thunderous-smite",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Tsunami",
@@ -9981,7 +9981,7 @@
   "spellid": "tsunami",
   "cast_time": "1 minute",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Witch Bolt",
@@ -10011,7 +10011,7 @@
   "spellid": "witch-bolt",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Wrathful Smite",
@@ -10035,7 +10035,7 @@
   "spellid": "wrathful-smite",
   "cast_time": "1 bonus action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 },{
   "name": "Blade Ward",
@@ -10062,6 +10062,6 @@
   "spellid": "blade-ward",
   "cast_time": "1 action",
   "source": [
-    "Players Handbook"
+    "Player's Handbook 2014"
   ]
 }]

@@ -1,6 +1,7 @@
 from spell_importer import import_spells
 import mini_importer
 from add_subclasses import add_subclasses
+from add_artificer import add_artificer
 
 
 if __name__ == "__main__":
@@ -18,6 +19,10 @@ if __name__ == "__main__":
     print("done updating xanathars")
     import_spells('aag')
     import_spells('bomt')
+    print("done updating astral, many things")
+    import_spells('phb24')
+    add_artificer()
+    print("done updating phb24")
 
     print("\nadding subclasses")
     add_subclasses()

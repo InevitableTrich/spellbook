@@ -762,6 +762,7 @@ subclasses = {
 def add_subclasses():
     col = getspellscollection()
     spells = [x for x in col.find(projection={'_id': False})]
+
     for spell in spells:
 
         spell["subclasses"] = spell.get("subclasses", [])
@@ -770,4 +771,4 @@ def add_subclasses():
             if spell["name"] in sub_spells:
                 spell["subclasses"].append(subclass)
 
-        mongodb.getcollection("spells").replace_one({"spellid": spell["spellid"]}, spell, upsert=True)
+        mongodb.getcollection("spells").replace_one({"spell_num": spell["spell_num"]}, spell, upsert=True)

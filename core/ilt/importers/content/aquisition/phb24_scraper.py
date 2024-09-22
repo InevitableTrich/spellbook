@@ -330,7 +330,6 @@ def scrape():
     with open("../phb24.json", "w") as fp:
         json.dump(spells, fp)  # cmd+opt+L to fmt json
     print()
-    # todo: add to db, qa, update db query to only use 2018 or 2024 (option in site)
 
 
 if __name__ == '__main__':
