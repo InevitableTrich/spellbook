@@ -126,9 +126,6 @@ def check_desc_line(line: str):
 
 
 def process_desc_line(line: str, regexes: dict[str: re.Pattern]):
-    if line == "<p data-content-chunk-id=\"3b83581a-fb1e-4eb4-9440-a534388645f5\"><strong><em>Cantrip Upgrade.</em></strong> The damage increases by 1d10 when you reach levels 5 (2d10), 11 (3d10), and 17 (4d10).</p>":
-        1
-
     desc_line_start = line.find(">") + 1
     desc_line_end = line.rfind("</")
     desc = line[desc_line_start:desc_line_end]

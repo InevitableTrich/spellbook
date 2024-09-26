@@ -32,6 +32,11 @@ class Spell {
         }
     }
 
+    // regex for format parsing
+    static parse_regex = {
+        "info": new RegExp("&(?<Type>\\w+)&\\[(?<Info>\\w+)\\]", "g")
+    }
+
     // top of a spell
     static head_template = `
         <div class="spell" id="{0}">
@@ -217,6 +222,11 @@ class Spell {
             body = body.replace("***", "<b><i>");
             body = body.replace("***", "</b></i>");
         }
+
+        // check for info labels
+        body = body.replaceAll(Spell.parse_regex["info"], function(match, type, info, offset, string, groups) {
+            return `<info class="${type}">${info}</info>`;
+        })
 
         return body;
     }
