@@ -53,6 +53,10 @@ subclasses = {
     "Bard (Glamour)": [
         "Command"
     ],
+    "Bard (Glamour 2024)": [
+        "Charm Person",
+        "Mirror Image"
+    ],
     "Cleric (Arcana)": [
         "Detect Magic",
         "Magic Missile",
@@ -125,6 +129,18 @@ subclasses = {
         "Mass Cure Wounds",
         "Raise Dead"
     ],
+    "Cleric (Life 2024)": [
+        "Aid",
+        "Bless",
+        "Cure Wounds",
+        "Lesser Restoration",
+        "Mass Healing Word",
+        "Revivify",
+        "Aura of Life",
+        "Death Ward",
+        "Greater Restoration",
+        "Mass Cure Wounds"
+    ],
     "Cleric (Light)": [
         "Burning Hands",
         "Faerie Fire",
@@ -133,6 +149,18 @@ subclasses = {
         "Daylight",
         "Fireball",
         "Guardian of Faith",
+        "Wall of Fire",
+        "Flame Strike",
+        "Scrying"
+    ],
+    "Cleric (Light 2024)": [
+        "Burning Hands",
+        "Faerie Fire",
+        "Scorching Ray",
+        "See Invisibility",
+        "Daylight",
+        "Fireball",
+        "Arcane Eye",
         "Wall of Fire",
         "Flame Strike",
         "Scrying"
@@ -197,6 +225,18 @@ subclasses = {
         "Dominate Person",
         "Modify Memory"
     ],
+    "Cleric (Trickery 2024)": [
+        "Charm Person",
+        "Disguise Self",
+        "Invisibility",
+        "Pass Without Trace",
+        "Hypnotic Pattern",
+        "Nondetection",
+        "Confusion",
+        "Dimension Door",
+        "Dominate Person",
+        "Modify Memory"
+    ],
     "Cleric (Twilight)": [
         "Faerie Fire",
         "Sleep",
@@ -221,6 +261,18 @@ subclasses = {
         "Flame Strike",
         "Hold Monster"
     ],
+    "Cleric (War 2024)": [
+        "Guiding Bolt",
+        "Magic Weapon",
+        "Shield of Faith",
+        "Spiritual Weapon",
+        "Crusader\'s Mantle",
+        "Spirit Guardians",
+        "Fire Shield",
+        "Freedom of Movement",
+        "Hold Monster",
+        "Steel Wind Strike"
+    ],
     "Druid (Arctic)": [
         "Hold Person",
         "Spike Growth",
@@ -230,6 +282,14 @@ subclasses = {
         "Ice Storm",
         "Commune with Nature",
         "Cone of Cold"
+    ],
+    "Druid (Arid)": [
+        "Blur",
+        "Burning Hands",
+        "Fire Bolt",
+        "Fireball",
+        "Blight",
+        "Wall of Stone"
     ],
     "Druid (Coast)": [
         "Mirror Image",
@@ -271,6 +331,14 @@ subclasses = {
         "Dream",
         "Insect Plague"
     ],
+    "Druid (Moon)": [
+        "Cure Wounds",
+        "Moonbeam",
+        "Starry Wisp",
+        "Conjure Animals",
+        "Fount of Moonlight",
+        "Mass Cure Wounds"
+    ],
     "Druid (Mountain)": [
         "Spider Climb",
         "Spike Growth",
@@ -280,6 +348,27 @@ subclasses = {
         "Stoneskin",
         "Passwall",
         "Wall of Stone"
+    ],
+    "Druid (Polar)": [
+        "Fog Cloud",
+        "Hold Person",
+        "Ray of Frost",
+        "Sleet Storm",
+        "Ice Storm",
+        "Cone of Cold"
+    ],
+    "Druid (Sea)": [
+        "Fog Cloud",
+        "Gust of Wind",
+        "Ray of Frost",
+        "Shatter",
+        "Thunderwave",
+        "Lightning Bolt",
+        "Water Breathing",
+        "Control Water",
+        "Ice Storm",
+        "Conjure Elemental",
+        "Hold Monster"
     ],
     "Druid (Spores)": [
         "Chill Touch",
@@ -305,6 +394,22 @@ subclasses = {
         "Locate Creature",
         "Insect Plague",
         "Scrying"
+    ],
+    "Druid (Temperate)": [
+        "Misty Step",
+        "Shocking Grasp",
+        "Sleep",
+        "Lightning Bolt",
+        "Freedom of Movement",
+        "Tree Stride"
+    ],
+    "Druid (Tropical)": [
+        "Acid Splash",
+        "Ray of Sickness",
+        "Web",
+        "Stinking Cloud",
+        "Polymorph",
+        "Isenct Plague"
     ],
     "Druid (Underdark)": [
         "Spider Climb",
@@ -351,7 +456,7 @@ subclasses = {
     "Monk (Sun Soul)": [
         "Burning Hands"
     ],
-    "Paladin (Ancients)" :[
+    "Paladin (Ancients)": [
         "Ensnaring Strike",
         "Speak with Animals",
         "Misty Step",
@@ -399,6 +504,18 @@ subclasses = {
         "Commune",
         "Flame Strike"
     ],
+    "Paladin (Devotion 2024)": [
+        "Protection from Evil and Good",
+        "Shield of Faith",
+        "Aid",
+        "Zone of Truth",
+        "Beacon of Hope",
+        "Dispel Magic",
+        "Freedom of Movement",
+        "Guardian of Faith",
+        "Commune",
+        "Flame Strike"
+    ],
     "Paladin (Glory)": [
         "Guiding Bolt",
         "Heroism",
@@ -410,6 +527,18 @@ subclasses = {
         "Freedom of Movement",
         "Commune",
         "Flame Strike"
+    ],
+    "Paladin (Glory 2024)": [
+        "Guiding Bolt",
+        "Heroism",
+        "Enhance Ability",
+        "Magic Weapon",
+        "Haste",
+        "Protection from Energy",
+        "Compulsion",
+        "Freedom of Movement",
+        "Legend Lore",
+        "Yolande\'s Regal Presence"
     ],
     "Paladin (Oathbreaker)": [
         "Hellish Rebuke",
@@ -466,6 +595,13 @@ subclasses = {
         "Dimension Door",
         "Mislead"
     ],
+    "Ranger (Fey Wanderer 2024)": [
+        "Charm Person",
+        "Misty Step",
+        "Summon Fey",
+        "Dimension Door",
+        "Mislead"
+    ],
     "Ranger (Gloom Stalker)": [
         "Disguise Self",
         "Rope Trick",
@@ -508,6 +644,19 @@ subclasses = {
         "Rary\'s Telepathic Bond",
         "Telekinesis"
     ],
+    "Sorcerer (Aberrant Sorcery)": [
+        "Arms of Hadar",
+        "Calm Emotions",
+        "Detect Thoughts",
+        "Dissonant Whispers",
+        "Mind Sliver"
+        "Hunger of Hadar",
+        "Sending",
+        "Evard\'s Black Tentacles",
+        "Summon Aberration",
+        "Rary\'s Telepathic Bond",
+        "Telekinesis"
+    ],
     "Sorcerer (Clockwork Soul)": [
         "Alarm",
         "Protection from Evil and Good",
@@ -519,6 +668,30 @@ subclasses = {
         "Summon Construct",
         "Greater Restoration",
         "Wall of Force"
+    ],
+    "Sorcerer (Clockwork Sorcery)": [
+        "Aid",
+        "Alarm",
+        "Lesser Restoration",
+        "Protection from Evil and Good",
+        "Dispel Magic",
+        "Protection from Energy",
+        "Freedom of Movement",
+        "Summon Construct",
+        "Greater Restoration",
+        "Wall of Force"
+    ],
+    "Sorcerer (Draconic Sorcery)": [
+        "Alter Self",
+        "Chromatic Orb",
+        "Command",
+        "Dragon\'s Breath",
+        "Fear",
+        "Fly",
+        "Arcane Eye",
+        "Charm Monster",
+        "Legend Lore",
+        "Summon Dragon"
     ],
     "Sorcerer (Divine Soul)": [
         "Guidance",
@@ -630,6 +803,19 @@ subclasses = {
         "Dominate Person",
         "Seeming"
     ],
+    "Warlock (Archfey 2024)": [
+        "Calm Emotions",
+        "Faerie Fire",
+        "Misty Step",
+        "Phantasmal Force",
+        "Sleep",
+        "Blink",
+        "Plant Growth",
+        "Dominate Beast",
+        "Greater Invisibility",
+        "Dominate Person",
+        "Seeming"
+    ],
     "Warlock (Celestial)": [
         "Light",
         "Sacred Flame",
@@ -642,7 +828,21 @@ subclasses = {
         "Guardian of Faith",
         "Wall of Fire",
         "Flame Strike",
+        "Greater Restoration"
+    ],
+    "Warlock (Celestial 2024)": [
+        "Aid",
+        "Cure Wounds",
+        "Guiding Bolt",
+        "Lesser Restoration",
+        "Light",
+        "Sacred Flame",
+        "Daylight",
+        "Revivify",
+        "Guardian of Faith",
+        "Wall of Fire",
         "Greater Restoration",
+        "Summon Celestial"
     ],
     "Warlock (Fathomless)": [
         "Create or Destroy Water",
@@ -667,6 +867,18 @@ subclasses = {
         "Wall of Fire",
         "Flame Strike",
         "Hallow"
+    ],
+    "Warlock (Fiend 2024)": [
+        "Burning Hands",
+        "Command",
+        "Scorching Ray",
+        "Suggestion",
+        "Fireball",
+        "Stinking Cloud",
+        "Fire Shield",
+        "Wall of Fire",
+        "Geas",
+        "Insect Plague"
     ],
     "Warlock (Genie - Dao)": [
         "Detect Evil and Good",
@@ -730,6 +942,18 @@ subclasses = {
         "Dominate Beast",
         "Evard\'s Black Tentacles",
         "Dominate Person",
+        "Telekinesis"
+    ],
+    "Warlock (Great Old One 2024)": [
+        "Detect Thoughts",
+        "Dissonant Whispers",
+        "Phantasmal Force",
+        "Tasha\'s Hideous Laughter",
+        "Clairvoyance",
+        "Hunger of Hadar",
+        "Confusion",
+        "Summon Aberration",
+        "Modify Memory",
         "Telekinesis"
     ],
     "Warlock (Hexblade)": [
