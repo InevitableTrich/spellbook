@@ -1,13 +1,13 @@
 import json
 
-from spell_importer import spell_list
+from spell_importer import SpellImporter
 
 
-def add_subclasses():
+def add_subclasses(importer: SpellImporter):
     with open("content/subclasses/subclasses.json") as subs:
         subclasses = json.load(subs)
 
-    for spell in spell_list:
+    for spell in importer.spell_list:
         spell["subclasses"] = spell.get("subclasses", [])
 
         for subclass, sub_spells in subclasses.items():

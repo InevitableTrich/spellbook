@@ -327,7 +327,7 @@ def lines_to_data(lines: list[str]):
 def scrape():
     lines = A_SPELLS.split("\n")[1:-1]
     spells = lines_to_data(lines)
-    with open("../phb24.json", "w") as fp:
+    with open("../books/phb24.json", "w") as fp:
         json.dump(spells, fp)  # cmd+opt+L to fmt json
     print()
 
