@@ -5,9 +5,11 @@ from ilt.dal import mongodb
 
 ROOT_IMPORT_PATH = ilt.__path__[0]
 spell_count = 0
+spell_list = []
 
 def import_spells(filename):
     global spell_count
+    global spell_list
 
     filelocation = os.path.join(ROOT_IMPORT_PATH, 'importers', 'content', filename + '.json')
     with (open(filelocation) as file):
@@ -55,5 +57,12 @@ def import_spells(filename):
                 elif school == "Abjuration" or school == "Evocation":
                     spell["classes"].append("Fighter")
 
-            mongodb.getcollection('spells').replace_one({'spell_num': spell['spell_num']}, spell, upsert=True)
+            spell_list.append(spell)
             spell_count += 1
+
+
+def upload_spells():
+    spells_collection = mongodb.getcollection("spells")
+
+    for spell in spell_list:
+        spells_collection.replace_one({"spell_num": spell["spell_num"]}, spell, upsert=True)

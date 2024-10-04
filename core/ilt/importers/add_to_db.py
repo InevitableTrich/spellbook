@@ -1,29 +1,27 @@
-from spell_importer import import_spells
-import mini_importer
+from spell_importer import import_spells, upload_spells, spell_list
 from add_subclasses import add_subclasses
-from add_artificer import add_artificer
 
 
 if __name__ == "__main__":
+    # import all spells from each book. when adding new books,
+    # always append to bottom to prevent re-indexing
     import_spells('acqinc')
-    print("done updating acquisitions")
     import_spells('egtw')
-    print("done updating explorers")
-    mini_importer.import_minis()
-    print("done updating mini-books")
+    import_spells('frost')
+    import_spells('ftod')
+    import_spells('kwalish')
+    import_spells('strix')
     import_spells('phb')
-    print("done updating phb")
     import_spells('tcoe')
-    print("done updating tashas")
     import_spells('xgte')
-    print("done updating xanathars")
     import_spells('aag')
     import_spells('bomt')
-    print("done updating astral, many things")
     import_spells('phb24')
-    add_artificer()
-    print("done updating phb24")
+    print("\nLoaded all spells from json")
 
-    print("\nadding subclasses")
     add_subclasses()
-    print("done adding subclasses")
+    print("Added subclasses to spells")
+
+    print("\nUploading spells...")
+    upload_spells()
+    print("Uploaded spells to MongoDB")
