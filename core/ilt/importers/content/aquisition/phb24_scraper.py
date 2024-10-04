@@ -169,7 +169,10 @@ def replace_elements(content: str, regexes: dict[str:re.Pattern]):
         elif match.group("tag") == "strong":
             content = f"{match.group('pre')}**{match.group('mid')}**{match.group('post')}"
         elif match.group("tag") == "em":
-            content = f"{match.group('pre')}*{match.group('mid')}*{match.group('post')}"
+            if match.group('mid').startswith(" "):
+                content = f"{match.group('pre')} *{match.group('mid')[1:]}*{match.group('post')}"
+            else:
+                content = f"{match.group('pre')}*{match.group('mid')}*{match.group('post')}"
 
         match = regex.search(content)
 

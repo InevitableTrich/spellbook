@@ -34,7 +34,8 @@ class Spell {
 
     // regex for format parsing
     static parse_regex = {
-        "info": new RegExp("&(?<Type>\\w+)&\\[(?<Info>\\w+)\\]", "g")
+        "info": new RegExp("&(?<Type>\\w+)&\\[(?<Info>[\\w\\- ]+)\\]", "g"),
+        "asterisk": new RegExp("(?<count>\\*+)(?! )(?<inside>.*?)(?:\\k<count>)", "g")
     }
 
     // top of a spell
@@ -138,6 +139,8 @@ class Spell {
         if (this.condition != "") {
             cast_time += ", " + this.condition;
         }
+        // check for info labels
+        cast_time = this.parse_info(cast_time);
 
         // if there is a direction, add it to the range
         var range = this.range;
@@ -218,15 +221,14 @@ class Spell {
         }
 
         // check for bold italics
-        while (body.indexOf("***") != -1) {
-            body = body.replace("***", "<b><i>");
-            body = body.replace("***", "</b></i>");
-        }
+        // while (body.indexOf("***") != -1) {
+        //     body = body.replace("***", "<b><i>");
+        //     body = body.replace("***", "</b></i>");
+        // }
 
         // check for info labels
-        body = body.replaceAll(Spell.parse_regex["info"], function(match, type, info, offset, string, groups) {
-            return `<info class="${type}">${info}</info>`;
-        })
+        body = this.parse_info(body);
+        body = this.parse_asterisks(body);
 
         return body;
     }
@@ -317,6 +319,29 @@ class Spell {
         body += bodies[table_count].join("<br>&emsp;&emsp;");
         
         return body;
+    }
+
+    // check for info labels
+    parse_info(string) {
+        return string.replaceAll(Spell.parse_regex["info"], function(match, type, info, offset, string, groups) {
+            return `<info class="${type}_info">${info}</info>`;
+        })
+    }
+
+    // check for asterisks
+    parse_asterisks(string) {
+        return string.replaceAll(Spell.parse_regex["asterisk"], function(match, count, inside, offset, string, groups) {
+            switch (count) {
+                case "***":
+                    return `<b><i>${inside}</i></b>`;
+
+                case "**":
+                    return `<b>${inside}</b>`;
+
+                case "*":
+                    return `<i>${inside}</i>`;
+            }
+        })
     }
 }
 
