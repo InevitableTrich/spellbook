@@ -13,7 +13,6 @@ function format_string(str, ...params) {
     }
     return str;
 }
-//todo: try loading desc on each click, rather than all at once? either way, optimize load times
 
 // clamps an integer to minimum given and maximum given
 function clamp(int, min, max) {
