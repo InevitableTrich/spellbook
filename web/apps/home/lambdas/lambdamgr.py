@@ -7,9 +7,7 @@ def get_spells_handler(event, context):
     if event.get("httpMethod", "") == "OPTIONS":
         return responseobject
 
-    body = event.get("body", "{}")
-
-    responseobject["body"] = json.dumps(SpellsViewImpl().do_post(json.loads(body)))
+    responseobject["body"] = json.dumps(SpellsViewImpl().do_post(event['queryStringParameters']))
 
     return responseobject
 
