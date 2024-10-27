@@ -128,9 +128,11 @@ function reset_data() {
 
 // alerts about data loss, potentially saves lost data to clipboard, then resets data
 function handle_data_error() {
-    prompt("Error loading or processing saved data, so it will be erased. To recover, copy the old data below and " +
-           "send to a developer (found on the discord) for manual recovery and bug fixing.",
-           JSON.stringify(localStorage));
+    if (!is_mobile()) {
+        prompt("Error loading or processing saved data, so it will be erased. To recover, copy the old data below and" +
+               " send to a developer (found on the discord) for manual recovery and bug fixing.",
+               JSON.stringify(localStorage));
+   }
 
     reset_data();
 }

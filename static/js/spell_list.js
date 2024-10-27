@@ -32,6 +32,12 @@ class Spell {
         }
     }
 
+    // regex for format parsing
+    static parse_regex = {
+        "info": new RegExp("&(?<Type>\\w+)&\\[(?<Info>[\\w\\- ]+)\\]", "g"),
+        "asterisk": new RegExp("(?<count>\\*+)(?! )(?<inside>.*?)(?:\\k<count>)", "g")
+    }
+
     // top of a spell
     static head_template = `
         <div class="spell" id="{0}">
@@ -133,6 +139,8 @@ class Spell {
         if (this.condition != "") {
             cast_time += ", " + this.condition;
         }
+        // check for info labels
+        cast_time = this.parse_info(cast_time);
 
         // if there is a direction, add it to the range
         var range = this.range;
@@ -208,83 +216,132 @@ class Spell {
 
             body = body.replace("##### ", "<table_header>");
 
-            var closing = body.indexOf("<br>", search + 1);
+            var closing = body.indexOf("</p>", search + 1);
             body = body.substr(0, closing) + "</table_header>" + body.substr(closing);
         }
 
         // check for bold italics
-        while (body.indexOf("***") != -1) {
-            body = body.replace("***", "<b><i>");
-            body = body.replace("***", "</b></i>");
-        }
+        // while (body.indexOf("***") != -1) {
+        //     body = body.replace("***", "<b><i>");
+        //     body = body.replace("***", "</b></i>");
+        // }
+
+        // check for info labels
+        body = this.parse_info(body);
+        body = this.parse_asterisks(body);
 
         return body;
     }
 
     // creates a body with tables
     create_table(description) {
-        // finds the final index of the table (starts search at end)
-        var last_index;
-        for (var i = description.length-1; i >= 0; i--) {
-            if (description[i].indexOf("|") != -1) {
-                last_index = i;
-                break;
+        // finds the indexes of table lines
+        var table_count = 0;
+        var last_was_table = false;
+        var table_poses = [];
+        var bodies = [[]];
+        var tables = [];
+        var desc;
+        for (var i = 0; i < description.length; i++) {
+            desc = description[i];
+
+            // if there is table content,
+            if (desc.indexOf("|") != -1) {
+                // and the last line wasn't table content,
+                if (!last_was_table) {
+                    // increase count, add to lists, and track table position
+                    last_was_table = true;
+                    table_count++;
+                    bodies.push([]);
+                    tables.push([]);
+                    table_poses.push([i, i]);
+                } else { // if the last line was table content, update the end pos
+                    table_poses[table_count-1][1] = i;
+                }
+            } else { // otherwise, the last was not table content
+                last_was_table = false;
             }
         }
 
-        var paragraph;
-        var top = [];  // paragraphs before table
-        var tables = [];  // table "paragraphs"
-        var bottom = [];  // paragraphs after table
-        var found_first = false; // false until first table "paragraph" found
-        // for each paragraph,
-        for (var i = 0; i < description.length; i++) {
-            paragraph = description[i];
+        var index = 0;
+        var start, end;
+        for (var i = 0; i < table_poses.length; i++) {
+            // get the start and end position of this table
+            start = table_poses[i][0];
+            end = table_poses[i][1];
 
-            // if there are no graph bars
-            if (paragraph.indexOf("|") == -1) {
-                // if the table hasn't started, place it in the top section
-                if (!found_first) {
-                    top.push(paragraph);
-                } else {
-                // else place in the bottom section
-                    bottom.push(paragraph);
+            // grab all the non-table content up until this point
+            while (index < start) {
+                bodies[i].push(description[index]);
+                index++;
+            }
+
+            // build this table
+            while (index <= end) {
+                desc = description[index];
+
+                // if the index is the start,
+                if (index == start) {
+                    // create a new table, close old text, start the body, create the head row
+                    tables[i].push("</p><table class=\"spell_table\"><tbody><tr><th>");
+                    // take the table data, remove the ends, and change pipes to row separators
+                    tables[i].push(desc.slice(1, -1).replaceAll("|", "</th><th>"));
+                    // close the row
+                    tables[i].push("</th></tr>");
+                } else { // for the rest of the rows, just make each row
+                    tables[i].push("<tr><td>");
+                    // take the table data, remove the ends, and change pipes to row separators
+                    tables[i].push(desc.slice(1, -1).replaceAll("|", "</td><td>"));
+                    tables[i].push("</td></tr>");
                 }
 
-                // no table, so move on
-                continue;
+                // if this is the last row for this table, close the table, start next text
+                if (index == end) {
+                    tables[i].push("</tbody></table><p class=\"spell_text\">");
+                }
+
+                index++;
             }
-
-            // if this is the table header
-            if (!found_first) {
-                // uses <th> elements (table header). surrounds table data with table header elements
-                paragraph = "<tr><th>" + paragraph.substr(1, paragraph.length-2) + "</th></tr>";
-                paragraph = paragraph.replaceAll("|", "</th><th>");
-
-                // close previous text, add the table
-                paragraph = '</p><table class="spell_table"><tbody>' + paragraph;
-                found_first = true;
-            } else {
-                // uses <td> elements (table data). surrounds table data with table data elements
-                paragraph = "<tr><td>" + paragraph.substr(1, paragraph.length-2) + "</td></tr>";
-                paragraph = paragraph.replaceAll("|", "</td><td>");
-            }
-
-            // if this is the final table "paragraph"
-            if (i == last_index) {
-                // close the table, open new text
-                paragraph += '</tbody></table><p class="spell_text">'
-            }
-
-            // add paragraph to tables
-            tables.push(paragraph);
         }
 
-        // place newlines and indentations between each paragraph before the table, add the table, then
-        // place newlines and indentations between each paragraph after the table
-        var body = top.join("<br>&emsp;&emsp;") + tables.join("") + bottom.join("<br>&emsp;&emsp;");
+        // add the final body lines
+        while (index < description.length) {
+            bodies[table_count].push(description[index]);
+            
+            index++;
+        }
 
+        // finally, combine the bodies and the tables
+        var body = "";
+        for (var i = 0; i < table_count; i++) {
+            body += bodies[i].join("<br>&emsp;&emsp;") + tables[i].join("") + "&emsp;&emsp;";
+        }
+        body += bodies[table_count].join("<br>&emsp;&emsp;");
+        
         return body;
+    }
+
+    // check for info labels
+    parse_info(string) {
+        return string.replaceAll(Spell.parse_regex["info"], function(match, type, info, offset, string, groups) {
+            return `<info class="${type}_info">${info}</info>`;
+        })
+    }
+
+    // check for asterisks
+    parse_asterisks(string) {
+        return string.replaceAll(Spell.parse_regex["asterisk"], function(match, count, inside, offset, string, groups) {
+            switch (count) {
+                case "***":
+                    return `<b><i>${inside}</i></b>`;
+
+                case "**":
+                    return `<b>${inside}</b>`;
+
+                case "*":
+                    return `<i>${inside}</i>`;
+            }
+        })
     }
 }
 

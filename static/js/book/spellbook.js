@@ -83,6 +83,11 @@ function delete_from_spellbook(num) {
 
 // adds spells and level headers to characters spellbook
 function create_spellbook() {
+    // if the spells are not done collecting, dont make the spellbook
+    if (!spell_collector['done']) {
+        return;
+    }
+
     // collect spells and place into list
     var spellbook_list = character_list[active_character].spell_list.slice();
 

@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Air Bubble",
+        "level": "2",
+        "classes": ["Artificer", "Druid", "Ranger", "Sorcerer", "Wizard"],
+        "school": "Conjuration",
+        "duration": "24 hours",
+        "range": "60 feet",
+        "components": ["S"],
+        "material": "",
+        "ritual": false,
+        "concentration": false,
+        "desc": ["You create a spectral globe around the head of a willing creature you can see within range. The globe is filled with fresh air that lasts until the spell ends. If the creature has more than one head, the globe of air appears around only one of its heads (which is all the creature needs to avoid suffocation, assuming that all its heads share the same respiratory system)."],
+        "higher_level": ["When you cast this spell using a spell slot of 3rd level or higher, you can create two additional globes of fresh air for each slot level above 2nd."],
+        "spellid": "air-bubble",
+        "cast_time": "1 action",
+        "source": ["Astral Adventurer's Guide"]
+    },{
+        "name": "Create Spelljamming Helm",
+        "level": "5",
+        "classes": ["Artificer","Wizard"],
+        "school": "Transmutation",
+        "duration": "Instantaneous",
+        "range": "Touch",
+        "components": ["V","S","M"],
+        "material": "a crystal rod worth at least 5,000 gp, which the spell consumes",
+        "ritual": false,
+        "concentration": false,
+        "desc": ["Holding the rod used in the casting of the spell, you touch a Large or smaller chair that is unoccupied. The rod disappears, and the chair is transformed into a spelljamming helm"],
+        "higher_level": [],
+        "spellid": "create-spelljamming-helm",
+        "cast_time": "1 hour",
+        "source": ["Astral Adventurer's Guide"]
+    }
+]

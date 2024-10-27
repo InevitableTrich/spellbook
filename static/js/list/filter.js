@@ -135,6 +135,11 @@ function create_filters() {
                     </div>
                 </div>`;
         } else {
+            // if sources, add version diff exclusions at the top
+            if (property == "sources") {
+                filters += format_string(filter_base, "-sources,Player*s Handbook 2014", "Exclude Player's Handbook 2014") + format_string(filter_base, "-sources,Player*s Handbook 2024", "Exclude Player's Handbook 2024");
+            }
+
             options = Array.from(filter_options[property]);
             // for each filter value
             for (var option of options) {
@@ -317,6 +322,15 @@ function add_filter(id) {
                 active_filters[category][filter].add(spell);
             }
         }
+    } else if (category == "-sources") { // otherwise if exclusion sources
+        var cat = category.slice(1);
+        // for each spell
+        for (var spell of spell_list) {
+            // if the filter is not found, add it
+            if (spell[cat].indexOf(filter) == -1) {
+                active_filters[category][filter].add(spell);
+            }
+        }
     } else {  // otherwise for each spell, if it matches, add it
         // for each spell
         for (var spell of spell_list) {
@@ -402,8 +416,8 @@ function perform_filter_operations() {
             count--;
         }
 
-        // components should 'and'
-        if (category == "components") {
+        // components and exclusions should 'and'
+        if (category == "components" || category.startsWith("-")) {
             for (var filter of filters) {
                 if (intersection == null) {
                     intersection = active_filters[category][filter];

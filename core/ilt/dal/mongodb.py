@@ -20,7 +20,7 @@ def _getdbname():
     return env.GLOBALCONFIG['mongodb']['dbname']
 
 
-def _getdatabase(client, dbname):
+def _getdatabase(client: MongoClient, dbname: str):
     return client[dbname]
 
 

@@ -25,7 +25,7 @@ function assert(condition, message) {
 
 // init's a page. called on page load
 function init_page() {
-    gather_spells();
+    gather_spells(-1);
 
     try {
         load_characters();

@@ -1,5 +1,11 @@
+var spell_collector = {
+    "calls_needed": 0,
+    "calls_completed": 0,
+    "done": false
+}
+
 // db query
-function gather_spells() {
+function gather_spells(index) {
     var url;
 
     if (window.location.href.startsWith("http://127.0.0.1:8000/")) {
@@ -8,7 +14,11 @@ function gather_spells() {
         url = "https://qkb8erhv2e.execute-api.us-east-1.amazonaws.com/main/get-spells";
     }
 
-    make_HTTP_post_request(url, handle_spells_response);
+    if (index == -1) {
+        make_HTTP_post_request(url + "?init=1", handle_spells_response);
+    } else {
+        make_HTTP_post_request(url + "?index=" + index, handle_spells_response);
+    }
 }
 
 // make an http req
@@ -29,13 +39,46 @@ function handle_spells_response(data) {
 
 // process spells from db query
 function collect_spells(response) {
+    // response data
+    const data = JSON.parse(response.srcElement.response);
+
     // db spell data
-    const spells = JSON.parse(response.srcElement.response)["spells"];
+    const spells = data["spells"] || [];
+    const total_spells = data["spell_count"] || -1;
+
+    // if total_spells is not -1, send calls for remaining spells
+    if (total_spells != -1) {
+        // calculate the number of calls needed
+        const num_calls = Math.ceil(total_spells / 30);
+        spell_collector['calls_needed'] = num_calls;
+
+        for (var i = 0; i < num_calls; i++) {
+            gather_spells(i);
+        }
+
+        // dont proceed on spells, as they are not gathered here
+        return;
+    }
+
+    // track a completed spell collection call
+    spell_collector['calls_completed']++
+    if (spell_collector['calls_completed'] == spell_collector['calls_needed']) {
+        spell_collector['done'] = true;
+    }
 
     // for each spell, create spell object and add to spell list
     for (var spell of spells){
         spell_list.push(new Spell(spell));
     }
+
+    // sort the spells into index form
+    spell_list = spell_list.sort((a, b) => {
+        if (a.index > b.index) {
+            return 1;
+        } else {
+            return -1;
+        }
+    })
 
     // copy the spells to filtered_spells
     filtered_spells = spell_list.slice();
