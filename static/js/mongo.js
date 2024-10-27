@@ -1,3 +1,9 @@
+var spell_collector = {
+    "calls_needed": 0,
+    "calls_completed": 0,
+    "done": false
+}
+
 // db query
 function gather_spells(index) {
     var url;
@@ -44,6 +50,8 @@ function collect_spells(response) {
     if (total_spells != -1) {
         // calculate the number of calls needed
         const num_calls = Math.ceil(total_spells / 30);
+        spell_collector['calls_needed'] = num_calls;
+
         for (var i = 0; i < num_calls; i++) {
             gather_spells(i);
         }
@@ -52,10 +60,25 @@ function collect_spells(response) {
         return;
     }
 
+    // track a completed spell collection call
+    spell_collector['calls_completed']++
+    if (spell_collector['calls_completed'] == spell_collector['calls_needed']) {
+        spell_collector['done'] = true;
+    }
+
     // for each spell, create spell object and add to spell list
     for (var spell of spells){
         spell_list.push(new Spell(spell));
     }
+
+    // sort the spells into index form
+    spell_list = spell_list.sort((a, b) => {
+        if (a.index > b.index) {
+            return 1;
+        } else {
+            return -1;
+        }
+    })
 
     // copy the spells to filtered_spells
     filtered_spells = spell_list.slice();

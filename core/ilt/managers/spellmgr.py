@@ -15,4 +15,4 @@ def get_spell_count():
 
 def get_spells_from(index: int):
     col = getspellscollection()
-    return [x for x in col.find(projection={'_id': False}).sort("name", pymongo.ASCENDING).skip(index * 30).limit(30)]
+    return [x for x in col.find(projection={'_id': False}).sort([("name", pymongo.ASCENDING),("spell_num", pymongo.ASCENDING)]).skip(index * 30).limit(30)]
