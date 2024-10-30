@@ -101,6 +101,12 @@ function number_in_string(str) {
     if (data != null) {
         return parseInt(data[0].replace(",", ""));
     }
+    
+    // action regex
+    var actionRegex = new RegExp("^.*[Aa]ction.*$");
+    if (str.match(actionRegex) != null) {
+        return 1;
+    }
 
     // if no number is found, return 9999
     return 9999;
@@ -116,11 +122,11 @@ function dur_multiplier(str) {
         return 60;
     } else if (str.indexOf("round") != -1) {
         return 6;
-    } else if (str.indexOf("reaction") != -1) {
+    } else if (str.indexOf("Reaction") != -1) {
         return 3;
-    } else if (str.indexOf("bonus") != -1) {
+    } else if (str.indexOf("Bonus") != -1) {
         return 2;
-    } else if (str.indexOf("action") != -1) {
+    } else if (str.indexOf("Action") != -1) {
         return 1;
     } else if (str.indexOf("Instant") != -1){
         return 0;
