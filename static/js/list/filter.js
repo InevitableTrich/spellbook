@@ -1,5 +1,8 @@
 var filtered_spells = [];
-var active_filters = {};
+var active_filters = {
+    "include": {},
+    "exclude": {}
+};
 var active_filter_count = 0;
 
 // all filter options. used mostly for construction of filters
@@ -13,7 +16,7 @@ var filter_options = {
     "cast_time": new Set(),
     "duration": new Set(),
     "range": new Set(),
-    "components": new Set(["V", "S", "M", "R", "No V", "No S", "No M", "No R"]),
+    "components": new Set(["V", "S", "M", "R"]),
     "sources": new Set(),
     "higher_level": new Set(["Yes", "No"])
 };
@@ -31,7 +34,7 @@ function gather_filter_options() {
         // exempt specificly this duration
         if (spell.duration != "Instantaneous or 1 hour (see below)") {
             filter_options.duration.add(spell.duration);
-        }
+        }//todo
 
         // add all list fields
         spell.classes.forEach(_class => { // _class as class is reserved
@@ -90,8 +93,8 @@ function gather_filter_options() {
 // filter item template
 const filter_base = `
     <div class="filter_item">
-        <div class="fit_row_container button" onclick="toggle_filter('{0}')">
-            <div id="{0} box" class="filter_selection"></div>
+        <div class="fit_row_container button" onclick="cycle_filter('{0}')">
+            <div id="{0} box" class="filter_selection" filter_state="inactive"></div>
             <p id="{0} text" class="filter_selection">{1}</p>
         </div>
     </div>`
@@ -135,12 +138,8 @@ function create_filters() {
                     </div>
                 </div>`;
         } else {
-            // if sources, add version diff exclusions at the top
-            if (property == "sources") {
-                filters += format_string(filter_base, "-sources,Player*s Handbook 2014", "Exclude Player's Handbook 2014") + format_string(filter_base, "-sources,Player*s Handbook 2024", "Exclude Player's Handbook 2024");
-            }
-
             options = Array.from(filter_options[property]);
+
             // for each filter value
             for (var option of options) {
                 // append populated template
@@ -190,20 +189,58 @@ function toggle_filter_view(id) {
 }
 
 // toggle individual filters
-function toggle_filter(id) {
+function cycle_filter(id) {
     const box = document.getElementById(id + " box");
     const text = document.getElementById(id + " text");
 
-    box.classList.toggle("filter_selected");
-    text.classList.toggle("filter_selected");
+    // get current state
+    const state = box.getAttribute('filter_state');
 
-    // if selected
-    if (box.classList.contains("filter_selected")) {
-        active_filter_count++;
-        add_filter(id);
-    } else { // if deselected
-        active_filter_count--;
-        remove_filter(id);
+    // switch on current state
+    switch (state) {
+        // if currently inactive, set to include
+        case "inactive":
+            // set state to include
+            box.setAttribute('filter_state', "include");
+
+            // toggle filter selected styles
+            box.classList.toggle("filter_selected");
+            text.classList.toggle("filter_selected");
+
+            // add the filter
+            active_filter_count++;
+            add_filter(id, true);
+            break;
+
+        // if currently included, set to exclude
+        case "include":
+            // set state to inactive
+            box.setAttribute('filter_state', "exclude");
+
+            // toggle filter selected styles
+            box.classList.toggle("filter_selected");
+            box.classList.toggle("filter_excluded");
+
+            // remove the filter
+            remove_filter(id, true);
+
+            // add the exclusion
+            add_filter(id, false);
+            break;
+
+        // if currently excluded, set to inactive
+        case "exclude":
+            // set state to inactive
+            box.setAttribute('filter_state', "inactive");
+
+            // toggle filter selected styles
+            box.classList.toggle("filter_excluded");
+            text.classList.toggle("filter_selected");
+
+            // remove the exclusion
+            active_filter_count--;
+            remove_filter(id, false);
+            break;
     }
 
     // set filter count in clear button
@@ -218,7 +255,6 @@ function toggle_filter(id) {
 
 // enable all correct subclasses' visibilities
 function show_subclasses() {
-    const class_container = document.getElementById("classes_filters");
     const subclass_container = document.getElementById("subclasses_filters");
     const toggled_filters = document.getElementsByClassName("filter_selected");
 
@@ -270,18 +306,13 @@ function show_subclasses() {
 
 var bool_fields = ["concentration", "ritual"];
 // when filters are added, create a set containing the spells it follows
-function add_filter(id) {
+function add_filter(id, inclusion) { //todo: change with param to allow for add exclusion
     const comma_index = id.indexOf(",");
 
     const category = id.slice(0, comma_index);
     const filter = id.slice(comma_index + 1);
 
-    // if the filter category has no active filters, declare it
-    if (!active_filters.hasOwnProperty(category)) {
-        active_filters[category] = {};
-    }
-    // add a filter (to populate) to active_filters
-    active_filters[category][filter] = new Set();
+    const filter_set = new Set();
 
     var spell;
     // if category is a boolean field,
@@ -293,7 +324,7 @@ function add_filter(id) {
         for (var spell of spell_list) {
             // if it is the correct boolean, add to the filter
             if (spell[category] == bool_value) {
-                active_filters[category][filter].add(spell);
+                filter_set.add(spell);
             }
         }
     } else if (category == "higher_level") {  // otherwise if it is higher_level
@@ -304,31 +335,7 @@ function add_filter(id) {
         // for each spell, if higher level is matched, add it
         for (var spell of spell_list) {
             if ((bool_value && spell[category].length > 0) || (!bool_value && spell[category].length == 0)) {
-                active_filters[category][filter].add(spell);
-            }
-        }
-    } else if (category == "components") {  // otherwise if components
-        // true for inclusion, false for exclusion
-        var included = filter.indexOf("No") == -1;
-
-        var component_index;
-        // for each spell, look for the component. if it matches the in/exclusion, add it
-        for (var spell of spell_list) {
-            // get index of the component
-            component_index = spell[category].indexOf(filter[filter.length-1]);
-
-            // if included and the component was found, or if excluded and component wasn't found
-            if ((included && (component_index != -1)) || (!included && (component_index == -1))) {
-                active_filters[category][filter].add(spell);
-            }
-        }
-    } else if (category == "-sources") { // otherwise if exclusion sources
-        var cat = category.slice(1);
-        // for each spell
-        for (var spell of spell_list) {
-            // if the filter is not found, add it
-            if (spell[cat].indexOf(filter) == -1) {
-                active_filters[category][filter].add(spell);
+                filter_set.add(spell);
             }
         }
     } else {  // otherwise for each spell, if it matches, add it
@@ -336,42 +343,53 @@ function add_filter(id) {
         for (var spell of spell_list) {
             // if the filter is found, add it
             if (spell[category].indexOf(filter) != -1) {
-                active_filters[category][filter].add(spell);
+                filter_set.add(spell);
             }
         }
     }
+
+    const clusion_key = inclusion ? "include" : "exclude";
+
+    // if the filter category has no active filters, declare it
+    if (!active_filters[clusion_key].hasOwnProperty(category)) {
+        active_filters[clusion_key][category] = {};
+    }
+    // add the filter
+    active_filters[clusion_key][category][filter] = filter_set;
 
     // perform 'or'-ing within each category, and 'and'-ing across them
     perform_filter_operations();
 }
 
 // when filters are removed, delete the set
-function remove_filter(id) {
+function remove_filter(id, inclusion) {
     const comma_index = id.indexOf(",");
 
     const category = id.slice(0, comma_index);
     const filter = id.slice(comma_index + 1);
 
+    const clusion_key = inclusion ? "include" : "exclude";
+
     // if there are multiple filters in a category, remove just the one
     // otherwise remove the category
-    if (Object.getOwnPropertyNames(active_filters[category]).length > 1) {
-        delete active_filters[category][filter];
+    if (Object.getOwnPropertyNames(active_filters[clusion_key][category]).length > 1) {
+        delete active_filters[clusion_key][category][filter];
     } else {
-        delete active_filters[category];
+        delete active_filters[clusion_key][category];
     }
 
     // remove subclasses corresponding to the class if it is one
     if (category == "classes" && active_filters["subclasses"] != null) {
         // remove corresponding subs
-        for (var subclass of Object.getOwnPropertyNames(active_filters["subclasses"])) {
+        for (var subclass of Object.getOwnPropertyNames(active_filters[clusion_key]["subclasses"])) {
             if (subclass.indexOf(filter) != -1) {
-                delete active_filters["subclasses"][subclass];
+                delete active_filters[clusion_key]["subclasses"][subclass];
             }
         }
 
         // if there are none left, remove filter
-        if (Object.getOwnPropertyNames(active_filters["subclasses"]).length == 0) {
-            delete active_filters["subclasses"];
+        if (Object.getOwnPropertyNames(active_filters[clusion_key]["subclasses"]).length == 0) {
+            delete active_filters[clusion_key]["subclasses"];
             active_filter_count--;
         }
     }
@@ -383,7 +401,7 @@ function remove_filter(id) {
 // get all active filter sets, 'or' within each category, then 'and' each category
 function perform_filter_operations() {
     // filter categories / category
-    var categories = Object.getOwnPropertyNames(active_filters);
+    var categories = Object.getOwnPropertyNames(active_filters['include']);
     var category;
     // filters
     var filters;
@@ -404,7 +422,7 @@ function perform_filter_operations() {
     for (var i = 0, count = categories.length; i < count; i++) {
         // get the filters
         category = categories[i];
-        filters = Object.getOwnPropertyNames(active_filters[category]);
+        filters = Object.getOwnPropertyNames(active_filters['include'][category]);
 
         // if not a subclass
         if (!(combine_subs && category == "subclasses")) {
@@ -420,10 +438,10 @@ function perform_filter_operations() {
         if (category == "components" || category.startsWith("-")) {
             for (var filter of filters) {
                 if (intersection == null) {
-                    intersection = active_filters[category][filter];
+                    intersection = active_filters['include'][category][filter];
                 } else {
                     // intersection operation, not a built-in
-                    intersection = set_intersection(intersection, active_filters[category][filter]);
+                    intersection = set_intersection(intersection, active_filters['include'][category][filter]);
                 }
             }
 
@@ -432,7 +450,7 @@ function perform_filter_operations() {
 
         for (var filter of filters) {
             // union operation, not a built-in
-            to_union[i] = set_union(to_union[i], active_filters[category][filter]);
+            to_union[i] = set_union(to_union[i], active_filters['include'][category][filter]);
         }
 
         // if not class where subclasses
@@ -453,6 +471,17 @@ function perform_filter_operations() {
         filtered_spells = spell_list.slice();
     }
 
+    // combine all exclusions into a single set
+    var exclusion = new Set();
+    for (var category of Object.getOwnPropertyNames(active_filters['exclude'])) {
+        for (var filter of Object.getOwnPropertyNames(active_filters['exclude'][category])) {
+            exclusion = set_union(exclusion, active_filters['exclude'][category][filter]);
+        }
+    }
+
+    // exclude all in the exclusion filter
+    filtered_spells = [...set_difference(filtered_spells, exclusion)];
+
     // sort spells, then populate spell list
     sort_spells();
     filter_spells();
@@ -466,6 +495,11 @@ function set_intersection(setA, setB) {
 // performs a set union
 function set_union(setA, setB) {
     return new Set([...setA, ...setB]);
+}
+
+// performs a set difference
+function set_difference(setA, setB) {
+    return new Set([...setA].filter(x => !setB.has(x)));
 }
 
 // clear all active filters
@@ -482,7 +516,10 @@ function clear_filters() {
 
     // set filters to zero state
     active_filter_count = 0;
-    active_filters = {};
+    active_filters = {
+        "include": {},
+        "exclude": {}
+    };
 
     // reset the clear filters button
     document.getElementById("filter_title").innerHTML = "Clear Active Filters (0)";
