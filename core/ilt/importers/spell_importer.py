@@ -1,3 +1,5 @@
+import re
+
 import ilt
 import os
 import json
@@ -20,8 +22,9 @@ class SpellImporter:
         with (open(filelocation) as file):
             spells = json.load(file)
             for spell in spells:
-                # number each spell
-                spell['spell_num'] = self._spell_count
+                # handle if spell has one source listed
+                if type(spell['source']) == str:
+                    spell['source'] = [spell['source']]
 
                 # handle conditional reaction cast times
                 spell['condition'] = ''
@@ -29,13 +32,40 @@ class SpellImporter:
                     spell['condition'] = spell['cast_time'][1]
                     spell['cast_time'] = spell['cast_time'][0]
 
-                # handle if spell has one source listed
-                if type(spell['source']) == str:
-                    spell['source'] = [spell['source']]
+                # split other cast time format
+                if ',' in spell['cast_time']:
+                    cast_time = spell['cast_time'].split(',')
+                    spell['condition'] = cast_time[1]
+                    spell['cast_time'] = cast_time[0]
+
+                # give conditional cast times separation
+                if '(' in spell['cast_time'] or ')' in spell['cast_time']:
+                    spell['condition'] = spell['cast_time']
+                    spell['cast_time'] = "Conditional"
+
+                # format cast_times to be the same
+                regex = re.compile(r'^1 [\w ]*action[\w ]*$')
+                if regex.match(spell['cast_time']):
+                    spell['cast_time'] = spell['cast_time'][2:]
+                    spell['cast_time'] = spell['cast_time'].title()
+
+                # number each spell
+                spell['spell_num'] = self._spell_count
 
                 # handle spell duration beginning with "up to " for concentration spells
                 if spell['duration'].startswith('up to ') or spell['duration'].startswith('Up to '):
                     spell['duration'] = spell['duration'][6:]
+
+                # handle spell duration beginning with "concentration"
+                if spell['duration'].startswith("Concentration"):
+                    spell['concentration'] = True
+                    spell['duration'] = spell['duration'][20:]
+
+                if '(' in spell['duration'] or ')' in spell['duration']:
+                    spell['duration'] = "Special"
+
+                if spell['duration'] == "Until dispelled or triggered":
+                    spell['duration'] = "Until dispelled"
 
                 # handle range separation into range and direction
                 spell['direction'] = ''

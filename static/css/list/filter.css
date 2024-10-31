@@ -123,6 +123,10 @@ div.filter_selected {
     background-color: var(--tog);
 }
 
+div.filter_excluded {
+    background-color: var(--del);
+}
+
 p.filter_selected {
     font-weight: 700;
 }
@@ -199,7 +203,4 @@ p.filter_selected {
         margin: 0 0 0 auto;
     }
     /* end filter screen */
-
-    .no_spells {
-    }
 }
