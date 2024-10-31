@@ -61,6 +61,12 @@ class SpellImporter:
                     spell['concentration'] = True
                     spell['duration'] = spell['duration'][20:]
 
+                if '(' in spell['duration'] or ')' in spell['duration']:
+                    spell['duration'] = "Special"
+
+                if spell['duration'] == "Until dispelled or triggered":
+                    spell['duration'] = "Until dispelled"
+
                 # handle range separation into range and direction
                 spell['direction'] = ''
                 if spell['range'].startswith('Self'):

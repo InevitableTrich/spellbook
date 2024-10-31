@@ -30,11 +30,7 @@ function gather_filter_options() {
         filter_options.school.add(spell.school);
         filter_options.cast_time.add(spell.cast_time);
         filter_options.range.add(spell.range);
-
-        // exempt specificly this duration
-        if (spell.duration != "Instantaneous or 1 hour (see below)") {
-            filter_options.duration.add(spell.duration);
-        }//todo
+        filter_options.duration.add(spell.duration);
 
         // add all list fields
         spell.classes.forEach(_class => { // _class as class is reserved
@@ -306,7 +302,7 @@ function show_subclasses() {
 
 var bool_fields = ["concentration", "ritual"];
 // when filters are added, create a set containing the spells it follows
-function add_filter(id, inclusion) { //todo: change with param to allow for add exclusion
+function add_filter(id, inclusion) {
     const comma_index = id.indexOf(",");
 
     const category = id.slice(0, comma_index);
