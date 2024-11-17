@@ -20,6 +20,7 @@ if __name__ == "__main__":
     importer.from_json('aag')
     importer.from_json('bomt')
     importer.from_json('phb24')
+    importer.from_json('phb24noscrape')
     print("\nLoaded all spells from json")
 
     add_subclasses(importer)

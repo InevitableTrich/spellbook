@@ -231,6 +231,9 @@ def lines_to_data(lines: list[str]):
                 "source": ["Player's Handbook 2024"],
             })
             spells[spell_count]["name"] = get_name(line)
+            # fix specific name
+            if spells[spell_count]["name"] == "Pass without Trace":
+                spells[spell_count]["name"] = "Pass Without Trace"
 
             # Classes, Level, School
             i += 1
