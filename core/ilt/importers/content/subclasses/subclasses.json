@@ -47,7 +47,7 @@
         "Banishing Smite",
         "Mass Cure Wounds"
     ],
-    "Bard (Glamour)": [
+    "Bard (Glamour 2014)": [
         "Command"
     ],
     "Bard (Glamour 2024)": [
@@ -114,7 +114,7 @@
         "Legend Lore",
         "Scrying"
     ],
-    "Cleric (Life)": [
+    "Cleric (Life 2014)": [
         "Bless",
         "Cure Wounds",
         "Lesser Restoration",
@@ -138,7 +138,7 @@
         "Greater Restoration",
         "Mass Cure Wounds"
     ],
-    "Cleric (Light)": [
+    "Cleric (Light 2014)": [
         "Burning Hands",
         "Faerie Fire",
         "Flaming Sphere",
@@ -210,7 +210,7 @@
         "Destructive Wave",
         "Insect Plague"
     ],
-    "Cleric (Trickery)": [
+    "Cleric (Trickery 2014)": [
         "Charm Person",
         "Disguise Self",
         "Mirror Image",
@@ -246,7 +246,7 @@
         "Circle of Power",
         "Mislead"
     ],
-    "Cleric (War)": [
+    "Cleric (War 2014)": [
         "Divine Favor",
         "Shield of Faith",
         "Magic Weapon",
@@ -311,7 +311,7 @@
     "Druid (Forest)": [
         "Barkskin",
         "Spider Climb",
-        "call Lightning",
+        "Call Lightning",
         "Plant Growth",
         "Divination",
         "Freedom of Movement",
@@ -328,7 +328,7 @@
         "Dream",
         "Insect Plague"
     ],
-    "Druid (Moon)": [
+    "Druid (Moon) -2024": [
         "Cure Wounds",
         "Moonbeam",
         "Starry Wisp",
@@ -340,7 +340,7 @@
         "Spider Climb",
         "Spike Growth",
         "Lightning Bolt",
-        "Meld into Stone",
+        "Meld Into Stone",
         "Stone Shape",
         "Stoneskin",
         "Passwall",
@@ -354,7 +354,7 @@
         "Ice Storm",
         "Cone of Cold"
     ],
-    "Druid (Sea)": [
+    "Druid (Sea) -2024": [
         "Fog Cloud",
         "Gust of Wind",
         "Ray of Frost",
@@ -378,7 +378,11 @@
         "Cloudkill",
         "Contagion"
     ],
-    "Druid (Stars)": [
+    "Druid (Stars 2014)": [
+        "Guidance",
+        "Guiding Bolt"
+    ],
+    "Druid (Stars 2024)": [
         "Guidance",
         "Guiding Bolt"
     ],
@@ -406,7 +410,7 @@
         "Web",
         "Stinking Cloud",
         "Polymorph",
-        "Isenct Plague"
+        "Insect Plague"
     ],
     "Druid (Underdark)": [
         "Spider Climb",
@@ -421,7 +425,7 @@
     "Druid (Wildfire)": [
         "Burning Hands",
         "Cure Wounds",
-        "Flmaing Sphere",
+        "Flaming Sphere",
         "Scorching Ray",
         "Plant Growth",
         "Revivify",
@@ -443,17 +447,36 @@
         "Cone of Cold",
         "Wall of Stone"
     ],
-    "Monk (Shadow)": [
+    "Monk (Shadow 2014)": [
         "Minor Illusion",
         "Darkness",
         "Darkvision",
         "Pass Without Trace",
         "Silence"
     ],
+    "Monk (Shadow 2024)": [
+        "Minor Illusion",
+        "Darkness"
+    ],
     "Monk (Sun Soul)": [
         "Burning Hands"
     ],
-    "Paladin (Ancients)": [
+    "Monk (Elements) -2024": [
+        "Elementalism"
+    ],
+    "Paladin (Ancients 2014)": [
+        "Ensnaring Strike",
+        "Speak with Animals",
+        "Misty Step",
+        "Moonbeam",
+        "Plant Growth",
+        "Protection from Energy",
+        "Ice Storm",
+        "Stoneskin",
+        "Commune with Nature",
+        "Tree Stride"
+    ],
+    "Paladin (Ancients 2024)": [
         "Ensnaring Strike",
         "Speak with Animals",
         "Misty Step",
@@ -489,7 +512,7 @@
         "Circle of Power",
         "Geas"
     ],
-    "Paladin (Devotion)": [
+    "Paladin (Devotion 2014)": [
         "Protection from Evil and Good",
         "Sanctuary",
         "Lesser Restoration",
@@ -513,7 +536,7 @@
         "Commune",
         "Flame Strike"
     ],
-    "Paladin (Glory)": [
+    "Paladin (Glory 2014)": [
         "Guiding Bolt",
         "Heroism",
         "Enhance Ability",
@@ -561,7 +584,19 @@
         "Hold Monster",
         "Wall of Force"
     ],
-    "Paladin (Vengeance)": [
+    "Paladin (Vengeance 2014)": [
+        "Bane",
+        "Hunter's Mark",
+        "Hold Person",
+        "Misty Step",
+        "Haste",
+        "Protection from Energy",
+        "Banishment",
+        "Dimension Door",
+        "Hold Monster",
+        "Scrying"
+    ],
+    "Paladin (Vengeance 2024)": [
         "Bane",
         "Hunter's Mark",
         "Hold Person",
@@ -585,7 +620,7 @@
         "Hold Monster",
         "Scrying"
     ],
-    "Ranger (Fey Wanderer)": [
+    "Ranger (Fey Wanderer 2014)": [
         "Charm Person",
         "Misty Step",
         "Dispel Magic",
@@ -599,7 +634,14 @@
         "Dimension Door",
         "Mislead"
     ],
-    "Ranger (Gloom Stalker)": [
+    "Ranger (Gloom Stalker 2014)": [
+        "Disguise Self",
+        "Rope Trick",
+        "Fear",
+        "Greater Invisibility",
+        "Seeming"
+    ],
+    "Ranger (Gloom Stalker 2024)": [
         "Disguise Self",
         "Rope Trick",
         "Fear",
@@ -641,7 +683,7 @@
         "Rary's Telepathic Bond",
         "Telekinesis"
     ],
-    "Sorcerer (Aberrant Sorcery)": [
+    "Sorcerer (Aberrant Sorcery) -2024": [
         "Arms of Hadar",
         "Calm Emotions",
         "Detect Thoughts",
@@ -666,7 +708,7 @@
         "Greater Restoration",
         "Wall of Force"
     ],
-    "Sorcerer (Clockwork Sorcery)": [
+    "Sorcerer (Clockwork Sorcery) -2024": [
         "Aid",
         "Alarm",
         "Lesser Restoration",
@@ -678,7 +720,7 @@
         "Greater Restoration",
         "Wall of Force"
     ],
-    "Sorcerer (Draconic Sorcery)": [
+    "Sorcerer (Draconic Sorcery) -2024": [
         "Alter Self",
         "Chromatic Orb",
         "Command",
@@ -788,7 +830,7 @@
         "Mass Heal",
         "True Resurrection"
     ],
-    "Warlock (Archfey)": [
+    "Warlock (Archfey 2014)": [
         "Faerie Fire",
         "Sleep",
         "Calm Emotions",
@@ -813,7 +855,7 @@
         "Dominate Person",
         "Seeming"
     ],
-    "Warlock (Celestial)": [
+    "Warlock (Celestial 2014)": [
         "Light",
         "Sacred Flame",
         "Cure Wounds",
@@ -853,7 +895,7 @@
         "Bigby's Hand",
         "Cone of Cold"
     ],
-    "Warlock (Fiend)": [
+    "Warlock (Fiend 2014)": [
         "Burning Hands",
         "Command",
         "Blindness/Deafness",
@@ -882,8 +924,8 @@
         "Sanctuary",
         "Phantasmal Force",
         "Spike Growth",
-        "Crete Food and Water",
-        "Meld into Stone",
+        "Create Food and Water",
+        "Meld Into Stone",
         "Phantasmal Killer",
         "Stone Shape",
         "Creation",
@@ -892,16 +934,16 @@
     ],
     "Warlock (Genie - Djinni)": [
         "Detect Evil and Good",
-        "Thunderwave",
-        "Gust of Wind",
         "Phantasmal Force",
         "Create Food and Water",
-        "Wind Wall",
-        "Greater Invisibility",
         "Phantasmal Killer",
         "Creation",
-        "Seeming",
-        "Wish"
+        "Wish",
+        "Thunderwave",
+        "Gust of Wind",
+        "Wind Wall",
+        "Greater Invisibility",
+        "Seeming"
     ],
     "Warlock (Genie - Efreeti)": [
         "Burning Hands",
@@ -929,7 +971,7 @@
         "Creation",
         "Wish"
     ],
-    "Warlock (Great Old One)": [
+    "Warlock (Great Old One 2014)": [
         "Dissonant Whispers",
         "Tasha's Hideous Laughter",
         "Detect Thoughts",

@@ -95,8 +95,9 @@ function create_spellbook() {
     const subclass = document.getElementById("class_selector").value + " ("
                      + document.getElementById("subclass_selector").value + ")";
     var subclass_spells = []
-    // there won't be any spells of subclass none
-    if (subclass.indexOf("None") == -1) {
+    // there won't be any spells of subclass none, also ignore divine soul, chronurgy, graviturgy
+    if (subclass.indexOf("None") == -1 && subclass.indexOf("Divine Soul") == -1
+        && subclass.indexOf("Chronurgy") == -1 && subclass.indexOf("Graviturgy") == -1) {
         for (var spell of spell_list) {
             if (spell.subclasses.indexOf(subclass) != -1) {
                 // if it is not in the spellbook list, add it
